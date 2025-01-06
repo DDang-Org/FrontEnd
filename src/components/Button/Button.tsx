@@ -1,4 +1,5 @@
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export type MyButtonProps = {
   onPress?: () => void;
