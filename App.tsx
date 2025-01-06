@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
+// import { Text } from 'react-native';
+import StoryBookUI from './.storybook';
 
 export default function App() {
-  return <Text>App</Text>;
+  return <StoryBookUI />;
+  // return <Text>App</Text>;
 }
