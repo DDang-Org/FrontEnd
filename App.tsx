@@ -1,7 +1,9 @@
 import styled, { css } from '@emotion/native';
+import { NavigationContainer } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { Text } from 'react-native';
 import StoryBookUI from './.storybook';
+import BottomTabNavigator from './src/BottomTabNavigator';
 
 const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
   position: absolute;
@@ -36,9 +38,9 @@ export default function App() {
       {storybookEnabled ? (
         <StoryBookUI />
       ) : (
-        <SafeAreaView>
-          <Text>App</Text>
-        </SafeAreaView>
+        <NavigationContainer>
+          <BottomTabNavigator />
+        </NavigationContainer>
       )}
     </>
   );
