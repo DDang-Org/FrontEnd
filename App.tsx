@@ -1,35 +1,38 @@
+import styled, { css } from '@emotion/native';
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import StoryBookUI from './.storybook';
+
+const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: purple;
+  align-items: center;
+  justify-content: center;
+  display: ${({ visible }) => (visible ? 'unset' : 'none')};
+`;
 
 export default function App() {
   const [storybookEnabled, setStorybookEnabled] = useState(false);
-
+  const onPress = () => setStorybookEnabled(prev => !prev);
   return (
     <>
-      <TouchableOpacity
-        onPress={() => setStorybookEnabled(prev => !prev)}
-        activeOpacity={0.8}
-        style={{
-          position: 'absolute',
-          right: 30,
-          bottom: 30,
-          zIndex: 1000,
-          width: 60,
-          height: 60,
-          borderRadius: '50%',
-          backgroundColor: 'purple',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      <StoryBookFloatingButton onPress={onPress} activeOpacity={0.8} visible={true}>
         <Text
-          style={{
-            color: 'white',
-            fontSize: 24,
-          }}>
+          style={css`
+            color: white;
+            font-size: 24px;
+          `}
+        >
           S
         </Text>
-      </TouchableOpacity>
+      </StoryBookFloatingButton>
+
       {storybookEnabled ? (
         <StoryBookUI />
       ) : (
