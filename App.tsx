@@ -24,18 +24,20 @@ export default function App() {
   const onPress = () => setStorybookEnabled(prev => !prev);
   return (
     <>
-      <StoryBookFloatingButton onPress={onPress} activeOpacity={0.8} visible={true}>
-        <Text
-          style={css`
-            color: white;
-            font-size: 24px;
-          `}
-        >
-          S
-        </Text>
-      </StoryBookFloatingButton>
+      {__DEV__ && (
+        <StoryBookFloatingButton onPress={onPress} activeOpacity={0.8} visible={true}>
+          <Text
+            style={css`
+              color: white;
+              font-size: 24px;
+            `}
+          >
+            S
+          </Text>
+        </StoryBookFloatingButton>
+      )}
 
-      {storybookEnabled ? (
+      {__DEV__ && storybookEnabled ? (
         <StoryBookUI />
       ) : (
         <NavigationContainer>
