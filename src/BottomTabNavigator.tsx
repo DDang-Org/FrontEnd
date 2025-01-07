@@ -16,7 +16,7 @@ export type TabBarParamList = {
   Social: undefined;
   FamilyDang: undefined;
   MyPage: undefined;
-  Profile: { username: string };
+  Profile: { userId: string };
 };
 
 const Tab = createBottomTabNavigator<TabBarParamList>();

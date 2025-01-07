@@ -3,6 +3,13 @@ import React from 'react';
 import { Button, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import WalkScreen from './WalkScreen';
+import styled from '@emotion/native';
+
+const SafeContainer = styled(SafeAreaView)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 type HomeStackProps = {
   Main: undefined;
@@ -15,10 +22,10 @@ type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
 function HomeScreen({ navigation }: Props) {
   return (
-    <SafeAreaView>
+    <SafeContainer>
       <Text>HomeScreen</Text>
       <Button title="산책하기" onPress={() => navigation.navigate('Walk')} />
-    </SafeAreaView>
+    </SafeContainer>
   );
 }
 
