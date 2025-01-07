@@ -2,6 +2,8 @@ import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MyButton } from './Button';
 import React from 'react';
+import { ThemeProvider } from '@emotion/react';
+import { lightTheme } from '../../styles/theme';
 
 const meta = {
   title: 'MyButton',
@@ -14,9 +16,11 @@ const meta = {
   },
   decorators: [
     Story => (
-      <View style={{ padding: 16, alignItems: 'flex-start' }}>
-        <Story />
-      </View>
+      <ThemeProvider theme={lightTheme}>
+        <View style={{ padding: 16, alignItems: 'flex-start' }}>
+          <Story />
+        </View>
+      </ThemeProvider>
     ),
   ],
 } satisfies Meta<typeof MyButton>;
