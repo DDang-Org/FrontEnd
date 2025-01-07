@@ -33,7 +33,7 @@ export default function HomeNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Walk" component={WalkScreen} />
+      <Stack.Screen name="Walk" component={WalkScreen} options={{ headerBackButtonDisplayMode: 'minimal' }} />
     </Stack.Navigator>
   );
 }
