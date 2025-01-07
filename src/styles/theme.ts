@@ -24,7 +24,7 @@ export const lightTheme = {
     medium: '500',
     bold: '700',
     extraBold: '800',
-  },
+  } as const,
 };
 
 export type ThemeType = typeof lightTheme;
