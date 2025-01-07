@@ -25,7 +25,7 @@ export default function App() {
   const [storybookEnabled, setStorybookEnabled] = useState(false);
   const onPress = () => setStorybookEnabled(prev => !prev);
   return (
-    <ThemeProvider theme={lightTheme}>
+    <>
       {__DEV__ && (
         <StoryBookFloatingButton onPress={onPress} activeOpacity={0.8} visible={true}>
           <Text
@@ -42,12 +42,12 @@ export default function App() {
       {__DEV__ && storybookEnabled ? (
         <StoryBookUI />
       ) : (
-        <>
+        <ThemeProvider theme={lightTheme}>
           <NavigationContainer>
             <BottomTabNavigator />
           </NavigationContainer>
-        </>
+        </ThemeProvider>
       )}
-    </ThemeProvider>
+    </>
   );
 }
