@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 import StoryBookUI from './.storybook';
 import BottomTabNavigator from './src/BottomTabNavigator';
+import { ThemeProvider } from '@emotion/react';
+import { lightTheme } from './src/styles/theme';
 
 const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
   position: absolute;
@@ -23,7 +25,7 @@ export default function App() {
   const [storybookEnabled, setStorybookEnabled] = useState(false);
   const onPress = () => setStorybookEnabled(prev => !prev);
   return (
-    <>
+    <ThemeProvider theme={lightTheme}>
       {__DEV__ && (
         <StoryBookFloatingButton onPress={onPress} activeOpacity={0.8} visible={true}>
           <Text
@@ -40,10 +42,12 @@ export default function App() {
       {__DEV__ && storybookEnabled ? (
         <StoryBookUI />
       ) : (
-        <NavigationContainer>
-          <BottomTabNavigator />
-        </NavigationContainer>
+        <>
+          <NavigationContainer>
+            <BottomTabNavigator />
+          </NavigationContainer>
+        </>
       )}
-    </>
+    </ThemeProvider>
   );
 }

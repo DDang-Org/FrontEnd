@@ -1,5 +1,12 @@
+import styled, { css } from '@emotion/native';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
+
+const Container = styled.TouchableOpacity`
+  padding: 8px 16px;
+  background-color: ${({ theme }) => theme.colors.default};
+  border-radius: 8px;
+`;
 
 export type MyButtonProps = {
   onPress?: () => void;
@@ -8,18 +15,14 @@ export type MyButtonProps = {
 
 export const MyButton = ({ onPress, text }: MyButtonProps) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.8}>
-      <Text style={styles.text}>{text}</Text>
-    </TouchableOpacity>
+    <Container onPress={onPress} activeOpacity={0.8}>
+      <Text
+        style={css`
+          color: white;
+        `}
+      >
+        {text}
+      </Text>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: 'purple',
-    borderRadius: 8,
-  },
-  text: { color: 'white' },
-});
