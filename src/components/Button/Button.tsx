@@ -1,5 +1,4 @@
 import styled, { css } from '@emotion/native';
-import React from 'react';
 import { Text } from 'react-native';
 
 const Container = styled.TouchableOpacity`

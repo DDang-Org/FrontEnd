@@ -1,8 +1,7 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import ActionButton from './ActionButton';
 import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from '../../styles/theme';
+import { lightTheme } from '~styles/theme';
 import { css } from '@emotion/native';
 import { View } from 'react-native';
 

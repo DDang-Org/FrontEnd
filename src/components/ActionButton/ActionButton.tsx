@@ -1,4 +1,3 @@
-import React from 'react';
 import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
 import { Theme, useTheme } from '@emotion/react';
 

@@ -1,14 +1,13 @@
 import { css } from '@emotion/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
 import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FamilyDangScreen from './screens/FamilyDangScreen';
-import HomeNavigator from './screens/HomeScreen';
-import LogScreen from './screens/LogScreen';
-import MyPageScreen from './screens/MyPage';
-import SocialScreen from './screens/SocialScreen';
+import FamilyDangScreen from '../screens/FamilyDangScreen';
+import HomeNavigator from '../screens/HomeScreen';
+import LogScreen from '../screens/LogScreen';
+import MyPageScreen from '../screens/MyPage';
+import SocialScreen from '../screens/SocialScreen';
 
 export type TabBarParamList = {
   Home: undefined;

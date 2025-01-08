@@ -1,9 +1,8 @@
+import styled from '@emotion/native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
 import { Button, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import WalkScreen from './WalkScreen';
-import styled from '@emotion/native';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
