@@ -33,7 +33,7 @@ export default function App() {
 
       await import('../msw.polyfills');
       const { server } = await import('./mocks/server.js');
-      server.listen();
+      server.listen({ onUnhandledRequest: 'bypass' });
       setIsMswEnabled(true);
     }
     enableMocking();
