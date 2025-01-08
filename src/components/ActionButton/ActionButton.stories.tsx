@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ActionButton from './ActionButton';
 import { ThemeProvider } from '@emotion/react';
 import { lightTheme } from '../../styles/theme';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { css } from '@emotion/native';
+import { View } from 'react-native';
 
 const meta = {
   title: 'ActionButton',
@@ -33,7 +33,7 @@ const meta = {
     onPress: { action: 'button pressed' },
   },
   args: {
-    text: '클릭하세요',
+    text: 'ActionButton',
     bgColor: 'default',
     type: 'capsule',
     fontWeight: 'regular',
@@ -42,15 +42,14 @@ const meta = {
   decorators: [
     Story => (
       <ThemeProvider theme={lightTheme}>
-        <SafeAreaView
+        <View
           style={css`
+            padding: 50px 20px;
             flex: 1;
-            justify-content: center;
-            padding: 0 20px;
           `}
         >
           <Story />
-        </SafeAreaView>
+        </View>
       </ThemeProvider>
     ),
   ],
