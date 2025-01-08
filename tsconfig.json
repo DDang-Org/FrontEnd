@@ -15,6 +15,7 @@
       "~styles/*": ["styles/*"],
       "~types/*": ["types/*"],
       "~/*": ["*"]
-    }
+    },
+    "module": "ESNext"
   }
 }

@@ -2,7 +2,7 @@ import styled, { css } from '@emotion/native';
 import { ThemeProvider } from '@emotion/react';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigator from '~navigation/BottomTabNavigator';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
@@ -22,8 +22,27 @@ const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
 `;
 
 export default function App() {
+  const [isMswEnabled, setIsMswEnabled] = useState(false);
   const [storybookEnabled, setStorybookEnabled] = useState(false);
   const onPress = () => setStorybookEnabled(prev => !prev);
+  useEffect(() => {
+    async function enableMocking() {
+      if (!__DEV__) {
+        return;
+      }
+
+      await import('../msw.polyfills');
+      const { server } = await import('./mocks/server.js');
+      server.listen();
+      setIsMswEnabled(true);
+    }
+    enableMocking();
+  }, []);
+
+  if (!isMswEnabled) {
+    return <Text>Loading MSW...</Text>;
+  }
+
   return (
     <>
       {__DEV__ && (
