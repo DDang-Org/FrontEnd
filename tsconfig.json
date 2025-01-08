@@ -2,6 +2,19 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "./src",
+    "paths": {
+      "~apis/*": ["apis/*"],
+      "~assets/*": ["assets/*"],
+      "~components/*": ["components/*"],
+      "~constants/*": ["constants/*"],
+      "~hooks/*": ["hooks/*"],
+      "~navigation/*": ["navigation/*"],
+      "~screens/*": ["screens/*"],
+      "~styles/*": ["styles/*"],
+      "~types/*": ["types/*"],
+      "~/*": ["*"]
+    }
   }
 }
