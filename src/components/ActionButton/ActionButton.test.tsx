@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import { ThemeProvider } from '@emotion/react';
 import { lightTheme } from '~styles/theme';
-import ActionButton from './ActionButton';
+import { ActionButton } from '~components/index.js';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider theme={lightTheme}>{component}</ThemeProvider>);

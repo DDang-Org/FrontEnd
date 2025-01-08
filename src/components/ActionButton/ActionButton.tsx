@@ -39,14 +39,14 @@ const ACTION_BUTTON_STYLES: Record<Required<ActionButtonProps>['type'], ViewStyl
   },
 };
 
-export default function ActionButton({
+export const ActionButton = ({
   bgColor = 'default',
   type = 'capsule',
   fontWeight = 'regular',
   disabled = false,
   onPress,
   text,
-}: ActionButtonProps) {
+}: ActionButtonProps) => {
   const theme = useTheme();
   const buttonStyle: ViewStyle = {
     width: '100%',
@@ -71,4 +71,4 @@ export default function ActionButton({
       <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   );
-}
+};
