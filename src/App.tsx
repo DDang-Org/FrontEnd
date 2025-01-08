@@ -2,10 +2,10 @@ import styled, { css } from '@emotion/native';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-import StoryBookUI from './.storybook';
-import BottomTabNavigator from './src/BottomTabNavigator';
+import StoryBookUI from '../.storybook';
+import BottomTabNavigator from './BottomTabNavigator';
 import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from './src/styles/theme';
+import { lightTheme } from './styles/theme';
 
 const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
   position: absolute;
