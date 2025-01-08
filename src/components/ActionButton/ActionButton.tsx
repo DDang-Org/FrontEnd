@@ -15,14 +15,14 @@ type BgColorType = Extract<keyof Theme['colors'], 'default' | 'lighten_2' | 'lig
 
 type ActionButtonProps = {
   bgColor?: BgColorType;
-  type: 'roundedRect' | 'semiRoundedRect' | 'capsule';
+  type?: 'roundedRect' | 'semiRoundedRect' | 'capsule';
   fontWeight?: keyof Theme['fontWeights'];
   disabled?: boolean;
   onPress?: () => void;
   text: string;
 };
 
-const ACTION_BUTTON_STYLES: Record<ActionButtonProps['type'], ViewStyle> = {
+const ACTION_BUTTON_STYLES: Record<Required<ActionButtonProps>['type'], ViewStyle> = {
   roundedRect: {
     padding: 15.5,
     paddingHorizontal: 24,
@@ -44,7 +44,7 @@ export default function ActionButton({
   bgColor = 'default',
   type = 'capsule',
   fontWeight = 'regular',
-  disabled,
+  disabled = false,
   onPress,
   text,
 }: ActionButtonProps) {
@@ -62,7 +62,13 @@ export default function ActionButton({
   };
 
   return (
-    <TouchableOpacity style={buttonStyle} onPress={onPress} disabled={disabled} activeOpacity={0.9}>
+    <TouchableOpacity
+      style={buttonStyle}
+      onPress={onPress}
+      disabled={disabled}
+      activeOpacity={0.9}
+      testID="action-button"
+    >
       <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   );

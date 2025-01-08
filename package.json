@@ -16,10 +16,10 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/native-stack": "^7.2.0",
-    "react-native-safe-area-context": "^5.0.0",
-    "react-native-screens": "^4.4.0",
     "react": "18.3.1",
     "react-native": "0.76.5",
+    "react-native-safe-area-context": "^5.0.0",
+    "react-native-screens": "^4.4.0",
     "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
@@ -41,6 +41,8 @@
     "@storybook/addon-ondevice-controls": "^8.4.4",
     "@storybook/react": "^8.4.7",
     "@storybook/react-native": "^8.4.4",
+    "@testing-library/react-native": "^13.0.0",
+    "@types/jest": "^29.5.14",
     "@types/react": "^18.2.6",
     "@types/react-native-vector-icons": "^6.4.18",
     "@types/react-test-renderer": "^18.0.0",
