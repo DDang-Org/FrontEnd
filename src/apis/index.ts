@@ -1,10 +1,17 @@
 import ky from 'ky';
-import { getAccessToken } from '~/utils/controlAccessToken.ts';
+import { getAccessToken } from '~utils/controlAccessToken';
 
 export const api = ky.create({
-  prefixUrl: 'https://api.example.com', //! 임시
+  prefixUrl: 'https://api.example.com',
   timeout: 5000,
-  headers: {
-    Authorization: `Bearer ${getAccessToken()}`,
+  hooks: {
+    beforeRequest: [
+      async request => {
+        const accessToken = await getAccessToken();
+        if (accessToken) {
+          request.headers.set('Authorization', `Bearer ${accessToken}`);
+        }
+      },
+    ],
   },
 });
