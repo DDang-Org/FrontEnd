@@ -11,6 +11,7 @@
       "~constants/*": ["constants/*"],
       "~hooks/*": ["hooks/*"],
       "~navigation/*": ["navigation/*"],
+      "~providers/*": ["providers/*"],
       "~screens/*": ["screens/*"],
       "~styles/*": ["styles/*"],
       "~types/*": ["types/*"],
