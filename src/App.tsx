@@ -1,15 +1,24 @@
 import styled from '@emotion/native';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import { Text } from 'react-native';
 import { useInitializeMsw } from '~hooks/useInitializeMsw';
 import BottomTabNavigator from '~navigation/BottomTabNavigator';
 import { AppProviders } from '~providers/AppProviders';
+import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
+
+const navTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: lightTheme.colors.lighten_3,
+  },
+};
 
 const MainApp = () => (
   <AppProviders>
-    <NavigationContainer>
+    <NavigationContainer theme={navTheme}>
       <BottomTabNavigator />
     </NavigationContainer>
   </AppProviders>
