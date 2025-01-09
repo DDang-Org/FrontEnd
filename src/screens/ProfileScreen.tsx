@@ -12,7 +12,7 @@ const SafeContainer = styled(SafeAreaView)`
   align-items: center;
 `;
 
-export default function ProfileScreen({ navigation, route }: Props) {
+export default function ProfileScreen({ route }: Props) {
   return (
     <SafeContainer>
       <Text>This is {route.params.userId}'s profile</Text>
