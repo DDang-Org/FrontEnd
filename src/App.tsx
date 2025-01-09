@@ -1,9 +1,10 @@
 import styled, { css } from '@emotion/native';
 import { ThemeProvider } from '@emotion/react';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomTabNavigator from '~navigation/BottomTabNavigator';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Text } from 'react-native';
+import { useInitializeMsw } from '~hooks/useInitializeMsw';
+import BottomTabNavigator from '~navigation/BottomTabNavigator';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
 
@@ -22,24 +23,11 @@ const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
 `;
 
 export default function App() {
-  const [isMswEnabled, setIsMswEnabled] = useState(false);
+  const { isMswEnabled } = useInitializeMsw();
   const [storybookEnabled, setStorybookEnabled] = useState(false);
   const onPress = () => setStorybookEnabled(prev => !prev);
-  useEffect(() => {
-    async function enableMocking() {
-      if (!__DEV__) {
-        return;
-      }
 
-      await import('../msw.polyfills');
-      const { server } = await import('./mocks/server.js');
-      server.listen({ onUnhandledRequest: 'warn' });
-      setIsMswEnabled(true);
-    }
-    enableMocking();
-  }, []);
-
-  if (!isMswEnabled) {
+  if (__DEV__ && !isMswEnabled) {
     return <Text>Loading MSW...</Text>;
   }
 
