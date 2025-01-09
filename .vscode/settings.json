@@ -1,5 +1,5 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "js"
+  "typescript.preferences.importModuleSpecifierEnding": "index"
 }
