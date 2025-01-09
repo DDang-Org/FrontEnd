@@ -7,6 +7,7 @@ import { useInitializeMsw } from '~hooks/useInitializeMsw';
 import BottomTabNavigator from '~navigation/BottomTabNavigator';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
   position: absolute;
@@ -22,6 +23,7 @@ const StoryBookFloatingButton = styled.TouchableOpacity<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'unset' : 'none')};
 `;
 
+const queryClient = new QueryClient();
 export default function App() {
   const { isMswEnabled } = useInitializeMsw();
   const [storybookEnabled, setStorybookEnabled] = useState(false);
@@ -49,11 +51,13 @@ export default function App() {
       {__DEV__ && storybookEnabled ? (
         <StoryBookUI />
       ) : (
-        <ThemeProvider theme={lightTheme}>
-          <NavigationContainer>
-            <BottomTabNavigator />
-          </NavigationContainer>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={lightTheme}>
+            <NavigationContainer>
+              <BottomTabNavigator />
+            </NavigationContainer>
+          </ThemeProvider>
+        </QueryClientProvider>
       )}
     </>
   );
