@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { EmotionProvider, TanstackQueryProvider } from '~providers/index';
+import { EmotionProvider } from '~providers/EmotionProvider';
+import { TanstackQueryProvider } from '~providers/QueryClientProvider';
 
 export const AppProviders = ({ children }: PropsWithChildren) => {
   return (

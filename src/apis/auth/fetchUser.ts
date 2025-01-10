@@ -1,4 +1,4 @@
-import { api } from '~apis/index.ts';
+import { api } from '~apis/api';
 
 export type FetchUserResponseType = {
   id: string;
