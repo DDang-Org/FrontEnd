@@ -8,10 +8,10 @@ const SafeContainer = styled(SafeAreaView)`
   align-items: center;
 `;
 
-export default function WalkScreen() {
+export const WalkScreen = () => {
   return (
     <SafeContainer>
       <Text>WalkScreen</Text>
     </SafeContainer>
   );
-}
+};

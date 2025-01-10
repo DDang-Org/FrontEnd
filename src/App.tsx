@@ -3,7 +3,7 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import { Text } from 'react-native';
 import { useInitializeMsw } from '~hooks/useInitializeMsw';
-import BottomTabNavigator from '~navigation/BottomTabNavigator';
+import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';

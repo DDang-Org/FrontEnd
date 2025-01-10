@@ -12,10 +12,10 @@ const SafeContainer = styled(SafeAreaView)`
   align-items: center;
 `;
 
-export default function MyPageScreen({}: Props) {
+export const MyPageScreen = ({}: Props) => {
   return (
     <SafeContainer edges={['top']}>
       <Text>This is My profile</Text>
     </SafeContainer>
   );
-}
+};

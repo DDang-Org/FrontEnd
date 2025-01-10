@@ -5,11 +5,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FamilyDangScreen from '~screens/FamilyDangScreen';
-import HomeNavigator from '~screens/HomeScreen';
-import LogScreen from '~screens/LogScreen';
-import MyPageScreen from '~screens/MyPage';
-import SocialScreen from '~screens/SocialScreen';
+import { FamilyDangScreen } from '~screens/FamilyDangScreen';
+import { HomeNavigator } from '~screens/HomeScreen';
+import { LogScreen } from '~screens/LogScreen';
+import { MyPageScreen } from '~screens/MyPage';
+import { SocialScreen } from '~screens/SocialScreen';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -33,7 +33,7 @@ const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: strin
   </View>
 );
 
-export default function BottomTabNavigator() {
+export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -87,4 +87,4 @@ export default function BottomTabNavigator() {
       />
     </Tab.Navigator>
   );
-}
+};

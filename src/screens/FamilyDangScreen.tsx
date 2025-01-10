@@ -12,10 +12,10 @@ const SafeContainer = styled(SafeAreaView)`
 
 type Props = BottomTabScreenProps<TabBarParamList, 'FamilyDang'>;
 
-export default function FamilyDangScreen({}: Props) {
+export const FamilyDangScreen = ({}: Props) => {
   return (
     <SafeContainer>
       <Text>FamilyDangScreen</Text>
     </SafeContainer>
   );
-}
+};

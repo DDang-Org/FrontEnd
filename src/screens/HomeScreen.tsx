@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchUser } from '~apis/auth/fetchUser';
-import WalkScreen from './WalkScreen';
+import { WalkScreen } from '~screens/WalkScreen';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -43,11 +43,11 @@ function HomeScreen({ navigation }: Props) {
   );
 }
 
-export default function HomeNavigator() {
+export const HomeNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Walk" component={WalkScreen} options={{ headerBackButtonDisplayMode: 'minimal' }} />
     </Stack.Navigator>
   );
-}
+};

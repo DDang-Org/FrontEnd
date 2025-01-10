@@ -12,10 +12,10 @@ const SafeContainer = styled(SafeAreaView)`
 
 type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
-export default function LogScreen({}: Props) {
+export const LogScreen = ({}: Props) => {
   return (
     <SafeContainer>
       <Text>LogScreen</Text>
     </SafeContainer>
   );
-}
+};

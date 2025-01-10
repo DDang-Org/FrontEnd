@@ -12,10 +12,10 @@ const SafeContainer = styled(SafeAreaView)`
 
 type Props = BottomTabScreenProps<TabBarParamList, 'Social'>;
 
-export default function SocialScreen({}: Props) {
+export const SocialScreen = ({}: Props) => {
   return (
     <SafeContainer>
       <Text>SocialScreen</Text>
     </SafeContainer>
   );
-}
+};
