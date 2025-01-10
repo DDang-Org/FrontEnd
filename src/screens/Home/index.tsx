@@ -1,10 +1,10 @@
 import styled from '@emotion/native';
-import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchUser } from '~apis/auth/fetchUser';
-import { WalkScreen } from './WalkScreen';
+import { HomeStackProps } from '~navigation/HomeNavigator';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -12,16 +12,9 @@ const SafeContainer = styled(SafeAreaView)`
   align-items: center;
 `;
 
-type HomeStackProps = {
-  Main: undefined;
-  Walk: undefined;
-};
-
-const Stack = createNativeStackNavigator<HomeStackProps>();
-
 type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
-function HomeScreen({ navigation }: Props) {
+export const HomeScreen = ({ navigation }: Props) => {
   const { data, isPending, isError } = useQuery({
     queryKey: ['HomeData'],
     queryFn: fetchUser,
@@ -40,14 +33,5 @@ function HomeScreen({ navigation }: Props) {
       <Button title="산책하기" onPress={() => navigation.navigate('Walk')} />
       <Text>{JSON.stringify(data)}</Text>
     </SafeContainer>
-  );
-}
-
-export const HomeNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Main" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Walk" component={WalkScreen} options={{ headerBackButtonDisplayMode: 'minimal' }} />
-    </Stack.Navigator>
   );
 };
