@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { FamilyDangScreen } from '~screens/FamilyDangScreen';
 import { HomeNavigator } from '~screens/HomeScreen';
 import { LogScreen } from '~screens/LogScreen';
-import { MyPageScreen } from '~screens/MyPage';
+import { MyPageScreen } from '~screens/MyPageScreen';
 import { SocialScreen } from '~screens/SocialScreen';
 
 export type TabBarParamList = {

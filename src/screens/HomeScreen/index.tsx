@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchUser } from '~apis/auth/fetchUser';
-import { WalkScreen } from '~screens/WalkScreen';
+import { WalkScreen } from '~screens/HomeScreen/WalkScreen';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;

@@ -19,5 +19,3 @@ export const ProfileScreen = ({ route }: Props) => {
     </SafeContainer>
   );
 };
-
-// const styles = StyleSheet.create({});
