@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { lightTheme } from '~styles/theme';
 import { css } from '@emotion/native';
 import { View } from 'react-native';
-import { ActionButton } from '~components/index';
+import { ActionButton } from '~components/Common/ActionButton';
 
 const meta = {
   title: 'ActionButton',
