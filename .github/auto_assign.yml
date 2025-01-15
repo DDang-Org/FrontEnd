@@ -5,18 +5,18 @@ reviewers:
   - ruehan
   - shlee9999
   - wonill
-# - kimjuyoung99
+  - kimjuyoung99
 
-numberOfReviewers: 2 
+numberOfReviewers: 2
 
-useReviewGroups: true 
+useReviewGroups: true
 
 reviewGroups:
   optional:
     - ruehan
     - shlee9999
     - wonill
-  # - kimjuyoung99
+    - kimjuyoung99
 
 skipKeywords:
   - wip
