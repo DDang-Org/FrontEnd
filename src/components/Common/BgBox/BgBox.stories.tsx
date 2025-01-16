@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Text, View } from 'react-native';
-import { ThemeProvider } from '@emotion/react';
 import { BgBox } from '~components/Common/BgBox';
-import { lightTheme } from '~styles/theme';
 
 const meta = {
   title: 'BgBox',
@@ -20,11 +18,9 @@ const meta = {
   args: {},
   decorators: [
     Story => (
-      <ThemeProvider theme={lightTheme}>
-        <View style={{ padding: 16 }}>
-          <Story />
-        </View>
-      </ThemeProvider>
+      <View>
+        <Story />
+      </View>
     ),
   ],
 } satisfies Meta<typeof BgBox>;

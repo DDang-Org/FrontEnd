@@ -1,19 +1,15 @@
-import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react';
+import { View } from 'react-native';
 import { StatContainer } from './index';
-import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from '~styles/theme';
 
 const meta = {
   title: 'StatContainer',
   component: StatContainer,
   decorators: [
     Story => (
-      <ThemeProvider theme={lightTheme}>
-        <View>
-          <Story />
-        </View>
-      </ThemeProvider>
+      <View>
+        <Story />
+      </View>
     ),
   ],
 } satisfies Meta<typeof StatContainer>;

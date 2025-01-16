@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { ThemeProvider } from '@emotion/react';
 import { DescriptionWithTimeStamp } from '~components/Common/DescriptionWithTimeStamp';
-import { lightTheme } from '~styles/theme';
 
 const meta = {
   title: 'DescriptionWithTimeStamp',
@@ -14,11 +12,9 @@ const meta = {
   },
   decorators: [
     Story => (
-      <ThemeProvider theme={lightTheme}>
-        <View style={{ padding: 16 }}>
-          <Story />
-        </View>
-      </ThemeProvider>
+      <View>
+        <Story />
+      </View>
     ),
   ],
 } satisfies Meta<typeof DescriptionWithTimeStamp>;
