@@ -13,7 +13,7 @@ export const DescriptionWithTimeStamp = ({ description, time }: DescriptionWithT
         <S.DotWrapper>
           <Dot />
         </S.DotWrapper>
-        <S.Description>{description}</S.Description>
+        <S.Description numberOfLines={3}>{description}</S.Description>
       </S.DescriptionWrapper>
       <S.Time>{time}</S.Time>
     </S.Container>
