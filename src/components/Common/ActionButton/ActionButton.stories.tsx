@@ -1,9 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from '~styles/theme';
-import { css } from '@emotion/native';
+import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
 import { ActionButton } from '~components/Common/ActionButton';
+import { lightTheme } from '~styles/theme';
 
 const meta = {
   title: 'ActionButton',
@@ -41,12 +40,7 @@ const meta = {
   decorators: [
     Story => (
       <ThemeProvider theme={lightTheme}>
-        <View
-          style={css`
-            padding: 50px 20px;
-            flex: 1;
-          `}
-        >
+        <View>
           <Story />
         </View>
       </ThemeProvider>
