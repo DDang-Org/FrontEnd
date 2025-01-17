@@ -1,5 +1,5 @@
 import { Theme, useTheme } from '@emotion/react';
-import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { Pressable, TextStyle, ViewStyle } from 'react-native';
 import { TextBold } from '~components/Common/Text';
 
 const ACTION_BUTTON_FONT_COLORS = {
@@ -49,26 +49,20 @@ export const ActionButton = ({
   const theme = useTheme();
   const buttonStyle: ViewStyle = {
     width: '100%',
-    backgroundColor: disabled ? theme.colors.lighten_3 : theme.colors[bgColor],
+    backgroundColor: disabled ? theme.colors.gc_1 : theme.colors[bgColor],
     ...ACTION_BUTTON_STYLES[type],
   };
 
   const textStyle: TextStyle = {
-    color: disabled ? theme.colors.font_2 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]],
+    color: disabled ? theme.colors.font_4 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]],
     textAlign: 'center',
   };
 
   return (
-    <TouchableOpacity
-      style={buttonStyle}
-      onPress={onPress}
-      disabled={disabled}
-      activeOpacity={0.9}
-      testID="action-button"
-    >
+    <Pressable style={buttonStyle} onPress={onPress} disabled={disabled} testID="action-button">
       <TextBold fontSize={17} style={textStyle}>
         {text}
       </TextBold>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
