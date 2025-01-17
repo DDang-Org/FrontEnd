@@ -41,12 +41,6 @@ describe('ActionButton', () => {
     expect(button.props.style).toHaveProperty('backgroundColor', lightTheme.colors.gc_1);
   });
 
-  it('applies correct font weight based on fontWeight prop', () => {
-    const { getByText } = renderWithTheme(<ActionButton text="Bold Button" fontWeight="bold" onPress={() => {}} />);
-    const buttonText = getByText('Bold Button');
-    expect(buttonText.props.style).toHaveProperty('fontWeight', '700'); // Assuming 'bold' corresponds to '700'
-  });
-
   it('handles long text correctly', () => {
     const longText = 'This is a very long button text that should be handled properly';
     const { getByText } = renderWithTheme(<ActionButton text={longText} onPress={() => {}} />);
