@@ -1,5 +1,6 @@
-import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
 import { Theme, useTheme } from '@emotion/react';
+import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { TextBold } from '~components/Common/Text';
 
 const ACTION_BUTTON_FONT_COLORS = {
   default: 'gc_4',
@@ -15,7 +16,6 @@ type BgColorType = Extract<keyof Theme['colors'], 'default' | 'lighten_2' | 'lig
 type ActionButtonProps = {
   bgColor?: BgColorType;
   type?: 'roundedRect' | 'semiRoundedRect' | 'capsule';
-  fontWeight?: keyof Theme['fontWeights'];
   disabled?: boolean;
   onPress?: () => void;
   text: string;
@@ -42,7 +42,6 @@ const ACTION_BUTTON_STYLES: Record<Required<ActionButtonProps>['type'], ViewStyl
 export const ActionButton = ({
   bgColor = 'default',
   type = 'capsule',
-  fontWeight = 'regular',
   disabled = false,
   onPress,
   text,
@@ -56,7 +55,6 @@ export const ActionButton = ({
 
   const textStyle: TextStyle = {
     color: disabled ? theme.colors.font_2 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]],
-    fontWeight: theme.fontWeights[fontWeight],
     textAlign: 'center',
   };
 
@@ -68,7 +66,9 @@ export const ActionButton = ({
       activeOpacity={0.9}
       testID="action-button"
     >
-      <Text style={textStyle}>{text}</Text>
+      <TextBold fontSize={17} style={textStyle}>
+        {text}
+      </TextBold>
     </TouchableOpacity>
   );
 };

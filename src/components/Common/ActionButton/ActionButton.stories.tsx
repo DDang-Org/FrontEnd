@@ -18,12 +18,7 @@ const meta = {
       },
       options: ['roundedRect', 'semiRoundedRect', 'capsule'],
     },
-    fontWeight: {
-      control: {
-        type: 'select',
-      },
-      options: ['light', 'regular', 'medium', 'bold'],
-    },
+
     disabled: { control: 'boolean' },
     text: { control: 'text' },
     onPress: { action: 'button pressed' },
@@ -32,7 +27,6 @@ const meta = {
     text: 'ActionButton',
     bgColor: 'default',
     type: 'capsule',
-    fontWeight: 'regular',
     disabled: false,
   },
   decorators: [
@@ -61,7 +55,6 @@ export const LongText: Story = {
   args: {
     bgColor: 'default',
     type: 'semiRoundedRect',
-    fontWeight: 'medium',
     text: '긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다.',
   },
 };
