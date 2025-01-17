@@ -145,7 +145,7 @@ export const CommonModal = ({
 
       case 'walkCancel':
         return {
-          title: '강변따 응답',
+          title: '강번따 응답',
           content: <Message>{data?.dog?.name}이(가) 거절했어요.</Message>,
           buttons: [
             { text: '취소', onPress: onCancel },
