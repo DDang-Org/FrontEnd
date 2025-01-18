@@ -18,7 +18,10 @@ describe('ActionButton', () => {
       <ActionButton text="Rounded Button" type="roundedRect" onPress={() => {}} />,
     );
     const button = getByTestId('action-button');
-    expect(button.props.style).toHaveProperty('borderRadius', 12);
+    expect(button.props.style[0]).toHaveProperty('borderTopLeftRadius', 12);
+    expect(button.props.style[0]).toHaveProperty('borderTopRightRadius', 12);
+    expect(button.props.style[0]).toHaveProperty('borderBottomLeftRadius', 12);
+    expect(button.props.style[0]).toHaveProperty('borderBottomRightRadius', 12);
   });
 
   it('disables the button when disabled prop is true', () => {
@@ -38,7 +41,7 @@ describe('ActionButton', () => {
   it('applies correct background color based on bgColor prop', () => {
     const { getByTestId } = renderWithTheme(<ActionButton text="Colored Button" bgColor="gc_1" onPress={() => {}} />);
     const button = getByTestId('action-button');
-    expect(button.props.style).toHaveProperty('backgroundColor', lightTheme.colors.gc_1);
+    expect(button.props.style[0]).toHaveProperty('backgroundColor', lightTheme.colors.gc_1);
   });
 
   it('handles long text correctly', () => {
