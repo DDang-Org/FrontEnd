@@ -1,6 +1,6 @@
 import { Theme, useTheme } from '@emotion/react';
-import { Pressable, TextStyle, ViewStyle } from 'react-native';
-import { TextBold } from '~components/Common/Text';
+import { TextStyle, ViewStyle } from 'react-native';
+import * as S from './styles';
 
 const ACTION_BUTTON_FONT_COLORS = {
   default: 'gc_4',
@@ -59,10 +59,10 @@ export const ActionButton = ({
   };
 
   return (
-    <Pressable style={buttonStyle} onPress={onPress} disabled={disabled} testID="action-button">
-      <TextBold fontSize={17} style={textStyle}>
+    <S.ActionButton style={buttonStyle} onPress={onPress} disabled={disabled} testID="action-button">
+      <S.Text fontSize={17} style={textStyle}>
         {text}
-      </TextBold>
-    </Pressable>
+      </S.Text>
+    </S.ActionButton>
   );
 };
