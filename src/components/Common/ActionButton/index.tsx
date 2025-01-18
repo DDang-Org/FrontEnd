@@ -1,5 +1,4 @@
 import { Theme, useTheme } from '@emotion/react';
-import { TextStyle, ViewStyle } from 'react-native';
 import * as S from './styles';
 
 const ACTION_BUTTON_FONT_COLORS = {
@@ -21,21 +20,18 @@ type ActionButtonProps = {
   text: string;
 };
 
-const ACTION_BUTTON_STYLES: Record<Required<ActionButtonProps>['type'], ViewStyle> = {
+const ACTION_BUTTON_STYLES = {
   roundedRect: {
-    padding: 15.5,
-    paddingHorizontal: 24,
-    borderRadius: 12,
+    padding: '15.5px 24px',
+    borderRadius: '12px',
   },
   semiRoundedRect: {
-    padding: 16.5,
-    paddingHorizontal: 24,
-    borderRadius: 12,
+    padding: '16.5px 24px',
+    borderRadius: '12px',
   },
   capsule: {
-    padding: 18,
-    paddingHorizontal: 24,
-    borderRadius: 100,
+    padding: '18px 24px',
+    borderRadius: '100px',
   },
 };
 
@@ -47,20 +43,14 @@ export const ActionButton = ({
   text,
 }: ActionButtonProps) => {
   const theme = useTheme();
-  const buttonStyle: ViewStyle = {
-    width: '100%',
-    backgroundColor: disabled ? theme.colors.gc_1 : theme.colors[bgColor],
+  const buttonStyle = {
+    bgColor: disabled ? theme.colors.gc_1 : theme.colors[bgColor],
     ...ACTION_BUTTON_STYLES[type],
   };
 
-  const textStyle: TextStyle = {
-    color: disabled ? theme.colors.font_4 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]],
-    textAlign: 'center',
-  };
-
   return (
-    <S.ActionButton style={buttonStyle} onPress={onPress} disabled={disabled} testID="action-button">
-      <S.Text fontSize={17} style={textStyle}>
+    <S.ActionButton onPress={onPress} disabled={disabled} testID="action-button" {...buttonStyle}>
+      <S.Text fontSize={17} color={disabled ? theme.colors.font_4 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]]}>
         {text}
       </S.Text>
     </S.ActionButton>
