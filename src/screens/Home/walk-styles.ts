@@ -77,3 +77,26 @@ export const StartButtonText = styled.Text`
   color: white;
   font-weight: bold;
 `;
+
+export const LocationButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 90px;
+  align-self: center;
+  background-color: #000000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const LocationIcon = styled.Text`
+  color: white;
+  font-size: 16px;
+`;
+
+export const LocationText = styled.Text`
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+`;
