@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextBold } from '~components/Common/Text';
 
-export const Container = styled(SafeAreaView)`
+export const HomeScreen = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
   padding: 12px 20px;

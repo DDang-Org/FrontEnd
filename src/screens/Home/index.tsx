@@ -11,11 +11,11 @@ type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
 export const HomeScreen = ({ navigation }: Props) => {
   return (
-    <S.Container>
+    <S.HomeScreen>
       <S.Header>
         {/* Profile로 변경하기 */}
         <Avatar1 width={32} height={32} />
-        <Icon.Bell />
+        <Icon.Bell onPress={() => navigation.navigate('Notification')} />
       </S.Header>
       <S.Heading>
         <S.HeadingText fontSize={24}>오늘은 아빠랑</S.HeadingText>
@@ -24,6 +24,6 @@ export const HomeScreen = ({ navigation }: Props) => {
       <DogHand />
       <WalkInfo />
       <ActionButton type="semiRoundedRect" text="산책 시작하기" onPress={() => navigation.navigate('Walk')} />
-    </S.Container>
+    </S.HomeScreen>
   );
 };
