@@ -22,6 +22,11 @@ export const WalkInfoContainer = styled.View`
   justify-content: space-evenly;
 `;
 
+//! Loader
+export const WalkInfoLoader = styled(WalkInfo)`
+  justify-content: center;
+`;
+
 //! Fallback
 export const WalkInfoFallback = styled(WalkInfo)`
   background-color: ${({ theme }) => theme.colors.gc_1};

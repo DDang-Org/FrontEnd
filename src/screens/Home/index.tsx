@@ -1,6 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Suspense } from 'react';
-import { Text } from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import Avatar1 from '~assets/avatars/Avatar1.svg';
 import DogHand from '~assets/dogs/dog-hand.svg';
@@ -8,6 +7,7 @@ import { ActionButton } from '~components/Common/ActionButton';
 import { Icon } from '~components/Common/Icons';
 import { WalkInfo } from '~components/Home/WalkInfo';
 import { WalkInfoFallback } from '~components/Home/WalkInfo/WalkInfoFallback';
+import { WalkInfoLoader } from '~components/Home/WalkInfo/WalkInfoLoader';
 import { HomeStackProps } from '~navigation/HomeNavigator';
 import * as S from './styles';
 
@@ -27,7 +27,7 @@ export const HomeScreen = ({ navigation }: Props) => {
       </S.Heading>
       <DogHand />
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
-        <Suspense fallback={<Text>Loading...</Text>}>
+        <Suspense fallback={<WalkInfoLoader />}>
           <WalkInfo />
         </Suspense>
       </ErrorBoundary>
