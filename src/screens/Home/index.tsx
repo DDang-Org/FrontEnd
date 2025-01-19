@@ -6,8 +6,8 @@ import DogHand from '~assets/dogs/dog-hand.svg';
 import { ActionButton } from '~components/Common/ActionButton';
 import { Icon } from '~components/Common/Icons';
 import { WalkInfo } from '~components/Home/WalkInfo';
-import { WalkInfoFallback } from '~components/Home/WalkInfo/WalkInfoFallback';
-import { WalkInfoLoader } from '~components/Home/WalkInfo/WalkInfoLoader';
+import { WalkInfoFallback } from '~components/Home/WalkInfo/fallback';
+import { WalkInfoLoader } from '~components/Home/WalkInfo/loader';
 import { HomeStackProps } from '~navigation/HomeNavigator';
 import * as S from './styles';
 
