@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://api.example.com';
+export const BASE_URL = 'https://api.example.com/api/v1';

@@ -2,20 +2,24 @@ import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
 
 export type FetchTodayWalkInfoRequestType = {
-  // Define request type here
+  dogId: number;
 };
 
 export type FetchTodayWalkInfoResponseType = {
-  // Define response type here
+  timeDuration: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+  totalDistanceMeter: number;
+  totalCalorie: number;
 };
 
-export const fetchTodayWalkInfo = async (
-  params: FetchTodayWalkInfoRequestType,
-): Promise<APIResponse<FetchTodayWalkInfoResponseType>> => {
+export const fetchTodayWalkInfo = async ({
+  dogId,
+}: FetchTodayWalkInfoRequestType): Promise<APIResponse<FetchTodayWalkInfoResponseType>> => {
   try {
-    const response = await api
-      .get('endpoint', { searchParams: params })
-      .json<APIResponse<FetchTodayWalkInfoResponseType>>();
+    const response = await api.get(`dogs/${dogId}/walk`).json<APIResponse<FetchTodayWalkInfoResponseType>>();
     return response;
   } catch (error) {
     console.error('Error:', error);

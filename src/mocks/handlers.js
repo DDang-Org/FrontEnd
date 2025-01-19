@@ -9,4 +9,17 @@ export const handlers = [
       lastName: 'Maverick',
     });
   }),
+  http.get(`${BASE_URL}/dogs/:id/walk`, req => {
+    return HttpResponse.json({
+      data: {
+        timeDuration: {
+          hours: 1,
+          minutes: 32,
+          seconds: 15,
+        },
+        totalDistanceMeter: 5413,
+        totalCalorie: 1234,
+      },
+    });
+  }),
 ];

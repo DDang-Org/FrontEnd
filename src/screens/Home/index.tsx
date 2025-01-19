@@ -6,6 +6,8 @@ import { Icon } from '~components/Common/Icons';
 import { WalkInfo } from '~components/Home/WalkInfo';
 import { HomeStackProps } from '~navigation/HomeNavigator';
 import * as S from './styles';
+import { Suspense } from 'react';
+import { Text } from 'react-native';
 
 type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
@@ -22,7 +24,9 @@ export const HomeScreen = ({ navigation }: Props) => {
         <S.HeadingText fontSize={24}>산책가는 날!</S.HeadingText>
       </S.Heading>
       <DogHand />
-      <WalkInfo />
+      <Suspense fallback={<Text>Loading...</Text>}>
+        <WalkInfo />
+      </Suspense>
       <ActionButton type="semiRoundedRect" text="산책 시작하기" onPress={() => navigation.navigate('Walk')} />
     </S.HomeScreen>
   );
