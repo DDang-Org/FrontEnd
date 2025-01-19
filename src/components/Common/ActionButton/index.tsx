@@ -50,9 +50,9 @@ export const ActionButton = ({
 
   return (
     <S.ActionButton onPress={onPress} disabled={disabled} testID="action-button" {...buttonStyle}>
-      <S.Text fontSize={17} color={disabled ? theme.colors.font_4 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]]}>
+      <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
         {text}
-      </S.Text>
+      </S.ButtonText>
     </S.ActionButton>
   );
 };

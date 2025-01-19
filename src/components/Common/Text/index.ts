@@ -1,8 +1,14 @@
 import styled from '@emotion/native';
+import { Theme } from '@emotion/react';
 
-const Text = styled.Text<{ fontSize: 11 | 13 | 14 | 15 | 17 | 20 | 24 }>`
+interface TextProps {
+  fontSize: 11 | 13 | 14 | 15 | 17 | 20 | 24;
+  color?: keyof Theme['colors'];
+}
+
+const Text = styled.Text<TextProps>`
   font-size: ${({ fontSize }) => fontSize + 'px'};
-  color: ${({ theme }) => theme.colors.font_1};
+  color: ${({ theme, color = 'font_1' }) => theme.colors[color]};
   line-height: ${({ fontSize }) => fontSize * 1.5 + 'px'};
   letter-spacing: ${({ fontSize }) => fontSize * -0.025 + 'px'};
 `;

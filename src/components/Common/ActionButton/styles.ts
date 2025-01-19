@@ -14,7 +14,6 @@ export const ActionButton = styled(Pressable)<ActionButtonProps>`
   background-color: ${({ bgColor }) => bgColor};
 `;
 
-export const Text = styled(TextBold)<{ color: string }>`
+export const ButtonText = styled(TextBold)`
   text-align: center;
-  color: ${props => props.color};
 `;

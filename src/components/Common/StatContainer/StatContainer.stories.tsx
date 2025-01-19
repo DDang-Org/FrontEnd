@@ -23,16 +23,16 @@ export const Basic: Story = {
     children: (
       <>
         <StatContainer.Item>
-          <StatContainer.Value>23회</StatContainer.Value>
-          <StatContainer.Label>누적 산책 횟수</StatContainer.Label>
+          <StatContainer.Value value="23회" />
+          <StatContainer.Label label="누적 산책 횟수" />
         </StatContainer.Item>
         <StatContainer.Item>
-          <StatContainer.Value>32km</StatContainer.Value>
-          <StatContainer.Label>총 산책 거리</StatContainer.Label>
+          <StatContainer.Value value="32km" />
+          <StatContainer.Label label="총 산책 거리" />
         </StatContainer.Item>
         <StatContainer.Item>
-          <StatContainer.Value>16회</StatContainer.Value>
-          <StatContainer.Label>강번따 횟수</StatContainer.Label>
+          <StatContainer.Value value="16회" />
+          <StatContainer.Label label="강번따 횟수" />
         </StatContainer.Item>
       </>
     ),
@@ -44,16 +44,16 @@ export const Reversed: Story = {
     children: (
       <>
         <StatContainer.Item>
-          <StatContainer.Label>누적 산책 횟수</StatContainer.Label>
-          <StatContainer.Value>23회</StatContainer.Value>
+          <StatContainer.Label label="누적 산책 횟수" />
+          <StatContainer.Value value="23회" />
         </StatContainer.Item>
         <StatContainer.Item>
-          <StatContainer.Label>총 산책 거리</StatContainer.Label>
-          <StatContainer.Value>32km</StatContainer.Value>
+          <StatContainer.Label label="총 산책 거리" />
+          <StatContainer.Value value="32km" />
         </StatContainer.Item>
         <StatContainer.Item>
-          <StatContainer.Label>강번따 횟수</StatContainer.Label>
-          <StatContainer.Value>16회</StatContainer.Value>
+          <StatContainer.Label label="강번따 횟수" />
+          <StatContainer.Value value="16회" />
         </StatContainer.Item>
       </>
     ),

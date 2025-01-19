@@ -1,9 +1,13 @@
-import { Container, Item, Value, Label } from '~components/Common/StatContainer/styles';
+import { PropsWithChildren } from 'react';
+import * as S from '~components/Common/StatContainer/styles';
 
-export const StatContainer = ({ children }: { children: React.ReactNode }) => {
-  return <Container>{children}</Container>;
+const Value = ({ value }: { value: string }) => <S.Value fontSize={20}>{value}</S.Value>;
+const Label = ({ label }: { label: string }) => <S.Label fontSize={13}>{label}</S.Label>;
+
+export const StatContainer = ({ children }: PropsWithChildren) => {
+  return <S.Container>{children}</S.Container>;
 };
 
-StatContainer.Item = Item;
+StatContainer.Item = S.Item;
 StatContainer.Value = Value;
 StatContainer.Label = Label;

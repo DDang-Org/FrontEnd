@@ -6,6 +6,18 @@ interface DescriptionWithTimeStampProps {
   time: string;
 }
 
+const Description = ({ description }: Pick<DescriptionWithTimeStampProps, 'description'>) => (
+  <S.Description fontSize={15} numberOfLines={3}>
+    {description}
+  </S.Description>
+);
+
+const Time = ({ time }: Pick<DescriptionWithTimeStampProps, 'time'>) => (
+  <S.Time fontSize={13} color="font_3">
+    {time}
+  </S.Time>
+);
+
 export const DescriptionWithTimeStamp = ({ description, time }: DescriptionWithTimeStampProps) => {
   return (
     <S.Container>
@@ -13,9 +25,9 @@ export const DescriptionWithTimeStamp = ({ description, time }: DescriptionWithT
         <S.DotWrapper>
           <Dot />
         </S.DotWrapper>
-        <S.Description numberOfLines={3}>{description}</S.Description>
+        <Description description={description} />
       </S.DescriptionWrapper>
-      <S.Time>{time}</S.Time>
+      <Time time={time} />
     </S.Container>
   );
 };

@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import { TextExtraBold, TextRegular } from '~components/Common/Text';
 
 export const Container = styled.View`
   width: 100%;
@@ -11,17 +12,12 @@ export const Container = styled.View`
 `;
 
 export const Item = styled.View`
-  width: 76px;
+  width: 80px;
   background-color: ${({ theme }) => theme.colors.gc_4};
   gap: 2px;
   align-items: center;
 `;
 
-export const Value = styled.Text`
-  font-size: 20px;
-  font-weight: ${({ theme }) => theme.fontWeights.extraBold};
-`;
+export const Value = styled(TextExtraBold)``;
 
-export const Label = styled.Text`
-  font-size: 13px;
-`;
+export const Label = styled(TextRegular)``;

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { BgBox } from '~components/Common/BgBox';
+import { TextRegular } from '~components/Common/Text';
 
 const meta = {
   title: 'BgBox',
@@ -31,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    children: <Text>Basic BgBox Content</Text>,
+    children: <TextRegular fontSize={15}>Basic BgBox Content</TextRegular>,
   },
 };
 
@@ -39,6 +40,6 @@ export const CustomPadding: Story = {
   args: {
     paddingHorizontal: 32,
     paddingVertical: 24,
-    children: <Text>Custom Padding Content</Text>,
+    children: <TextRegular fontSize={15}>Custom Padding Content</TextRegular>,
   },
 };
