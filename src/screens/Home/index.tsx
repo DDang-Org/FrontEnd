@@ -1,37 +1,29 @@
-import styled from '@emotion/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useQuery } from '@tanstack/react-query';
-import { Button, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchUser } from '~apis/auth/fetchUser';
+import Avatar1 from '~assets/avatars/Avatar1.svg';
+import DogHand from '~assets/dogs/dog-hand.svg';
+import { ActionButton } from '~components/Common/ActionButton';
+import { Icon } from '~components/Common/Icons';
+import { WalkInfo } from '~components/Home/WalkInfo';
 import { HomeStackProps } from '~navigation/HomeNavigator';
-
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import * as S from './styles';
 
 type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
 export const HomeScreen = ({ navigation }: Props) => {
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['HomeData'],
-    queryFn: fetchUser,
-  });
-
-  if (isPending) {
-    return <Text>Loading...</Text>;
-  }
-  if (isError) {
-    return <Text>Error!</Text>;
-  }
-
   return (
-    <SafeContainer>
-      <Text>HomeScreen</Text>
-      <Button title="산책하기" onPress={() => navigation.navigate('Walk')} />
-      <Text>{JSON.stringify(data)}</Text>
-    </SafeContainer>
+    <S.Container>
+      <S.Header>
+        {/* Profile로 변경하기 */}
+        <Avatar1 width={32} height={32} />
+        <Icon.Bell />
+      </S.Header>
+      <S.Heading>
+        <S.HeadingText fontSize={24}>오늘은 아빠랑</S.HeadingText>
+        <S.HeadingText fontSize={24}>산책가는 날!</S.HeadingText>
+      </S.Heading>
+      <DogHand />
+      <WalkInfo />
+      <ActionButton type="semiRoundedRect" text="산책 시작하기" onPress={() => navigation.navigate('Walk')} />
+    </S.Container>
   );
 };
