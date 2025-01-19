@@ -7,5 +7,9 @@ interface BgBoxProps extends PropsWithChildren {
 }
 
 export const BgBox = ({ children, ...rest }: BgBoxProps) => {
-  return <S.Container {...rest}>{children}</S.Container>;
+  return (
+    <S.Container {...rest} testID="bg-box">
+      {children}
+    </S.Container>
+  );
 };

@@ -5,6 +5,6 @@ export const Container = styled.View<{
   paddingVertical?: number;
 }>`
   background-color: ${({ theme }) => theme.colors.gc_4};
-  padding: ${({ paddingHorizontal = 30, paddingVertical = 20 }) => `${paddingHorizontal}px ${paddingVertical}px`};
+  padding: ${({ paddingVertical = 20, paddingHorizontal = 30 }) => `${paddingVertical}px ${paddingHorizontal}px`};
   border-radius: 16px;
 `;
