@@ -70,5 +70,13 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>NMFClientId</key>
+	<string>j6vmx4vlbe</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>네이버 맵에서 내 위치를 표시하기 위해 권한을 요청합니다.</string>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<string>네이버 맵에서 내 위치를 표시하기 위해 권한을 요청합니다.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>네이버 맵에서 내 위치를 표시하기 위해 권한을 요청합니다.</string>
 </dict>
 </plist>
