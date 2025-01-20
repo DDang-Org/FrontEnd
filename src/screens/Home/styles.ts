@@ -16,14 +16,5 @@ export const Header = styled.View`
   margin-bottom: 24px;
 `;
 
-export const Heading = styled.View`
-  text-align: center;
-  margin-bottom: 32px;
-`;
-
-export const HeadingText = styled(TextBold)`
-  text-align: center;
-`;
-
 export const WalkTime = styled(TextBold)``;
 export const WalkDistance = styled(TextBold)``;
