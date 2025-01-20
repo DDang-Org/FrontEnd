@@ -22,6 +22,15 @@ export const handlers = [
       },
     });
   }),
+  http.get(`${BASE_URL}/dogs/:id/walks`, () => {
+    return HttpResponse.json({
+      data: {
+        totalDistance: 12.5,
+        walkCount: 5,
+        countWalksWithMember: 3,
+      },
+    });
+  }),
   http.get(`${BASE_URL}/member`, () => {
     return HttpResponse.json({
       data: {
