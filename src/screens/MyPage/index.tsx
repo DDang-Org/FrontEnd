@@ -1,21 +1,29 @@
-import styled from '@emotion/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import * as S from './styles';
+import { Icon } from '~components/Common/Icons';
+import { UserProfile } from '~components/MyPage/UserProfile';
+import ErrorBoundary from 'react-native-error-boundary';
+import { Suspense } from 'react';
+import { UserProfileFallback } from '~components/MyPage/UserProfile/fallback';
+import { UserProfileLoader } from '~components/MyPage/UserProfile/loader';
 
 type Props = BottomTabScreenProps<TabBarParamList, 'MyPage'>;
 
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const MyPageScreen = ({}: Props) => {
   return (
-    <SafeContainer edges={['top']}>
-      <Text>This is My profile</Text>
-    </SafeContainer>
+    <S.MyPage>
+      <S.Header>
+        <S.Title fontSize={17}>마이페이지</S.Title>
+        <S.GearWrapper>
+          <Icon.Gear />
+        </S.GearWrapper>
+      </S.Header>
+      <ErrorBoundary FallbackComponent={UserProfileFallback}>
+        <Suspense fallback={<UserProfileLoader />}>
+          <UserProfile />
+        </Suspense>
+      </ErrorBoundary>
+    </S.MyPage>
   );
 };

@@ -1,4 +1,5 @@
 import { FamilyRole } from '~types/family-role';
+import { Gender } from '~types/gender';
 import { getParticle } from '~utils/getParticle';
 
 const roleMap = {
@@ -20,6 +21,10 @@ const roleMap = {
     GRANDMOTHER: '할머니',
     '': '',
   },
+};
+
+export const getKoreanRole = ({ dogGender, familyRole }: { dogGender: Gender; familyRole: FamilyRole }) => {
+  return roleMap[dogGender][familyRole];
 };
 
 export const getKoreanRoleWithName = ({
