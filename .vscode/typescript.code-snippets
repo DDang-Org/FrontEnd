@@ -137,7 +137,6 @@
     "prefix": "sc",
     "body": [
       "import styled from '@emotion/native'",
-      "import { APIResponse } from '~types/api';",
       "",
       "export const ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}} = styled.View`",
       "  ${2}",
