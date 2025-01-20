@@ -1,12 +1,15 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
-import * as S from './styles';
+import { Suspense } from 'react';
+import ErrorBoundary from 'react-native-error-boundary';
 import { Icon } from '~components/Common/Icons';
 import { UserProfile } from '~components/MyPage/UserProfile';
-import ErrorBoundary from 'react-native-error-boundary';
-import { Suspense } from 'react';
 import { UserProfileFallback } from '~components/MyPage/UserProfile/fallback';
 import { UserProfileLoader } from '~components/MyPage/UserProfile/loader';
+import { WalkInfo } from '~components/MyPage/WalkInfo';
+import { WalkInfoFallback } from '~components/MyPage/WalkInfo/fallback';
+import { WalkInfoLoader } from '~components/MyPage/WalkInfo/loader';
+import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import * as S from './styles';
 
 type Props = BottomTabScreenProps<TabBarParamList, 'MyPage'>;
 
@@ -22,6 +25,11 @@ export const MyPageScreen = ({}: Props) => {
       <ErrorBoundary FallbackComponent={UserProfileFallback}>
         <Suspense fallback={<UserProfileLoader />}>
           <UserProfile />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={WalkInfoFallback}>
+        <Suspense fallback={<WalkInfoLoader />}>
+          <WalkInfo />
         </Suspense>
       </ErrorBoundary>
     </S.MyPage>
