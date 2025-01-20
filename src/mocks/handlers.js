@@ -9,7 +9,7 @@ export const handlers = [
       lastName: 'Maverick',
     });
   }),
-  http.get(`${BASE_URL}/dogs/:id/walk`, req => {
+  http.get(`${BASE_URL}/dogs/:id/walk`, () => {
     return HttpResponse.json({
       data: {
         timeDuration: {
@@ -19,6 +19,20 @@ export const handlers = [
         },
         totalDistanceMeter: 5413,
         totalCalorie: 1234,
+      },
+    });
+  }),
+  http.get(`${BASE_URL}/member`, () => {
+    return HttpResponse.json({
+      data: {
+        memberId: 1,
+        name: '홍길동',
+        email: 'test@naver.com',
+        provider: 'NAVER',
+        gender: 'MALE',
+        address: '서울시 강남구',
+        familyRole: 'FATHER',
+        profileImg: 'https://example.com/profile.jpg',
       },
     });
   }),
