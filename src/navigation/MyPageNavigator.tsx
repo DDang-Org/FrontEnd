@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MyPageScreen } from '~screens/MyPage';
+import { BlockScreen } from '~screens/MyPage/Block';
 import { EntryScreen } from '~screens/MyPage/Entry';
 import { SettingScreen } from '~screens/MyPage/Setting';
 
@@ -32,7 +33,7 @@ export const MyPageNavigator = () => {
       <Stack.Screen name="Main" component={MyPageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Entry" component={EntryScreen} options={{ title: '설정' }} />
       <Stack.Screen name="Setting" component={SettingScreen} options={{ title: '설정' }} />
-      <Stack.Screen name="Block" component={SettingScreen} options={{ title: '차단 목록' }} />
+      <Stack.Screen name="Block" component={BlockScreen} options={{ title: '차단 목록' }} />
     </Stack.Navigator>
   );
 };
