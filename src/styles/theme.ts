@@ -18,13 +18,6 @@ export const lightTheme = {
     gc_3: '#F7F7FB',
     gc_4: '#FFFFFF', // 가장 밝은 배경
   },
-  fontWeights: {
-    light: '300',
-    regular: '400',
-    medium: '500',
-    bold: '700',
-    extraBold: '800',
-  } as const,
 };
 
 export type ThemeType = typeof lightTheme;

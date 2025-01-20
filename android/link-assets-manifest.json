@@ -1,0 +1,41 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/SUIT-Bold.ttf",
+      "sha1": "260f37817e53e956893d5444564685351c3f344d"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-ExtraBold.ttf",
+      "sha1": "18142924cde92e4044145027170278d06556d017"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-ExtraLight.ttf",
+      "sha1": "d6bf885fd51c079fde494231dcbf8de31ae9adda"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-Heavy.ttf",
+      "sha1": "e9276c72058de1826ada980e6290c5f301610032"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-Light.ttf",
+      "sha1": "1ec865181a4fbc45940ba1b6a17eebe51d8c1988"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-Medium.ttf",
+      "sha1": "1f8cc07eb00d6117f6b3ca52763d367fd20581f2"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-Regular.ttf",
+      "sha1": "cd14bef9e9e8e9cd81cff5ba720685eab860d754"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-SemiBold.ttf",
+      "sha1": "ab1bd61b305551638ca9d8e9d870f6bcc2c0c1c5"
+    },
+    {
+      "path": "src/assets/fonts/SUIT-Thin.ttf",
+      "sha1": "3cb0fc31ddbd4664eacce7fedf2f26df6b58f587"
+    }
+  ]
+}

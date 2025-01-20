@@ -1,5 +1,5 @@
-import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
 import { Theme, useTheme } from '@emotion/react';
+import * as S from './styles';
 
 const ACTION_BUTTON_FONT_COLORS = {
   default: 'gc_4',
@@ -15,60 +15,44 @@ type BgColorType = Extract<keyof Theme['colors'], 'default' | 'lighten_2' | 'lig
 type ActionButtonProps = {
   bgColor?: BgColorType;
   type?: 'roundedRect' | 'semiRoundedRect' | 'capsule';
-  fontWeight?: keyof Theme['fontWeights'];
   disabled?: boolean;
   onPress?: () => void;
   text: string;
 };
 
-const ACTION_BUTTON_STYLES: Record<Required<ActionButtonProps>['type'], ViewStyle> = {
+const ACTION_BUTTON_STYLES = {
   roundedRect: {
-    padding: 15.5,
-    paddingHorizontal: 24,
-    borderRadius: 12,
+    padding: '15.5px 24px',
+    borderRadius: '12px',
   },
   semiRoundedRect: {
-    padding: 16.5,
-    paddingHorizontal: 24,
-    borderRadius: 12,
+    padding: '16.5px 24px',
+    borderRadius: '12px',
   },
   capsule: {
-    padding: 18,
-    paddingHorizontal: 24,
-    borderRadius: 100,
+    padding: '18px 24px',
+    borderRadius: '100px',
   },
 };
 
 export const ActionButton = ({
   bgColor = 'default',
   type = 'capsule',
-  fontWeight = 'regular',
   disabled = false,
   onPress,
   text,
 }: ActionButtonProps) => {
   const theme = useTheme();
-  const buttonStyle: ViewStyle = {
-    width: '100%',
-    backgroundColor: disabled ? theme.colors.lighten_3 : theme.colors[bgColor],
+  const buttonStyle = {
+    bgColor: disabled ? theme.colors.gc_1 : theme.colors[bgColor],
     ...ACTION_BUTTON_STYLES[type],
   };
 
-  const textStyle: TextStyle = {
-    color: disabled ? theme.colors.font_2 : theme.colors[ACTION_BUTTON_FONT_COLORS[bgColor]],
-    fontWeight: theme.fontWeights[fontWeight],
-    textAlign: 'center',
-  };
-
   return (
-    <TouchableOpacity
-      style={buttonStyle}
-      onPress={onPress}
-      disabled={disabled}
-      activeOpacity={0.9}
-      testID="action-button"
-    >
-      <Text style={textStyle}>{text}</Text>
-    </TouchableOpacity>
+    <S.ActionButton onPress={onPress} disabled={disabled} testID="action-button" {...buttonStyle}>
+      <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
+        {text}
+      </S.ButtonText>
+    </S.ActionButton>
   );
 };

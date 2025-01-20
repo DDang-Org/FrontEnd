@@ -126,5 +126,16 @@
       "};"
     ],
     "description": "Patch data using PATCH request with ky"
+  },
+  "Typescript React Styled Components": {
+    "scope": "typescript",
+    "prefix": "sc",
+    "body": [
+      "import styled from '@emotion/native'",
+      "",
+      "export const ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}} = styled.View`",
+      "  ${2}",
+      "`;"
+    ]
   }
 }
