@@ -1,5 +1,6 @@
 import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
+import { FamilyRole } from '~types/family-role';
 
 export type FetchUserResponseType = {
   memberId: number;
@@ -8,7 +9,7 @@ export type FetchUserResponseType = {
   provider: string;
   gender: string;
   address: string;
-  familyRole: string;
+  familyRole: FamilyRole;
   profileImg: string;
 };
 

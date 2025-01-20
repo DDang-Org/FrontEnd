@@ -26,12 +26,12 @@ export const handlers = [
     return HttpResponse.json({
       data: {
         memberId: 1,
-        name: '홍길동',
+        name: '이성훈',
         email: 'test@naver.com',
         provider: 'NAVER',
         gender: 'MALE',
         address: '서울시 강남구',
-        familyRole: 'FATHER',
+        familyRole: 'BROTHER',
         profileImg: 'https://example.com/profile.jpg',
       },
     });
