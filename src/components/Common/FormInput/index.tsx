@@ -1,15 +1,17 @@
 import { TextInputProps } from 'react-native';
 import * as S from './styles';
-import { Theme } from '@emotion/react';
 import { useCallback, useEffect, useState } from 'react';
+import { NativeSyntheticEvent, TextInputContentSizeChangeEventData } from 'react-native';
 
 interface FormInputProps extends TextInputProps {
   onPress?: () => void;
+  multiline?: boolean;
 }
 
-const FormInput = ({ onPress, ...props }: FormInputProps) => {
+const FormInput = ({ onPress, multiline = false, ...props }: FormInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(props.value || '');
+  const [height, setHeight] = useState(64);
 
   const handleFocus = useCallback(() => {
     setIsFocused(true);
@@ -23,8 +25,18 @@ const FormInput = ({ onPress, ...props }: FormInputProps) => {
     setValue(text);
   }, []);
 
+  const handleContentSizeChange = useCallback(
+    (event: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
+      if (multiline) {
+        const { height } = event.nativeEvent.contentSize;
+        setHeight(Math.min(Math.max(64, height), 96));
+      }
+    },
+    [multiline],
+  );
+
   return (
-    <S.InputButton disabled={!onPress} onPress={onPress} isFocused={isFocused}>
+    <S.InputButton disabled={!onPress} onPress={onPress} isFocused={isFocused} style={{ height: multiline ? 96 : 64 }}>
       <S.InputWrapper>
         <S.CustomTextInput
           editable={!onPress}
@@ -38,6 +50,9 @@ const FormInput = ({ onPress, ...props }: FormInputProps) => {
           value={value}
           onChangeText={handleChangeText}
           placeholderTextColor={'#767676'}
+          multiline={multiline}
+          numberOfLines={multiline ? 2 : 1}
+          onContentSizeChange={handleContentSizeChange}
           {...props}
         />
       </S.InputWrapper>

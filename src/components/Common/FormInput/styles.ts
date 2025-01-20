@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import { Platform } from 'react-native';
 interface InputButtonProps {
   isFocused: boolean;
 }
@@ -17,7 +18,7 @@ export const InputButton = styled.Pressable<InputButtonProps>`
 
 export const InputWrapper = styled.View`
   width: 100%;
-  padding: 0 32px;
+  padding: ${Platform.OS === 'ios' ? '17 32px' : '0 32px'};
   border-radius: 12px;
   justify-content: center;
   align-items: center;
