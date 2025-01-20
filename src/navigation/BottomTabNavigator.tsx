@@ -6,9 +6,9 @@ import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeNavigator } from '~navigation/HomeNavigator';
+import { MyPageNavigator } from '~navigation/MyPageNavigator';
 import { FamilyDangScreen } from '~screens/FamilyDang';
 import { LogScreen } from '~screens/Log';
-import { MyPageScreen } from '~screens/MyPage';
 import { SocialScreen } from '~screens/Social';
 
 export type TabBarParamList = {
@@ -78,7 +78,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="MyPage"
-        component={MyPageScreen}
+        component={MyPageNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="person" size={size} color={color} focused={focused} />
