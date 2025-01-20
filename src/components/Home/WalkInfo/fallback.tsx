@@ -2,7 +2,10 @@ import { RetryButton } from '~components/Common/RetryButton';
 import { TextBold } from '~components/Common/Text';
 import * as S from './styles';
 
-export type WalkInfoFallbackProps = { error: Error; resetError: () => void };
+export interface WalkInfoFallbackProps {
+  error: Error;
+  resetError: () => void;
+}
 
 export const WalkInfoFallback = ({ error, resetError }: WalkInfoFallbackProps) => {
   return (

@@ -6,6 +6,8 @@ import DogHand from '~assets/dogs/dog-hand.svg';
 import { ActionButton } from '~components/Common/ActionButton';
 import { Icon } from '~components/Common/Icons';
 import { Heading } from '~components/Home/Heading';
+import { HeadingFallback } from '~components/Home/Heading/fallback';
+import { HeadingLoader } from '~components/Home/Heading/loader';
 import { WalkInfo } from '~components/Home/WalkInfo';
 import { WalkInfoFallback } from '~components/Home/WalkInfo/fallback';
 import { WalkInfoLoader } from '~components/Home/WalkInfo/loader';
@@ -22,7 +24,11 @@ export const HomeScreen = ({ navigation }: Props) => {
         <Avatar1 width={32} height={32} />
         <Icon.Bell onPress={() => navigation.navigate('Notification')} />
       </S.Header>
-      <Heading />
+      <ErrorBoundary FallbackComponent={HeadingFallback}>
+        <Suspense fallback={<HeadingLoader />}>
+          <Heading />
+        </Suspense>
+      </ErrorBoundary>
       <DogHand />
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
         <Suspense fallback={<WalkInfoLoader />}>
