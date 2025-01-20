@@ -9,6 +9,7 @@ interface ActionButtonProps {
 }
 
 export const ActionButton = styled(Pressable)<ActionButtonProps>`
+  width: 100%;
   padding: ${({ padding }) => padding};
   border-radius: ${({ borderRadius }) => borderRadius};
   background-color: ${({ bgColor }) => bgColor};
