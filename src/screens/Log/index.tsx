@@ -31,9 +31,9 @@ export const LogScreen = ({}: Props) => {
         placeholder="클릭하세요"
         value={text}
       /> */}
-      <FormInput onPress={() => console.log('클릭!!')} placeholder="입력하세요" />
-      <FormInput multiline placeholder="입력하세요" />
-      <FormInput placeholder="입력하세요" />
+      {/* <FormInput onPress={() => setText('hihi')} placeholder="입력하세요" /> */}
+      {/* <FormInput multiline placeholder="입력하세요" value={text} onChangeText={setText} /> */}
+      <FormInput placeholder="입력하세요" value={text} onChangeText={setText} />
     </SafeContainer>
   );
 };

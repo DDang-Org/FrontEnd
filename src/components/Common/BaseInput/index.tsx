@@ -2,9 +2,18 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { TextInputProps, NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
 import * as S from './styles';
 
-interface BaseInputProps extends TextInputProps {}
+export interface BaseInputProps extends TextInputProps {
+  isMultiline?: boolean;
+}
 
-export const BaseInput: React.FC<BaseInputProps> = ({ value, onChangeText, onFocus, onBlur, ...props }) => {
+export const BaseInput: React.FC<BaseInputProps> = ({
+  isMultiline = false,
+  value,
+  onChangeText,
+  onFocus,
+  onBlur,
+  ...props
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = useCallback(
@@ -38,6 +47,7 @@ export const BaseInput: React.FC<BaseInputProps> = ({ value, onChangeText, onFoc
       autoCorrect={false}
       isBold={!!value}
       value={value}
+      isMultiline={isMultiline}
       placeholderTextColor="#767676"
       {...props}
     />

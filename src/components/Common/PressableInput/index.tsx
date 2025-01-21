@@ -3,7 +3,7 @@ import { TextInputProps } from 'react-native';
 import { BaseInput } from '../BaseInput';
 import * as S from './styles';
 
-interface PressableInputProps extends TextInputProps {
+export interface PressableInputProps extends TextInputProps {
   onPress: () => void;
 }
 

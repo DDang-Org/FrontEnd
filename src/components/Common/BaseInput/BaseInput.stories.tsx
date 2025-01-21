@@ -1,25 +1,14 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { BaseInput } from './index';
+import { BaseInput, BaseInputProps } from './index';
 
 const meta = {
   title: 'BaseInput',
   component: BaseInput,
-  argTypes: {
-    value: { control: 'text' },
-    onChangeText: { action: 'text changed' },
-    placeholder: { control: 'text' },
-    onFocus: { action: 'focused' },
-    onBlur: { action: 'blurred' },
-  },
-  args: {
-    value: '',
-    onChangeText: () => {},
-    placeholder: 'Enter text...',
-  },
   decorators: [
     Story => (
-      <View>
+      <View style={{ padding: 20 }}>
         <Story />
       </View>
     ),
@@ -30,16 +19,33 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+// 제어 컴포넌트를 위한 필수 props 타입 정의
+type ControlledBaseInputProps = BaseInputProps & {
+  value: string;
+  onChangeText: (text: string) => void;
+};
 
-export const WithValue: Story = {
-  args: {
-    value: 'Hello, World!',
+const ControlledBaseInput = ({ value, onChangeText, ...props }: ControlledBaseInputProps) => (
+  <BaseInput value={value} onChangeText={onChangeText} {...props} />
+);
+
+export const Basic: Story = {
+  render: () => {
+    const [value, setValue] = React.useState('');
+    return <ControlledBaseInput value={value} onChangeText={setValue} />;
   },
 };
 
-export const LongPlaceholder: Story = {
-  args: {
-    placeholder: '이것은 매우 긴 플레이스홀더 텍스트입니다. 이 텍스트가 어떻게 처리되는지 확인하기 위한 것입니다.',
+export const WithPlaceholder: Story = {
+  render: () => {
+    const [value, setValue] = React.useState('');
+    return <ControlledBaseInput value={value} onChangeText={setValue} placeholder="Enter text here..." />;
+  },
+};
+
+export const WithInitialValue: Story = {
+  render: () => {
+    const [value, setValue] = React.useState('Initial value');
+    return <ControlledBaseInput value={value} onChangeText={setValue} />;
   },
 };

@@ -1,24 +1,11 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import FormInput from './index';
+import FormInput, { FormInputProps } from './index';
 
 const meta = {
   title: 'FormInput',
   component: FormInput,
-  argTypes: {
-    value: { control: 'text' },
-    onChangeText: { action: 'text changed' },
-    placeholder: { control: 'text' },
-    multiline: { control: 'boolean' },
-    maxLines: { control: { type: 'number', min: 1, max: 10, step: 1 } },
-    onPress: { action: 'pressed' },
-  },
-  args: {
-    value: '',
-    placeholder: 'Enter text...',
-    multiline: false,
-    maxLines: 1,
-  },
   decorators: [
     Story => (
       <View style={{ padding: 20 }}>
@@ -30,21 +17,58 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof FormInput>;
 
-export const Basic: Story = {};
+const FormInputWithState = (args: FormInputProps) => {
+  const [value, setValue] = useState(args.value || '');
+  return (
+    <FormInput
+      {...args}
+      value={value}
+      onChangeText={setValue}
+      onPress={
+        args.onPress
+          ? () => {
+              setValue('Pressed!');
+              args.onPress?.();
+            }
+          : undefined
+      }
+    />
+  );
+};
+
+export const Basic: Story = {
+  render: args => <FormInputWithState {...args} />,
+  args: {
+    placeholder: 'Enter text...',
+    onChangeText: (text: string) => console.log('Text changed:', text),
+  },
+};
 
 export const Multiline: Story = {
+  render: args => <FormInputWithState {...args} />,
   args: {
     multiline: true,
-    maxLines: 3,
+    maxLines: 2,
     placeholder: 'Enter multiline text...',
+    onChangeText: (text: string) => console.log('Text changed:', text),
   },
 };
 
 export const Pressable: Story = {
+  render: args => <FormInputWithState {...args} />,
   args: {
     onPress: () => console.log('Pressed'),
     placeholder: 'Press me...',
+    onChangeText: (text: string) => console.log('Text changed:', text),
+  },
+};
+
+export const WithInitialValue: Story = {
+  render: args => <FormInputWithState {...args} />,
+  args: {
+    value: 'Initial form input value',
+    onChangeText: (text: string) => console.log('Text changed:', text),
   },
 };

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { TextInputProps } from 'react-native';
 import { BaseInput } from '../BaseInput';
-import * as S from './styles';
 
-interface MultilineInputProps extends TextInputProps {
+export interface MultilineInputProps extends TextInputProps {
   maxLines?: number;
 }
 
@@ -20,9 +19,5 @@ export const MultilineInput: React.FC<MultilineInputProps> = ({ maxLines = 2, on
     }
   };
 
-  return (
-    <S.MultilineInput isMultiline={isMultiline}>
-      <BaseInput multiline onChangeText={handleChangeText} {...props} />
-    </S.MultilineInput>
-  );
+  return <BaseInput multiline onChangeText={handleChangeText} {...props} isMultiline={isMultiline} />;
 };

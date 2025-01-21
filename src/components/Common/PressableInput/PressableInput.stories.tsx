@@ -1,19 +1,11 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { PressableInput } from './index';
+import { PressableInput, PressableInputProps } from './index';
 
 const meta = {
   title: 'PressableInput',
   component: PressableInput,
-  argTypes: {
-    value: { control: 'text' },
-    onPress: { action: 'pressed' },
-    placeholder: { control: 'text' },
-  },
-  args: {
-    value: '',
-    placeholder: 'Press me...',
-  },
   decorators: [
     Story => (
       <View style={{ padding: 20 }}>
@@ -25,24 +17,43 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof PressableInput>;
+
+const PressableInputWithState = (args: PressableInputProps) => {
+  const [value, setValue] = useState(args.value || '');
+  return (
+    <PressableInput
+      {...args}
+      value={value}
+      onChangeText={setValue}
+      onPress={() => {
+        setValue('Pressed!');
+        args.onPress();
+      }}
+    />
+  );
+};
 
 export const Basic: Story = {
+  render: args => <PressableInputWithState {...args} />,
   args: {
-    onPress: () => console.log('Press!!'),
+    onPress: () => console.log('Pressed'),
+    placeholder: 'Press me...',
   },
 };
 
-export const WithValue: Story = {
+export const WithPlaceholder: Story = {
+  render: args => <PressableInputWithState {...args} />,
   args: {
-    value: 'Pressable Input Value',
-    onPress: () => console.log('Press!!'),
+    onPress: () => console.log('Pressed'),
+    placeholder: 'Custom placeholder...',
   },
 };
 
-export const WithLongPlaceholder: Story = {
+export const WithInitialValue: Story = {
+  render: args => <PressableInputWithState {...args} />,
   args: {
-    onPress: () => console.log('Press!!'),
-    placeholder: 'This is a long placeholder text for the pressable input',
+    onPress: () => console.log('Pressed'),
+    value: 'Initial pressable value',
   },
 };
