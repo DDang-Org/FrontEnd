@@ -1,8 +1,9 @@
-import styled from '@emotion/native';
 import { Modal } from 'react-native';
 import { DogProfile } from '~components/Walk/DogProfile';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react';
+import * as S from './styles';
+import { Icon } from '~components/Common/Icons';
 
 type ModalType =
   | 'walkStart' // 산책 시작 전 입력
@@ -33,79 +34,7 @@ interface CommonModalProps {
   onCancel?: () => void;
 }
 
-const ModalBackground = styled.TouchableOpacity`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContainer = styled.View`
-  position: relative;
-  background-color: white;
-  border-radius: 12px;
-  padding: 20px;
-  width: 80%;
-  align-items: center;
-`;
-
-const TitleContainer = styled.View`
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-`;
-
-const Title = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  text-align: center;
-`;
-
-const ReportButton = styled.Text`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
-
-const Input = styled.TextInput`
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  margin-bottom: 16px;
-`;
-
-const ButtonContainer = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-  width: 100%;
-`;
-
-const Button = styled.TouchableOpacity<{ variant?: 'primary' | 'secondary' }>`
-  padding: 12px 24px;
-  border-radius: 8px;
-  flex: 1;
-  background-color: ${props => (props.variant === 'primary' ? '#8B4513' : '#F5F5F5')};
-`;
-
-const ButtonText = styled.Text<{ variant?: 'primary' | 'secondary' }>`
-  color: ${props => (props.variant === 'primary' ? 'white' : 'black')};
-  text-align: center;
-  font-size: 14px;
-`;
-
-const Message = styled.Text`
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  margin-bottom: 16px;
-`;
-
-export const CommonModal = ({
+export const WalkModal = ({
   isVisible,
   onClose,
   type,
@@ -117,13 +46,18 @@ export const CommonModal = ({
 }: CommonModalProps) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [_items, setItems] = useState([
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Pear', value: 'pear' },
+  ]);
 
   const getModalContent = () => {
     switch (type) {
       case 'walkStart':
         return {
           content: (
-            <Input
+            <S.Input
               placeholder="산책하기 위해 멘트를 입력하세요"
               onSubmitEditing={e => onSubmit?.(e.nativeEvent.text)}
             />
@@ -136,7 +70,11 @@ export const CommonModal = ({
         return {
           title: '산책 요청이 왔어요!',
           dog: data?.dog,
-          content: <Message>{message}</Message>,
+          content: (
+            <S.MessageContainer>
+              <S.Message fontSize={13}>{message}</S.Message>
+            </S.MessageContainer>
+          ),
           buttons: [
             { text: '거절', onPress: onCancel },
             { text: '수락', onPress: () => onSubmit?.(), variant: 'primary' },
@@ -146,7 +84,7 @@ export const CommonModal = ({
       case 'walkCancel':
         return {
           title: '강번따 응답',
-          content: <Message>{data?.dog?.name}이(가) 거절했어요.</Message>,
+          content: <S.Message fontSize={17}>{data?.dog?.name}이(가) 거절했어요.</S.Message>,
           buttons: [
             { text: '취소', onPress: onCancel },
             { text: '다시 시도', onPress: () => onSubmit?.(), variant: 'primary' },
@@ -164,7 +102,7 @@ export const CommonModal = ({
               items={reportOptions ?? []}
               setOpen={setOpen}
               setValue={setValue}
-              // setItems={setItems}
+              setItems={setItems}
             />
           ),
           buttons: [
@@ -176,7 +114,7 @@ export const CommonModal = ({
       case 'reportComplete':
         return {
           title: '신고 완료!',
-          content: <Message>신고가 완료되었습니다.</Message>,
+          content: <S.Message fontSize={17}>신고가 완료되었습니다.</S.Message>,
           buttons: [{ text: '확인', onPress: onClose, variant: 'primary' }],
         };
 
@@ -196,27 +134,27 @@ export const CommonModal = ({
 
   return (
     <Modal visible={isVisible} transparent={true} onRequestClose={onClose} animationType="fade">
-      <ModalBackground activeOpacity={1} onPress={onClose}>
-        <ModalContainer>
-          <TitleContainer>
-            {modalContent?.title && <Title>{modalContent?.title}</Title>}
-            {type === 'walkComplete' && <ReportButton>신고</ReportButton>}
-          </TitleContainer>
+      <S.ModalBackground activeOpacity={1} onPress={onClose}>
+        <S.ModalContainer>
+          <S.TitleContainer>
+            {modalContent?.title && <S.Title fontSize={14}>{modalContent?.title}</S.Title>}
+            {type === 'walkComplete' && <Icon.Report style={{ position: 'absolute', right: 0, top: 0 }} />}
+          </S.TitleContainer>
           {modalContent?.dog && <DogProfile dog={modalContent.dog} />}
           {modalContent?.content}
-          <ButtonContainer>
+          <S.ButtonContainer type={type}>
             {modalContent?.buttons.map((button, index) => (
-              <Button
+              <S.ModalButton
                 key={index}
-                variant={button.variant as 'primary' | 'secondary' | undefined}
+                text={button.text}
                 onPress={button.onPress}
-              >
-                <ButtonText variant={button.variant as 'primary' | 'secondary' | undefined}>{button.text}</ButtonText>
-              </Button>
+                type="roundedRect"
+                bgColor={button.variant === 'primary' ? 'default' : 'lighten_3'}
+              />
             ))}
-          </ButtonContainer>
-        </ModalContainer>
-      </ModalBackground>
+          </S.ButtonContainer>
+        </S.ModalContainer>
+      </S.ModalBackground>
     </Modal>
   );
 };
