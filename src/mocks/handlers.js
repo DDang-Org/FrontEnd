@@ -45,4 +45,14 @@ export const handlers = [
       },
     });
   }),
+  http.get(`${BASE_URL}/notification-settings`, () => {
+    return HttpResponse.json({
+      data: {
+        walkNotificationAllowed: 'TRUE',
+        chatNotificationAllowed: 'FALSE',
+        friendNotificationAllowed: 'TRUE',
+        familyNotificationAllowed: 'TRUE',
+      },
+    });
+  }),
 ];
