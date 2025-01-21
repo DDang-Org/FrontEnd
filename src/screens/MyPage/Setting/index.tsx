@@ -1,6 +1,7 @@
+import { useNotificationPermission } from '~apis/notification/useNotificationPermission';
+import { ActionButton } from '~components/Common/ActionButton';
 import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
 import * as S from './styles';
-import { useNotificationPermission } from '~apis/notification/useNotificationPermission';
 
 export const SettingScreen = () => {
   const {
@@ -40,6 +41,12 @@ export const SettingScreen = () => {
           />
         </ToggleBox.Container>
       </ToggleBox>
+      <S.ButtonContainer>
+        <ActionButton text="로그아웃" bgColor="font_1" type="semiRoundedRect" />
+        <S.DeleteAccountButton>
+          <S.DeleteAccountTypo fontSize={15}>탈퇴하기</S.DeleteAccountTypo>
+        </S.DeleteAccountButton>
+      </S.ButtonContainer>
     </S.SettingScreen>
   );
 };
