@@ -1,7 +1,7 @@
 import * as S from './styles.ts';
 import { Icon } from '~components/Common/Icons';
 
-interface GenderSelectButtonProps {
+export interface GenderSelectButtonProps {
   gender: 'male' | 'female';
   direction?: 'row' | 'column';
   isActive: boolean;

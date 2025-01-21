@@ -1,5 +1,4 @@
 import styled from '@emotion/native';
-import { Dimensions } from 'react-native';
 import { TextBold, TextRegular } from '~components/Common/Text';
 
 interface GenderBtnProps {
