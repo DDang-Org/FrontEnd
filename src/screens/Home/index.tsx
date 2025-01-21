@@ -1,73 +1,41 @@
-import styled from '@emotion/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useQuery } from '@tanstack/react-query';
-import { Button, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchUser } from '~apis/auth/fetchUser';
-import { DogListModal } from '~components/Common/ListModal';
+import { Suspense } from 'react';
+import ErrorBoundary from 'react-native-error-boundary';
+import Avatar1 from '~assets/avatars/Avatar1.svg';
+import DogHand from '~assets/dogs/dog-hand.svg';
+import { ActionButton } from '~components/Common/ActionButton';
+import { Icon } from '~components/Common/Icons';
+import { Heading } from '~components/Home/Heading';
+import { HeadingFallback } from '~components/Home/Heading/fallback';
+import { HeadingLoader } from '~components/Home/Heading/loader';
+import { WalkInfo } from '~components/Home/WalkInfo';
+import { WalkInfoFallback } from '~components/Home/WalkInfo/fallback';
+import { WalkInfoLoader } from '~components/Home/WalkInfo/loader';
 import { HomeStackProps } from '~navigation/HomeNavigator';
-
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import * as S from './styles';
 
 type Props = NativeStackScreenProps<HomeStackProps, 'Main'>;
 
 export const HomeScreen = ({ navigation }: Props) => {
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['HomeData'],
-    queryFn: fetchUser,
-  });
-
-  if (isPending) {
-    return <Text>Loading...</Text>;
-  }
-  if (isError) {
-    return <Text>Error!</Text>;
-  }
-
   return (
-    <SafeContainer>
-      <Text>HomeScreen</Text>
-      <Button title="산책하기" onPress={() => navigation.navigate('Walk')} />
-      <Text>{JSON.stringify(data)}</Text>
-      <DogListModal
-        isVisible={true}
-        onClose={() => {}}
-        dogs={[
-          {
-            id: '1',
-            name: '멍멍이',
-            breed: '멍멍이',
-            age: '1',
-            gender: '남',
-            walkCount: 1,
-            imageUrl: 'https://cataas.com/cat/pbrosoqOlUUtR5XJ',
-          },
-          {
-            id: '2',
-            name: '멍멍이',
-            breed: '멍멍이',
-            age: '1',
-            gender: '남',
-            walkCount: 1,
-            imageUrl: 'https://cataas.com/cat/pbrosoqOlUUtR5XJ',
-          },
-          {
-            id: '3',
-            name: '멍멍이',
-            breed: '멍멍이',
-            age: '1',
-            gender: '남',
-            walkCount: 1,
-            imageUrl: 'https://cataas.com/cat/pbrosoqOlUUtR5XJ',
-          },
-        ]}
-        onSelectDog={() => {}}
-        type="default"
-      />
-    </SafeContainer>
+    <S.HomeScreen>
+      <S.Header>
+        {/* Profile로 변경하기 */}
+        <Avatar1 width={32} height={32} />
+        <Icon.Bell onPress={() => navigation.navigate('Notification')} />
+      </S.Header>
+      <ErrorBoundary FallbackComponent={HeadingFallback}>
+        <Suspense fallback={<HeadingLoader />}>
+          <Heading />
+        </Suspense>
+      </ErrorBoundary>
+      <DogHand />
+      <ErrorBoundary FallbackComponent={WalkInfoFallback}>
+        <Suspense fallback={<WalkInfoLoader />}>
+          <WalkInfo />
+        </Suspense>
+      </ErrorBoundary>
+      <ActionButton type="semiRoundedRect" text="산책 시작하기" onPress={() => navigation.navigate('Walk')} />
+    </S.HomeScreen>
   );
 };
