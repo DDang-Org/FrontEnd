@@ -5,7 +5,7 @@ import { Pressable } from 'react-native';
 interface DescriptionWithTimeStampProps {
   description: string;
   time: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const Description = ({ description }: Pick<DescriptionWithTimeStampProps, 'description'>) => (
