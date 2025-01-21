@@ -24,7 +24,7 @@ export const MyPageScreen = ({ navigation }: Props) => {
       </S.Header>
       <ErrorBoundary FallbackComponent={UserProfileFallback}>
         <Suspense fallback={<UserProfileLoader />}>
-          <UserProfile />
+          <UserProfile navigateToProfileEdit={() => navigation.navigate('ProfileEdit')} />
         </Suspense>
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
