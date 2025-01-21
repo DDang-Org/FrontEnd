@@ -2,6 +2,9 @@ import styled from '@emotion/native';
 import { Modal, ScrollView, Animated, Dimensions, GestureResponderEvent } from 'react-native';
 import { Text } from 'react-native';
 import { useEffect, useRef } from 'react';
+import { ResizeButton } from '~components/Common/ResizeButton';
+import { TextBold, TextMedium } from '~components/Common/Text';
+import { Separator } from '~components/Common/Seperator';
 
 interface DogListModalProps {
   isVisible: boolean;
@@ -75,13 +78,27 @@ const DogImage = styled.Image`
 const DogInfo = styled.View`
   flex: 1;
   margin-left: 15px;
+  margin-right: 8px;
+  gap: 4px;
+  flex-direction: column;
 `;
 
-const SelectButton = styled.TouchableOpacity`
-  background-color: #f5f5f5;
-  padding: 8px 16px;
-  border-radius: 20px;
+const ButtonContainer = styled.View`
+  justify-content: center;
+  align-self: center;
 `;
+
+const NameText = styled(TextBold)``;
+
+const InfoText = styled(TextMedium)``;
+
+const InfoContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+`;
+
+const SelectButton = styled(ResizeButton)``;
 
 export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'default' }: DogListModalProps) => {
   const slideAnim = useRef(new Animated.Value(type === 'walk' ? WALK_MODAL_HEIGHT : 500)).current;
@@ -129,15 +146,24 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
                   }}
                 />
                 <DogInfo>
-                  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{dog.name}</Text>
-                  <Text style={{ color: '#666' }}>
-                    {dog.breed} {dog.age} {dog.gender}
-                  </Text>
-                  <Text style={{ color: '#666' }}>산책 횟수 {dog.walkCount}회</Text>
+                  <NameText fontSize={17}>{dog.name}</NameText>
+                  <InfoContainer>
+                    <InfoText fontSize={14}>{dog.breed}</InfoText>
+                    <Separator $height={14} />
+                    <InfoText fontSize={14}>{dog.age}</InfoText>
+                    <Separator $height={14} />
+                    <InfoText fontSize={14}>{dog.gender}</InfoText>
+                  </InfoContainer>
+                  <Text>산책 횟수 {dog.walkCount}회</Text>
                 </DogInfo>
-                <SelectButton onPress={() => onSelectDog(dog)}>
-                  <Text>{type === 'walk' ? '강번따' : '추가'}</Text>
-                </SelectButton>
+                <ButtonContainer>
+                  <SelectButton
+                    onPress={() => onSelectDog(dog)}
+                    type="roundedRect"
+                    bgColor="lighten_3"
+                    text={type === 'walk' ? '강번따' : '추가'}
+                  />
+                </ButtonContainer>
               </DogItem>
             ))}
           </ScrollView>
