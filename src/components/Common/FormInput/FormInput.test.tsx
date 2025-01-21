@@ -1,42 +1,44 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { ThemeProvider } from '@emotion/react';
+import { fireEvent, render } from '@testing-library/react-native';
 import FormInput from './index';
+import { lightTheme } from '~styles/theme';
+
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(<ThemeProvider theme={lightTheme}>{component}</ThemeProvider>);
+};
 
 describe('FormInput', () => {
-  it('renders correctly', () => {
-    const { getByPlaceholderText } = render(<FormInput placeholder="Enter text" />);
-    expect(getByPlaceholderText('Enter text')).toBeTruthy();
+  it('기본 props로 올바르게 렌더링됩니다', () => {
+    const { getByPlaceholderText } = renderWithTheme(<FormInput placeholder="Test Input" />);
+    expect(getByPlaceholderText('Test Input')).toBeTruthy();
   });
 
-  it('handles text input correctly', () => {
-    const onChangeText = jest.fn();
-    const { getByPlaceholderText } = render(<FormInput placeholder="Enter text" onChangeText={onChangeText} />);
-    const input = getByPlaceholderText('Enter text');
-    fireEvent.changeText(input, 'Hello, World!');
-    expect(onChangeText).toHaveBeenCalledWith('Hello, World!');
+  it('multiline prop이 true일 때 MultilineInput을 렌더링합니다', () => {
+    const { getByPlaceholderText } = renderWithTheme(<FormInput placeholder="Multiline Input" multiline />);
+    const input = getByPlaceholderText('Multiline Input');
+    expect(input.props.multiline).toBe(true);
   });
 
-  it('limits input to two lines', () => {
-    const onChangeText = jest.fn();
-    const { getByPlaceholderText } = render(
-      <FormInput placeholder="Enter text" onChangeText={onChangeText} multiline />,
-    );
-    const input = getByPlaceholderText('Enter text');
-    fireEvent.changeText(input, 'Line 1\nLine 2\nLine 3');
-    expect(onChangeText).toHaveBeenCalledWith('Line 1\nLine 2');
-  });
-
-  it('handles focus and blur', () => {
-    const { getByPlaceholderText } = render(<FormInput placeholder="Enter text" />);
-    const input = getByPlaceholderText('Enter text');
-    fireEvent(input, 'focus');
-    fireEvent(input, 'blur');
-  });
-
-  it('disables input when onPress is provided', () => {
+  it('onPress prop이 제공될 때 PressableInput을 렌더링합니다', () => {
     const onPress = jest.fn();
-    const { getByPlaceholderText } = render(<FormInput placeholder="Enter text" onPress={onPress} />);
-    const input = getByPlaceholderText('Enter text');
-    expect(input.props.editable).toBe(false);
+    const { getByPlaceholderText } = renderWithTheme(<FormInput placeholder="Pressable Input" onPress={onPress} />);
+    const input = getByPlaceholderText('Pressable Input');
+    fireEvent.press(input);
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('value prop을 올바르게 표시합니다', () => {
+    const { getByDisplayValue } = renderWithTheme(<FormInput value="Test Value" />);
+    expect(getByDisplayValue('Test Value')).toBeTruthy();
+  });
+
+  it('onChangeText 콜백을 호출합니다', () => {
+    const onChangeText = jest.fn();
+    const { getByPlaceholderText } = renderWithTheme(
+      <FormInput placeholder="Test Input" onChangeText={onChangeText} />,
+    );
+    const input = getByPlaceholderText('Test Input');
+    fireEvent.changeText(input, 'New Text');
+    expect(onChangeText).toHaveBeenCalledWith('New Text');
   });
 });

@@ -1,23 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import FormInput from './index';
+import { MultilineInput } from './index';
 
 const meta = {
-  title: 'FormInput',
-  component: FormInput,
+  title: 'MultilineInput',
+  component: MultilineInput,
   argTypes: {
     value: { control: 'text' },
     onChangeText: { action: 'text changed' },
     placeholder: { control: 'text' },
-    multiline: { control: 'boolean' },
     maxLines: { control: { type: 'number', min: 1, max: 10, step: 1 } },
-    onPress: { action: 'pressed' },
   },
   args: {
     value: '',
-    placeholder: 'Enter text...',
-    multiline: false,
-    maxLines: 1,
+    placeholder: 'Enter multiline text...',
+    maxLines: 2,
   },
   decorators: [
     Story => (
@@ -26,7 +23,7 @@ const meta = {
       </View>
     ),
   ],
-} satisfies Meta<typeof FormInput>;
+} satisfies Meta<typeof MultilineInput>;
 
 export default meta;
 
@@ -34,17 +31,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
 
-export const Multiline: Story = {
+export const WithInitialValue: Story = {
   args: {
-    multiline: true,
-    maxLines: 3,
-    placeholder: 'Enter multiline text...',
+    value: 'Initial\nMultiline\nText',
   },
 };
 
-export const Pressable: Story = {
+export const CustomMaxLines: Story = {
   args: {
-    onPress: () => console.log('Pressed'),
-    placeholder: 'Press me...',
+    maxLines: 5,
+    placeholder: 'You can enter up to 5 lines here',
   },
 };

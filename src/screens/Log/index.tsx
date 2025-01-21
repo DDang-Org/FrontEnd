@@ -1,10 +1,10 @@
 import styled from '@emotion/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useState } from 'react';
-import { Text, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import FormInput from '~components/Common/FormInput';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import { MultilineInput } from '../../components/Common/MultilineInput/index';
+import { PressableInput } from '~components/Common/PressableInput';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -16,10 +16,20 @@ const SafeContainer = styled(SafeAreaView)`
 type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
-  const [text, setText] = useState('밤톨이');
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    console.log(text);
+  }, [text]);
   return (
     <SafeContainer>
-      <FormInput placeholder="이름을 입력하세요" value={text} onChangeText={setText} multiline />
+      <MultilineInput onChangeText={setText} value={text} placeholder="멀티라인이니다" />
+      <PressableInput
+        onPress={() => setText('밤톨이 클릭!!!!')}
+        onChangeText={setText}
+        placeholder="클릭하세요"
+        value={text}
+      />
     </SafeContainer>
   );
 };
