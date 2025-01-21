@@ -7,6 +7,7 @@ interface ResizeButtonProps {
   borderRadius: string;
   bgColor: string;
   width?: string;
+  flexGrow?: boolean;
 }
 
 export const ResizeButton = styled(Pressable)<ResizeButtonProps>`
@@ -14,7 +15,10 @@ export const ResizeButton = styled(Pressable)<ResizeButtonProps>`
   border-radius: ${({ borderRadius }) => borderRadius};
   background-color: ${({ bgColor }) => bgColor};
   width: ${({ width }) => width};
-  flex: 1;
+  align-self: flex-start;
+  ${({ flexGrow }) => (flexGrow ? 'flex: 1;' : 'flex: none;')};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ButtonText = styled(TextBold)`

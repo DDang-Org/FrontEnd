@@ -19,6 +19,7 @@ type ResizeButtonProps = {
   onPress?: () => void;
   text: string;
   width?: string;
+  flexGrow?: boolean;
 };
 
 const ACTION_BUTTON_STYLES = {
@@ -40,7 +41,8 @@ export const ResizeButton = ({
   bgColor = 'default',
   type = 'capsule',
   disabled = false,
-  width = '100%',
+  width = 'auto',
+  flexGrow = false,
   onPress,
   text,
 }: ResizeButtonProps) => {
@@ -51,7 +53,14 @@ export const ResizeButton = ({
   };
 
   return (
-    <S.ResizeButton onPress={onPress} disabled={disabled} testID="action-button" {...buttonStyle} width={width}>
+    <S.ResizeButton
+      onPress={onPress}
+      disabled={disabled}
+      testID="action-button"
+      {...buttonStyle}
+      width={width}
+      flexGrow={flexGrow}
+    >
       <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
         {text}
       </S.ButtonText>
