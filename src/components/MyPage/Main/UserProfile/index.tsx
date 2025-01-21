@@ -2,7 +2,7 @@ import { Icon } from '~components/Common/Icons';
 import * as S from './styles';
 import Avatar1 from '~assets/avatars/Avatar1.svg';
 import { Separator } from '~components/Common/Seperator';
-import { useUser } from '~apis/members/useUser';
+import { useUser } from '~apis/member/useUser';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 
 export const UserProfile = () => {
