@@ -9,6 +9,7 @@ import { FormInput } from '../../components/Common/FormInput/index';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { Dimensions, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { BaseInput } from '~components/Common/BaseInput';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -21,6 +22,7 @@ type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
   const [isActive, setIsActive] = useState(false);
+  const [text, setText] = useState('');
   const wid = Dimensions.get('screen').width;
   useEffect(() => {
     console.log(isActive);
@@ -41,9 +43,9 @@ export const LogScreen = ({}: Props) => {
         placeholder="클릭하세요"
         value={text}
       /> */}
-      {/* <FormInput onPress={() => setText('hihi')} placeholder="입력하세요" /> */}
-      {/* <FormInput multiline placeholder="입력하세요" value={text} onChangeText={setText} /> */}
-      {/* <FormInput placeholder="입력하세요" value={text} onChangeText={setText} /> */}
+      <BaseInput onChangeText={setText} value={text} placeholder="입력하세요" />
+      <MultilineInput multiline placeholder="입력하세요" value={text} onChangeText={setText} />
+      <FormInput onChangeText={setText} placeholder="입력하세요" value={text} />
       <View style={{ flexDirection: 'row', gap: 7 }}>
         <GenderSelectButton
           gender="female"
