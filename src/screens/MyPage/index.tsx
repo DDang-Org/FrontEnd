@@ -2,12 +2,12 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Suspense } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
 import { Icon } from '~components/Common/Icons';
-import { UserProfile } from '~components/MyPage/UserProfile';
-import { UserProfileFallback } from '~components/MyPage/UserProfile/fallback';
-import { UserProfileLoader } from '~components/MyPage/UserProfile/loader';
-import { WalkInfo } from '~components/MyPage/WalkInfo';
-import { WalkInfoFallback } from '~components/MyPage/WalkInfo/fallback';
-import { WalkInfoLoader } from '~components/MyPage/WalkInfo/loader';
+import { UserProfile } from '~components/MyPage/Main/UserProfile';
+import { UserProfileFallback } from '~components/MyPage/Main/UserProfile/fallback';
+import { UserProfileLoader } from '~components/MyPage/Main/UserProfile/loader';
+import { WalkInfo } from '~components/MyPage/Main/WalkInfo';
+import { WalkInfoFallback } from '~components/MyPage/Main/WalkInfo/fallback';
+import { WalkInfoLoader } from '~components/MyPage/Main/WalkInfo/loader';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 
