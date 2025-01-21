@@ -8,6 +8,7 @@ import { PressableInput } from '~components/Common/PressableInput';
 import { FormInput } from '../../components/Common/FormInput/index';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { Dimensions, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -23,6 +24,13 @@ export const LogScreen = ({}: Props) => {
   const wid = Dimensions.get('screen').width;
   useEffect(() => {
     console.log(isActive);
+    Toast.show({
+      type: 'error',
+      text1: '위치 권한을 허용해주세요',
+      text2: '권한을 허용했는지 확인해주세요. 설정에서 바꾸시면 됩니다.',
+      position: 'top',
+      visibilityTime: 2000,
+    });
   }, [isActive]);
   return (
     <SafeContainer style={{ paddingHorizontal: 20 }}>
