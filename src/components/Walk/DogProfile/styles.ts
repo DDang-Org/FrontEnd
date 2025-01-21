@@ -11,7 +11,7 @@ export const ProfileContainer = styled.View`
 export const ProfileImage = styled.Image`
   width: 50px;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 1000px;
 `;
 
 export const InfoContainer = styled.View`

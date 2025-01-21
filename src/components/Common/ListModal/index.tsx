@@ -71,7 +71,7 @@ const DogItem = styled.View`
 const DogImage = styled.Image`
   width: 64px;
   height: 64px;
-  border-radius: 100%;
+  border-radius: 1000px;
 `;
 
 const DogInfo = styled.View`
