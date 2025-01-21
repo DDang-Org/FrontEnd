@@ -1,6 +1,5 @@
 import styled from '@emotion/native';
 import { Modal, ScrollView, Animated, Dimensions, GestureResponderEvent } from 'react-native';
-import { Text } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { ResizeButton } from '~components/Common/ResizeButton';
 import { TextBold, TextMedium } from '~components/Common/Text';
@@ -98,6 +97,8 @@ const InfoContainer = styled.View`
   gap: 4px;
 `;
 
+const WalkText = styled(TextBold)``;
+
 const SelectButton = styled(ResizeButton)``;
 
 export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'default' }: DogListModalProps) => {
@@ -154,7 +155,7 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
                     <Separator $height={14} />
                     <InfoText fontSize={14}>{dog.gender}</InfoText>
                   </InfoContainer>
-                  <Text>산책 횟수 {dog.walkCount}회</Text>
+                  <WalkText fontSize={14}>산책 횟수 {dog.walkCount}회</WalkText>
                 </DogInfo>
                 <ButtonContainer>
                   <SelectButton
