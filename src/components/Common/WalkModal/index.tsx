@@ -149,7 +149,9 @@ export const WalkModal = ({
                 text={button.text}
                 onPress={button.onPress}
                 type="roundedRect"
+                flexGrow={modalContent.buttons.length === 2 ? true : false}
                 bgColor={button.variant === 'primary' ? 'default' : 'lighten_3'}
+                width={modalContent.buttons.length === 1 ? '100%' : 'auto'}
               />
             ))}
           </S.ButtonContainer>
