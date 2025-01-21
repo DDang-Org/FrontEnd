@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import { MultilineInput } from '../../components/Common/MultilineInput/index';
 import { PressableInput } from '~components/Common/PressableInput';
+import { FormInput } from '../../components/Common/FormInput/index';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -23,13 +24,16 @@ export const LogScreen = ({}: Props) => {
   }, [text]);
   return (
     <SafeContainer>
-      <MultilineInput onChangeText={setText} value={text} placeholder="멀티라인이니다" />
+      {/* <MultilineInput onChangeText={setText} value={text} placeholder="멀티라인이니다" />
       <PressableInput
         onPress={() => setText('밤톨이 클릭!!!!')}
         onChangeText={setText}
         placeholder="클릭하세요"
         value={text}
-      />
+      /> */}
+      <FormInput onPress={() => console.log('클릭!!')} placeholder="입력하세요" />
+      <FormInput multiline placeholder="입력하세요" />
+      <FormInput placeholder="입력하세요" />
     </SafeContainer>
   );
 };

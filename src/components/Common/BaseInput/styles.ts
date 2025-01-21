@@ -7,7 +7,7 @@ interface BaseInputProps {
 
 export const BaseInput = styled.TextInput<BaseInputProps>`
   font-family: ${({ isBold }) => (isBold ? 'SUIT-Bold' : 'SUIT-Medium')};
-  height: 100%;
+  width: 100%;
   padding: ${Platform.OS === 'ios' ? '17px 32px' : '0px 32px'};
   justify-content: center;
   border-radius: 12px;
