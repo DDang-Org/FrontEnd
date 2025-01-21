@@ -6,6 +6,8 @@ import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import { MultilineInput } from '../../components/Common/MultilineInput/index';
 import { PressableInput } from '~components/Common/PressableInput';
 import { FormInput } from '../../components/Common/FormInput/index';
+import { GenderSelectButton } from '~components/Common/GenderSelectButton';
+import { Dimensions, View } from 'react-native';
 
 const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -17,13 +19,13 @@ const SafeContainer = styled(SafeAreaView)`
 type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
-  const [text, setText] = useState('');
-
+  const [isActive, setIsActive] = useState(false);
+  const wid = Dimensions.get('screen').width;
   useEffect(() => {
-    console.log(text);
-  }, [text]);
+    console.log(isActive);
+  }, [isActive]);
   return (
-    <SafeContainer>
+    <SafeContainer style={{ paddingHorizontal: 20 }}>
       {/* <MultilineInput onChangeText={setText} value={text} placeholder="멀티라인이니다" />
       <PressableInput
         onPress={() => setText('밤톨이 클릭!!!!')}
@@ -33,7 +35,21 @@ export const LogScreen = ({}: Props) => {
       /> */}
       {/* <FormInput onPress={() => setText('hihi')} placeholder="입력하세요" /> */}
       {/* <FormInput multiline placeholder="입력하세요" value={text} onChangeText={setText} /> */}
-      <FormInput placeholder="입력하세요" value={text} onChangeText={setText} />
+      {/* <FormInput placeholder="입력하세요" value={text} onChangeText={setText} /> */}
+      <View style={{ flexDirection: 'row', gap: 7 }}>
+        <GenderSelectButton
+          gender="female"
+          direction="row"
+          isActive={isActive}
+          onPress={() => setIsActive(!isActive)}
+        />
+        <GenderSelectButton
+          gender="male"
+          direction="column"
+          isActive={isActive}
+          onPress={() => setIsActive(!isActive)}
+        />
+      </View>
     </SafeContainer>
   );
 };
