@@ -1,18 +1,58 @@
 import { NaverMapView } from '@mj-studio/react-native-naver-map';
 import { useNavigation } from '@react-navigation/native';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState, useEffect } from 'react';
 import * as S from './walk-styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+export const formatDuration = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return `${hours}시간 ${minutes}분`;
+};
+
+export const formatDistance = (meters: number) => {
+  return (meters / 1000).toFixed(1);
+};
 
 export const WalkScreen = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const [isWalking, setIsWalking] = useState(false);
+  const [walkTime, setWalkTime] = useState(0);
+  const [distance, _setDistance] = useState(0);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, [navigation]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isWalking) {
+      interval = setInterval(() => {
+        setWalkTime(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isWalking]);
+
+  const renderWalkButton = () => {
+    if (!isWalking) {
+      return <S.StartButton onPress={() => setIsWalking(true)} bgColor="default" text="산책 시작" />;
+    }
+
+    return (
+      <S.WalkingInfoContainer>
+        <S.WalkingInfo>
+          <S.InfoText fontSize={15}>{formatDuration(walkTime)}</S.InfoText>
+          <S.StopButton onPress={() => setIsWalking(false)} bgColor="lighten_2" text="산책 끝" />
+          <S.InfoText fontSize={15}>{formatDistance(distance)}km</S.InfoText>
+        </S.WalkingInfo>
+      </S.WalkingInfoContainer>
+    );
+  };
 
   return (
     <S.SafeContainer>
@@ -51,7 +91,7 @@ export const WalkScreen = () => {
 
         <S.LocationButton onPress={() => {}} text="⊕ 내 위치로" bgColor="font_1" />
 
-        <S.StartButton text="산책 시작" onPress={() => console.log('산책 시작')} />
+        {renderWalkButton()}
       </S.MapContainer>
     </S.SafeContainer>
   );

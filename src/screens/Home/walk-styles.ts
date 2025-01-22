@@ -98,7 +98,6 @@ export const StartButton = styled(ResizeButton)`
   bottom: 80px;
   align-self: center;
   width: 118px;
-  background-color: ${({ theme }) => theme.colors.default};
 `;
 
 export const StartButtonText = styled.Text`
@@ -109,7 +108,7 @@ export const StartButtonText = styled.Text`
 
 export const LocationButton = styled(ResizeButton)`
   position: absolute;
-  bottom: 90px;
+  bottom: 100px;
   align-self: center;
   padding: 8px 16px;
   align-items: center;
@@ -125,4 +124,37 @@ export const LocationText = styled.Text`
   color: white;
   font-weight: 500;
   font-size: 14px;
+`;
+
+export const WalkingInfoContainer = styled.View`
+  position: absolute;
+  bottom: 12px;
+  align-self: center;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding: 12px 20px;
+  border-radius: 100px;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.1;
+  shadow-radius: 4px;
+  elevation: 3;
+  width: 335px;
+`;
+
+export const WalkingInfo = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+`;
+
+export const InfoText = styled(TextBold)`
+  flex: 1;
+  text-align: center;
+`;
+
+export const StopButton = styled(ResizeButton)`
+  width: 100px;
 `;
