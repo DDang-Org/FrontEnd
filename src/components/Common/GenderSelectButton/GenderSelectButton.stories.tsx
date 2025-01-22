@@ -8,7 +8,7 @@ const meta: Meta<typeof GenderSelectButton> = {
   argTypes: {
     gender: {
       control: { type: 'radio' },
-      options: ['male', 'female'],
+      options: ['MALE', 'FEMALE'],
     },
     direction: {
       control: { type: 'radio' },
@@ -33,7 +33,7 @@ type Story = StoryObj<typeof GenderSelectButton>;
 
 export const Default: Story = {
   args: {
-    gender: 'male',
+    gender: 'MALE',
     direction: 'column',
     isActive: false,
     onPress: () => console.log('Button pressed'),
@@ -43,7 +43,7 @@ export const Default: Story = {
 export const Female: Story = {
   args: {
     ...Default.args,
-    gender: 'female',
+    gender: 'FEMALE',
   },
 };
 
