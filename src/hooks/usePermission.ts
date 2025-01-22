@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Alert, Linking, Platform } from 'react-native';
 import { check, request, PERMISSIONS, Permission, RESULTS } from 'react-native-permissions';
 import { permissionMessages } from '~/constants/permission-message';
@@ -20,46 +19,62 @@ const iosPermission: PermissionOSType = {
 };
 
 export const usePermission = (type: PermissionType) => {
-  useEffect(() => {
-    (async () => {
-      const isAndroid = Platform.OS === 'android';
-      const permissionOS = isAndroid ? androidPermission[type] : iosPermission[type];
+  const showPermissionAlert = () => {
+    Alert.alert(permissionMessages[`${type}_PERMISSION`].TITLE, permissionMessages[`${type}_PERMISSION`].DESCRIPTION, [
+      {
+        text: '설정하기',
+        onPress: () => Linking.openSettings(),
+      },
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+    ]);
+  };
 
-      const checked = await check(permissionOS);
+  const checkPermission = async () => {
+    const isAndroid = Platform.OS === 'android';
+    const permissionOS = isAndroid ? androidPermission[type] : iosPermission[type];
 
-      const showPermissionAlert = () => {
-        Alert.alert(
-          permissionMessages[`${type}_PERMISSION`].TITLE,
-          permissionMessages[`${type}_PERMISSION`].DESCRIPTION,
-          [
-            {
-              text: '설정하기',
-              onPress: () => Linking.openSettings(),
-            },
-            {
-              text: '취소',
-              style: 'cancel',
-            },
-          ],
-        );
-      };
+    const checked = await check(permissionOS);
 
-      switch (checked) {
-        case RESULTS.DENIED:
-          if (isAndroid) {
-            showPermissionAlert();
-            return;
-          }
+    return checked;
+  };
 
-          await request(permissionOS);
-          break;
-        case RESULTS.BLOCKED:
-        case RESULTS.LIMITED:
+  const requestPermission = async (status: string) => {
+    const isAndroid = Platform.OS === 'android';
+    const permissionOS = isAndroid ? androidPermission[type] : iosPermission[type];
+
+    switch (status) {
+      case RESULTS.DENIED:
+        if (isAndroid) {
           showPermissionAlert();
-          break;
-        default:
-          break;
-      }
-    })();
-  }, []);
+          return;
+        }
+        await request(permissionOS);
+        break;
+      case RESULTS.BLOCKED:
+      case RESULTS.LIMITED:
+        showPermissionAlert();
+
+        break;
+      default:
+        break;
+    }
+  };
+
+  const requestAndCheckPermission = async () => {
+    const status = await checkPermission();
+
+    if (status === RESULTS.GRANTED) {
+      return true;
+    }
+
+    await requestPermission(status);
+
+    const finalStatus = await checkPermission();
+    return finalStatus === RESULTS.GRANTED;
+  };
+
+  return { requestAndCheckPermission };
 };
