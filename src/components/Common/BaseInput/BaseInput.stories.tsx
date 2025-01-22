@@ -1,14 +1,20 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { BaseInput, BaseInputProps } from './index';
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+});
 
 const meta = {
   title: 'BaseInput',
   component: BaseInput,
   decorators: [
     Story => (
-      <View style={{ padding: 20 }}>
+      <View style={styles.container}>
         <Story />
       </View>
     ),
@@ -19,7 +25,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// 제어 컴포넌트를 위한 필수 props 타입 정의
 type ControlledBaseInputProps = BaseInputProps & {
   value: string;
   onChangeText: (text: string) => void;
@@ -29,23 +34,29 @@ const ControlledBaseInput = ({ value, onChangeText, ...props }: ControlledBaseIn
   <BaseInput value={value} onChangeText={onChangeText} {...props} />
 );
 
+const BasicStory = () => {
+  const [value, setValue] = React.useState('');
+  return <ControlledBaseInput value={value} onChangeText={setValue} />;
+};
+
 export const Basic: Story = {
-  render: () => {
-    const [value, setValue] = React.useState('');
-    return <ControlledBaseInput value={value} onChangeText={setValue} />;
-  },
+  render: () => <BasicStory />,
+};
+
+const WithPlaceholderStory = () => {
+  const [value, setValue] = React.useState('');
+  return <ControlledBaseInput value={value} onChangeText={setValue} placeholder="Enter text here..." />;
 };
 
 export const WithPlaceholder: Story = {
-  render: () => {
-    const [value, setValue] = React.useState('');
-    return <ControlledBaseInput value={value} onChangeText={setValue} placeholder="Enter text here..." />;
-  },
+  render: () => <WithPlaceholderStory />,
+};
+
+const WithInitialValueStory = () => {
+  const [value, setValue] = React.useState('Initial value');
+  return <ControlledBaseInput value={value} onChangeText={setValue} />;
 };
 
 export const WithInitialValue: Story = {
-  render: () => {
-    const [value, setValue] = React.useState('Initial value');
-    return <ControlledBaseInput value={value} onChangeText={setValue} />;
-  },
+  render: () => <WithInitialValueStory />,
 };
