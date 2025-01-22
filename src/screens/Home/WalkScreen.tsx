@@ -2,7 +2,7 @@ import { NaverMapView } from '@mj-studio/react-native-naver-map';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState, useEffect } from 'react';
 import * as S from './walk-styles';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import WalkHeader from '~components/Walk/Header';
 
 export const formatDuration = (seconds: number) => {
   const hours = Math.floor(seconds / 3600);
@@ -17,7 +17,6 @@ export const formatDistance = (meters: number) => {
 
 export const WalkScreen = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [isWalking, setIsWalking] = useState(false);
   const [walkTime, setWalkTime] = useState(0);
   const [distance, _setDistance] = useState(0);
@@ -56,22 +55,7 @@ export const WalkScreen = () => {
 
   return (
     <S.SafeContainer>
-      <S.Header style={{ top: insets.top }}>
-        <S.HeaderGradient
-          colors={['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0)']}
-          start={{ x: 0, y: 0.5 }}
-          end={{ x: 0, y: 1 }}
-        />
-        <S.HeaderContent>
-          <S.BackButton onPress={() => navigation.goBack()}>
-            <S.BackIcon>←</S.BackIcon>
-          </S.BackButton>
-          <S.Title fontSize={20}>강남구 논현동</S.Title>
-          <S.ProfileContainer>
-            <S.ProfileImage source={{ uri: 'https://avatars.githubusercontent.com/u/65541546?v=4' }} />
-          </S.ProfileContainer>
-        </S.HeaderContent>
-      </S.Header>
+      <WalkHeader />
 
       <S.MapContainer>
         <NaverMapView
