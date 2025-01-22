@@ -1,5 +1,6 @@
 import styled from '@emotion/native';
 import LinearGradient from 'react-native-linear-gradient';
+import { ResizeButton } from '~components/Common/ResizeButton';
 import { TextBold } from '~components/Common/Text';
 
 export const SafeContainer = styled.SafeAreaView`
@@ -92,28 +93,25 @@ export const MessageTail = styled.View`
 
 export const MessageText = styled(TextBold)``;
 
-export const StartButton = styled.TouchableOpacity`
-  position: absolute;
-  bottom: 24px;
+export const StartButton = styled(ResizeButton)`
+  position: fixed;
+  bottom: 80px;
   align-self: center;
-  background-color: #8b4513;
-  padding: 15px 30px;
-  border-radius: 25px;
+  width: 118px;
+  background-color: ${({ theme }) => theme.colors.default};
 `;
 
 export const StartButtonText = styled.Text`
   color: white;
   font-weight: bold;
+  width: 95px;
 `;
 
-export const LocationButton = styled.TouchableOpacity`
+export const LocationButton = styled(ResizeButton)`
   position: absolute;
   bottom: 90px;
   align-self: center;
-  background-color: #000000;
   padding: 8px 16px;
-  border-radius: 20px;
-  flex-direction: row;
   align-items: center;
   gap: 4px;
 `;

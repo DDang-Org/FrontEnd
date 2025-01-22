@@ -44,14 +44,9 @@ export const WalkScreen = () => {
           <S.MessageTail />
         </S.WalkMessage>
 
-        <S.LocationButton onPress={() => {}}>
-          <S.LocationIcon>⊕</S.LocationIcon>
-          <S.LocationText>내 위치로</S.LocationText>
-        </S.LocationButton>
+        <S.LocationButton onPress={() => {}} text="⊕ 내 위치로" bgColor="font_1" />
 
-        <S.StartButton>
-          <S.StartButtonText>산책 시작</S.StartButtonText>
-        </S.StartButton>
+        <S.StartButton text="산책 시작" onPress={() => console.log('산책 시작')} />
       </S.MapContainer>
     </S.SafeContainer>
   );
