@@ -1,9 +1,11 @@
 import styled from '@emotion/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text, Pressable, View, Alert } from 'react-native';
+import { useEffect } from 'react';
+import { Text, Pressable, View, Alert, Platform } from 'react-native';
 import { RESULTS } from 'react-native-permissions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import useNotificationPermission from '~hooks/useNotificationPermission';
 import { usePermission } from '~hooks/usePermission';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
@@ -23,6 +25,7 @@ type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
   const { requestAndCheckPermission } = usePermission();
+  const { permissionStatus, requestPermission } = useNotificationPermission();
 
   const showToast = () => {
     Toast.show({
@@ -32,6 +35,10 @@ export const LogScreen = ({}: Props) => {
       position: 'bottom',
     });
   };
+
+  useEffect(() => {
+    console.log('권한이 변경되었습니다', permissionStatus);
+  }, [permissionStatus]);
 
   const handleClick = async () => {
     const isGranted = await requestAndCheckPermission('CAMERA');
@@ -43,7 +50,7 @@ export const LogScreen = ({}: Props) => {
   return (
     <Test>
       <SafeContainer>
-        <Pressable onPress={handleClick} style={{ width: 100, height: 30, backgroundColor: 'black' }}></Pressable>
+        <Pressable onPress={requestPermission} style={{ width: 100, height: 30, backgroundColor: 'black' }}></Pressable>
       </SafeContainer>
     </Test>
   );
