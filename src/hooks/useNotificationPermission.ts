@@ -4,7 +4,7 @@ import { checkNotifications, requestNotifications, RESULTS } from 'react-native-
 
 type NotificationPermissionStatus = 'unavailable' | 'denied' | 'limited' | 'granted' | 'blocked';
 
-const useNotificationPermission = () => {
+export const useNotificationPermission = () => {
   const [permissionStatus, setPermissionStatus] = useState<NotificationPermissionStatus>('denied');
 
   const checkPermission = useCallback(async () => {
@@ -37,5 +37,3 @@ const useNotificationPermission = () => {
     requestPermission,
   };
 };
-
-export default useNotificationPermission;

@@ -5,7 +5,7 @@ import { Text, Pressable, View, Alert, Platform } from 'react-native';
 import { RESULTS } from 'react-native-permissions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import useNotificationPermission from '~hooks/useNotificationPermission';
+import { useNotificationPermission } from '~hooks/useNotificationPermission';
 import { usePermission } from '~hooks/usePermission';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
