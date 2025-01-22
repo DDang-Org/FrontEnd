@@ -1,13 +1,15 @@
 import styled from '@emotion/native';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { useState } from 'react';
-import { Text } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Text, View } from 'react-native';
 import { useInitializeMsw } from '~hooks/useInitializeMsw';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
-import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
+import Toast, { BaseToast, BaseToastProps, ErrorToast, ToastConfigParams } from 'react-native-toast-message';
+import { FormErrorToast } from '~components/Common/FormErrorToast';
+import { Animated } from 'react-native';
 
 const navTheme = {
   ...DefaultTheme,
@@ -18,10 +20,6 @@ const navTheme = {
 };
 
 const toastConfig = {
-  /*
-    Overwrite 'success' type,
-    by modifying the existing `BaseToast` component
-  */
   success: (props: BaseToastProps) => (
     <BaseToast
       {...props}
@@ -33,10 +31,6 @@ const toastConfig = {
       }}
     />
   ),
-  /*
-    Overwrite 'error' type,
-    by modifying the existing `ErrorToast` component
-  */
   error: (props: BaseToastProps) => (
     <ErrorToast
       {...props}
@@ -52,19 +46,18 @@ const toastConfig = {
       }}
     />
   ),
-  /*
-    Or create a completely new type - `tomatoToast`,
-    building the layout from scratch.
-
-    I can consume any custom `props` I want.
-    They will be passed when calling the `show` method (see below)
-  */
-  // tomatoToast: ({ text1, props }) => (
-  //   <View style={{ height: 60, width: '100%', backgroundColor: 'tomato' }}>
-  //     <Text>{text1}</Text>
-  //     <Text>{props.uuid}</Text>
-  //   </View>
-  // ),
+  formError: ({ text1, props }: ToastConfigParams<{ position: { top: number; left: number } }>) => (
+    <View
+      style={{
+        position: 'absolute',
+        top: props?.position?.top || 0,
+        left: props?.position?.left || 0,
+        transform: [{ translateX: '-50%' }],
+      }}
+    >
+      <FormErrorToast message={text1 || ''} />
+    </View>
+  ),
 };
 
 const MainApp = () => (

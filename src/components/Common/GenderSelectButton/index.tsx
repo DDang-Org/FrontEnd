@@ -1,8 +1,9 @@
+import { Gender } from '~types/gender';
 import * as S from './styles.ts';
 import { Icon } from '~components/Common/Icons';
 
 export interface GenderSelectButtonProps {
-  gender: 'male' | 'female';
+  gender: Gender;
   direction?: 'row' | 'column';
   isActive: boolean;
   onPress: () => void;
@@ -10,8 +11,8 @@ export interface GenderSelectButtonProps {
 
 export const GenderSelectButton = ({ gender, direction = 'column', isActive, onPress }: GenderSelectButtonProps) => {
   const genderInfo = {
-    male: { icon: Icon.Male, text: '남' },
-    female: { icon: Icon.Female, text: '여' },
+    MALE: { icon: Icon.Male, text: '남' },
+    FEMALE: { icon: Icon.Female, text: '여' },
   };
 
   const { icon: GenderIcon, text } = genderInfo[gender];
