@@ -1,5 +1,7 @@
 import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
+import { BooleanString } from '~types/boolean-string';
+import { Gender } from '~types/gender';
 
 export type FetchMyDogInfoResponseType = {
   dogId: number;
@@ -7,9 +9,9 @@ export type FetchMyDogInfoResponseType = {
   breed: string;
   dogBirthDate: string;
   weight: number;
-  dogGender: string;
+  dogGender: Gender;
   dogProfileImg: string;
-  isNeutered: string;
+  isNeutered: BooleanString;
   familyId: number;
   comment: string;
 };

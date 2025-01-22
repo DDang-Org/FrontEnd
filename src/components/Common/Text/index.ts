@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 import { Theme } from '@emotion/react';
 
 interface TextProps {
-  fontSize: 11 | 13 | 14 | 15 | 17 | 20 | 24;
+  fontSize: 9 | 11 | 13 | 14 | 15 | 17 | 20 | 24;
   color?: keyof Theme['colors'];
 }
 

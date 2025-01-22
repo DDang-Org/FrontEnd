@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Suspense } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
 import { Icon } from '~components/Common/Icons';
+import { DogProfile } from '~components/MyPage/Main/DogProfile';
 import { UserProfile } from '~components/MyPage/Main/UserProfile';
 import { UserProfileFallback } from '~components/MyPage/Main/UserProfile/fallback';
 import { UserProfileLoader } from '~components/MyPage/Main/UserProfile/loader';
@@ -32,6 +33,7 @@ export const MyPageScreen = ({ navigation }: Props) => {
           <WalkInfo />
         </Suspense>
       </ErrorBoundary>
+      <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit')} />
     </S.MyPage>
   );
 };
