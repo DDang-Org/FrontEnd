@@ -1,8 +1,8 @@
-import { NaverMapView } from '@mj-studio/react-native-naver-map';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState, useEffect } from 'react';
 import * as S from './walk-styles';
 import WalkHeader from '~components/Walk/Header';
+import MapView from '~components/Walk/MapView';
 
 export const formatDuration = (seconds: number) => {
   const hours = Math.floor(seconds / 3600);
@@ -56,15 +56,8 @@ export const WalkScreen = () => {
   return (
     <S.SafeContainer>
       <WalkHeader />
-
       <S.MapContainer>
-        <NaverMapView
-          style={{ width: '100%', height: '100%' }}
-          isShowLocationButton={false}
-          isShowZoomControls={false}
-          isShowCompass={false}
-        />
-
+        <MapView />
         <S.WalkMessage>
           <S.MessageText fontSize={14}>
             주변에 5마리가 산책을 하고 있어요. {'\n'}
