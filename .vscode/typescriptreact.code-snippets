@@ -1,0 +1,28 @@
+{
+  "Typescript React component with props": {
+    "prefix": "rfc",
+    "scope": "typescriptreact",
+    "body": [
+      "import * as S from './styles';",
+      "",
+      "interface ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}Props {}",
+      "",
+      "export const ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}} = ({}: ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}Props) => {",
+      "  return <S.${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}></S.${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}>",
+      "};",
+      ""
+    ]
+  },
+  "Typescript React component with no props": {
+    "prefix": "rfcn",
+    "scope": "typescriptreact",
+    "body": [
+      "import * as S from './styles';",
+      "",
+      "export const ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}} = () => {",
+      "  return <S.${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}></S.${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}}>",
+      "};",
+      ""
+    ]
+  }
+}

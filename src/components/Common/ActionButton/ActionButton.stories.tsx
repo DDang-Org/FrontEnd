@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from '~styles/theme';
-import { css } from '@emotion/native';
 import { View } from 'react-native';
 import { ActionButton } from '~components/Common/ActionButton';
 
@@ -21,12 +18,7 @@ const meta = {
       },
       options: ['roundedRect', 'semiRoundedRect', 'capsule'],
     },
-    fontWeight: {
-      control: {
-        type: 'select',
-      },
-      options: ['light', 'regular', 'medium', 'bold'],
-    },
+
     disabled: { control: 'boolean' },
     text: { control: 'text' },
     onPress: { action: 'button pressed' },
@@ -35,21 +27,13 @@ const meta = {
     text: 'ActionButton',
     bgColor: 'default',
     type: 'capsule',
-    fontWeight: 'regular',
     disabled: false,
   },
   decorators: [
     Story => (
-      <ThemeProvider theme={lightTheme}>
-        <View
-          style={css`
-            padding: 50px 20px;
-            flex: 1;
-          `}
-        >
-          <Story />
-        </View>
-      </ThemeProvider>
+      <View>
+        <Story />
+      </View>
     ),
   ],
 } satisfies Meta<typeof ActionButton>;
@@ -71,7 +55,6 @@ export const LongText: Story = {
   args: {
     bgColor: 'default',
     type: 'semiRoundedRect',
-    fontWeight: 'medium',
     text: '긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다. 긴 텍스트를 테스트합니다.',
   },
 };

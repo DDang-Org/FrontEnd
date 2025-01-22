@@ -2,7 +2,8 @@
   "api-get-ky": {
     "prefix": "api-get-ky",
     "body": [
-      "import { api } from '~apis/index.ts';",
+      "import { api } from '~apis/api.ts';",
+      "import { APIResponse } from '~types/api';",
       "",
       "export type ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType = {",
       "  ${1:// Define request type here}",
@@ -12,9 +13,9 @@
       "  ${2:// Define response type here}",
       "};",
       "",
-      "export const ${TM_FILENAME_BASE} = async (params: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType> => {",
+      "export const ${TM_FILENAME_BASE} = async (params: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>> => {",
       "  try {",
-      "    const response = await api.get(`${3:endpoint}`, { searchParams: params }).json<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>();",
+      "    const response = await api.get(`${3:endpoint}`, { searchParams: params }).json<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>>();",
       "    return response;",
       "  } catch (error) {",
       "    console.error('Error:', error);",
@@ -27,7 +28,8 @@
   "api-post-ky": {
     "prefix": "api-post-ky",
     "body": [
-      "import { api } from '~apis/index.ts';",
+      "import { api } from '~apis/api.ts';",
+      "import { APIResponse } from '~types/api';",
       "",
       "export type ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType = {",
       "  ${1:// Define request type here}",
@@ -37,9 +39,9 @@
       "  ${2:// Define response type here}",
       "};",
       "",
-      "export const ${TM_FILENAME_BASE} = async (data: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType> => {",
+      "export const ${TM_FILENAME_BASE} = async (data: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>> => {",
       "  try {",
-      "    const response = await api.post(`${3:endpoint}`, { json: data }).json<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>();",
+      "    const response = await api.post(`${3:endpoint}`, { json: data }).json<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>>();",
       "    return response;",
       "  } catch (error) {",
       "    console.error('Error:', error);",
@@ -52,7 +54,8 @@
   "api-delete-ky": {
     "prefix": "api-delete-ky",
     "body": [
-      "import { api } from '~apis/index.ts';",
+      "import { api } from '~apis/api.ts';",
+      "import { APIResponse } from '~types/api';",
       "",
       "export type ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType = {",
       "  id: string;",
@@ -63,9 +66,9 @@
       "  ${2:// Define response type here}",
       "};",
       "",
-      "export const ${TM_FILENAME_BASE} = async ({ id, ...params }: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType> => {",
+      "export const ${TM_FILENAME_BASE} = async ({ id, ...params }: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>> => {",
       "  try {",
-      "    const response = await api.delete(`${3:endpoint}/\\${id}`, { searchParams: params }).json<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>();",
+      "    const response = await api.delete(`${3:endpoint}/\\${id}`, { searchParams: params }).json<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>>();",
       "    return response;",
       "  } catch (error) {",
       "    console.error('Error:', error);",
@@ -78,7 +81,8 @@
   "api-put-ky": {
     "prefix": "api-put-ky",
     "body": [
-      "import { api } from '~apis/index.ts';",
+      "import { api } from '~apis/api.ts';",
+      "import { APIResponse } from '~types/api';",
       "",
       "export type ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType = {",
       "  id: string;",
@@ -89,9 +93,9 @@
       "  ${2:// Define response type here}",
       "};",
       "",
-      "export const ${TM_FILENAME_BASE} = async ({ id, ...data }: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType> => {",
+      "export const ${TM_FILENAME_BASE} = async ({ id, ...data }: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType): Promise<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>> => {",
       "  try {",
-      "    const response = await api.put(`${3:endpoint}/\\${id}`, { json: data }).json<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>();",
+      "    const response = await api.put(`${3:endpoint}/\\${id}`, { json: data }).json<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>>();",
       "    return response;",
       "  } catch (error) {",
       "    console.error('Error:', error);",
@@ -104,7 +108,8 @@
   "api-patch-ky": {
     "prefix": "api-patch-ky",
     "body": [
-      "import { api } from '~apis/index.ts';",
+      "import { api } from '~apis/api.ts';",
+      "import { APIResponse } from '~types/api';",
       "",
       "export type ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType = {",
       "  id: string;",
@@ -115,9 +120,9 @@
       "  ${2:// Define response type here}",
       "};",
       "",
-      "export const ${TM_FILENAME_BASE} = async ({ id, ...data }: Partial<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType>): Promise<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType> => {",
+      "export const ${TM_FILENAME_BASE} = async ({ id, ...data }: Partial<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}RequestType>): Promise<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>> => {",
       "  try {",
-      "    const response = await api.patch(`${3:endpoint}/\\${id}`, { json: data }).json<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>();",
+      "    const response = await api.patch(`${3:endpoint}/\\${id}`, { json: data }).json<APIResponse<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ResponseType>>();",
       "    return response;",
       "  } catch (error) {",
       "    console.error('Error:', error);",
@@ -126,5 +131,16 @@
       "};"
     ],
     "description": "Patch data using PATCH request with ky"
+  },
+  "Typescript React Styled Components": {
+    "scope": "typescript",
+    "prefix": "sc",
+    "body": [
+      "import styled from '@emotion/native'",
+      "",
+      "export const ${1:${TM_DIRECTORY/.*\\/(.*)$/$1/}} = styled.View`",
+      "  ${2}",
+      "`;"
+    ]
   }
 }
