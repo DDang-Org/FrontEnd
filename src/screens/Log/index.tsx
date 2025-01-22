@@ -15,7 +15,7 @@ const SafeContainer = styled(SafeAreaView)`
 type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
-  usePermission('PHOTO');
+  usePermission('LOCATION');
   const showToast = () => {
     Toast.show({
       type: 'success',
