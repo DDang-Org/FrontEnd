@@ -22,7 +22,7 @@ const Test = styled.View`
 type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 
 export const LogScreen = ({}: Props) => {
-  const { requestAndCheckPermission } = usePermission('PHOTO');
+  const { requestAndCheckPermission } = usePermission();
 
   const showToast = () => {
     Toast.show({
@@ -34,9 +34,9 @@ export const LogScreen = ({}: Props) => {
   };
 
   const handleClick = async () => {
-    const isGranted = await requestAndCheckPermission();
+    const isGranted = await requestAndCheckPermission('CAMERA');
     if (isGranted) {
-      Alert.alert('권한이 승인되었으므로 실행됩니다.');
+      Alert.alert('권한이 승인되었으므로 실행됩니다.'); // 권한만 받고 추가 작업은 하지 않을거라면 생략
     }
   };
 
