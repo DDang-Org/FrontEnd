@@ -34,7 +34,12 @@ export const WalkScreen = () => {
       </S.Header>
 
       <S.MapContainer>
-        <NaverMapView style={{ width: '100%', height: '100%' }} />
+        <NaverMapView
+          style={{ width: '100%', height: '100%' }}
+          isShowLocationButton={false}
+          isShowZoomControls={false}
+          isShowCompass={false}
+        />
 
         <S.WalkMessage>
           <S.MessageText fontSize={14}>
