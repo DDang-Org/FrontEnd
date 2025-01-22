@@ -50,7 +50,7 @@ export const LogScreen = ({}: Props) => {
           style={{ width: '100%', height: 80, backgroundColor: 'blue', marginTop: 300, alignItems: 'center' }}
           onPress={handleOnPress}
         >
-          <View ref={buttonRef} style={{ width: 100, height: 30, backgroundColor: 'yellow', marginTop: 200 }} />
+          <View ref={buttonRef} style={{ width: 100, height: 30, backgroundColor: 'yellow', marginTop: 50 }} />
         </Pressable>
       </ScrollView>
     </SafeContainer>
