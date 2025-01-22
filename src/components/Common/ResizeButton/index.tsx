@@ -1,5 +1,6 @@
 import { Theme, useTheme } from '@emotion/react';
 import * as S from './styles';
+import { ViewStyle } from 'react-native';
 
 const ACTION_BUTTON_FONT_COLORS = {
   default: 'gc_4',
@@ -20,6 +21,7 @@ type ResizeButtonProps = {
   text: string;
   width?: string;
   flexGrow?: boolean;
+  style?: ViewStyle;
 };
 
 const ACTION_BUTTON_STYLES = {
@@ -45,6 +47,8 @@ export const ResizeButton = ({
   flexGrow = false,
   onPress,
   text,
+  style,
+  ...rest
 }: ResizeButtonProps) => {
   const theme = useTheme();
   const buttonStyle = {
@@ -60,6 +64,8 @@ export const ResizeButton = ({
       {...buttonStyle}
       width={width}
       flexGrow={flexGrow}
+      style={style}
+      {...rest}
     >
       <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
         {text}
