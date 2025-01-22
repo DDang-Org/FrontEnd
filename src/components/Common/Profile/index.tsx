@@ -6,7 +6,7 @@ interface ProfileProps {
   size: number;
   src: string | React.FC<SvgProps>;
   userId?: number;
-  testID?: string; 
+  testID?: string;
 }
 
 export const Profile = ({ size, src, userId, testID }: ProfileProps) => {
