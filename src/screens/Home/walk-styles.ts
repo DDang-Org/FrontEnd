@@ -64,23 +64,33 @@ export const MapContainer = styled.View`
 
 export const WalkMessage = styled.View`
   position: absolute;
-  top: 20px;
+  top: 80px;
   right: 20px;
-  background-color: white;
-  padding: 12px;
-  border-radius: 8px;
-  shadow-color: #000;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.lighten_2};
+
+  shadow-color: #000000;
   shadow-offset: 0px 2px;
-  shadow-opacity: 0.25;
-  shadow-radius: 3.84px;
-  elevation: 5;
-  width: 222px;
+  shadow-opacity: 0.1;
+  shadow-radius: 4px;
+
+  elevation: 3;
+
+  z-index: 2;
 `;
 
-export const MessageText = styled.Text`
-  font-size: 14px;
-  color: #666;
+export const MessageTail = styled.View`
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  background-color: ${({ theme }) => theme.colors.lighten_2};
+  transform: rotate(45deg);
 `;
+
+export const MessageText = styled(TextBold)``;
 
 export const StartButton = styled.TouchableOpacity`
   position: absolute;

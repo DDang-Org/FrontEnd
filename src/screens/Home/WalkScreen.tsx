@@ -37,10 +37,11 @@ export const WalkScreen = () => {
         <NaverMapView style={{ width: '100%', height: '100%' }} />
 
         <S.WalkMessage>
-          <S.MessageText>
+          <S.MessageText fontSize={14}>
             주변에 5마리가 산책을 하고 있어요. {'\n'}
-            <S.MessageText>같이 산책을 해보세요!</S.MessageText>
+            같이 산책을 해보세요!
           </S.MessageText>
+          <S.MessageTail />
         </S.WalkMessage>
 
         <S.LocationButton onPress={() => {}}>
