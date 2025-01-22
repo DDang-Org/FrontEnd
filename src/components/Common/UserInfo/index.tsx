@@ -9,16 +9,18 @@ import * as S from './styles';
 interface ItemProps {
   name: string;
   gender: Gender;
+  dogGender: Gender;
   familyRole: FamilyRole;
   buttonText: string;
   isLast?: boolean;
+  onPressButton: () => void;
 }
 
 export const UserInfo = ({ children }: PropsWithChildren) => {
   return <S.UserInfo>{children}</S.UserInfo>;
 };
 
-const Item = ({ buttonText, familyRole, gender, name, isLast = false }: ItemProps) => {
+const Item = ({ buttonText, familyRole, gender, name, isLast = false, onPressButton, dogGender }: ItemProps) => {
   //! 유저 강아지 성별
   return (
     <S.Item>
@@ -31,11 +33,11 @@ const Item = ({ buttonText, familyRole, gender, name, isLast = false }: ItemProp
             <S.GenderFamilyRoleWrapper>
               <S.Gender fontSize={14}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
               <Separator $height={8} />
-              <S.FamilyRole fontSize={14}>{getKoreanRole({ dogGender: 'FEMALE', familyRole })}</S.FamilyRole>
+              <S.FamilyRole fontSize={14}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
             </S.GenderFamilyRoleWrapper>
           </S.TypoWrapper>
         </S.LeftContentContainer>
-        <S.Button>
+        <S.Button onPress={onPressButton}>
           <S.ButtonText fontSize={14}>{buttonText}</S.ButtonText>
         </S.Button>
       </S.ItemWrapper>
