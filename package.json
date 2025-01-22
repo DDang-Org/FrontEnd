@@ -23,6 +23,7 @@
     "react-native": "0.76.5",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-error-boundary": "^1.2.7",
+    "react-native-permissions": "^5.2.4",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.4.0",
     "react-native-toast-message": "^2.2.1",

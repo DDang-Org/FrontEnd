@@ -31,8 +31,20 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>반려견과의 산책을 위해 위치 접근 권한이 필요합니다. 동의하시면, 현재 위치를 표시하고, 산책 거리와 경로를 기록하는 데 사용됩니다. 설정에서 언제든 변경이 가능합니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>반려견과의 산책을 위해 위치 접근 권한이 필요합니다. 동의하시면, 현재 위치를 표시하고, 산책 거리와 경로를 기록하는 데 사용됩니다. 설정에서 언제든 변경이 가능합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>반려견과의 산책을 위해 위치 접근 권한이 필요합니다. 동의하시면, 현재 위치를 표시하고, 산책 거리와 경로를 기록하는 데 사용됩니다. 설정에서 언제든 변경이 가능합니다.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>반려견과의 산책을 위해 위치 접근 권한이 필요합니다. 동의하시면, 현재 위치를 표시하고, 산책 거리와 경로를 기록하는 데 사용됩니다. 설정에서 언제든 변경이 가능합니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>사진 등록시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진 등록시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>사진 등록시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
