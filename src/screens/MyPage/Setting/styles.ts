@@ -19,6 +19,7 @@ export const DeleteAccountTypo = styled(TextBold)`
 `;
 
 export const ButtonContainer = styled.View`
+  width: 100%;
   position: absolute;
   left: 20px;
   bottom: 12px;
