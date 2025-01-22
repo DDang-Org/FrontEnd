@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
 import { Icon } from '~components/Common/Icons';
 import { DogProfile } from '~components/MyPage/Main/DogProfile';
+import { DogProfileFallback } from '~components/MyPage/Main/DogProfile/fallback';
 import { UserProfile } from '~components/MyPage/Main/UserProfile';
 import { UserProfileFallback } from '~components/MyPage/Main/UserProfile/fallback';
 import { UserProfileLoader } from '~components/MyPage/Main/UserProfile/loader';
@@ -11,6 +12,7 @@ import { WalkInfoFallback } from '~components/MyPage/Main/WalkInfo/fallback';
 import { WalkInfoLoader } from '~components/MyPage/Main/WalkInfo/loader';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
+import { DogProfileLoader } from '~components/MyPage/Main/DogProfile/loader';
 
 type Props = NativeStackScreenProps<MyPageStackProps, 'Main'>;
 
@@ -33,7 +35,11 @@ export const MyPageScreen = ({ navigation }: Props) => {
           <WalkInfo />
         </Suspense>
       </ErrorBoundary>
-      <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit')} />
+      <ErrorBoundary FallbackComponent={DogProfileFallback}>
+        <Suspense fallback={<DogProfileLoader />}>
+          <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit')} />
+        </Suspense>
+      </ErrorBoundary>
     </S.MyPage>
   );
 };

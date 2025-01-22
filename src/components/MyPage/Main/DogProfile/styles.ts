@@ -7,6 +7,7 @@ export const DogProfile = styled(BgBox)`
   flex-direction: row;
   gap: 20px;
   align-items: center;
+  height: 108px;
 `;
 export const Info = styled.View`
   flex: 1;
@@ -33,4 +34,16 @@ export const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 4px;
+`;
+
+//! Loader
+export const DogProfileLoader = styled(BgBox)`
+  height: 108px;
+  justify-content: center;
+`;
+
+//! Fallback
+export const DogProfileFallback = styled(BgBox)`
+  height: 108px;
+  gap: 2px;
 `;
