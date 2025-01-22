@@ -19,7 +19,7 @@ export const MyPageScreen = ({ navigation }: Props) => {
       <S.Header>
         <S.Title fontSize={17}>마이페이지</S.Title>
         <S.GearWrapper>
-          <Icon.Gear onPress={() => navigation.navigate('Entry')} />
+          <Icon.Gear onPress={() => navigation.navigate('Setting')} />
         </S.GearWrapper>
       </S.Header>
       <ErrorBoundary FallbackComponent={UserProfileFallback}>

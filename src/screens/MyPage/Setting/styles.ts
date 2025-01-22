@@ -1,5 +1,7 @@
 import styled from '@emotion/native';
 import { Pressable } from 'react-native';
+import { BgBox } from '~components/Common/BgBox';
+import { Icon } from '~components/Common/Icons';
 import { TextBold } from '~components/Common/Text';
 
 export const SettingScreen = styled.View`
@@ -21,4 +23,15 @@ export const ButtonContainer = styled.View`
   left: 20px;
   bottom: 12px;
   gap: 6px;
+`;
+
+export const NavigationToBlockScreen = styled(BgBox)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const TypoWrapper = styled.View``;
+export const NextButton = styled(Icon.Prev)`
+  transform: rotate(180deg);
 `;

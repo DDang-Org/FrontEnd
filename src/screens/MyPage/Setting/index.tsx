@@ -1,9 +1,14 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNotificationPermission } from '~apis/notification/useNotificationPermission';
 import { ActionButton } from '~components/Common/ActionButton';
+import { TextBold, TextRegular } from '~components/Common/Text';
 import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
+import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 
-export const SettingScreen = () => {
+type Props = NativeStackScreenProps<MyPageStackProps, 'Main'>;
+
+export const SettingScreen = ({ navigation }: Props) => {
   const {
     chatNotificationAllowed,
     familyNotificationAllowed,
@@ -41,6 +46,15 @@ export const SettingScreen = () => {
           />
         </ToggleBox.Container>
       </ToggleBox>
+
+      <S.NavigationToBlockScreen paddingHorizontal={20} paddingVertical={16.5}>
+        <S.TypoWrapper>
+          <TextBold fontSize={17}>차단 목록</TextBold>
+          <TextRegular fontSize={15}>차단한 유저를 관리합니다.</TextRegular>
+        </S.TypoWrapper>
+        <S.NextButton onPress={() => navigation.navigate('Block')} />
+      </S.NavigationToBlockScreen>
+
       <S.ButtonContainer>
         <ActionButton text="로그아웃" bgColor="font_1" type="semiRoundedRect" />
         <S.DeleteAccountButton>
