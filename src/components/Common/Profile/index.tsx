@@ -33,3 +33,19 @@ export default function Profile({
         </TouchableOpacity>
         );
     }
+
+//userId 란?
+
+// 클릭 가능한 프로필
+// <Profile 
+//   size={64} 
+//   src={Avatar1}
+//   userId={1}  // 클릭 시 opacity 0.8로 변경되며 터치 피드백 제공
+// />
+
+// 클릭 불가능한 프로필
+// <Profile 
+//   size={64} 
+//   src={Avatar1}
+// userId 없음 - 터치 피드백 없이 항상 opacity 1 유지
+// />
