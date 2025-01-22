@@ -48,6 +48,7 @@
     "@storybook/addon-ondevice-controls": "^8.4.4",
     "@storybook/react": "^8.4.7",
     "@storybook/react-native": "^8.4.4",
+    "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.62.16",
     "@testing-library/react-native": "^13.0.0",
     "@types/jest": "^29.5.14",
@@ -67,6 +68,7 @@
     "react-native-safe-area-context": "^5.0.0",
     "react-native-svg": "^15.11.1",
     "react-native-svg-transformer": "^1.5.0",
+    "react-native-svg-web": "^1.0.9",
     "react-test-renderer": "18.3.1",
     "typescript": "5.0.4"
   },

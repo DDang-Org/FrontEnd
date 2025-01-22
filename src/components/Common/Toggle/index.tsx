@@ -11,27 +11,27 @@ interface ToggleProps {
 }
 
 export const Toggle: React.FC<ToggleProps> = ({
-  value,
-  onValueChange,
-  disabled = false,
-  label,
+    value,
+    onValueChange,
+    disabled = false,
+    label,
 }) => {
   const theme = useTheme(); // 테마 객체 가져오기
 
-  return (
-    <S.Container>
-      {label && <S.Label>{label}</S.Label>}
-      <Switch
-        value={value}
-        onValueChange={onValueChange}
-        disabled={disabled}
-        trackColor={{
-          false: theme.colors.gc_1, // 비활성화 상태 트랙 색상
-          true: theme.colors.font_1, // 활성화 상태 트랙 색상
-        }}
-        ios_backgroundColor={theme.colors.gc_1} // iOS 백그라운드 색상
-      />
-    </S.Container>
-  );
+    return (
+        <S.Container>
+        {label && <S.Label>{label}</S.Label>}
+        <Switch
+            value={value}
+            onValueChange={onValueChange}
+            disabled={disabled}
+            trackColor={{
+            false: theme.colors.gc_1, // 비활성화 상태 트랙 색상
+            true: theme.colors.font_1, // 활성화 상태 트랙 색상
+            }}
+            ios_backgroundColor={theme.colors.gc_1} // iOS 백그라운드 색상
+        />
+        </S.Container>
+    );
 };
 
