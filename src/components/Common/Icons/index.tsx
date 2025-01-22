@@ -10,6 +10,7 @@ import AddDogProfile from '~assets/icons/add-dog-profile.svg';
 import AddDogPicture from '~assets/icons/add-dog-picture.svg';
 import Edit from '~assets/icons/edit.svg';
 import { SvgProps } from 'react-native-svg';
+import Report from '~assets/icons/report.svg';
 import Female from '~assets/icons/female.svg';
 import Male from '~assets/icons/male.svg';
 
@@ -25,6 +26,7 @@ export const Icon = {
   AddDogProfile: (props: SvgProps) => <AddDogProfile {...props} />,
   AddDogPicture: (props: SvgProps) => <AddDogPicture {...props} />,
   Edit: (props: SvgProps) => <Edit {...props} />,
+  Report: (props: SvgProps) => <Report {...props} />,
   Female: (props: SvgProps) => <Female {...props} />,
   Male: (props: SvgProps) => <Male {...props} />,
 };
