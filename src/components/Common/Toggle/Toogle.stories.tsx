@@ -14,7 +14,7 @@ const Template: StoryFn = (args) => {
     const handleToggle = (value: boolean) => {
     setIsEnabled(value);
     if (args.onValueChange) {
-      args.onValueChange(value); // 외부 핸들러 호출 (존재할 경우)
+      args.onValueChange(value); 
     }
     };
 
@@ -28,11 +28,11 @@ const Template: StoryFn = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   label: 'Toggle (On)',
-  value: true, // 초기 상태 On
+  value: true, 
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
+export const OffToggle = Template.bind({});
+OffToggle.args = {
   label: 'Toggle (Off)',
-  value: false, // 초기 상태 Off
+  value: false,
 };

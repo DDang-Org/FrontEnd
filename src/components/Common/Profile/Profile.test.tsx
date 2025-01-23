@@ -30,7 +30,6 @@ describe('Profile 컴포넌트', () => {
 
     const { getByTestId } = render(<Profile {...propsWithoutUserId} testID="profile-container" />);
     const container = getByTestId('profile-container');
-    // activeOpacity 대신 TouchableOpacity의 disabled 속성을 테스트
     expect(container.props.accessibilityState.disabled).toBe(true);
   });
 
