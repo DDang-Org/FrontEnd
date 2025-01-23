@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react-native';
-import Profile from './index';
+import { Profile } from '~components/Common/Profile';
 
 jest.mock('~assets/avatars/Avatar1.svg', () => 'Avatar1');
 jest.mock('~assets/avatars/Avatar2.svg', () => 'Avatar2');

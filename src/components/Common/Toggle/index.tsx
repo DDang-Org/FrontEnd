@@ -16,8 +16,7 @@ export const Toggle: React.FC<ToggleProps> = ({
     disabled = false,
     label,
 }) => {
-  const theme = useTheme(); // 테마 객체 가져오기
-
+  const theme = useTheme(); 
     return (
         <S.Container>
         {label && <S.Label>{label}</S.Label>}
@@ -26,10 +25,11 @@ export const Toggle: React.FC<ToggleProps> = ({
             onValueChange={onValueChange}
             disabled={disabled}
             trackColor={{
-            false: theme.colors.gc_1, // 비활성화 상태 트랙 색상
-            true: theme.colors.font_1, // 활성화 상태 트랙 색상
+            false: theme.colors.gc_1, 
+            true: theme.colors.font_1, 
             }}
-            ios_backgroundColor={theme.colors.gc_1} // iOS 백그라운드 색상
+            thumbColor={theme.colors.gc_4}
+            ios_backgroundColor={theme.colors.gc_1}
         />
         </S.Container>
     );
