@@ -9,25 +9,25 @@ import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
 import { useState } from 'react';
 import { DatePickerModal } from '~components/Common/DatePickerModal';
-import { dateToString } from '../../../utils/dateFormat';
+import { dateToString, stringToDate } from '~utils/dateFormat';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
 export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const deviceHeight = Dimensions.get('screen').height;
-  const [date, setDate] = useState(new Date());
   const [isVisible, setIsVisible] = useState(false);
-  const [birthDate, setBirthDate] = useState(dateToString(new Date()));
-
-  const handleChangeDate = (pickedDate: Date) => {
-    setBirthDate(dateToString(pickedDate));
-  };
+  const [birthDate, setBirthDate] = useState('');
 
   const showDatePicker = () => {
     setIsVisible(true);
   };
 
-  const hideDatePicker = () => {
+  const handleChangeDate = (pickedDate: Date) => {
+    setBirthDate(dateToString(pickedDate, '. '));
+  };
+
+  const handleClose = () => {
+    if (!birthDate) setBirthDate(dateToString(new Date(), '. '));
     setIsVisible(false);
   };
 
@@ -53,10 +53,10 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
         text="다음"
       />
       <DatePickerModal
-        date={date}
+        date={birthDate ? stringToDate(birthDate, '. ') : new Date()}
         isVisible={isVisible}
         onChangeDate={handleChangeDate}
-        onConfirmDate={hideDatePicker}
+        onConfirmDate={handleClose}
       />
     </S.BasicProfile>
   );
