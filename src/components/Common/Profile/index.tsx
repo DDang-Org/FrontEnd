@@ -6,10 +6,10 @@ type ProfileProps = {
   size: number;
   src: string | React.FC<SvgProps>;
   userId?: number;
-  testID?: string; // (테스트 코드용)testID를 옵셔널 prop으로 추가
+  testID?: string; 
 };
 
-export default function Profile({ size, src, userId, testID }: ProfileProps) {
+export const Profile: React.FC<ProfileProps> = ({ size, src, userId, testID }) => {
   const renderImage = () => {
     if (typeof src === 'string') {
       return <Image source={{ uri: src }} style={{ width: size, height: size }} />;
@@ -23,7 +23,7 @@ export default function Profile({ size, src, userId, testID }: ProfileProps) {
       {renderImage()}
     </TouchableOpacity>
   );
-}
+};
 
 //userId 란?
 

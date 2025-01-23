@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Profile from './index';
+import { Profile } from '~components/Common/Profile';
 import Avatar1 from '~assets/avatars/Avatar1.svg';
 import Avatar2 from '~assets/avatars/Avatar2.svg';
 
