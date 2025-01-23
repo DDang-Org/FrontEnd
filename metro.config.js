@@ -13,25 +13,26 @@ const { assetExts, sourceExts } = defaultConfig.resolver;
 const config = {
   transformer: {
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
+      },
+    }),
   },
   resolver: {
     assetExts: assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...sourceExts, 'svg'],
   },
 };
-// set your own config here 👆
 
 const finalConfig = mergeConfig(defaultConfig, config);
-
-module.exports = withStorybook(finalConfig, {
-  // Set to false to remove storybook specific options
+ // Set to false to remove storybook specific options
   // you can also use a env variable to set this
+module.exports = withStorybook(finalConfig, {
   enabled: true,
-  // Path to your storybook config
   configPath: path.resolve(__dirname, './.storybook'),
-
   // Optional websockets configuration
-  // Starts a websocket server on the specified port and host on metro start
   // websockets: {
   //   port: 7007,
   //   host: 'localhost',
