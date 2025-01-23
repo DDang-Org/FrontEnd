@@ -2,15 +2,6 @@ import styled from '@emotion/native';
 import { ResizeButton } from '~components/Common/ResizeButton';
 import { TextBold } from '~components/Common/Text';
 
-export const SafeContainer = styled.SafeAreaView`
-  flex: 1;
-  background-color: white;
-`;
-
-export const MapContainer = styled.View`
-  flex: 1;
-`;
-
 export const StartButton = styled(ResizeButton)`
   position: fixed;
   bottom: 80px;

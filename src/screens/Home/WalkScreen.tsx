@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import { useLayoutEffect, useState, useEffect } from 'react';
-import * as S from './walk-styles';
+import { useLayoutEffect } from 'react';
 import WalkHeader from '~components/Walk/Header';
 import MapView from '~components/Walk/MapView';
 import WalkMessage from '~components/Walk/WalkMessage';
+import { SafeAreaView, View } from 'react-native';
 
 export const formatDuration = (seconds: number) => {
   const hours = Math.floor(seconds / 3600);
@@ -18,9 +18,6 @@ export const formatDistance = (meters: number) => {
 
 export const WalkScreen = () => {
   const navigation = useNavigation();
-  const [isWalking, setIsWalking] = useState(false);
-  const [walkTime, setWalkTime] = useState(0);
-  const [distance, _setDistance] = useState(0);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,42 +25,13 @@ export const WalkScreen = () => {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isWalking) {
-      interval = setInterval(() => {
-        setWalkTime(prev => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isWalking]);
-
-  const renderWalkButton = () => {
-    if (!isWalking) {
-      return <S.StartButton onPress={() => setIsWalking(true)} bgColor="default" text="산책 시작" />;
-    }
-
-    return (
-      <S.WalkingInfoContainer>
-        <S.WalkingInfo>
-          <S.InfoText fontSize={15}>{formatDuration(walkTime)}</S.InfoText>
-          <S.StopButton onPress={() => setIsWalking(false)} bgColor="lighten_2" text="산책 끝" />
-          <S.InfoText fontSize={15}>{formatDistance(distance)}km</S.InfoText>
-        </S.WalkingInfo>
-      </S.WalkingInfoContainer>
-    );
-  };
-
   return (
-    <S.SafeContainer>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <WalkHeader />
-      <S.MapContainer>
+      <View style={{ flex: 1 }}>
         <MapView />
         <WalkMessage />
-        <S.LocationButton onPress={() => {}} text="⊕ 내 위치로" bgColor="font_1" />
-
-        {renderWalkButton()}
-      </S.MapContainer>
-    </S.SafeContainer>
+      </View>
+    </SafeAreaView>
   );
 };
