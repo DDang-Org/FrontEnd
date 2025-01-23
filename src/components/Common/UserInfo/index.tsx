@@ -6,7 +6,7 @@ import { Gender } from '~types/gender';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
 
-interface ItemProps {
+export interface UserItemProps {
   name: string;
   gender: Gender;
   dogGender: Gender;
@@ -20,7 +20,7 @@ export const UserInfo = ({ children }: PropsWithChildren) => {
   return <S.UserInfo>{children}</S.UserInfo>;
 };
 
-const Item = ({ buttonText, familyRole, gender, name, isLast = false, onPressButton, dogGender }: ItemProps) => {
+const Item = ({ buttonText, familyRole, gender, name, isLast = false, onPressButton, dogGender }: UserItemProps) => {
   //! 유저 강아지 성별
   return (
     <S.Item>
