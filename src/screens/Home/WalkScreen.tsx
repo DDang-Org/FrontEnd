@@ -3,6 +3,7 @@ import { useLayoutEffect, useState, useEffect } from 'react';
 import * as S from './walk-styles';
 import WalkHeader from '~components/Walk/Header';
 import MapView from '~components/Walk/MapView';
+import WalkMessage from '~components/Walk/WalkMessage';
 
 export const formatDuration = (seconds: number) => {
   const hours = Math.floor(seconds / 3600);
@@ -58,14 +59,7 @@ export const WalkScreen = () => {
       <WalkHeader />
       <S.MapContainer>
         <MapView />
-        <S.WalkMessage>
-          <S.MessageText fontSize={14}>
-            주변에 5마리가 산책을 하고 있어요. {'\n'}
-            같이 산책을 해보세요!
-          </S.MessageText>
-          <S.MessageTail />
-        </S.WalkMessage>
-
+        <WalkMessage />
         <S.LocationButton onPress={() => {}} text="⊕ 내 위치로" bgColor="font_1" />
 
         {renderWalkButton()}
