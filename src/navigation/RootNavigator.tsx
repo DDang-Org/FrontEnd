@@ -1,7 +1,7 @@
-import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
-// import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
+// import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
+import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 
 export const RootNavigator = () => {
-  return <BottomTabNavigator />;
-  // return <RegisterDogNavigator />;
+  // return <BottomTabNavigator />;
+  return <RegisterDogNavigator />;
 };
