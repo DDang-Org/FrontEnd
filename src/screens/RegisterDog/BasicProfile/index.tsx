@@ -7,11 +7,30 @@ import { TextBold } from '~components/Common/Text';
 import { Dimensions, View } from 'react-native';
 import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
+import { useState } from 'react';
+import { DatePickerModal } from '~components/Common/DatePickerModal';
+import { dateToString } from '../../../utils/dateFormat';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
 export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const deviceHeight = Dimensions.get('screen').height;
+  const [date, setDate] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false);
+  const [birthDate, setBirthDate] = useState(dateToString(new Date()));
+
+  const handleChangeDate = (pickedDate: Date) => {
+    setBirthDate(dateToString(pickedDate));
+  };
+
+  const showDatePicker = () => {
+    setIsVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setIsVisible(false);
+  };
+
   return (
     <S.BasicProfile>
       <S.TextWrapper deviceHeight={deviceHeight}>
@@ -26,12 +45,18 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
       </S.AddImageArea>
       <S.InputArea>
         <FormInput onChangeText={() => null} value="" placeholder="이름 입력" />
-        <FormInput onPress={() => null} value="" placeholder="생년월일 선택" />
+        <FormInput onPress={showDatePicker} value={birthDate} placeholder="생년월일 선택" />
         <FormInput onChangeText={() => null} value="" placeholder="한줄 소개 입력" multiline />
       </S.InputArea>
       <ActionButton
         onPress={() => navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE, { basicInfo: null })}
         text="다음"
+      />
+      <DatePickerModal
+        date={date}
+        isVisible={isVisible}
+        onChangeDate={handleChangeDate}
+        onConfirmDate={hideDatePicker}
       />
     </S.BasicProfile>
   );

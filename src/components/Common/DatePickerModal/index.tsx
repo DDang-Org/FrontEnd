@@ -5,11 +5,11 @@ import DatePicker from 'react-native-date-picker';
 interface DatePickerProps {
   isVisible: boolean;
   date: Date;
-  onDateChange: (date: Date) => void;
+  onChangeDate: (date: Date) => void;
   onConfirmDate: () => void;
 }
 
-export const DatePickerModal = ({ isVisible, date, onDateChange, onConfirmDate }: DatePickerProps) => {
+export const DatePickerModal = ({ isVisible, date, onChangeDate, onConfirmDate }: DatePickerProps) => {
   return (
     <Modal visible={isVisible} transparent animationType="slide">
       <S.DatePickerBackground>
@@ -17,7 +17,7 @@ export const DatePickerModal = ({ isVisible, date, onDateChange, onConfirmDate }
           <S.ConfirmButton onPress={onConfirmDate} />
         </S.DatePickerContainer>
         <S.DatePickerContainer>
-          <DatePicker mode="date" date={new Date()} onDateChange={onDateChange} />
+          <DatePicker mode="date" date={new Date()} onDateChange={onChangeDate} />
         </S.DatePickerContainer>
       </S.DatePickerBackground>
     </Modal>
