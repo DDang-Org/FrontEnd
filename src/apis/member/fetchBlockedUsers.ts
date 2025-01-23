@@ -11,7 +11,7 @@ export type FetchBlockedUsersResponseType = {
   familyRole: FamilyRole;
   buttonText: string;
   isLast: BooleanString;
-};
+}[];
 
 export const fetchBlockedUsers = async (): Promise<APIResponse<FetchBlockedUsersResponseType>> => {
   try {
