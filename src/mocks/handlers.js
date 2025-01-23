@@ -71,4 +71,16 @@ export const handlers = [
       },
     });
   }),
+  http.get(`${BASE_URL}/member/block`, () => {
+    return HttpResponse.json({
+      data: {
+        name: 'John Doe',
+        gender: 'MALE',
+        dogGender: 'FEMALE',
+        familyRole: 'BROTHER',
+        buttonText: 'Edit',
+        isLast: false,
+      },
+    });
+  }),
 ];
