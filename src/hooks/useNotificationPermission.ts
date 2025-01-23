@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Platform } from 'react-native';
-import { checkNotifications, requestNotifications, RESULTS } from 'react-native-permissions';
+import { checkNotifications, requestNotifications } from 'react-native-permissions';
 
 type NotificationPermissionStatus = 'unavailable' | 'denied' | 'limited' | 'granted' | 'blocked';
 
