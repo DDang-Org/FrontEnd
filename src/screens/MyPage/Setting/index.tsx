@@ -6,7 +6,7 @@ import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 
-type Props = NativeStackScreenProps<MyPageStackProps, 'Main'>;
+type Props = NativeStackScreenProps<MyPageStackProps, 'Setting'>;
 
 export const SettingScreen = ({ navigation }: Props) => {
   const {
