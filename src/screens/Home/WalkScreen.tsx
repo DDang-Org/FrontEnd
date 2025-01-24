@@ -1,17 +1,37 @@
-import styled from '@emotion/native';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { useLayoutEffect } from 'react';
+import WalkHeader from '~components/Walk/Header';
+import MapView from '~components/Walk/MapView';
+import WalkMessage from '~components/Walk/WalkMessage';
+import { SafeAreaView, View } from 'react-native';
 
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+export const formatDuration = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return `${hours}시간 ${minutes}분`;
+};
+
+export const formatDistance = (meters: number) => {
+  return (meters / 1000).toFixed(1);
+};
 
 export const WalkScreen = () => {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, [navigation]);
+
   return (
-    <SafeContainer>
-      <Text>WalkScreen</Text>
-    </SafeContainer>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <WalkHeader />
+      <View style={{ flex: 1 }}>
+        <MapView />
+        <WalkMessage />
+      </View>
+    </SafeAreaView>
   );
 };
