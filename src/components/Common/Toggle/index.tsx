@@ -4,20 +4,19 @@ import * as S from './styles';
 import { useTheme } from '@emotion/react';
 
 interface ToggleProps {
-  value: boolean; // 스위치 상태
-  onValueChange: (value: boolean) => void; // 상태 변경 핸들러
-  disabled?: boolean; // 비활성화 여부
-  label?: string; // 스위치 옆에 표시할 텍스트 라벨
+  value: boolean; 
+  onValueChange: (value: boolean) => void; 
+  disabled?: boolean; 
+  label?: string; 
 }
 
-export const Toggle: React.FC<ToggleProps> = ({
+export const Toggle = ({
     value,
     onValueChange,
     disabled = false,
     label,
-}) => {
-  const theme = useTheme(); // 테마 객체 가져오기
-
+}: ToggleProps) => {
+  const theme = useTheme(); 
     return (
         <S.Container>
         {label && <S.Label>{label}</S.Label>}
@@ -26,10 +25,11 @@ export const Toggle: React.FC<ToggleProps> = ({
             onValueChange={onValueChange}
             disabled={disabled}
             trackColor={{
-            false: theme.colors.gc_1, // 비활성화 상태 트랙 색상
-            true: theme.colors.font_1, // 활성화 상태 트랙 색상
+            false: theme.colors.gc_1, 
+            true: theme.colors.font_1, 
             }}
-            ios_backgroundColor={theme.colors.gc_1} // iOS 백그라운드 색상
+            thumbColor={theme.colors.gc_4}
+            ios_backgroundColor={theme.colors.gc_1}
         />
         </S.Container>
     );
