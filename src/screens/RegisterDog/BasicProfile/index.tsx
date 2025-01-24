@@ -25,7 +25,6 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
 
   const handleAddImageButton = async () => {
     const isGranted = await requestAndCheckPermission('PHOTO');
-    // const isGranted = requestAndCheckPermission('CAMERA');
     if (isGranted) {
       handleImagePicker();
     }
