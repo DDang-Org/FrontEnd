@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DDangTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DDangTests.m */; };
 		0A42D71E831C494B9E8104D0 /* SUIT-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C7858A3CA46FAB496832B /* SUIT-ExtraBold.ttf */; };
-		1326C96B8B81F2F0220E1580 /* libPods-DDang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80A7B43EFF3EE4DBB31877 /* libPods-DDang.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2713BC8E4BDA4651B32D4763 /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73D47B414AEE40E9B393FCEA /* SUIT-Medium.ttf */; };
 		2A5371C545874BEA885F81ED /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEAA7CB911F84A1C956DE25D /* SUIT-SemiBold.ttf */; };
 		49EF5D5903954AF29FA065B0 /* SUIT-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B4DAC02C8924E43B4F7D4D0 /* SUIT-ExtraLight.ttf */; };
-		608D424C709A8A1F0EBBC668 /* libPods-DDang-DDangTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482765C67E3542660D08EB53 /* libPods-DDang-DDangTests.a */; };
 		6A71DE8B28374E18B429B59D /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C50CB0C30CB4AC2ADAA3899 /* SUIT-Thin.ttf */; };
 		6CFB4E6D7D304F3A85ED2EB7 /* SUIT-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E68531A8BC04B19A1800128 /* SUIT-Heavy.ttf */; };
 		6F0CB6D811BD4AFAA6F4C02D /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54FA30CB01184ECE81E1FEC1 /* SUIT-Regular.ttf */; };
@@ -24,6 +22,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9D7911F7459053AE2ECE187F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		AE73153F763B44F6AB7FFA86 /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0E20392DF481E8B51F6C3 /* SUIT-Light.ttf */; };
+		B738BE5219F93F40BBE685D0 /* libPods-DDang-DDangTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 378278F81B4258C72937DD84 /* libPods-DDang-DDangTests.a */; };
+		C5C627D8628574712F6AC900 /* libPods-DDang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6079E2FB50264D4AD605D3B /* libPods-DDang.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,21 +48,21 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DDang/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = DDang/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1E68531A8BC04B19A1800128 /* SUIT-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Heavy.ttf"; path = "../src/assets/fonts/SUIT-Heavy.ttf"; sourceTree = "<group>"; };
-		20FB69ADECF2E873DCAABB5A /* Pods-DDang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang.debug.xcconfig"; path = "Target Support Files/Pods-DDang/Pods-DDang.debug.xcconfig"; sourceTree = "<group>"; };
-		2C80A7B43EFF3EE4DBB31877 /* libPods-DDang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		378278F81B4258C72937DD84 /* libPods-DDang-DDangTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDang-DDangTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CA0E20392DF481E8B51F6C3 /* SUIT-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Light.ttf"; path = "../src/assets/fonts/SUIT-Light.ttf"; sourceTree = "<group>"; };
-		482765C67E3542660D08EB53 /* libPods-DDang-DDangTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDang-DDangTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C50CB0C30CB4AC2ADAA3899 /* SUIT-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Thin.ttf"; path = "../src/assets/fonts/SUIT-Thin.ttf"; sourceTree = "<group>"; };
 		54FA30CB01184ECE81E1FEC1 /* SUIT-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Regular.ttf"; path = "../src/assets/fonts/SUIT-Regular.ttf"; sourceTree = "<group>"; };
-		6D74CB2DCDC377549AF091D6 /* Pods-DDang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang.release.xcconfig"; path = "Target Support Files/Pods-DDang/Pods-DDang.release.xcconfig"; sourceTree = "<group>"; };
+		64D47C31020AD98AAEFDCFBB /* Pods-DDang-DDangTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang-DDangTests.debug.xcconfig"; path = "Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests.debug.xcconfig"; sourceTree = "<group>"; };
 		73D47B414AEE40E9B393FCEA /* SUIT-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Medium.ttf"; path = "../src/assets/fonts/SUIT-Medium.ttf"; sourceTree = "<group>"; };
 		7B4DAC02C8924E43B4F7D4D0 /* SUIT-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-ExtraLight.ttf"; path = "../src/assets/fonts/SUIT-ExtraLight.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DDang/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A50CBDF77F172A8DAEDD8F90 /* Pods-DDang-DDangTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang-DDangTests.release.xcconfig"; path = "Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests.release.xcconfig"; sourceTree = "<group>"; };
-		AA7A1221EFCA409533AA2D3E /* Pods-DDang-DDangTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang-DDangTests.debug.xcconfig"; path = "Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C0D1F8D12B8EF10EF69AC61 /* Pods-DDang-DDangTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang-DDangTests.release.xcconfig"; path = "Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests.release.xcconfig"; sourceTree = "<group>"; };
 		AEAA7CB911F84A1C956DE25D /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-SemiBold.ttf"; path = "../src/assets/fonts/SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		C26C7858A3CA46FAB496832B /* SUIT-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-ExtraBold.ttf"; path = "../src/assets/fonts/SUIT-ExtraBold.ttf"; sourceTree = "<group>"; };
+		C6079E2FB50264D4AD605D3B /* libPods-DDang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3D8CF02AC0696BB7032043C /* Pods-DDang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang.release.xcconfig"; path = "Target Support Files/Pods-DDang/Pods-DDang.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F02889348C94C2BE4349F8D2 /* Pods-DDang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDang.debug.xcconfig"; path = "Target Support Files/Pods-DDang/Pods-DDang.debug.xcconfig"; sourceTree = "<group>"; };
 		F6A68D6705C64846A9601395 /* SUIT-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Bold.ttf"; path = "../src/assets/fonts/SUIT-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				608D424C709A8A1F0EBBC668 /* libPods-DDang-DDangTests.a in Frameworks */,
+				B738BE5219F93F40BBE685D0 /* libPods-DDang-DDangTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1326C96B8B81F2F0220E1580 /* libPods-DDang.a in Frameworks */,
+				C5C627D8628574712F6AC900 /* libPods-DDang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				2C80A7B43EFF3EE4DBB31877 /* libPods-DDang.a */,
-				482765C67E3542660D08EB53 /* libPods-DDang-DDangTests.a */,
+				C6079E2FB50264D4AD605D3B /* libPods-DDang.a */,
+				378278F81B4258C72937DD84 /* libPods-DDang-DDangTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -179,10 +179,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				20FB69ADECF2E873DCAABB5A /* Pods-DDang.debug.xcconfig */,
-				6D74CB2DCDC377549AF091D6 /* Pods-DDang.release.xcconfig */,
-				AA7A1221EFCA409533AA2D3E /* Pods-DDang-DDangTests.debug.xcconfig */,
-				A50CBDF77F172A8DAEDD8F90 /* Pods-DDang-DDangTests.release.xcconfig */,
+				F02889348C94C2BE4349F8D2 /* Pods-DDang.debug.xcconfig */,
+				D3D8CF02AC0696BB7032043C /* Pods-DDang.release.xcconfig */,
+				64D47C31020AD98AAEFDCFBB /* Pods-DDang-DDangTests.debug.xcconfig */,
+				9C0D1F8D12B8EF10EF69AC61 /* Pods-DDang-DDangTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -194,12 +194,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DDangTests" */;
 			buildPhases = (
-				32E0EF483C8F8CD446C1B97D /* [CP] Check Pods Manifest.lock */,
+				1D298EB7352C46842644EC04 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				DC955EB777604329D7B07F96 /* [CP] Embed Pods Frameworks */,
-				51644A9C97F034D604969970 /* [CP] Copy Pods Resources */,
+				9197E700A3B1C967EAC90A0D /* [CP] Embed Pods Frameworks */,
+				83EC75FEA5C8A5D97380EA42 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,13 +215,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DDang" */;
 			buildPhases = (
-				AE222F4423F4CA3DFAE29DFE /* [CP] Check Pods Manifest.lock */,
+				263425F718E05161A7C5A699 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				2E1120BF8BB6990CF5BD447E /* [CP] Embed Pods Frameworks */,
-				1B6C681352EB06BFD0876734 /* [CP] Copy Pods Resources */,
+				D827E19E62745566318A3207 /* [CP] Embed Pods Frameworks */,
+				D11846087FCC8C356F1FB682 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -314,41 +314,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		1B6C681352EB06BFD0876734 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2E1120BF8BB6990CF5BD447E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		32E0EF483C8F8CD446C1B97D /* [CP] Check Pods Manifest.lock */ = {
+		1D298EB7352C46842644EC04 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -370,24 +336,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51644A9C97F034D604969970 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE222F4423F4CA3DFAE29DFE /* [CP] Check Pods Manifest.lock */ = {
+		263425F718E05161A7C5A699 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -409,7 +358,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC955EB777604329D7B07F96 /* [CP] Embed Pods Frameworks */ = {
+		83EC75FEA5C8A5D97380EA42 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9197E700A3B1C967EAC90A0D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -424,6 +390,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang-DDangTests/Pods-DDang-DDangTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D11846087FCC8C356F1FB682 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D827E19E62745566318A3207 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDang/Pods-DDang-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -459,7 +459,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA7A1221EFCA409533AA2D3E /* Pods-DDang-DDangTests.debug.xcconfig */;
+			baseConfigurationReference = 64D47C31020AD98AAEFDCFBB /* Pods-DDang-DDangTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -486,7 +486,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A50CBDF77F172A8DAEDD8F90 /* Pods-DDang-DDangTests.release.xcconfig */;
+			baseConfigurationReference = 9C0D1F8D12B8EF10EF69AC61 /* Pods-DDang-DDangTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -510,7 +510,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20FB69ADECF2E873DCAABB5A /* Pods-DDang.debug.xcconfig */;
+			baseConfigurationReference = F02889348C94C2BE4349F8D2 /* Pods-DDang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -539,7 +539,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D74CB2DCDC377549AF091D6 /* Pods-DDang.release.xcconfig */;
+			baseConfigurationReference = D3D8CF02AC0696BB7032043C /* Pods-DDang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
