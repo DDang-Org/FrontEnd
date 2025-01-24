@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { View, Button, Image, StyleSheet, Alert } from 'react-native';
+import { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 export const useImagePicker = () => {

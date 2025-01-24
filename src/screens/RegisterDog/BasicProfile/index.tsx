@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold } from '~components/Common/Text';
-import { Dimensions, Image } from 'react-native';
+import { Dimensions } from 'react-native';
 import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
 import { useState } from 'react';
