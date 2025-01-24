@@ -2,14 +2,14 @@ import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
-type ProfileProps = {
+interface ProfileProps {
   size: number;
   src: string | React.FC<SvgProps>;
   userId?: number;
   testID?: string; 
-};
+}
 
-export const Profile: React.FC<ProfileProps> = ({ size, src, userId, testID }) => {
+export const Profile = ({ size, src, userId, testID }: ProfileProps) => {
   const renderImage = () => {
     if (typeof src === 'string') {
       return <Image source={{ uri: src }} style={{ width: size, height: size }} />;

@@ -5,9 +5,9 @@ interface UnreadChatCountProps {
     unreadCount: number;
 }
 
-export const UnreadChatCount: React.FC<UnreadChatCountProps> = ({
+export const UnreadChatCount = ({
     unreadCount,
-}) => {
+}: UnreadChatCountProps ) => {
     return (
         <S.UnreadChatCount>
             <S.UnreadCountText fontSize={11} color='gc_4'>

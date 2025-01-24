@@ -10,12 +10,12 @@ interface ToggleProps {
   label?: string; 
 }
 
-export const Toggle: React.FC<ToggleProps> = ({
+export const Toggle = ({
     value,
     onValueChange,
     disabled = false,
     label,
-}) => {
+}: ToggleProps) => {
   const theme = useTheme(); 
     return (
         <S.Container>
