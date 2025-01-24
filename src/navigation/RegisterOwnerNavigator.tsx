@@ -1,27 +1,30 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { RegisterOwnerProfile } from "~screens/RegisterOwner/OwnerProfile";
+import { OwnerAvatarModal } from "~screens/RegisterOwner/AvatarModal";
 
 export type RegisterOwnerParamList = {
-    Home:undefined;
-    OwnerProfile:undefined;
-    OwnerAvatarModal:undefined;
+  OwnerProfile: undefined;
+  OwnerAvatarModal: undefined;
 };
 
 export const RegisterOwnerNavigator = () => {
-    const Stack = createNativeStackNavigator<RegisterOwnerParamList>();
+  const Stack = createNativeStackNavigator<RegisterOwnerParamList>();
 
-
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="OwnerProfile" component={OwnerProfile} options={{headerBackButtonDisplayMode: 'generic'}}/>
-            <Stack.Screen name="OwnerAvatarModal" component={OwnerAvatarProfile}          options={{
-            presentation: 'modal',
-            title: 'Modal Screen',
-            headerLeft: () => (
-              <Button title="X" onPress={() => navigation.goBack()} />
-            ),
-          }}/>
-        </Stack.Navigator>
-
-    );
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="OwnerProfile" 
+        component={RegisterOwnerProfile} 
+        options={{ headerBackButtonDisplayMode: 'generic' }} 
+      />
+      <Stack.Screen 
+        name="OwnerAvatarModal" 
+        component={OwnerAvatarModal} 
+        options={{
+          presentation: 'modal',
+          title: 'Modal Screen',
+        }} 
+      />
+    </Stack.Navigator>
+  );
 };
