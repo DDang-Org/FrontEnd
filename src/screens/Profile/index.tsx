@@ -1,21 +1,34 @@
-import styled from '@emotion/native';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import { Suspense } from 'react';
+import ErrorBoundary from 'react-native-error-boundary';
+import { DogProfile } from '~components/Profile/DogProfile';
+import { DogProfileFallback } from '~components/Profile/DogProfile/fallback';
+import { DogProfileLoader } from '~components/Profile/DogProfile/loader';
+import { UserProfile } from '~components/Profile/UserProfile';
+import { UserProfileFallback } from '~components/Profile/UserProfile/fallback';
+import { UserProfileLoader } from '~components/Profile/UserProfile/loader';
+import { WalkInfo } from '~components/Profile/WalkInfo';
+import { WalkInfoFallback } from '~components/Profile/WalkInfo/fallback';
+import { WalkInfoLoader } from '~components/Profile/WalkInfo/loader';
+import * as S from './styles';
 
-type Props = BottomTabScreenProps<TabBarParamList, 'Profile'>;
-
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ProfileScreen = ({ route }: Props) => {
+export const ProfileScreen = () => {
   return (
-    <SafeContainer>
-      <Text>This is {route.params.userId}'s profile</Text>
-    </SafeContainer>
+    <S.Profile>
+      <ErrorBoundary FallbackComponent={UserProfileFallback}>
+        <Suspense fallback={<UserProfileLoader />}>
+          <UserProfile />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={WalkInfoFallback}>
+        <Suspense fallback={<WalkInfoLoader />}>
+          <WalkInfo />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={DogProfileFallback}>
+        <Suspense fallback={<DogProfileLoader />}>
+          <DogProfile />
+        </Suspense>
+      </ErrorBoundary>
+    </S.Profile>
   );
 };
