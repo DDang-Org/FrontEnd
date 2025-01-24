@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import Avatar1 from '~assets/avatars/Avatar1.svg';
+import { Profile } from '~components/Common/Profile';
 import { Separator } from '~components/Common/Seperator';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
@@ -27,7 +27,7 @@ const Item = ({ buttonText, familyRole, gender, name, isLast = false, onPressBut
       <S.ItemWrapper isLast={isLast}>
         {/* Profile로 변경하기 */}
         <S.LeftContentContainer>
-          <Avatar1 width={48} height={48} />
+          <Profile size={48} avatarNumber={1} />
           <S.TypoWrapper>
             <S.Name fontSize={17}>{name}</S.Name>
             <S.GenderFamilyRoleWrapper>

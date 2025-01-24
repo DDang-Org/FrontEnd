@@ -19,6 +19,10 @@ const meta: Meta<typeof Profile> = {
       control: { type: 'number' },
       description: '사용자 ID (있으면 클릭 가능)',
     },
+    avatarNumber: {
+      control: { type: 'number' },
+      description: '아바타 번호 1~10',
+    },
   },
 };
 
@@ -38,5 +42,12 @@ export const NonClickable: Story = {
   args: {
     size: 140,
     src: Avatar2,
+  },
+};
+
+export const Avatar: Story = {
+  args: {
+    size: 140,
+    avatarNumber: 3,
   },
 };
