@@ -1,11 +1,13 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { Suspense } from 'react';
 import { TouchableOpacity } from 'react-native';
+import ErrorBoundary, { FallbackComponentProps } from 'react-native-error-boundary';
 import { SvgProps } from 'react-native-svg';
 import { useUser } from '~apis/member/useUser';
 import { AvatarNumber } from '~types/avatar-number';
 import { getAvatar } from '~utils/getAvatar';
 import * as S from './styles';
-import ErrorBoundary, { FallbackComponentProps } from 'react-native-error-boundary';
+import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
 interface ProfileProps {
   size: number;
@@ -19,13 +21,20 @@ export const Profile = ({ size, src, userId, testID, avatarNumber }: ProfileProp
   if (src && avatarNumber) {
     throw new Error('Profile 컴포넌트의 props가 적절하지 않습니다. src, avatarNumber 중 하나만 작성해 주세요.');
   }
+  const navigation = useNavigation<NavigationProp<TabBarParamList>>();
   const avatars = getAvatar();
   const renderImage = () => {
     if (avatarNumber) {
       const AvatarComponent = avatars[avatarNumber];
       return (
         <Suspense fallback={<S.ProfileImageLoader style={{ width: size, height: size }} />}>
-          {AvatarComponent && <AvatarComponent width={size} height={size} />}
+          {AvatarComponent && (
+            <AvatarComponent
+              width={size}
+              height={size}
+              onPress={() => userId && navigation.navigate('Profile', { userId })}
+            />
+          )}
         </Suspense>
       );
     }

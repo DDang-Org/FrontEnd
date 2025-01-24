@@ -31,6 +31,20 @@ export const handlers = [
       },
     });
   }),
+  http.get(`${BASE_URL}/member/:memberId`, () => {
+    return HttpResponse.json({
+      data: {
+        memberId: 1,
+        memberName: '홍길동',
+        email: 'test@naver.com',
+        address: '서울시 강남구',
+        memberGender: 'MALE',
+        familyRole: 'FATHER',
+        memberProfileImg: 'https://example.com/profile.jpg',
+        avatarNumber: 1,
+      },
+    });
+  }),
   http.get(`${BASE_URL}/member`, () => {
     return HttpResponse.json({
       data: {
