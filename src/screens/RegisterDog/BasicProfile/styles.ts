@@ -9,13 +9,13 @@ export const BasicProfile = styled.View`
 `;
 
 export const TextWrapper = styled.View<{ deviceHeight: number }>`
-  margin-top: ${props => (props.deviceHeight > 900 ? '100px' : '80px')};
+  margin-top: ${props => (props.deviceHeight > 900 ? '70px' : '50px')};
   align-items: center;
 `;
 
-export const AddImageArea = styled.View``;
-
 export const AddImageButton = styled.Pressable`
+  position: relative;
+  overflow: hidden;
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -29,6 +29,19 @@ export const AddImageText = styled(TextBold)`
   color: ${props => props.theme.colors.darken};
 `;
 
+export const ImagePreviewer = styled.Image`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+`;
+
 export const InputArea = styled.View`
   width: 100%;
+`;
+
+export const ActionButtonWrapper = styled.View`
+  margin-top: 20px;
 `;

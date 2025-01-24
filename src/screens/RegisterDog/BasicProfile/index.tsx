@@ -4,12 +4,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold } from '~components/Common/Text';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
 import { useState } from 'react';
 import { dateToString, stringToDate } from '~utils/dateFormat';
 import DatePicker from 'react-native-date-picker';
+import { usePermission } from '~hooks/usePermission';
+import { useImagePicker } from '~hooks/useImagePicker';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
@@ -18,24 +20,33 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const [birthDate, setBirthDate] = useState('');
   const [open, setOpen] = useState(false);
 
+  const { requestAndCheckPermission } = usePermission();
+  const { handleImagePicker, handleCameraPicker, selectedImage } = useImagePicker();
+
+  const handleAddImageButton = async () => {
+    const isGranted = await requestAndCheckPermission('PHOTO');
+    // const isGranted = requestAndCheckPermission('CAMERA');
+    if (isGranted) {
+      handleImagePicker();
+    }
+  };
+
   return (
     <S.BasicProfile>
       <S.TextWrapper deviceHeight={deviceHeight}>
         <TextBold fontSize={24}>반려견의 기본 정보를</TextBold>
         <TextBold fontSize={24}>알려주세요!</TextBold>
       </S.TextWrapper>
-      <S.AddImageArea>
-        <S.AddImageButton>
-          <Icon.AddDogImage />
-          <S.AddImageText fontSize={15}>반려견 사진 추가</S.AddImageText>
-        </S.AddImageButton>
-      </S.AddImageArea>
+      <S.AddImageButton onPress={handleAddImageButton}>
+        <Icon.AddDogImage />
+        <S.AddImageText fontSize={15}>반려견 사진 추가</S.AddImageText>
+        {selectedImage && <S.ImagePreviewer source={{ uri: selectedImage }} resizeMode="cover" />}
+      </S.AddImageButton>
       <S.InputArea>
         <FormInput onChangeText={() => null} value="" placeholder="이름 입력" />
         <FormInput onPress={() => setOpen(true)} value={birthDate} placeholder="생년월일 선택" />
         <FormInput onChangeText={() => null} value="" placeholder="한줄 소개 입력" multiline />
       </S.InputArea>
-
       <ActionButton
         onPress={() => navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE, { basicInfo: null })}
         text="다음"

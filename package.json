@@ -25,6 +25,7 @@
     "react-native-date-picker": "^5.0.8",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-error-boundary": "^1.2.7",
+    "react-native-image-crop-picker": "^0.42.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-permissions": "^5.2.4",
     "react-native-safe-area-context": "^5.0.0",
