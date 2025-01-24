@@ -1,19 +1,20 @@
-import { Icon } from '~components/Common/Icons';
-import * as S from './styles';
-import Avatar1 from '~assets/avatars/Avatar1.svg';
-import { Separator } from '~components/Common/Seperator';
 import { useUser } from '~apis/member/useUser';
+import { Icon } from '~components/Common/Icons';
+import { Profile } from '~components/Common/Profile';
+import { Separator } from '~components/Common/Seperator';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
+import * as S from './styles';
 
 interface UserProfileProps {
   navigateToProfileEdit: () => void;
 }
+
 export const UserProfile = ({ navigateToProfileEdit }: UserProfileProps) => {
   const { address, familyRole, name, gender } = useUser();
 
   return (
     <S.UserProfile paddingVertical={24} paddingHorizontal={20}>
-      <Avatar1 width={140} height={140} />
+      <Profile.Mine size={140} />
       <S.EditWrapper>
         <Icon.Edit onPress={navigateToProfileEdit} />
       </S.EditWrapper>

@@ -1,23 +1,14 @@
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
-import Avatar1 from '~assets/avatars/Avatar1.svg';
+import { Profile } from '~components/Common/Profile';
 import { Separator } from '~components/Common/Seperator';
 import { getAge } from '~utils/getAge';
 import * as S from './styles';
 
 export const DogProfile = () => {
-  const {
-    dogName,
-    breed,
-    dogBirthDate,
-    dogGender,
-    isNeutered,
-    weight,
-    comment,
-    //! dogProfileImg
-  } = useMyDogInfo();
+  const { dogName, breed, dogBirthDate, dogGender, isNeutered, weight, comment, dogProfileImg } = useMyDogInfo();
   return (
     <S.DogProfile paddingHorizontal={25} paddingVertical={14}>
-      <Avatar1 width={80} height={80} />
+      <Profile src={dogProfileImg} size={80} />
       <S.Info>
         <S.Heading>
           <S.Name fontSize={20}>{dogName}</S.Name>

@@ -5,6 +5,7 @@ import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
+import { AvatarNumber } from '~types/avatar-number';
 
 export interface UserItemProps {
   name: string;
@@ -13,21 +14,32 @@ export interface UserItemProps {
   familyRole: FamilyRole;
   buttonText: string;
   isLast?: boolean;
+  avatarNumber: AvatarNumber;
   onPressButton: () => void;
+  userId: number;
 }
 
 export const UserInfo = ({ children }: PropsWithChildren) => {
   return <S.UserInfo>{children}</S.UserInfo>;
 };
 
-const Item = ({ buttonText, familyRole, gender, name, isLast = false, onPressButton, dogGender }: UserItemProps) => {
+const Item = ({
+  buttonText,
+  familyRole,
+  gender,
+  name,
+  isLast = false,
+  onPressButton,
+  dogGender,
+  avatarNumber,
+  userId,
+}: UserItemProps) => {
   //! 유저 강아지 성별
   return (
     <S.Item>
       <S.ItemWrapper isLast={isLast}>
-        {/* Profile로 변경하기 */}
         <S.LeftContentContainer>
-          <Profile size={48} avatarNumber={1} />
+          <Profile size={48} avatarNumber={avatarNumber} userId={userId} />
           <S.TypoWrapper>
             <S.Name fontSize={17}>{name}</S.Name>
             <S.GenderFamilyRoleWrapper>

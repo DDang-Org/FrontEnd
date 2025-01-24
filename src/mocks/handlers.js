@@ -42,6 +42,7 @@ export const handlers = [
         address: '서울시 강남구',
         familyRole: 'BROTHER',
         profileImg: 'https://example.com/profile.jpg',
+        avatarNumber: 1,
       },
     });
   }),
@@ -64,7 +65,7 @@ export const handlers = [
         dogBirthDate: '2024-12-24',
         weight: 6,
         dogGender: 'MALE',
-        dogProfileImg: 'string',
+        dogProfileImg: 'https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg',
         isNeutered: 'TRUE',
         familyId: 0,
         comment: '우리아이 안 물어요 착해요. 강아지껌을 너무 좋아해요 같이 놀아요.',
@@ -80,7 +81,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button4',
-          isLast: 'true',
+          avatarNumber: 3,
+          memberId: 5,
         },
         {
           name: 'User64',
@@ -88,7 +90,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button5',
-          isLast: 'true',
+          avatarNumber: 5,
+          memberId: 13,
         },
         {
           name: 'User100',
@@ -96,7 +99,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 4,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -104,7 +108,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 1,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -112,7 +117,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 2,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -120,7 +126,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 10,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -128,7 +135,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 9,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -136,7 +144,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 8,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -144,7 +153,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 7,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -152,7 +162,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 6,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -160,7 +171,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 5,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -168,7 +180,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 4,
+          memberId: 5,
         },
         {
           name: 'User100',
@@ -176,7 +189,8 @@ export const handlers = [
           dogGender: 'MALE',
           familyRole: 'MOTHER',
           buttonText: 'Button9',
-          isLast: 'false',
+          avatarNumber: 3,
+          memberId: 5,
         },
       ],
     });

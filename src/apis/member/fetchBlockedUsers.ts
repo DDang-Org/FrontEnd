@@ -1,5 +1,6 @@
 import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
+import { AvatarNumber } from '~types/avatar-number';
 import { BooleanString } from '~types/boolean-string';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
@@ -11,6 +12,8 @@ export type FetchBlockedUsersResponseType = {
   familyRole: FamilyRole;
   buttonText: string;
   isLast: BooleanString;
+  memberId: number;
+  avatarNumber: AvatarNumber;
 }[];
 
 export const fetchBlockedUsers = async (): Promise<APIResponse<FetchBlockedUsersResponseType>> => {
