@@ -4,11 +4,12 @@ import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import breeds from '~assets/data/breeds.json';
 import { TextBold, TextRegular } from '~components/Common/Text';
+import { DogProfileType } from '~providers/DogProfileProvider';
 
 interface SearchModalProps {
   isVisible: boolean;
   setIsVisible: (visible: boolean) => void;
-  setBreed?: (breed: string) => void;
+  setBreed: (key: keyof DogProfileType, breed: string) => void;
 }
 
 export const SearchModal = ({ isVisible, setIsVisible, setBreed }: SearchModalProps) => {
@@ -55,7 +56,7 @@ export const SearchModal = ({ isVisible, setIsVisible, setBreed }: SearchModalPr
   };
 
   const handlePressResult = (breed: string) => {
-    // setBreed(breed);
+    setBreed('breed', breed);
     toggleModal();
   };
 

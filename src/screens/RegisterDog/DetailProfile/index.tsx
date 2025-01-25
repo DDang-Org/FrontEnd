@@ -14,18 +14,13 @@ import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider
 
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
-export const DetailProfile = ({ route }: DetailProps) => {
+export const DetailProfile = ({}: DetailProps) => {
   const deviceHeight = Dimensions.get('screen').height;
   const { dogProfile, setDogProfile } = useContext(DogProfileContext)!;
-  const [isVisible, setIsVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const updateField = (field: keyof DogProfileType, value: any) => {
-    console.log('업데이트 전:', dogProfile);
-    setDogProfile(prevState => {
-      const newState = { ...prevState, [field]: value };
-      console.log('업데이트 후:', newState);
-      return newState;
-    });
+  const updateField = (key: keyof DogProfileType, value: string) => {
+    setDogProfile(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -48,7 +43,6 @@ export const DetailProfile = ({ route }: DetailProps) => {
             onPress={() => updateField('gender', 'FEMALE')}
           />
         </S.GenderButtonWrapper>
-
         <S.NeuteredCheckButton
           onPress={() => updateField('isNeutered', dogProfile.isNeutered === 'TRUE' ? 'FALSE' : 'TRUE')}
         >
@@ -60,7 +54,7 @@ export const DetailProfile = ({ route }: DetailProps) => {
       </S.GenderSelectArea>
 
       <View>
-        <FormInput value={dogProfile.breed} onPress={() => setIsVisible(true)} placeholder="견종 입력" />
+        <FormInput value={dogProfile.breed} onPress={() => setIsModalVisible(true)} placeholder="견종 입력" />
         <FormInput
           value={(dogProfile.weight || '').toString()}
           onChangeText={value => updateField('weight', value)}
@@ -69,7 +63,7 @@ export const DetailProfile = ({ route }: DetailProps) => {
         />
       </View>
       <ActionButton text="확인" onPress={() => console.log(dogProfile)} />
-      <SearchModal isVisible={isVisible} setIsVisible={setIsVisible} />
+      <SearchModal isVisible={isModalVisible} setIsVisible={setIsModalVisible} setBreed={updateField} />
     </S.DetailProfile>
   );
 };

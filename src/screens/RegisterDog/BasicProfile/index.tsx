@@ -33,8 +33,8 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
     }
   };
 
-  const handleInputChange = (field: keyof DogProfileType, value: string) => {
-    setDogProfile(prev => ({ ...prev, [field]: value }));
+  const updateField = (key: keyof DogProfileType, value: string) => {
+    setDogProfile(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -49,14 +49,10 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
         {selectedImage && <S.ImagePreviewer source={{ uri: selectedImage }} resizeMode="cover" />}
       </S.AddImageButton>
       <S.InputArea>
-        <FormInput
-          onChangeText={value => handleInputChange('name', value)}
-          value={dogProfile.name}
-          placeholder="이름 입력"
-        />
+        <FormInput onChangeText={value => updateField('name', value)} value={dogProfile.name} placeholder="이름 입력" />
         <FormInput onPress={() => setOpen(true)} value={dogProfile.birthDate} placeholder="생년월일 선택" />
         <FormInput
-          onChangeText={value => handleInputChange('comment', value)}
+          onChangeText={value => updateField('comment', value)}
           value={dogProfile.comment}
           placeholder="한줄 소개 입력"
           multiline
@@ -76,7 +72,7 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
         onConfirm={date => {
           setOpen(false);
           const formattedDate = dateToString(date, '. ');
-          handleInputChange('birthDate', formattedDate);
+          updateField('birthDate', formattedDate);
         }}
         onCancel={() => setOpen(false)}
         mode="date"
