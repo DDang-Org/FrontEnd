@@ -8,7 +8,7 @@ import { TextBold, TextRegular } from '~components/Common/Text';
 interface SearchModalProps {
   isVisible: boolean;
   setIsVisible: (visible: boolean) => void;
-  setBreed: (breed: string) => void;
+  setBreed?: (breed: string) => void;
 }
 
 export const SearchModal = ({ isVisible, setIsVisible, setBreed }: SearchModalProps) => {
@@ -55,7 +55,7 @@ export const SearchModal = ({ isVisible, setIsVisible, setBreed }: SearchModalPr
   };
 
   const handlePressResult = (breed: string) => {
-    setBreed(breed);
+    // setBreed(breed);
     toggleModal();
   };
 

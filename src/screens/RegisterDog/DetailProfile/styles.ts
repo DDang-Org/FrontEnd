@@ -12,12 +12,27 @@ export const TextWrapper = styled.View<{ deviceHeight: number }>`
   align-items: center;
 `;
 
-export const GenderSelectArea = styled.View``;
+export const GenderSelectArea = styled.View`
+  gap: 20px;
+`;
 
 export const GenderButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
   gap: 7px;
+`;
+
+export const NeuteredCheckButton = styled.Pressable`
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+`;
+
+export const NotChecked = styled.View`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: solid 1px ${props => props.theme.colors.gc_1};
 `;
 
 export const ActionButtonWrapper = styled.View`

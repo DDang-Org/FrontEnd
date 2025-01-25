@@ -1,25 +1,25 @@
-import { ActionButton } from '~components/Common/ActionButton';
-import * as S from './styles';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
-import { RegisterDogNavigations } from '~constants/navigations';
-import { TextBold } from '~components/Common/Text';
+import { useContext, useState } from 'react';
 import { Dimensions } from 'react-native';
+import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
-import { useState } from 'react';
-import { dateToString, stringToDate } from '~utils/dateFormat';
+import { TextBold } from '~components/Common/Text';
+import { ActionButton } from '~components/Common/ActionButton';
 import DatePicker from 'react-native-date-picker';
 import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
+import { dateToString, stringToDate } from '~utils/dateFormat';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
+import { RegisterDogNavigations } from '~constants/navigations';
+import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
 export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const deviceHeight = Dimensions.get('screen').height;
-  const [birthDate, setBirthDate] = useState('');
+  const { dogProfile, setDogProfile } = useContext(DogProfileContext)!;
   const [open, setOpen] = useState(false);
-
   const { requestAndCheckPermission } = usePermission();
   const { handleImagePicker, selectedImage } = useImagePicker();
 
@@ -27,7 +27,14 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
     const isGranted = await requestAndCheckPermission('PHOTO');
     if (isGranted) {
       handleImagePicker();
+      if (selectedImage) {
+        setDogProfile(prev => ({ ...prev, profileImg: selectedImage }));
+      }
     }
+  };
+
+  const handleInputChange = (field: keyof DogProfileType, value: string) => {
+    setDogProfile(prev => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -42,27 +49,36 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
         {selectedImage && <S.ImagePreviewer source={{ uri: selectedImage }} resizeMode="cover" />}
       </S.AddImageButton>
       <S.InputArea>
-        <FormInput onChangeText={() => null} value="" placeholder="이름 입력" />
-        <FormInput onPress={() => setOpen(true)} value={birthDate} placeholder="생년월일 선택" />
-        <FormInput onChangeText={() => null} value="" placeholder="한줄 소개 입력" multiline />
+        <FormInput
+          onChangeText={value => handleInputChange('name', value)}
+          value={dogProfile.name}
+          placeholder="이름 입력"
+        />
+        <FormInput onPress={() => setOpen(true)} value={dogProfile.birthDate} placeholder="생년월일 선택" />
+        <FormInput
+          onChangeText={value => handleInputChange('comment', value)}
+          value={dogProfile.comment}
+          placeholder="한줄 소개 입력"
+          multiline
+        />
       </S.InputArea>
       <ActionButton
-        onPress={() => navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE, { basicInfo: null })}
+        onPress={() => navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE)}
         text="다음"
-        disabled={open}
+        disabled={!dogProfile.name || !dogProfile.birthDate}
       />
+
       <DatePicker
         title={' '}
         modal
         open={open}
-        date={birthDate ? stringToDate(birthDate, '. ') : new Date()}
+        date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
         onConfirm={date => {
           setOpen(false);
-          setBirthDate(dateToString(date, '. '));
+          const formattedDate = dateToString(date, '. ');
+          handleInputChange('birthDate', formattedDate);
         }}
-        onCancel={() => {
-          setOpen(false);
-        }}
+        onCancel={() => setOpen(false)}
         mode="date"
         locale="ko"
         confirmText="확인"
