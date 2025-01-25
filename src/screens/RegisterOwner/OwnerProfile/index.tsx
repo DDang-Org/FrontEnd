@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ActionButton } from '~components/Common/ActionButton';
 import { RootStackParamList } from '~navigation/RootNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
+import { Icon } from '~components/Common/Icons';
 
 // 최상위 네비게이터의 타입 정의
 type RootNavigationProp = NativeStackNavigationProp<RootStackParamList, 'RegisterDog'>;
@@ -14,6 +15,10 @@ export function RegisterOwnerProfile() {
 
   return (
     <S.RegisterOwner>
+        <S.AddAvatarBtn onPress={()=> 
+        navigation.navigate('RegisterOwner', {screen: 'OwnerAvatarModal'})}>
+        <Icon.AddDogPicture />
+        </S.AddAvatarBtn>
       {/* 버튼 클릭 시 최상위 네비게이터의 'RegisterDog' 경로로 이동 */}
       <ActionButton
         onPress={() =>

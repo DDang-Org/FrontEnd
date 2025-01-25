@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RegisterOwnerNavigator } from '~navigation/RegisterOwnerNavigator';
+import { RegisterOwnerNavigator, RegisterOwnerParamList } from '~navigation/RegisterOwnerNavigator';
 import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 
 export type RootStackParamList = {
-  RegisterOwner: undefined;
+  RegisterOwner: {screen? : keyof RegisterOwnerParamList};
   RegisterDog: { screen?: keyof RegisterDogParamList };
   BottomTab: undefined;
 };
