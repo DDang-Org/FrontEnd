@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
@@ -17,23 +17,29 @@ import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
 export const BasicProfile = ({ navigation }: BasicProfileProps) => {
-  const deviceHeight = Dimensions.get('screen').height;
   const { dogProfile, setDogProfile } = useContext(DogProfileContext)!;
-  const [open, setOpen] = useState(false);
+  const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
   const { requestAndCheckPermission } = usePermission();
   const { handleImagePicker, selectedImage } = useImagePicker();
 
+  const deviceHeight = Dimensions.get('screen').height;
+
+  useEffect(() => {
+    console.log('selectedImage', selectedImage);
+  }, [selectedImage]);
+
   const handleAddImageButton = async () => {
     const isGranted = await requestAndCheckPermission('PHOTO');
-    if (isGranted) {
-      handleImagePicker();
-      if (selectedImage) {
-        setDogProfile(prev => ({ ...prev, profileImg: selectedImage }));
-      }
+    if (!isGranted) {
+      return;
+    }
+    handleImagePicker();
+    if (selectedImage) {
+      setDogProfile(prev => ({ ...prev, profileImg: selectedImage }));
     }
   };
 
-  const updateField = (key: keyof DogProfileType, value: string) => {
+  const updateField = <key extends keyof DogProfileType>(key: key, value: DogProfileType[key]) => {
     setDogProfile(prev => ({ ...prev, [key]: value }));
   };
 
@@ -50,7 +56,7 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
       </S.AddImageButton>
       <S.InputArea>
         <FormInput onChangeText={value => updateField('name', value)} value={dogProfile.name} placeholder="이름 입력" />
-        <FormInput onPress={() => setOpen(true)} value={dogProfile.birthDate} placeholder="생년월일 선택" />
+        <FormInput onPress={() => setisDatePickerOpen(true)} value={dogProfile.birthDate} placeholder="생년월일 선택" />
         <FormInput
           onChangeText={value => updateField('comment', value)}
           value={dogProfile.comment}
@@ -67,14 +73,14 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
       <DatePicker
         title={' '}
         modal
-        open={open}
+        open={isDatePickerOpen}
         date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
         onConfirm={date => {
-          setOpen(false);
+          setisDatePickerOpen(false);
           const formattedDate = dateToString(date, '. ');
           updateField('birthDate', formattedDate);
         }}
-        onCancel={() => setOpen(false)}
+        onCancel={() => setisDatePickerOpen(false)}
         mode="date"
         locale="ko"
         confirmText="확인"
