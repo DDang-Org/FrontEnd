@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { useContext, useRef, useState } from 'react';
+import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
@@ -13,6 +13,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider';
+import { validateBasicProfile } from '~utils/validateDogProfile';
+import { useToast } from '~hooks/useToast';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
@@ -21,26 +23,33 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
   const { requestAndCheckPermission } = usePermission();
   const { handleImagePicker, selectedImage } = useImagePicker();
+  const { showFormErrorToast } = useToast();
+  const nextButtonRef = useRef<View | null>(null);
 
   const deviceHeight = Dimensions.get('screen').height;
-
-  useEffect(() => {
-    console.log('selectedImage', selectedImage);
-  }, [selectedImage]);
 
   const handleAddImageButton = async () => {
     const isGranted = await requestAndCheckPermission('PHOTO');
     if (!isGranted) {
       return;
     }
-    handleImagePicker();
+    await handleImagePicker();
     if (selectedImage) {
-      setDogProfile(prev => ({ ...prev, profileImg: selectedImage }));
+      updateField('profileImg', selectedImage);
     }
   };
 
   const updateField = <key extends keyof DogProfileType>(key: key, value: DogProfileType[key]) => {
     setDogProfile(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleClickNext = () => {
+    const error = validateBasicProfile(dogProfile);
+    if (error) {
+      showFormErrorToast(error, nextButtonRef);
+      return;
+    }
+    navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE);
   };
 
   return (
@@ -64,12 +73,14 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
           multiline
         />
       </S.InputArea>
-      <ActionButton
-        onPress={() => navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE)}
-        text="다음"
-        disabled={!dogProfile.name || !dogProfile.birthDate}
-      />
-
+      <S.ActionButtonWrapper ref={nextButtonRef}>
+        <ActionButton
+          onPress={handleClickNext}
+          text="다음"
+          disabled={isDatePickerOpen}
+          bgColor={validateBasicProfile(dogProfile) ? 'gc_1' : 'default'}
+        />
+      </S.ActionButtonWrapper>
       <DatePicker
         title={' '}
         modal

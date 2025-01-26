@@ -36,5 +36,5 @@ export const NotChecked = styled.View`
 `;
 
 export const ActionButtonWrapper = styled.View`
-  margin-top: 20px;
+  width: 100%;
 `;

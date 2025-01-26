@@ -3,6 +3,7 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 export const useImagePicker = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<string | null>(null);
 
   const handleImagePicker = async () => {
     const image = await ImageCropPicker.openPicker({
@@ -13,6 +14,7 @@ export const useImagePicker = () => {
       cropperChooseText: '완료',
       cropperCancelText: '취소',
     });
+    console.log(image);
     setSelectedImage(image.path);
   };
 
