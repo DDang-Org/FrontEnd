@@ -4,7 +4,7 @@ import { RootStackParamList } from '~navigation/RootNavigator';
 import Dog from '~assets/dogs/dog-walk.svg';
 import { Icon } from '~components/Common/Icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '@emotion/react';
+import { LoginComment } from '~components/Login/\bLoginComment/indedx';
 
 type RootNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -26,24 +26,13 @@ const SOCIAL_LOGIN_BUTTONS = [
 ];
 
 export const Login = ({ navigation }: RootNavigationProp) => {
-  const theme = useTheme();
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', justifyContent: 'flex-start', alignItems: 'center' }}>
-      <S.TextWrapper>
-        <S.Text fontSize={24}>건강한 반려생활,</S.Text>
-        <S.Text fontSize={24}>
-          <S.Text fontSize={24} style={{ color: theme.colors.default }}>
-            댕
-          </S.Text>
-          과 함께해요!
-        </S.Text>
-      </S.TextWrapper>
-
+      <LoginComment />
       <S.DigIconWrapper>
       <Dog width={200} height={200} />
       </S.DigIconWrapper>
-
       <S.LoginButtonWrapper>
         {SOCIAL_LOGIN_BUTTONS.map(({ backgroundColor, textColor, IconComponent, text, onPress }, index) => (
           <S.CustomActionButton key={index} style={{ backgroundColor }} onPress={() => onPress(navigation)}>
@@ -54,6 +43,7 @@ export const Login = ({ navigation }: RootNavigationProp) => {
           </S.CustomActionButton>
         ))}
       </S.LoginButtonWrapper>
+
     </SafeAreaView>
   );
 };
