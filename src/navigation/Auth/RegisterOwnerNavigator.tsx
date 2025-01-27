@@ -4,7 +4,7 @@ import { OwnerAvatarModal } from "~screens/RegisterOwner/AvatarModal";
 import { useTheme } from "@emotion/react";
 
 export type RegisterOwnerParamList = {
-  OwnerProfile: undefined;
+  OwnerProfile: {screen? : keyof RegisterOwnerParamList};
   OwnerAvatarModal: undefined;
 };
 
@@ -30,16 +30,16 @@ export const RegisterOwnerNavigator = () => {
       }}
     >
       {/* OwnerProfile 화면 */}
-      <Stack.Screen 
-        name="OwnerProfile" 
-        component={RegisterOwnerProfile} 
-        options={{ title: '견주정보입력' }} 
+      <Stack.Screen
+        name="OwnerProfile"
+        component={RegisterOwnerProfile}
+        options={{ title: '견주정보입력' }}
       />
 
       {/* OwnerAvatarModal 화면 */}
-      <Stack.Screen 
-        name="OwnerAvatarModal" 
-        component={OwnerAvatarModal} 
+      <Stack.Screen
+        name="OwnerAvatarModal"
+        component={OwnerAvatarModal}
         options={{
           presentation: 'transparentModal', // 투명한 배경으로 설정
           headerShown: false, // 기본 헤더 숨김

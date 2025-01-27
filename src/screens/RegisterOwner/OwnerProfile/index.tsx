@@ -15,7 +15,7 @@ export function RegisterOwnerProfile() {
 
   return (
     <S.RegisterOwner>
-        <S.AddAvatarBtn onPress={()=> 
+        <S.AddAvatarBtn onPress={()=>
         navigation.navigate('RegisterOwner', {screen: 'OwnerAvatarModal'})}>
         <Icon.AddDogPicture />
         </S.AddAvatarBtn>

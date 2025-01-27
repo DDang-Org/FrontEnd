@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "@emotion/react";
+import { Login } from "~screens/Login";
 
 export type LoginParamList = {
     Login: {screen? : keyof LoginParamList};
@@ -26,10 +27,12 @@ export const LoginNavigator = () => {
         },
       }}
     >
-      <Stack.Screen 
-        name="Login" 
-        component={LoginNavigator} 
-        options={{ title: '로그인페이지' }} 
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );

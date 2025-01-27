@@ -18,10 +18,14 @@ export const RootNavigator = () => {
   // 현재 RootNavigator에서 조건부 렌더링(if)을 사용하지 않고 모든 네비게이터를 한 번에 등록하도록 설정
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginNavigator} />
-      <Stack.Screen name="RegisterOwner" component={RegisterOwnerNavigator} />
+            {/* <Stack.Screen name="BottomTab" component={BottomTabNavigator} /> */}
+
+            <Stack.Screen name="Login" component={LoginNavigator} />
+            <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
+
+            <Stack.Screen name="RegisterOwner" component={RegisterOwnerNavigator} />
+
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
-      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 };
