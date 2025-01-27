@@ -1,6 +1,6 @@
 import * as S from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterOwnerParamList } from '~navigation/RegisterOwnerNavigator';
+import { RegisterOwnerParamList } from '~navigation/Auth/RegisterOwnerNavigator';
 import { Icon } from '~components/Common/Icons';
 
 type RegisterOwnerProps = NativeStackScreenProps<RegisterOwnerParamList, 'OwnerAvatarModal'>;

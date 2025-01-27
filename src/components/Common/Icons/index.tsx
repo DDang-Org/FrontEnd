@@ -16,6 +16,7 @@ import Male from '~assets/icons/male.svg';
 import Check from '~assets/icons/check.svg';
 import AddFamilyCode from '~assets/icons/add-family-code.svg';
 import Option from '~assets/icons/option.svg';
+import Kakao from '~assets/icons/kakao.svg'
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -35,4 +36,5 @@ export const Icon = {
   Check: (props: SvgProps) => <Check {...props} />,
   AddFamilyCode: (props: SvgProps) => <AddFamilyCode {...props} />,
   Option: (props: SvgProps) => <Option {...props} />,
+  Kakao: (props: SvgProps) => <Kakao {...props} />,
 };

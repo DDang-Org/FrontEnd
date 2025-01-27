@@ -1,7 +1,7 @@
 import { ActionButton } from '~components/Common/ActionButton';
 import * as S from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
+import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 
 type InviteCodeProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.INVITE_CODE>;
