@@ -2,28 +2,11 @@ import * as S from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '~navigation/RootNavigator';
 import Dog from '~assets/dogs/dog-walk.svg';
-import { Icon } from '~components/Common/Icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LoginComment } from '~components/Login/\bLoginComment/indedx';
+import { SOCIAL_LOGIN_BUTTONS } from '~components/Login/LoginButton';
 
 type RootNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
-
-const SOCIAL_LOGIN_BUTTONS = [
-  {
-    backgroundColor: '#FFED16', // 카카오 배경색
-    textColor: '#000000', // 카카오 텍스트 색상
-    IconComponent: Icon.Kakao, // 카카오 아이콘
-    text: '카카오계정 로그인',
-    onPress: (navigation: any) => navigation.navigate('RegisterOwner', { screen: 'OwnerProfile' }),
-  },
-  {
-    backgroundColor: '#F2F2F2', // 구글 배경색
-    textColor: '#000000', // 구글 텍스트 색상
-    IconComponent: Icon.Google, // 구글 아이콘
-    text: '구글계정 로그인',
-    onPress: (navigation: any) => navigation.navigate('RegisterOwner', { screen: 'OwnerProfile' }),
-  },
-];
 
 export const Login = ({ navigation }: RootNavigationProp) => {
 
