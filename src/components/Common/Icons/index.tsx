@@ -17,7 +17,8 @@ import Check from '~assets/icons/check.svg';
 import AddFamilyCode from '~assets/icons/add-family-code.svg';
 import Option from '~assets/icons/option.svg';
 import Kakao from '~assets/icons/kakao.svg';
-import Google from '~assets/icons/google.svg'
+import Google from '~assets/icons/google.svg';
+import AvatarSelect from '~assets/icons/avatar-select-button.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -39,4 +40,5 @@ export const Icon = {
   Option: (props: SvgProps) => <Option {...props} />,
   Kakao: (props: SvgProps) => <Kakao {...props} />,
   Google: (props: SvgProps) => <Google {...props} />,
+  AvatarSelect: (props: SvgProps) => <AvatarSelect {...props} />,
 };

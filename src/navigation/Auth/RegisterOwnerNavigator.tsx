@@ -14,38 +14,36 @@ export const RegisterOwnerNavigator = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        contentStyle: {
-          backgroundColor: 'white',
-        },
-        headerBackButtonDisplayMode: 'minimal',
-        headerTintColor: theme.colors.font_1,
-        headerShadowVisible: false,
-        headerTitleAlign: 'center',
-        headerBackButtonMenuEnabled: true,
-        headerTitleStyle: {
-          fontFamily: 'SUIT-Bold',
-          fontSize: 18,
-        },
-      }}
-    >
-      {/* OwnerProfile 화면 */}
-      <Stack.Screen
-        name="OwnerProfile"
-        component={RegisterOwnerProfile}
-        options={{ title: '견주정보입력' }}
-      />
+  screenOptions={{
+    headerShown: true, // 헤더 표시
+    headerBackVisible: true, // 뒤로가기 버튼 활성화
+    contentStyle: {
+      backgroundColor: 'white',
+    },
+    headerTintColor: theme.colors.font_1,
+    headerShadowVisible: false,
+    headerTitleAlign: 'center',
+    headerTitleStyle: {
+      fontFamily: 'SUIT-Bold',
+      fontSize: 18,
+    },
+  }}
+>
+  <Stack.Screen
+    name="OwnerProfile"
+    component={RegisterOwnerProfile}
+    options={{ title: '견주정보입력', headerShown: false }}
+  />
+  <Stack.Screen
+    name="OwnerAvatarModal"
+    component={OwnerAvatarModal}
+    options={{
+      presentation: 'transparentModal',
+      headerShown: false, // 이 화면에서는 헤더를 숨김
+      animation: 'slide_from_bottom',
+    }}
+  />
+</Stack.Navigator>
 
-      {/* OwnerAvatarModal 화면 */}
-      <Stack.Screen
-        name="OwnerAvatarModal"
-        component={OwnerAvatarModal}
-        options={{
-          presentation: 'transparentModal', // 투명한 배경으로 설정
-          headerShown: false, // 기본 헤더 숨김
-          animation: 'slide_from_bottom', // 아래에서 위로 슬라이드 애니메이션
-        }} 
-      />
-    </Stack.Navigator>
   );
 };
