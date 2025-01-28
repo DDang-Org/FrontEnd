@@ -15,6 +15,20 @@ import * as S from './styles';
 const WALKING_INTERVAL = 5000;
 const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
+const MIN_MARKER_DISTANCE = 5;
+
+const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const R = 6371e3;
+  const φ1 = (lat1 * Math.PI) / 180;
+  const φ2 = (lat2 * Math.PI) / 180;
+  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+};
 
 const MapView = () => {
   const mapRef = useRef<NaverMapViewRef>(null);
@@ -65,28 +79,41 @@ const MapView = () => {
     return position.coords.accuracy <= MIN_ACCURACY;
   };
 
+  const shouldAddMarker = (newPosition: { latitude: number; longitude: number }): boolean => {
+    if (locationMarkers.length === 0) {
+      return true;
+    }
+
+    const lastMarker = locationMarkers[locationMarkers.length - 1];
+    const calDistance = calculateDirectDistance(
+      lastMarker.latitude,
+      lastMarker.longitude,
+      newPosition.latitude,
+      newPosition.longitude,
+    );
+
+    return calDistance >= MIN_MARKER_DISTANCE;
+  };
+
   useEffect(() => {
     console.log('위치 추적 시작:', { isWalking });
 
     const requestLocationPermission = async () => {
       if (Platform.OS === 'ios') {
         const status = await request(PERMISSIONS.IOS.LOCATION_ALWAYS);
-        console.log('iOS 위치 권한 상태:', status);
         if (status === 'granted') {
           try {
             await requestLocationAccuracy({ purposeKey: 'common-purpose' });
-            console.log('iOS 위치 정확도 설정 성공');
           } catch (e) {
             console.error('iOS 위치 정확도 요청 실패:', e);
           }
         }
       } else {
         try {
-          const result = await requestMultiple([
+          await requestMultiple([
             PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
             PERMISSIONS.ANDROID.ACCESS_BACKGROUND_LOCATION,
           ]);
-          console.log('Android 위치 권한 상태:', result);
         } catch (e) {
           console.error('Android 위치 권한 요청 실패:', e);
         }
@@ -100,29 +127,11 @@ const MapView = () => {
         const currentTime = Date.now();
         const timeSinceLastUpdate = currentTime - lastUpdateTime;
 
-        // 마지막 업데이트로부터 5초가 지나지 않았다면 무시
         if (timeSinceLastUpdate < WALKING_INTERVAL) {
-          console.log('업데이트 무시: 시간 간격이 충분하지 않음', {
-            timeSinceLastUpdate,
-            requiredInterval: WALKING_INTERVAL,
-          });
           return;
         }
 
-        console.log('위치 업데이트 받음:', {
-          accuracy: position.coords.accuracy,
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          timestamp: new Date(position.timestamp).toLocaleString(),
-          timeSinceLastUpdate,
-          isWalking,
-        });
-
         if (!filterPosition(position)) {
-          console.log('위치 정확도가 낮음:', {
-            accuracy: position.coords.accuracy,
-            required: MIN_ACCURACY,
-          });
           return;
         }
 
@@ -130,15 +139,16 @@ const MapView = () => {
         const newPosition = { latitude, longitude };
 
         if (isWalking) {
-          setLocationMarkers(prev => [
-            ...prev,
-            {
-              latitude,
-              longitude,
-              index: prev.length + 1,
-            },
-          ]);
-          console.log('새 위치 마커 추가됨:', locationMarkers.length + 1);
+          if (shouldAddMarker(newPosition)) {
+            setLocationMarkers(prev => [
+              ...prev,
+              {
+                latitude,
+                longitude,
+                index: prev.length + 1,
+              },
+            ]);
+          }
 
           mapRef.current?.animateCameraTo({
             latitude,
@@ -154,10 +164,7 @@ const MapView = () => {
         setLastUpdateTime(currentTime);
       },
       error => {
-        console.error('위치 추적 오류 발생:', {
-          code: error.code,
-          message: error.message,
-        });
+        console.error('위치 추적 오류:', error);
       },
       {
         enableHighAccuracy: true,
@@ -173,7 +180,7 @@ const MapView = () => {
       console.log('위치 추적 정리(cleanup):', watchId);
       Geolocation.clearWatch(watchId);
     };
-  }, [currentLocation, isWalking, lastUpdateTime]); // lastUpdateTime 의존성 추가
+  }, [currentLocation, isWalking, lastUpdateTime]);
 
   const handleLocationButtonPress = () => {
     mapRef.current?.animateCameraTo({
