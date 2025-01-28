@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
@@ -10,14 +10,15 @@ import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import { Icon } from '~components/Common/Icons';
 import { SearchModal } from '~components/RegisterDog/SearchModal';
-import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider';
 import { validateDetailProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
+import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
+import { useAtom } from 'jotai';
 
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
 export const DetailProfile = ({}: DetailProps) => {
-  const { dogProfile, setDogProfile } = useContext(DogProfileContext)!;
+  const [dogProfile, setDogProfile] = useAtom(dogProfileAtom)!;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [displayWeight, setDisplayWeight] = useState(dogProfile.weight ? `${dogProfile.weight}kg` : '');
   const { showFormErrorToast } = useToast();
@@ -25,7 +26,7 @@ export const DetailProfile = ({}: DetailProps) => {
 
   const deviceHeight = Dimensions.get('screen').height;
 
-  const updateField = <key extends keyof DogProfileType>(key: key, value: DogProfileType[key]) => {
+  const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile(prev => ({ ...prev, [key]: value }));
   };
 

@@ -1,5 +1,7 @@
-import { createContext, ReactNode, useState } from 'react';
+import { Provider } from 'jotai';
 import { Gender } from '~types/gender';
+import { PropsWithChildren } from 'react';
+import { atomWithReset } from 'jotai/utils';
 
 export interface DogProfileType {
   name: string;
@@ -13,29 +15,20 @@ export interface DogProfileType {
   comment: string;
 }
 
-type DogProfileContextType = {
-  dogProfile: DogProfileType;
-  setDogProfile: React.Dispatch<React.SetStateAction<DogProfileType>>;
+export const INITIAL_DOG_PROFILE: DogProfileType = {
+  name: '',
+  profileImg: '',
+  profileImgFile: undefined,
+  birthDate: '',
+  gender: null,
+  isNeutered: 'FALSE',
+  breed: '',
+  weight: undefined,
+  comment: '',
 };
 
-type DogProfileProviderProps = {
-  children: ReactNode;
-};
+export const dogProfileAtom = atomWithReset<DogProfileType>(INITIAL_DOG_PROFILE);
 
-export const DogProfileContext = createContext<DogProfileContextType | undefined>(undefined);
-
-export const DogProfileProvider = ({ children }: DogProfileProviderProps) => {
-  const [dogProfile, setDogProfile] = useState<DogProfileType>({
-    name: '',
-    profileImg: '',
-    profileImgFile: undefined,
-    birthDate: '',
-    gender: null,
-    isNeutered: 'FALSE',
-    breed: '',
-    weight: undefined,
-    comment: '',
-  });
-
-  return <DogProfileContext.Provider value={{ dogProfile, setDogProfile }}>{children}</DogProfileContext.Provider>;
+export const DogProfileProvider = ({ children }: PropsWithChildren) => {
+  return <Provider>{children}</Provider>;
 };

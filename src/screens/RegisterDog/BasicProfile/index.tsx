@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
@@ -12,35 +12,34 @@ import { dateToString, stringToDate } from '~utils/dateFormat';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
-import { DogProfileContext, DogProfileType } from '~providers/DogProfileProvider';
 import { validateBasicProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
+import { useAtom } from 'jotai';
+import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
 export const BasicProfile = ({ navigation }: BasicProfileProps) => {
-  const { dogProfile, setDogProfile } = useContext(DogProfileContext)!;
+  const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
   const { requestAndCheckPermission } = usePermission();
-  const { handleImagePicker, selectedImage } = useImagePicker();
+  const { handleImagePicker } = useImagePicker();
   const { showFormErrorToast } = useToast();
   const nextButtonRef = useRef<View | null>(null);
 
   const deviceHeight = Dimensions.get('screen').height;
+
+  const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
+    setDogProfile(prev => ({ ...prev, [key]: value }));
+  };
 
   const handleAddImageButton = async () => {
     const isGranted = await requestAndCheckPermission('PHOTO');
     if (!isGranted) {
       return;
     }
-    await handleImagePicker();
-    if (selectedImage) {
-      updateField('profileImg', selectedImage);
-    }
-  };
-
-  const updateField = <key extends keyof DogProfileType>(key: key, value: DogProfileType[key]) => {
-    setDogProfile(prev => ({ ...prev, [key]: value }));
+    const selectedImage = await handleImagePicker();
+    updateField('profileImg', selectedImage);
   };
 
   const handleClickNext = () => {
@@ -61,7 +60,7 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
       <S.AddImageButton onPress={handleAddImageButton}>
         <Icon.AddDogImage />
         <S.AddImageText fontSize={15}>반려견 사진 추가</S.AddImageText>
-        {selectedImage && <S.ImagePreviewer source={{ uri: selectedImage }} resizeMode="cover" />}
+        {dogProfile.profileImg && <S.ImagePreviewer source={{ uri: dogProfile.profileImg }} resizeMode="cover" />}
       </S.AddImageButton>
       <S.InputArea>
         <FormInput onChangeText={value => updateField('name', value)} value={dogProfile.name} placeholder="이름 입력" />
