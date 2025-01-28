@@ -114,10 +114,11 @@ export const BottomTabNavigator = () => {
             fontFamily: 'SUIT-Bold',
             fontSize: 18,
           },
-          headerLeftContainerStyle: {
-            paddingLeft: 14,
-          },
-          headerLeft: () => <Prev onPress={() => navigation.goBack()} />,
+          headerLeft: () => (
+            <View style={{ paddingLeft: 14 }}>
+              <Prev onPress={() => navigation.goBack()} />
+            </View>
+          ),
           animation: 'shift',
         })}
       />

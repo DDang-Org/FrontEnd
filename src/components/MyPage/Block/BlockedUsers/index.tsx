@@ -6,7 +6,13 @@ export const BlockedUsers = () => {
 
   return (
     <UserInfo.Container
-      data={blockedUsers?.map(user => ({ ...user, userId: user.memberId, onPressButton: () => {}, isLast: false }))}
+      data={blockedUsers?.map(user => ({
+        ...user,
+        userId: user.memberId,
+        onPressButton: () => {},
+        buttonText: '차단 해제',
+        isLast: false,
+      }))}
       keyExtractor={(item, index) => `${item.name}-${index}`}
       renderItem={({ item, index }) => (
         <UserInfo.Item

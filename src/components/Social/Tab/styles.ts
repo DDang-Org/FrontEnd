@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import { Animated, View } from 'react-native';
+import { Animated } from 'react-native';
 import { TextBold } from '~components/Common/Text';
 
 export const TabContainer = styled.View`
