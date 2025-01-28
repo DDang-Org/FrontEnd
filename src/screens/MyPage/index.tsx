@@ -32,7 +32,7 @@ export const MyPageScreen = ({ navigation }: Props) => {
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
         <Suspense fallback={<WalkInfoLoader />}>
-          <WalkInfo />
+          <WalkInfo dogId={1} />
         </Suspense>
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={DogProfileFallback}>

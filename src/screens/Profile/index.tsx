@@ -40,12 +40,12 @@ export const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
         <Suspense fallback={<WalkInfoLoader />}>
-          <WalkInfo />
+          <WalkInfo dogId={1} />
         </Suspense>
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={DogProfileFallback}>
         <Suspense fallback={<DogProfileLoader />}>
-          <DogProfile />
+          <DogProfile dogId={1} />
         </Suspense>
       </ErrorBoundary>
     </S.Profile>
