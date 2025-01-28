@@ -20,9 +20,7 @@ export const RootNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {/* <Stack.Screen name="BottomTab" component={BottomTabNavigator} /> */}
 
-      <Stack.Screen name="Login" component={LoginNavigator}
-        options={{ headerTitle:''}}
-      />
+      <Stack.Screen name="Login" component={LoginNavigator} options={{ headerTitle: '' }} />
       <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
 
       <Stack.Screen

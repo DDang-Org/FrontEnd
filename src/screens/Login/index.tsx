@@ -9,24 +9,22 @@ import { SOCIAL_LOGIN_BUTTONS } from '~components/Login/LoginButton';
 type RootNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 export const Login = ({ navigation }: RootNavigationProp) => {
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', justifyContent: 'flex-start', alignItems: 'center' }}>
       <LoginComment />
       <S.DigIconWrapper>
-      <Dog width={200} height={200} />
+        <Dog width={200} height={200} />
       </S.DigIconWrapper>
       <S.LoginButtonWrapper>
         {SOCIAL_LOGIN_BUTTONS.map(({ backgroundColor, textColor, IconComponent, text, onPress }, index) => (
           <S.CustomActionButton key={index} style={{ backgroundColor }} onPress={() => onPress(navigation)}>
-            <IconComponent width={24} height={24} style={{ position: 'absolute', left: 16 }}/>
+            <IconComponent width={24} height={24} style={{ position: 'absolute', left: 16 }} />
             <S.Text fontSize={14} style={{ color: textColor }}>
               {text}
             </S.Text>
           </S.CustomActionButton>
         ))}
       </S.LoginButtonWrapper>
-
     </SafeAreaView>
   );
 };

@@ -20,7 +20,7 @@ export const CustomActionButton = styled.Pressable`
   width: 100%;
   height: 50px;
   border-radius: 12px;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
@@ -38,8 +38,7 @@ export const CloseButton = styled.TouchableOpacity`
   padding: 8px;
 `;
 
-
 export const DigIconWrapper = styled.View`
-  align-items: center; 
-  margin:80px 0px;
+  align-items: center;
+  margin: 80px 0px;
 `;
