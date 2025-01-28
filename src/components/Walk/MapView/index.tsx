@@ -182,6 +182,51 @@ const MapView = () => {
     };
   }, [currentLocation, isWalking, lastUpdateTime]);
 
+  useEffect(() => {
+    const getCurrentLocation = async () => {
+      try {
+        if (Platform.OS === 'ios') {
+          const status = await request(PERMISSIONS.IOS.LOCATION_ALWAYS);
+          if (status === 'granted') {
+            await requestLocationAccuracy({ purposeKey: 'common-purpose' });
+          }
+        } else {
+          await requestMultiple([
+            PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+            PERMISSIONS.ANDROID.ACCESS_BACKGROUND_LOCATION,
+          ]);
+        }
+
+        Geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords;
+
+            setCurrentLocation({ latitude, longitude });
+
+            mapRef.current?.animateCameraTo({
+              latitude,
+              longitude,
+              zoom: 18,
+              duration: 500,
+              easing: 'Fly',
+            });
+          },
+          error => {
+            console.error('초기 위치 가져오기 실패:', error);
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+          },
+        );
+      } catch (error) {
+        console.error('위치 권한 요청 실패:', error);
+      }
+    };
+
+    getCurrentLocation();
+  }, []);
+
   const handleLocationButtonPress = () => {
     mapRef.current?.animateCameraTo({
       latitude: currentLocation.latitude,
@@ -216,7 +261,15 @@ const MapView = () => {
         isShowLocationButton={false}
         isShowZoomControls={false}
         isShowCompass={false}
-        camera={camera}
+        camera={
+          currentLocation
+            ? {
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+                zoom: 18,
+              }
+            : undefined
+        }
       >
         <NaverMapMarkerOverlay
           latitude={currentLocation.latitude}
