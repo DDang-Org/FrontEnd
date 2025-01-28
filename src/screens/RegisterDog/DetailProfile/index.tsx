@@ -18,7 +18,7 @@ import { useAtom } from 'jotai';
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
 export const DetailProfile = ({}: DetailProps) => {
-  const [dogProfile, setDogProfile] = useAtom(dogProfileAtom)!;
+  const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [displayWeight, setDisplayWeight] = useState(dogProfile.weight ? `${dogProfile.weight}kg` : '');
   const { showFormErrorToast } = useToast();
@@ -26,8 +26,17 @@ export const DetailProfile = ({}: DetailProps) => {
 
   const deviceHeight = Dimensions.get('screen').height;
 
+  const handleClickConfirm = () => {
+    const error = validateDetailProfile(dogProfile);
+    if (error) {
+      showFormErrorToast(error, confirmButtonRef);
+      return;
+    }
+    console.log(dogProfile);
+  };
+
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
-    setDogProfile(prev => ({ ...prev, [key]: value }));
+    setDogProfile({ ...dogProfile, [key]: value });
   };
 
   const handleChangeWeight = (value: string) => {
@@ -53,15 +62,6 @@ export const DetailProfile = ({}: DetailProps) => {
     if (dogProfile.weight) {
       setDisplayWeight(`${dogProfile.weight}kg`);
     }
-  };
-
-  const handleClickConfirm = () => {
-    const error = validateDetailProfile(dogProfile);
-    if (error) {
-      showFormErrorToast(error, confirmButtonRef);
-      return;
-    }
-    console.log(dogProfile);
   };
 
   return (

@@ -30,7 +30,7 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const deviceHeight = Dimensions.get('screen').height;
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
-    setDogProfile(prev => ({ ...prev, [key]: value }));
+    setDogProfile({ ...dogProfile, [key]: value });
   };
 
   const handleAddImageButton = async () => {
