@@ -65,6 +65,8 @@ const MapView = () => {
 
   const [lastUpdateTime, setLastUpdateTime] = useState<number>(Date.now());
 
+  const [isLocationCentered, setIsLocationCentered] = useState(true);
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isWalking) {
@@ -253,6 +255,19 @@ const MapView = () => {
     );
   };
 
+  // 카메라 이동이 완료될 때마다 호출되는 함수
+  const handleCameraChange = (event: any) => {
+    const { latitude, longitude } = event;
+    // console.log(latitude, longitude);
+
+    const distance = calculateDirectDistance(latitude, longitude, currentLocation.latitude, currentLocation.longitude);
+
+    console.log(distance);
+
+    // 현재 위치와 카메라 중심점의 거리가 50미터 이상이면 중심에서 벗어난 것으로 판단
+    setIsLocationCentered(distance < 20);
+  };
+
   return (
     <>
       <NaverMapView
@@ -261,15 +276,8 @@ const MapView = () => {
         isShowLocationButton={false}
         isShowZoomControls={false}
         isShowCompass={false}
-        camera={
-          currentLocation
-            ? {
-                latitude: currentLocation.latitude,
-                longitude: currentLocation.longitude,
-                zoom: 18,
-              }
-            : undefined
-        }
+        camera={camera}
+        onCameraChanged={handleCameraChange}
       >
         <NaverMapMarkerOverlay
           latitude={currentLocation.latitude}
@@ -292,7 +300,9 @@ const MapView = () => {
         ))}
       </NaverMapView>
 
-      <S.LocationButton onPress={handleLocationButtonPress} text="⊕ 내 위치로" bgColor="font_1" />
+      {!isLocationCentered && (
+        <S.LocationButton onPress={handleLocationButtonPress} text="⊕ 내 위치로" bgColor="font_1" />
+      )}
 
       {renderWalkButton()}
     </>
