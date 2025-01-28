@@ -70,6 +70,23 @@ export const handlers = [
       },
     });
   }),
+  http.get(`${BASE_URL}/dogs/:id`, () => {
+    return HttpResponse.json({
+      data: {
+        dogId: 0,
+        dogName: '도토리',
+        breed: '시베리안 허스키',
+        dogBirthDate: '2022-11-20',
+        weight: 23,
+        dogGender: 'MALE',
+        dogProfileImg:
+          'https://www.yomidog.com/preSaleUpFile/190228_%EB%B6%80%EC%82%B0%ED%97%88%EC%8A%A4%ED%82%A4_638.jpg',
+        isNeutered: 'TRUE',
+        familyId: 0,
+        comment: '시베리안 허스키 도토리에요.',
+      },
+    });
+  }),
   http.get(`${BASE_URL}/dogs`, () => {
     return HttpResponse.json({
       data: {
