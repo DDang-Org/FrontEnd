@@ -249,7 +249,7 @@ const MapView = () => {
         <S.WalkingInfo>
           <S.InfoText fontSize={15}>{formatDuration(walkTime)}</S.InfoText>
           <S.StopButton onPress={() => setIsWalking(false)} bgColor="lighten_2" text="산책 끝" />
-          <S.InfoText fontSize={15}>{formatDistance(distance)}km</S.InfoText>
+          <S.InfoText fontSize={15}>{formatDistance(distance)}</S.InfoText>
         </S.WalkingInfo>
       </S.WalkingInfoContainer>
     );
