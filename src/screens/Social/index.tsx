@@ -1,21 +1,20 @@
-import styled from '@emotion/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
+import { Tab } from '~components/Social/Tab';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
-
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import * as S from './styles';
 
 type Props = BottomTabScreenProps<TabBarParamList, 'Social'>;
 
 export const SocialScreen = ({}: Props) => {
+  const [selectedTab, setSelectedTab] = useState<'댕친' | '댕톡'>('댕친');
+
   return (
-    <SafeContainer>
-      <Text>SocialScreen</Text>
-    </SafeContainer>
+    <S.SocialScreen>
+      <S.Header>
+        <S.HeaderText fontSize={17}>소셜</S.HeaderText>
+      </S.Header>
+      <Tab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+    </S.SocialScreen>
   );
 };
