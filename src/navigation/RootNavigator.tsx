@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RegisterOwnerNavigator, RegisterOwnerParamList } from '~navigation/Auth/RegisterOwnerNavigator';
-import { RegisterDogNavigator } from '~navigation/Auth/RegisterDogNavigator';
+import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
-import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { LoginNavigator, LoginParamList } from '~navigation/Auth/LoginNavigator';
 
 export type RootStackParamList = {
