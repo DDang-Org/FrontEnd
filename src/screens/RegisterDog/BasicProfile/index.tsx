@@ -10,7 +10,7 @@ import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
 import { dateToString, stringToDate } from '~utils/dateFormat';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { validateBasicProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';

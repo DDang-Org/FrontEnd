@@ -1,7 +1,7 @@
 import { ActionButton } from '~components/Common/ActionButton';
 import * as S from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold } from '~components/Common/Text';
 import FormInput from '~components/Common/FormInput';

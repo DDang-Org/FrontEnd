@@ -5,7 +5,7 @@ import FormInput from '~components/Common/FormInput';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { ActionButton } from '~components/Common/ActionButton';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import { Icon } from '~components/Common/Icons';
