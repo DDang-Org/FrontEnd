@@ -25,6 +25,7 @@ export const ProfileDataContainer = styled.View`
   margin: 10px;
   gap: 4px;
   align-items: center;
+  width: 100%;
 `;
 
 export const GenderButtonWrapper = styled.View`
@@ -74,13 +75,13 @@ export const ModalComment = styled.View`
 export const AvatarGrid = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between; /* 각 열 사이 간격 균등 분배 */
+  justify-content: space-between;
 `;
 
 export const AvatarWrapper = styled.View`
-  width: 157px; /* 아바타 크기 */
+  width: 157px;
   height: 157px;
-  margin-bottom: 16px; /* 행 간 간격 */
+  margin-bottom: 16px;
 `;
 
 export const AvatarOverlay = styled.View`

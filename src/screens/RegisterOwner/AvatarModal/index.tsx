@@ -7,24 +7,22 @@ import * as Avatars from '~assets/avatars';
 import { Profile } from '~components/Common/Profile';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useState } from 'react';
-import AvatarSelected from '~assets/icons/AvatarSelected.svg';
+// import AvatarSelected from '~assets/icons/AvatarSelected.svg';
 
 type OwnerAvatarModalProps = NativeStackScreenProps<RegisterOwnerParamList, 'OwnerAvatarModal'>;
 
 export const OwnerAvatarModal = ({ navigation, route }: OwnerAvatarModalProps) => {
   const avatarList = Object.values(Avatars);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(
-    route.params?.selectedAvatar || null, // 이전 선택된 아바타 유지
-  );
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(route.params?.selectedAvatar || null);
 
   const handleAvatarSelect = (index: number) => {
-    setSelectedIndex(index); // 선택한 아바타 상태 업데이트
+    setSelectedIndex(index);
   };
 
   const handleNextPress = () => {
     if (selectedIndex !== null) {
-      navigation.setParams({ selectedAvatar: selectedIndex }); // 이전 화면의 params 업데이트
-      navigation.goBack(); // 이전 화면으로 돌아감
+      navigation.setParams({ selectedAvatar: selectedIndex });
+      navigation.goBack();
     }
   };
 
@@ -50,9 +48,7 @@ export const OwnerAvatarModal = ({ navigation, route }: OwnerAvatarModalProps) =
                 <Profile size={157} src={Avatar} onPress={() => handleAvatarSelect(index)} />
                 {/* 선택된 아바타 위에 표시 */}
                 {selectedIndex === index && (
-                  <S.AvatarOverlay>
-                    <AvatarSelected width={157} height={157} />
-                  </S.AvatarOverlay>
+                  <S.AvatarOverlay>{/* <AvatarSelected width={157} height={157} /> */}</S.AvatarOverlay>
                 )}
               </S.AvatarWrapper>
             ))}
