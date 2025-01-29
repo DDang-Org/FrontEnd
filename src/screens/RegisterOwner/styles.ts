@@ -14,7 +14,7 @@ export const RegisterCommentText = styled(TextBold)`
 
 export const AvatarSelectWrapper = styled.View`
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 export const StyledAvatarSelect = styled(Icon.AvatarSelect)`
@@ -24,6 +24,7 @@ export const StyledAvatarSelect = styled(Icon.AvatarSelect)`
 
 export const ProfileDataContainer = styled.View`
   margin: 10px;
+  padding-right: 25px;
   gap: 4px;
   align-items: center;
   width: 100%;
@@ -33,6 +34,7 @@ export const GenderButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 40px;
+  margin-top: 10px;
 `;
 
 export const NextButtonWrapper = styled.View`
@@ -68,8 +70,8 @@ export const ModalContent = styled.View`
 export const AvatarContainer = styled.View``;
 
 export const ModalComment = styled.View`
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 70px;
+  margin-bottom: 40px;
   align-items: center;
 `;
 
@@ -80,17 +82,24 @@ export const AvatarGrid = styled.View`
 `;
 
 export const AvatarWrapper = styled.View`
-  width: 157px;
-  height: 157px;
+  width: 48%;
+  height: 156px;
   margin-bottom: 16px;
+  padding-left: 10px;
 `;
 
 export const AvatarOverlay = styled.View`
   position: absolute;
   top: 0;
-  left: 0;
+  left: 5px;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
+`;
+
+export const CloseButtonWrapper = styled.View`
+  position: absolute;
+  top: 16px;
+  left: 16px;
 `;

@@ -32,14 +32,13 @@ export function RegisterOwnerProfile() {
       setShowToast(true);
     } else {
       setShowToast(false);
-      // 다음 화면으로 이동 로직 추가
       console.log('다음 화면으로 이동');
     }
   };
 
   return (
     <>
-      <ScrollView contentContainerStyle={{ paddingBottom: 100, padding: 16 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 10, padding: 16 }}>
         <S.RegisterComment>
           <S.RegisterCommentText fontSize={24}>견주님에 대해</S.RegisterCommentText>
           <S.RegisterCommentText fontSize={24}>알려주세요</S.RegisterCommentText>
@@ -47,11 +46,9 @@ export function RegisterOwnerProfile() {
 
         {/* 아바타 선택 */}
         <S.AvatarSelectWrapper>
-          {/* 아바타가 선택되지 않은 경우에만 StyledAvatarSelect 렌더링 */}
           {selectedAvatarIndex === null ? (
             <S.StyledAvatarSelect onPress={() => setIsAvatarModalVisible(true)} />
           ) : (
-            // 선택된 아바타를 클릭하면 모달이 다시 열리도록 설정
             <TouchableOpacity onPress={() => setIsAvatarModalVisible(true)}>
               <Profile size={180} src={avatarList[selectedAvatarIndex]} />
             </TouchableOpacity>
@@ -116,8 +113,10 @@ export function RegisterOwnerProfile() {
         <S.ModalContainer>
           <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
             <S.ModalContent>
-              {/* 닫기 버튼 */}
-              <S.CloseButton onPress={() => setIsAvatarModalVisible(false)}>닫기</S.CloseButton>
+              {/* 닫기 버튼 (상단 왼쪽) */}
+              <S.CloseButtonWrapper>
+                <S.CloseButton onPress={() => setIsAvatarModalVisible(false)}>X</S.CloseButton>
+              </S.CloseButtonWrapper>
 
               {/* 아바타 선택 안내 텍스트 */}
               <S.ModalComment>
