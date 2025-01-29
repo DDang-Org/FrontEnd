@@ -5,10 +5,19 @@ import { RegisterDogParamList } from '~navigation/Auth/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { Icon } from '~components/Common/Icons';
 import { Dimensions, View } from 'react-native';
+import { useEffect } from 'react';
+import { useResetAtom } from 'jotai/utils';
+import { dogProfileAtom } from '~providers/DogProfileProvider';
 
 type RegisterDogProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.HOME>;
 
 export const RegisterDog = ({ navigation }: RegisterDogProps) => {
+  const resetDogProfile = useResetAtom(dogProfileAtom)!;
+
+  useEffect(() => {
+    resetDogProfile();
+  }, []);
+
   const deviceHeight = Dimensions.get('screen').height;
   return (
     <S.RegisterDog>

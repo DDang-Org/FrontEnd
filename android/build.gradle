@@ -23,6 +23,10 @@ allprojects {
         maven {
             url "https://repository.map.naver.com/archive/maven"
         }
+
+        maven { url 'https://maven.google.com' }
+
+        maven { url "https://www.jitpack.io" }
     }
 }
 
