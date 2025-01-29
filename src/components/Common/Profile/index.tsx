@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, GestureResponderEvent } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 interface ProfileProps {
@@ -7,9 +7,10 @@ interface ProfileProps {
   src: string | React.FC<SvgProps>;
   userId?: number;
   testID?: string;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
-export const Profile = ({ size, src, userId, testID }: ProfileProps) => {
+export const Profile = ({ size, src, userId, testID, onPress }: ProfileProps) => {
   const renderImage = () => {
     if (typeof src === 'string') {
       return <Image source={{ uri: src }} style={{ width: size, height: size }} />;
@@ -19,7 +20,7 @@ export const Profile = ({ size, src, userId, testID }: ProfileProps) => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={userId ? 0.8 : 1} disabled={!userId} testID={testID}>
+    <TouchableOpacity activeOpacity={userId ? 0.8 : 1} disabled={!userId} testID={testID} onPress={onPress}>
       {renderImage()}
     </TouchableOpacity>
   );
