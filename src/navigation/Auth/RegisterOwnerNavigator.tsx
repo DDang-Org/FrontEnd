@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RegisterOwnerProfile } from '~screens/RegisterOwner/OwnerProfile';
-import { OwnerAvatarModal } from '~screens/RegisterOwner/AvatarModal';
 import { useTheme } from '@emotion/react';
 
 export type RegisterOwnerParamList = {
@@ -33,15 +32,6 @@ export const RegisterOwnerNavigator = () => {
         name="OwnerProfile"
         component={RegisterOwnerProfile}
         options={{ title: '견주정보입력', headerShown: false }}
-      />
-      <Stack.Screen
-        name="OwnerAvatarModal"
-        component={OwnerAvatarModal}
-        options={{
-          presentation: 'transparentModal',
-          headerShown: false, // 이 화면에서는 헤더를 숨김
-          animation: 'slide_from_bottom',
-        }}
       />
     </Stack.Navigator>
   );
