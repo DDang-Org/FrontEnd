@@ -7,7 +7,7 @@ import * as Avatars from '~assets/avatars';
 import { Profile } from '~components/Common/Profile';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useState } from 'react';
-// import AvatarSelected from '~assets/icons/AvatarSelected.svg';
+import Check from '~assets/avatars/AvatarSelected.svg';
 
 type OwnerAvatarModalProps = NativeStackScreenProps<RegisterOwnerParamList, 'OwnerAvatarModal'>;
 
@@ -36,8 +36,8 @@ export const OwnerAvatarModal = ({ navigation, route }: OwnerAvatarModalProps) =
           </S.CloseButton>
 
           <S.ModalComment>
-            <S.LoginCommentText fontSize={24}>맘에 드는</S.LoginCommentText>
-            <S.LoginCommentText fontSize={24}>캐릭터를 선택해 주세요.</S.LoginCommentText>
+            <S.RegisterCommentText fontSize={24}>맘에 드는</S.RegisterCommentText>
+            <S.RegisterCommentText fontSize={24}>캐릭터를 선택해 주세요.</S.RegisterCommentText>
           </S.ModalComment>
 
           {/* 아바타 그리드 */}
@@ -45,10 +45,12 @@ export const OwnerAvatarModal = ({ navigation, route }: OwnerAvatarModalProps) =
             {avatarList.map((Avatar, index) => (
               <S.AvatarWrapper key={index}>
                 {/* 아바타 */}
-                <Profile size={157} src={Avatar} onPress={() => handleAvatarSelect(index)} />
-                {/* 선택된 아바타 위에 표시 */}
+                <Profile size={157} src={Avatar} userId={1} onPress={() => handleAvatarSelect(index)} />
+                {/* 선택된 아바타 위에 Check 표시 */}
                 {selectedIndex === index && (
-                  <S.AvatarOverlay>{/* <AvatarSelected width={157} height={157} /> */}</S.AvatarOverlay>
+                  <S.AvatarOverlay>
+                    <Check width={157} height={157} />
+                  </S.AvatarOverlay>
                 )}
               </S.AvatarWrapper>
             ))}

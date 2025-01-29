@@ -2,18 +2,19 @@ import styled from '@emotion/native';
 import { TextBold } from '~components/Common/Text';
 import { Icon } from '~components/Common/Icons';
 
-export const LoginComment = styled.View`
+export const RegisterComment = styled.View`
   margin-top: 40px;
   margin-bottom: 30px;
   align-items: center;
 `;
 
-export const LoginCommentText = styled(TextBold)`
+export const RegisterCommentText = styled(TextBold)`
   text-align: center;
 `;
 
 export const AvatarSelectWrapper = styled.View`
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const StyledAvatarSelect = styled(Icon.AvatarSelect)`
