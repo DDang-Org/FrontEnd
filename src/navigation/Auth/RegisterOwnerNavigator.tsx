@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react';
 
 export type RegisterOwnerParamList = {
   OwnerProfile: { screen?: keyof RegisterOwnerParamList };
-  OwnerAvatarModal: undefined;
+  OwnerAvatarModal: { selectedAvatar?: number };
 };
 
 export const RegisterOwnerNavigator = () => {
