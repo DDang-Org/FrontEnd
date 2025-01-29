@@ -18,6 +18,7 @@ import AddFamilyCode from '~assets/icons/add-family-code.svg';
 import Option from '~assets/icons/option.svg';
 import AddDogImage from '~assets/icons/add-dog-image.svg';
 import NeuteredCheck from '~assets/icons/neutered-check.svg';
+import DogInvite from '~assets/dogs/dog-invite.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -39,4 +40,5 @@ export const Icon = {
   Option: (props: SvgProps) => <Option {...props} />,
   AddDogImage: (props: SvgProps) => <AddDogImage {...props} />,
   NeuteredCheck: (props: SvgProps) => <NeuteredCheck {...props} />,
+  DogInvite: (props: SvgProps) => <DogInvite {...props} />,
 };
