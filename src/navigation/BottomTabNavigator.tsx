@@ -6,8 +6,8 @@ import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeNavigator } from '~navigation/HomeNavigator';
+import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { FamilyDangScreen } from '~screens/FamilyDang';
-import { LogScreen } from '~screens/Log';
 import { MyPageScreen } from '~screens/MyPage';
 import { SocialScreen } from '~screens/Social';
 
@@ -51,7 +51,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Log"
-        component={LogScreen}
+        component={WalkLogNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="calendar" size={size} color={color} focused={focused} />
