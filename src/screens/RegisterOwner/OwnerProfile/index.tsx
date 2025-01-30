@@ -23,12 +23,12 @@ export function RegisterOwnerProfile() {
   const [showToast, setShowToast] = useState(false);
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
-  const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false); // 가족 모달 상태
+  const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
-  const isComplete = name && address && birth && selectedGender && familyRole;
+  const isComplete = name && address && birth && selectedGender && familyRole && selectedAvatarIndex !== null;
 
   const handleNextPress = () => {
     if (!isComplete) {
@@ -64,7 +64,7 @@ export function RegisterOwnerProfile() {
 
           {/* 가족 구성원 선택 */}
           <PressableInput
-            onPress={() => setIsFamilyModalVisible(true)} // 가족 모달 열기
+            onPress={() => setIsFamilyModalVisible(true)}
             value={familyRole}
             placeholder="가족 포지션 입력"
           />
@@ -159,7 +159,9 @@ export function RegisterOwnerProfile() {
             <S.ModalContent>
               {/* 닫기 버튼 (상단 왼쪽) */}
               <S.CloseButtonWrapper>
-                <Icon.Close />
+                <TouchableOpacity onPress={() => setIsAvatarModalVisible(false)}>
+                  <Icon.Close />
+                </TouchableOpacity>
               </S.CloseButtonWrapper>
 
               {/* 아바타 선택 안내 텍스트 */}

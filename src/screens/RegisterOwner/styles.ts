@@ -100,6 +100,7 @@ export const AvatarOverlay = styled.View`
 
 export const CloseButtonWrapper = styled.View`
   position: absolute;
+  padding-top: 70px;
   top: 16px;
   left: 16px;
 `;
@@ -111,7 +112,7 @@ export const FamilyModalContainer = styled.View`
 
 export const FamilyModalContent = styled.View`
   background-color: white;
-  height: 60%; /* 화면 높이의 절반 */
+  height: 60%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 16px;
