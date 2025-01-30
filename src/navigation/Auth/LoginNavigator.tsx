@@ -1,9 +1,9 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useTheme } from "@emotion/react";
-import { Login } from "~screens/Login";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTheme } from '@emotion/react';
+import { Login } from '~screens/Login';
 
 export type LoginParamList = {
-    Login: {screen? : keyof LoginParamList};
+  Login: { screen?: keyof LoginParamList };
 };
 
 export const LoginNavigator = () => {

@@ -2,8 +2,8 @@ import styled from '@emotion/native';
 
 export const ModalContainer = styled.View`
   flex: 1;
-  justify-content: flex-end; /* 화면 하단에 컨텐츠 배치 */
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 export const ModalHeader = styled.View`
   padding: 16px;
@@ -17,8 +17,8 @@ export const CloseButton = styled.TouchableOpacity`
 
 export const ModalContent = styled.View`
   background-color: white;
-  border-top-left-radius: 20px; /* 상단 왼쪽 모서리 둥글게 */
-  border-top-right-radius: 20px; /* 상단 오른쪽 모서리 둥글게 */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   padding: 16px;
 `;
 
