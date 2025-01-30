@@ -12,6 +12,7 @@ import { Profile } from '~components/Common/Profile';
 import * as Avatars from '~assets/avatars';
 import Check from '~assets/avatars/AvatarSelected.svg';
 import { Gender } from '~types/gender';
+import { Icon } from '~components/Common/Icons/index.tsx';
 
 export function RegisterOwnerProfile() {
   const [familyRole, setFamilyRole] = useState('');
@@ -22,9 +23,11 @@ export function RegisterOwnerProfile() {
   const [showToast, setShowToast] = useState(false);
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
+  const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false); // 가족 모달 상태
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
 
   const avatarList = Object.values(Avatars);
+  const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
   const isComplete = name && address && birth && selectedGender && familyRole;
 
   const handleNextPress = () => {
@@ -58,11 +61,19 @@ export function RegisterOwnerProfile() {
         {/* 프로필 데이터 입력 */}
         <S.ProfileDataContainer>
           <BaseInput placeholder="닉네임 입력" value={name} onChangeText={setName} />
-          <PressableInput onPress={() => setFamilyRole('엄마')} value={familyRole} placeholder="가족 포지션 입력" />
-          <PressableInput onPress={() => setAddress('양천구 신월동')} value={address} placeholder="내 동네 불러오기" />
-          <PressableInput onPress={() => setOpenDatePicker(true)} value={birth} placeholder="생년월일 선택" />
 
-          {/* 생년월일 선택 모달 */}
+          {/* 가족 구성원 선택 */}
+          <PressableInput
+            onPress={() => setIsFamilyModalVisible(true)} // 가족 모달 열기
+            value={familyRole}
+            placeholder="가족 포지션 입력"
+          />
+
+          {/* 주소 입력 */}
+          <PressableInput onPress={() => setAddress('양천구 신월동')} value={address} placeholder="내 동네 불러오기" />
+
+          {/* 생년월일 선택 */}
+          <PressableInput onPress={() => setOpenDatePicker(true)} value={birth} placeholder="생년월일 선택" />
           <DatePicker
             title={' '}
             modal
@@ -108,6 +119,39 @@ export function RegisterOwnerProfile() {
         </S.NextButtonWrapper>
       </ScrollView>
 
+      {/* 가족 구성원 선택 모달 */}
+      <Modal visible={isFamilyModalVisible} animationType="slide" transparent={true}>
+        <S.FamilyModalContainer>
+          <S.FamilyModalContent>
+            {/* 닫기 버튼 */}
+            <TouchableOpacity onPress={() => setIsFamilyModalVisible(false)}>
+              <Icon.Close />
+            </TouchableOpacity>
+            <S.FamilyRoleSelectWrapper>
+              {familyOptions.map(option => (
+                <S.FamilyRoleOption
+                  key={option}
+                  isSelected={familyRole === option}
+                  onPress={() => setFamilyRole(option)} // 선택된 가족 구성원 설정
+                >
+                  <S.FamilyRoleIcon isSelected={familyRole === option}>
+                    {familyRole === option && <S.FamilyRoleIconInner />}
+                  </S.FamilyRoleIcon>
+                  <S.FamilyRoleText isSelected={familyRole === option}>{option}</S.FamilyRoleText>
+                </S.FamilyRoleOption>
+              ))}
+            </S.FamilyRoleSelectWrapper>
+
+            {/* 완료 버튼 */}
+            <ActionButton
+              onPress={() => setIsFamilyModalVisible(false)}
+              text="완료"
+              disabled={!familyRole} // 선택되지 않으면 비활성화
+            />
+          </S.FamilyModalContent>
+        </S.FamilyModalContainer>
+      </Modal>
+
       {/* 아바타 선택 모달 */}
       <Modal visible={isAvatarModalVisible} animationType="slide" transparent={true}>
         <S.ModalContainer>
@@ -115,7 +159,7 @@ export function RegisterOwnerProfile() {
             <S.ModalContent>
               {/* 닫기 버튼 (상단 왼쪽) */}
               <S.CloseButtonWrapper>
-                <S.CloseButton onPress={() => setIsAvatarModalVisible(false)}>X</S.CloseButton>
+                <Icon.Close />
               </S.CloseButtonWrapper>
 
               {/* 아바타 선택 안내 텍스트 */}

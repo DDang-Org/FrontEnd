@@ -103,3 +103,53 @@ export const CloseButtonWrapper = styled.View`
   top: 16px;
   left: 16px;
 `;
+
+export const FamilyModalContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+export const FamilyModalContent = styled.View`
+  background-color: white;
+  height: 60%; /* 화면 높이의 절반 */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 16px;
+  padding-top: 30px;
+`;
+
+export const FamilyRoleSelectWrapper = styled.View`
+  margin-top: 10px;
+`;
+
+export const FamilyRoleOption = styled.TouchableOpacity<{ isSelected: boolean }>`
+  padding: 20px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ccc;
+  background-color: ${({ isSelected }) => (isSelected ? '#f0f8ff' : 'white')};
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const FamilyRoleIcon = styled.View<{ isSelected: boolean }>`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: ${({ isSelected }) => (isSelected ? '#007AFF' : '#ccc')};
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+export const FamilyRoleIconInner = styled.View`
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #007aff;
+`;
+
+export const FamilyRoleText = styled.Text<{ isSelected: boolean }>`
+  font-size: 18px;
+  color: ${({ isSelected }) => (isSelected ? '#007AFF' : 'black')};
+`;
