@@ -48,6 +48,7 @@ export const WalkLogNavigator = () => {
               <Icon.Prev />
             </Pressable>
           ),
+          headerTitle: '산책 분석',
         })}
         name={WalkLogNavigations.Stats}
         component={Stats}
