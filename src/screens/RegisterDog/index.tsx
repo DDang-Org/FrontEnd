@@ -16,7 +16,7 @@ export const RegisterDog = ({ navigation }: RegisterDogProps) => {
 
   useEffect(() => {
     resetDogProfile();
-  }, []);
+  }, [resetDogProfile]);
 
   const deviceHeight = Dimensions.get('screen').height;
   return (
