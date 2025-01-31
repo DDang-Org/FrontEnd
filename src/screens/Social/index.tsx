@@ -1,13 +1,11 @@
-import { Suspense } from 'react';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { Suspense, useState } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
 import { BlockedUsersFallback } from '~components/MyPage/Block/BlockedUsers/fallback';
 import { BlockedUsersLoader } from '~components/MyPage/Block/BlockedUsers/loader';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useState } from 'react';
-import { View } from 'react-native';
-import { TextBold } from '~components/Common/Text';
 import { Friend } from '~components/Social/Friend';
 import { Tab } from '~components/Social/Tab';
+import { Talk } from '~components/Social/Talk';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
 
@@ -29,9 +27,7 @@ export const SocialScreen = ({}: Props) => {
           </Suspense>
         </ErrorBoundary>
       ) : (
-        <View>
-          <TextBold fontSize={15}>댕톡</TextBold>
-        </View>
+        <Talk />
       )}
     </S.SocialScreen>
   );
