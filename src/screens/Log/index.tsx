@@ -26,7 +26,7 @@ export const LogHome = () => {
         <FlatList
           contentContainerStyle={{
             padding: 20,
-            paddingBottom: 26, // 추가 패딩
+            paddingBottom: 26,
           }}
           data={['item1', 'item2', 'item3', 'item4']}
           renderItem={() => <WalkLogCard />}

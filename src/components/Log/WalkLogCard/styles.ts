@@ -23,13 +23,13 @@ export const WalkImage = styled.Image`
   height: 120px;
 `;
 
-export const WalkInfo = styled.View`
+export const WalkLogDetails = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
 `;
 
-export const WalkInfoItem = styled.View`
+export const WalkLogDetailItem = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 4px;

@@ -18,22 +18,22 @@ export const WalkLogCard = ({}: WalkLogCardProps) => {
         source={{ uri: 'https://velog.velcdn.com/images/nahy-512/post/7d3caf5d-bb12-4e8a-af27-e9c6fb717f37/image.jpg' }}
         resizeMode="cover"
       />
-      <S.WalkInfo>
-        <S.WalkInfoItem>
+      <S.WalkLogDetails>
+        <S.WalkLogDetailItem>
           <Icon.Clock color={theme.colors.default} />
           <TextBold fontSize={15}>1:10:10</TextBold>
-        </S.WalkInfoItem>
+        </S.WalkLogDetailItem>
         <S.Separator />
-        <S.WalkInfoItem>
+        <S.WalkLogDetailItem>
           <Icon.GpsIcon color={theme.colors.default} />
           <TextBold fontSize={15}>3.3km</TextBold>
-        </S.WalkInfoItem>
+        </S.WalkLogDetailItem>
         <S.Separator />
-        <S.WalkInfoItem>
+        <S.WalkLogDetailItem>
           <Icon.CaloriesBurned />
           <TextBold fontSize={15}>212kcal</TextBold>
-        </S.WalkInfoItem>
-      </S.WalkInfo>
+        </S.WalkLogDetailItem>
+      </S.WalkLogDetails>
     </S.WalkLogCard>
   );
 };
