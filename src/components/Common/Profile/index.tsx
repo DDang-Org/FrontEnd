@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { Suspense } from 'react';
-import { TouchableOpacity } from 'react-native';
 import ErrorBoundary, { FallbackComponentProps } from 'react-native-error-boundary';
+import { TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { useUser } from '~apis/member/useUser';
 import { AvatarNumber } from '~types/avatar-number';
@@ -15,9 +15,10 @@ interface ProfileProps {
   userId?: number;
   testID?: string;
   avatarNumber?: AvatarNumber;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
-export const Profile = ({ size, src, userId, testID, avatarNumber }: ProfileProps) => {
+export const Profile = ({ size, src, userId, testID, avatarNumber, onPress }: ProfileProps) => {
   if (src && avatarNumber) {
     throw new Error('Profile 컴포넌트의 props가 적절하지 않습니다. src, avatarNumber 중 하나만 작성해 주세요.');
   }
@@ -50,7 +51,7 @@ export const Profile = ({ size, src, userId, testID, avatarNumber }: ProfileProp
   };
 
   return (
-    <TouchableOpacity activeOpacity={userId ? 0.8 : 1} disabled={!userId} testID={testID}>
+    <TouchableOpacity activeOpacity={userId ? 0.8 : 1} disabled={!userId} testID={testID} onPress={onPress}>
       {renderImage()}
     </TouchableOpacity>
   );
