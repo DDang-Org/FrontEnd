@@ -8,6 +8,7 @@ import { Icon } from '~components/Common/Icons';
 import { StatContainer } from '~components/Common/StatContainer';
 import { BgBox } from '~components/Common/BgBox';
 import { Separator } from '~components/Common/Seperator';
+import { DogProfile } from '~components/Profile/DogProfile';
 
 type Props = BottomTabScreenProps<TabBarParamList, 'FamilyDang'>;
 
@@ -89,6 +90,8 @@ export const FamilyDangScreen = ({}: Props) => {
           <Icon.Gear />
         </S.GearWrapper>
       </S.HeaderArea>
+
+      <DogProfile dogId={1} />
 
       <BgBox paddingVertical={5} paddingHorizontal={15}>
         <FlatList data={members} keyExtractor={item => item.id} renderItem={renderMember} />
