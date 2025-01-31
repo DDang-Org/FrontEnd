@@ -1,8 +1,10 @@
 import * as S from './styles';
 import Dog from '~assets/dogs/dog-walk.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LoginComment } from '~components/Login/\bLoginComment/indedx';
+import { LoginComment } from '~components/Login/\bLoginComment/index';
 import { SOCIAL_LOGIN_BUTTONS } from '~components/Login/LoginButton';
+
+// type RootNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 export const Login = () => {
   return (

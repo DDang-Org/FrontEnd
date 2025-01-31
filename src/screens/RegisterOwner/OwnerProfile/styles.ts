@@ -8,3 +8,4 @@ export const RegisterOwner = styled.View`
 export const AddAvatarBtn = styled.Pressable`
   align-items: center;
 `;
+

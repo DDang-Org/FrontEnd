@@ -1,5 +1,5 @@
-import styled from "@emotion/native";
-import { TextBold } from "~components/Common/Text";
+import styled from '@emotion/native';
+import { TextBold } from '~components/Common/Text';
 
 export const LoginComment = styled.View`
   margin-top: 60px;

@@ -1,4 +1,4 @@
-import { useUser } from '~apis/members/useUser';
+import { useUser } from '~apis/member/useUser';
 import { getKoreanRoleWithName } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
 import { getParticle } from '~utils/getParticle';
