@@ -35,7 +35,6 @@ export const CalendarBody = styled(Animated.View)`
 
 export const Week = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   gap: 8px;
 `;
 

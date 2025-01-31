@@ -8,7 +8,6 @@ import { WalkLogNavigations } from '~constants/navigations';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import { WalkLogParamList } from '~navigation/WalkLogNavigator';
 
-// type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
 type LogProps = CompositeNavigationProp<
   BottomTabNavigationProp<TabBarParamList, 'Log'>,
   NativeStackNavigationProp<WalkLogParamList, typeof WalkLogNavigations.LogHome>

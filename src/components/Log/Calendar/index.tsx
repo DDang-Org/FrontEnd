@@ -1,11 +1,12 @@
 import { Dimensions, LayoutChangeEvent } from 'react-native';
 import * as S from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCalendar } from '~hooks/useCalendar';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { TextBold } from '~components/Common/Text';
 import { Icon } from '~components/Common/Icons';
+import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 
 interface CalendarProps {
   date: Date;
@@ -15,19 +16,31 @@ interface CalendarProps {
 export const Calendar = ({ date, setDate }: CalendarProps) => {
   const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(date);
   const deviceWidth = Dimensions.get('window').width;
-  const dateItemSize = (deviceWidth - 96) / weekDays.length;
+  const itemSpacing = 8;
+  const dateItemSize = (deviceWidth - (itemSpacing * (weekDays.length - 1) + 48)) / weekDays.length;
   const MIN_CALENDAR_SIZE = dateItemSize + 52;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [datePickerOpened, setDatePickerOpened] = useState(false);
   const [startHeight, setStartHeight] = useState(MIN_CALENDAR_SIZE);
+  const [maxAdditionalHeight, setMaxAdditionalHeight] = useState(
+    (dateItemSize + itemSpacing) * (weekCalendarList.length - 1),
+  );
 
   const calendarHeight = useSharedValue<number | undefined>(undefined);
   const isOpenShared = useSharedValue(isOpen);
 
+  useEffect(() => {
+    setDate(currentDate);
+    setMaxAdditionalHeight((dateItemSize + itemSpacing) * (weekCalendarList.length - 1));
+    if (isOpen) {
+      calendarHeight.value = MIN_CALENDAR_SIZE + maxAdditionalHeight;
+    }
+  }, [currentDate, weekCalendarList]);
+
   const handleDatePress = (date: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), date);
     setCurrentDate(newDate);
-    setDate(newDate);
   };
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -41,18 +54,17 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
     calendarHeight.value = height;
   };
 
-  const MAX_ADDITIONAL_HEIGHT = dateItemSize * 4 + 40;
   const CLOSE_THRESHOLD = 100;
   const OPEN_THRESHOLD = 100;
 
-  const panGesture = Gesture.Pan()
+  const calendarGesture = Gesture.Pan()
     .onUpdate(event => {
       const heightDelta = event.translationY;
       const newHeight = startHeight + heightDelta;
 
       let finalHeight = newHeight;
 
-      finalHeight = Math.min(finalHeight, MIN_CALENDAR_SIZE + MAX_ADDITIONAL_HEIGHT);
+      finalHeight = Math.min(finalHeight, MIN_CALENDAR_SIZE + maxAdditionalHeight);
       finalHeight = Math.max(finalHeight, MIN_CALENDAR_SIZE);
 
       calendarHeight.value = finalHeight;
@@ -66,21 +78,26 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
       }
     })
     .onEnd(() => {
-      const finalCalendarHeight = isOpenShared.value ? MIN_CALENDAR_SIZE + MAX_ADDITIONAL_HEIGHT : MIN_CALENDAR_SIZE;
+      const finalCalendarHeight = isOpenShared.value ? MIN_CALENDAR_SIZE + maxAdditionalHeight : MIN_CALENDAR_SIZE;
       calendarHeight.value = finalCalendarHeight;
       runOnJS(setIsOpen)(isOpenShared.value);
       runOnJS(setStartHeight)(finalCalendarHeight);
     });
 
+  const handleConfirmDatePicker = (date: Date) => {
+    setCurrentDate(date);
+    setDatePickerOpened(false);
+  };
+
   return (
     <GestureHandlerRootView>
-      <GestureDetector gesture={panGesture}>
+      <GestureDetector gesture={calendarGesture}>
         <S.Calendar>
           <S.CalendarHeader>
             <TextBold fontSize={20}>
               {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
             </TextBold>
-            <S.DatePickerTriggerButton>
+            <S.DatePickerTriggerButton onPress={() => setDatePickerOpened(true)}>
               <Icon.ArrowDown />
             </S.DatePickerTriggerButton>
           </S.CalendarHeader>
@@ -120,6 +137,13 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
           </S.CalendarBody>
         </S.Calendar>
       </GestureDetector>
+      <CustomDatePicker
+        open={datePickerOpened}
+        date={currentDate}
+        onConfirm={handleConfirmDatePicker}
+        onCancel={() => setDatePickerOpened(false)}
+        minimumDate={new Date(2020, 0, 1)}
+      />
     </GestureHandlerRootView>
   );
 };
