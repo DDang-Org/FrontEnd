@@ -23,6 +23,8 @@ import Kakao from '~assets/icons/kakao.svg';
 import Google from '~assets/icons/google.svg';
 import AvatarSelect from '~assets/icons/avatar-select-button.svg';
 import ArrowDown from '~assets/icons/arrow-down.svg';
+import CaloriesBurned from '~assets/icons/calories-burned.svg';
+import GpsIcon from '~assets/icons/gps.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -49,4 +51,6 @@ export const Icon = {
   Google: (props: SvgProps) => <Google {...props} />,
   AvatarSelect: (props: SvgProps) => <AvatarSelect {...props} />,
   ArrowDown: (props: SvgProps) => <ArrowDown {...props} />,
+  CaloriesBurned: (props: SvgProps) => <CaloriesBurned {...props} />,
+  GpsIcon: (props: SvgProps) => <GpsIcon {...props} />,
 };

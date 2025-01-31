@@ -2,7 +2,7 @@ import { Dimensions, LayoutChangeEvent } from 'react-native';
 import * as S from './styles';
 import { useEffect, useState } from 'react';
 import { useCalendar } from '~hooks/useCalendar';
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { TextBold } from '~components/Common/Text';
 import { Icon } from '~components/Common/Icons';
@@ -90,7 +90,7 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
   };
 
   return (
-    <GestureHandlerRootView>
+    <>
       <GestureDetector gesture={calendarGesture}>
         <S.Calendar>
           <S.CalendarHeader>
@@ -144,6 +144,6 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
         onCancel={() => setDatePickerOpened(false)}
         minimumDate={new Date(2020, 0, 1)}
       />
-    </GestureHandlerRootView>
+    </>
   );
 };
