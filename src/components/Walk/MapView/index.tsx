@@ -13,7 +13,7 @@ import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
 import * as S from './styles';
 
 const WALKING_INTERVAL = 5000;
-const NORMAL_INTERVAL = 10000;
+// const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
 const MIN_MARKER_DISTANCE = 5;
 
@@ -34,7 +34,7 @@ const MapView = () => {
   const mapRef = useRef<NaverMapViewRef>(null);
   const [isWalking, setIsWalking] = useState(false);
   const [walkTime, setWalkTime] = useState(0);
-  const [distance, _setDistance] = useState(0);
+  const [distance, setDistance] = useState(0);
 
   const [camera, _setCamera] = useState<Camera>({
     latitude: 37.50497126,
@@ -182,6 +182,7 @@ const MapView = () => {
       console.log('위치 추적 정리(cleanup):', watchId);
       Geolocation.clearWatch(watchId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocation, isWalking, lastUpdateTime]);
 
   useEffect(() => {
@@ -248,7 +249,16 @@ const MapView = () => {
       <S.WalkingInfoContainer>
         <S.WalkingInfo>
           <S.InfoText fontSize={15}>{formatDuration(walkTime)}</S.InfoText>
-          <S.StopButton onPress={() => setIsWalking(false)} bgColor="lighten_2" text="산책 끝" />
+          <S.StopButton
+            onPress={() => {
+              setIsWalking(false);
+              setWalkTime(0);
+              setDistance(0);
+              setLocationMarkers([]);
+            }}
+            bgColor="lighten_2"
+            text="산책 끝"
+          />
           <S.InfoText fontSize={15}>{formatDistance(distance)}</S.InfoText>
         </S.WalkingInfo>
       </S.WalkingInfoContainer>
@@ -260,12 +270,17 @@ const MapView = () => {
     const { latitude, longitude } = event;
     // console.log(latitude, longitude);
 
-    const distance = calculateDirectDistance(latitude, longitude, currentLocation.latitude, currentLocation.longitude);
+    const calDistance = calculateDirectDistance(
+      latitude,
+      longitude,
+      currentLocation.latitude,
+      currentLocation.longitude,
+    );
 
-    console.log(distance);
+    console.log(calDistance);
 
     // 현재 위치와 카메라 중심점의 거리가 50미터 이상이면 중심에서 벗어난 것으로 판단
-    setIsLocationCentered(distance < 20);
+    setIsLocationCentered(calDistance < 20);
   };
 
   return (
