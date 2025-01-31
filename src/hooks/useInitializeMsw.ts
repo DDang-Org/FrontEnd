@@ -10,7 +10,7 @@ export const useInitializeMsw = () => {
       }
       await import('../../msw.polyfills');
       const { server } = await import('../mocks/server.js');
-      server.listen({ onUnhandledRequest: 'warn' });
+      server.listen({ onUnhandledRequest: 'bypass' });
       setIsMswEnabled(true);
     }
     enableMocking();

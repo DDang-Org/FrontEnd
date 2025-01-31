@@ -2,10 +2,10 @@ import styled from '@emotion/native';
 import { TextBold, TextRegular } from '~components/Common/Text';
 
 export const Container = styled.View`
+  box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.gc_4};
   padding: 16px 20px 16px 32px;
   width: 100%;
-  height: 100px;
   justify-content: center;
   gap: 2px;
 `;

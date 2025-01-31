@@ -1,20 +1,51 @@
-import React from 'react';
-import { TouchableOpacity, Image, GestureResponderEvent } from 'react-native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { Suspense } from 'react';
+import ErrorBoundary, { FallbackComponentProps } from 'react-native-error-boundary';
+import { TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { SvgProps } from 'react-native-svg';
+import { useUser } from '~apis/member/useUser';
+import { AvatarNumber } from '~types/avatar-number';
+import { getAvatar } from '~utils/getAvatar';
+import * as S from './styles';
+import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
 interface ProfileProps {
   size: number;
-  src: string | React.FC<SvgProps>;
+  src?: string | React.FC<SvgProps>;
   userId?: number;
   testID?: string;
+  avatarNumber?: AvatarNumber;
   onPress?: (event: GestureResponderEvent) => void;
 }
 
-export const Profile = ({ size, src, userId, testID, onPress }: ProfileProps) => {
+export const Profile = ({ size, src, userId, testID, avatarNumber, onPress }: ProfileProps) => {
+  if (src && avatarNumber) {
+    throw new Error('Profile 컴포넌트의 props가 적절하지 않습니다. src, avatarNumber 중 하나만 작성해 주세요.');
+  }
+  const navigation = useNavigation<NavigationProp<TabBarParamList>>();
+  const avatars = getAvatar();
   const renderImage = () => {
-    if (typeof src === 'string') {
-      return <Image source={{ uri: src }} style={{ width: size, height: size }} />;
+    if (avatarNumber) {
+      const AvatarComponent = avatars[avatarNumber];
+      return (
+        <Suspense fallback={<S.ProfileImageLoader style={{ width: size, height: size }} />}>
+          {AvatarComponent && (
+            <AvatarComponent
+              width={size}
+              height={size}
+              onPress={() => userId && navigation.navigate('Profile', { userId })}
+            />
+          )}
+        </Suspense>
+      );
     }
+    if (!src) {
+      throw new Error('Profile 컴포넌트의 props가 적절하지 않습니다. src, avatarNumber 중 하나는 작성해 주세요.');
+    }
+    if (typeof src === 'string') {
+      return <S.ProfileWithSrc source={{ uri: src }} style={{ width: size, height: size }} />;
+    }
+
     const SvgComponent = src;
     return <SvgComponent width={size} height={size} />;
   };
@@ -41,3 +72,24 @@ export const Profile = ({ size, src, userId, testID, onPress }: ProfileProps) =>
 //   src={Avatar1}
 // userId 없음 - 터치 피드백 없이 항상 opacity 1 유지
 // />
+
+const DefaultProfile = ({ size }: { size: number }) => <S.ProfileImageLoader style={{ width: size, height: size }} />;
+
+const MyProfileFallback = ({}: FallbackComponentProps) => <S.ProfileImageFallback />;
+
+const MyProfileDataProvider = ({ size }: { size: number }) => {
+  const { avatarNumber, memberId } = useUser();
+  return <Profile size={size} avatarNumber={avatarNumber} userId={memberId} />;
+};
+
+const MyProfile = ({ size }: { size: number }) => {
+  return (
+    <ErrorBoundary FallbackComponent={MyProfileFallback}>
+      <Suspense fallback={<DefaultProfile size={size} />}>
+        <MyProfileDataProvider size={size} />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+Profile.Mine = MyProfile;
