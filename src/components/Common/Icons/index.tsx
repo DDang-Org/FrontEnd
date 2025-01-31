@@ -16,15 +16,12 @@ import Male from '~assets/icons/male.svg';
 import Check from '~assets/icons/check.svg';
 import AddFamilyCode from '~assets/icons/add-family-code.svg';
 import Option from '~assets/icons/option.svg';
-<<<<<<< Updated upstream
-=======
 import AddDogImage from '~assets/icons/add-dog-image.svg';
 import NeuteredCheck from '~assets/icons/neutered-check.svg';
 import DogInvite from '~assets/dogs/dog-invite.svg';
 import Kakao from '~assets/icons/kakao.svg';
 import Google from '~assets/icons/google.svg';
 import AvatarSelect from '~assets/icons/avatar-select-button.svg';
->>>>>>> Stashed changes
 import ArrowDown from '~assets/icons/arrow-down.svg';
 
 export const Icon = {
@@ -45,14 +42,11 @@ export const Icon = {
   Check: (props: SvgProps) => <Check {...props} />,
   AddFamilyCode: (props: SvgProps) => <AddFamilyCode {...props} />,
   Option: (props: SvgProps) => <Option {...props} />,
-<<<<<<< Updated upstream
-=======
   AddDogImage: (props: SvgProps) => <AddDogImage {...props} />,
   NeuteredCheck: (props: SvgProps) => <NeuteredCheck {...props} />,
   DogInvite: (props: SvgProps) => <DogInvite {...props} />,
   Kakao: (props: SvgProps) => <Kakao {...props} />,
   Google: (props: SvgProps) => <Google {...props} />,
   AvatarSelect: (props: SvgProps) => <AvatarSelect {...props} />,
->>>>>>> Stashed changes
   ArrowDown: (props: SvgProps) => <ArrowDown {...props} />,
 };
