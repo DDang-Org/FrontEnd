@@ -20,6 +20,14 @@ const sampleData = [
   { label: '12월', value: 3 },
 ];
 
+const sampleData2 = [
+  { label: '나', value: 2 },
+  { label: '망고', value: 4 },
+  { label: '엄마', value: 5 },
+  { label: '아빠', value: 2 },
+  { label: '할아버지', value: 1 },
+];
+
 export const Stats = ({}: StatsProps) => {
   return (
     <GestureHandlerRootView>
@@ -32,7 +40,7 @@ export const Stats = ({}: StatsProps) => {
         }}
       >
         <LineChart data={sampleData} />
-        <BarChart />
+        <BarChart data={sampleData2} />
         <WalkLogStatContainer title="총 산책 내역" />
         <WalkLogStatContainer title="이번달 통계" />
       </ScrollView>
