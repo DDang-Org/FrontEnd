@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import { useCalendar } from '~hooks/useCalendar';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-import { TextBold } from '~components/Common/Text';
-import { Icon } from '~components/Common/Icons';
 import { CustomDatePicker } from '~components/Common/CustomDatePicker';
+import { CalendarHeader } from '~components/Log/CalendarHeader';
 
 interface CalendarProps {
   date: Date;
@@ -54,14 +53,11 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
     calendarHeight.value = height;
   };
 
-  const CLOSE_THRESHOLD = 100;
-  const OPEN_THRESHOLD = 100;
+  const calculateFinalHeight = (newHeight: number): number => {
+    const maxAllowedHeight = MIN_CALENDAR_SIZE + maxAdditionalHeight;
+    const minAllowedHeight = MIN_CALENDAR_SIZE;
 
-  const calculateFinalHeight = (newHeight: number) => {
-    const maxAllowedHeight = Math.min(newHeight, MIN_CALENDAR_SIZE + maxAdditionalHeight);
-    const minAllowedHeight = Math.min(maxAllowedHeight, MIN_CALENDAR_SIZE);
-
-    return minAllowedHeight;
+    return Math.max(minAllowedHeight, Math.min(newHeight, maxAllowedHeight));
   };
 
   const calendarGesture = Gesture.Pan()
@@ -72,6 +68,9 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
       const finalHeight = calculateFinalHeight(newHeight);
 
       calendarHeight.value = finalHeight;
+
+      const CLOSE_THRESHOLD = 100;
+      const OPEN_THRESHOLD = 100;
 
       if (heightDelta < -CLOSE_THRESHOLD) {
         isOpenShared.value = false;
@@ -99,14 +98,10 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
     <>
       <GestureDetector gesture={calendarGesture}>
         <S.Calendar>
-          <S.CalendarHeader>
-            <TextBold fontSize={20}>
-              {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
-            </TextBold>
-            <S.DatePickerTriggerButton onPress={() => setDatePickerOpened(true)}>
-              <Icon.ArrowDown />
-            </S.DatePickerTriggerButton>
-          </S.CalendarHeader>
+          <CalendarHeader
+            currentDate={currentDate}
+            onDatePickerPress={() => setDatePickerOpened(true)}
+          ></CalendarHeader>
           <S.CalendarBody onLayout={handleLayout} style={animatedStyle}>
             <S.Week>
               {weekDays.map((day, index) => (
