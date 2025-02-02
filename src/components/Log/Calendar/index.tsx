@@ -57,15 +57,19 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
   const CLOSE_THRESHOLD = 100;
   const OPEN_THRESHOLD = 100;
 
+  const calculateFinalHeight = (newHeight: number) => {
+    const maxAllowedHeight = Math.min(newHeight, MIN_CALENDAR_SIZE + maxAdditionalHeight);
+    const minAllowedHeight = Math.min(maxAllowedHeight, MIN_CALENDAR_SIZE);
+
+    return minAllowedHeight;
+  };
+
   const calendarGesture = Gesture.Pan()
     .onUpdate(event => {
       const heightDelta = event.translationY;
       const newHeight = startHeight + heightDelta;
 
-      let finalHeight = newHeight;
-
-      finalHeight = Math.min(finalHeight, MIN_CALENDAR_SIZE + maxAdditionalHeight);
-      finalHeight = Math.max(finalHeight, MIN_CALENDAR_SIZE);
+      const finalHeight = calculateFinalHeight(newHeight);
 
       calendarHeight.value = finalHeight;
 
@@ -78,10 +82,12 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
       }
     })
     .onEnd(() => {
-      const finalCalendarHeight = isOpenShared.value ? MIN_CALENDAR_SIZE + maxAdditionalHeight : MIN_CALENDAR_SIZE;
-      calendarHeight.value = finalCalendarHeight;
+      const resolvedHeight = isOpenShared.value ? MIN_CALENDAR_SIZE + maxAdditionalHeight : MIN_CALENDAR_SIZE;
+
+      calendarHeight.value = resolvedHeight;
+
       runOnJS(setIsOpen)(isOpenShared.value);
-      runOnJS(setStartHeight)(finalCalendarHeight);
+      runOnJS(setStartHeight)(resolvedHeight);
     });
 
   const handleConfirmDatePicker = (date: Date) => {
