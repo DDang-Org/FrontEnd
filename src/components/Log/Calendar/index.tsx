@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useCalendar } from '~hooks/useCalendar';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 import { CalendarHeader } from '~components/Log/CalendarHeader';
 
 interface CalendarProps {
@@ -15,23 +14,23 @@ interface CalendarProps {
 export const Calendar = ({ date, setDate }: CalendarProps) => {
   const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(date);
   const deviceWidth = Dimensions.get('window').width;
-  const itemSpacing = 8;
-  const dateItemSize = (deviceWidth - (itemSpacing * (weekDays.length - 1) + 48)) / weekDays.length;
+  const ITEM_SPACING = 8;
+  const SIDE_PADDING = 24;
+  const dateItemSize = (deviceWidth - (ITEM_SPACING * (weekDays.length - 1) + SIDE_PADDING * 2)) / weekDays.length;
   const MIN_CALENDAR_SIZE = dateItemSize + 52;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [datePickerOpened, setDatePickerOpened] = useState(false);
   const [startHeight, setStartHeight] = useState(MIN_CALENDAR_SIZE);
   const [maxAdditionalHeight, setMaxAdditionalHeight] = useState(
-    (dateItemSize + itemSpacing) * (weekCalendarList.length - 1),
+    (dateItemSize + ITEM_SPACING) * (weekCalendarList.length - 1),
   );
 
-  const calendarHeight = useSharedValue<number | undefined>(undefined);
+  const calendarHeight = useSharedValue(MIN_CALENDAR_SIZE);
   const isOpenShared = useSharedValue(isOpen);
 
   useEffect(() => {
     setDate(currentDate);
-    setMaxAdditionalHeight((dateItemSize + itemSpacing) * (weekCalendarList.length - 1));
+    setMaxAdditionalHeight((dateItemSize + ITEM_SPACING) * (weekCalendarList.length - 1));
     if (isOpen) {
       calendarHeight.value = MIN_CALENDAR_SIZE + maxAdditionalHeight;
     }
@@ -54,6 +53,7 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
   };
 
   const calculateFinalHeight = (newHeight: number): number => {
+    'worklet';
     const maxAllowedHeight = MIN_CALENDAR_SIZE + maxAdditionalHeight;
     const minAllowedHeight = MIN_CALENDAR_SIZE;
 
@@ -64,7 +64,6 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
     .onUpdate(event => {
       const heightDelta = event.translationY;
       const newHeight = startHeight + heightDelta;
-
       const finalHeight = calculateFinalHeight(newHeight);
 
       calendarHeight.value = finalHeight;
@@ -89,19 +88,11 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
       runOnJS(setStartHeight)(resolvedHeight);
     });
 
-  const handleConfirmDatePicker = (date: Date) => {
-    setCurrentDate(date);
-    setDatePickerOpened(false);
-  };
-
   return (
     <>
       <GestureDetector gesture={calendarGesture}>
         <S.Calendar>
-          <CalendarHeader
-            currentDate={currentDate}
-            onDatePickerPress={() => setDatePickerOpened(true)}
-          ></CalendarHeader>
+          <CalendarHeader currentDate={currentDate} setCurrentDate={setCurrentDate}></CalendarHeader>
           <S.CalendarBody onLayout={handleLayout} style={animatedStyle}>
             <S.Week>
               {weekDays.map((day, index) => (
@@ -138,13 +129,6 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
           </S.CalendarBody>
         </S.Calendar>
       </GestureDetector>
-      <CustomDatePicker
-        open={datePickerOpened}
-        date={currentDate}
-        onConfirm={handleConfirmDatePicker}
-        onCancel={() => setDatePickerOpened(false)}
-        minimumDate={new Date(2020, 0, 1)}
-      />
     </>
   );
 };
