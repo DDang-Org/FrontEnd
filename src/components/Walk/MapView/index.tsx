@@ -6,7 +6,7 @@ import {
   NaverMapCircleOverlay,
 } from '@mj-studio/react-native-naver-map';
 import { useEffect, useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Image, Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { request, PERMISSIONS, requestLocationAccuracy, requestMultiple } from 'react-native-permissions';
 import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
@@ -279,7 +279,7 @@ const MapView = () => {
 
     console.log(calDistance);
 
-    // 현재 위치와 카메라 중심점의 거리가 50미터 이상이면 중심에서 벗어난 것으로 판단
+    // 현재 위치와 카메라 중심점의 거리가 20미터 이상이면 중심에서 벗어난 것으로 판단
     setIsLocationCentered(calDistance < 20);
   };
 
@@ -298,8 +298,9 @@ const MapView = () => {
           latitude={currentLocation.latitude}
           longitude={currentLocation.longitude}
           anchor={{ x: 0.5, y: 1 }}
-          width={30}
+          width={40}
           height={40}
+          image={require('../../../assets/avatars/Avatar1.png')}
         />
         {locationMarkers.map((marker, index) => (
           <NaverMapCircleOverlay
