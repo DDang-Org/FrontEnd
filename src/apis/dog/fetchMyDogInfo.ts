@@ -14,7 +14,7 @@ export type FetchMyDogInfoResponseType = {
   isNeutered: BooleanString;
   familyId: number;
   comment: string;
-};
+}[];
 
 export const fetchMyDogInfo = async (): Promise<APIResponse<FetchMyDogInfoResponseType>> => {
   try {

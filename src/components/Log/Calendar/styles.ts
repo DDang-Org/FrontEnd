@@ -31,7 +31,6 @@ export const DayOfWeek = styled(TextBold)`
 export const DateItem = styled.Pressable<{
   disabled: boolean;
   isActive: boolean;
-  hasWalkRecord?: boolean;
   size: number;
 }>`
   width: ${props => `${props.size}px`};

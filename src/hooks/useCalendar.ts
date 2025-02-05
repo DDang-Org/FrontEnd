@@ -6,7 +6,7 @@ const MAX_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const WEEKDAYS = ['월', '화', '수', '목', '금', '토', '일'];
 
 type UseCalendarRequest = Date;
-interface UseCalendarReturn {
+export interface UseCalendarReturn {
   activeIndex: number[];
   weekDays: string[];
   weekCalendarList: number[][];

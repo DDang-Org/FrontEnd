@@ -1,18 +1,20 @@
 import { Dimensions, LayoutChangeEvent } from 'react-native';
 import * as S from './styles';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useCalendar } from '~hooks/useCalendar';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { CalendarHeader } from '~components/Log/CalendarHeader';
+import { useWalkLog } from '~apis/log/useWalkLog';
+import { dateToString } from '~utils/dateFormat';
+import { DateItem } from '~components/Log/DateItem';
 
 interface CalendarProps {
-  date: Date;
   setDate: (date: Date) => void;
 }
 
-export const Calendar = ({ date, setDate }: CalendarProps) => {
-  const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(date);
+export const Calendar = React.memo(({ setDate }: CalendarProps) => {
+  const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(new Date());
   const deviceWidth = Dimensions.get('window').width;
   const ITEM_SPACING = 8;
   const SIDE_PADDING = 24;
@@ -28,18 +30,29 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
   const calendarHeight = useSharedValue(MIN_CALENDAR_SIZE);
   const isOpenShared = useSharedValue(isOpen);
 
+  const { walkDates } = useWalkLog(dateToString(currentDate, '-'));
+
   useEffect(() => {
     setDate(currentDate);
     setMaxAdditionalHeight((dateItemSize + ITEM_SPACING) * (weekCalendarList.length - 1));
     if (isOpen) {
       calendarHeight.value = MIN_CALENDAR_SIZE + maxAdditionalHeight;
     }
-  }, [currentDate, weekCalendarList]);
+  }, [weekCalendarList]);
 
-  const handleDatePress = (date: number) => {
-    const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), date);
-    setCurrentDate(newDate);
+  const hasWalkRecord = (walkDates: string[], date: number) => {
+    return walkDates.some(walkDate => {
+      const [y, m, d] = walkDate.split('-').map(Number);
+      if (y != currentDate.getFullYear()) return false;
+      if (m != currentDate.getMonth() + 1) return false;
+      if (d != date) return false;
+      return true;
+    });
   };
+
+  const handleDatePress = useCallback((date: number) => {
+    setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), date));
+  }, []);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -108,18 +121,15 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
                     const isDisabled = (weekIdx === 0 && date > 7) || (weekIdx === 4 && date < 22);
                     const isActive = weekIdx === activeIndex[0] && dateIdx === activeIndex[1];
                     return (
-                      <S.DateItem
+                      <DateItem
                         key={dateIdx}
+                        date={date}
                         disabled={isDisabled}
                         isActive={isActive}
-                        hasWalkRecord={false}
-                        onPress={() => handleDatePress(date)}
+                        hasRecord={hasWalkRecord(walkDates ?? [], date)}
                         size={dateItemSize}
-                      >
-                        <S.DateText fontSize={15} isActive={isActive} disabled={isDisabled}>
-                          {date}
-                        </S.DateText>
-                      </S.DateItem>
+                        onPress={handleDatePress}
+                      />
                     );
                   })}
                 </S.Week>
@@ -131,4 +141,4 @@ export const Calendar = ({ date, setDate }: CalendarProps) => {
       </GestureDetector>
     </>
   );
-};
+});
