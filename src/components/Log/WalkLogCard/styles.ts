@@ -5,14 +5,12 @@ export const WalkLogCard = styled.View`
   width: 100%;
   background-color: ${props => props.theme.colors.gc_4};
   border-radius: 16px;
-  flex: 1;
   align-items: center;
 `;
 
 export const UserProfile = styled.View`
   align-self: flex-start;
   flex-direction: row;
-  gap: 5px;
   align-items: center;
 `;
 
