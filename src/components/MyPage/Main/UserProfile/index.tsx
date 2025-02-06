@@ -10,7 +10,7 @@ interface UserProfileProps {
 }
 
 export const UserProfile = ({ navigateToProfileEdit }: UserProfileProps) => {
-  const { address, familyRole, name, gender } = useUser();
+  const { address, familyRole, memberName: name, memberGender: gender } = useUser();
 
   return (
     <S.UserProfile paddingVertical={24} paddingHorizontal={20}>

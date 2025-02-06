@@ -6,14 +6,14 @@ import { Gender } from '~types/gender';
 
 export type FetchUserResponseType = {
   memberId: number;
-  name: string;
+  memberName: string;
   email: string;
   provider: string;
-  gender: Gender;
+  memberGender: Gender;
   address: string;
   familyRole: FamilyRole;
-  profileImg: string;
-  avatarNumber: AvatarNumber;
+  memberProfileImg: AvatarNumber;
+  memberBirthDate: string;
 };
 
 export const fetchUser = async (): Promise<APIResponse<FetchUserResponseType>> => {

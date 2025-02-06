@@ -4,7 +4,8 @@ import * as S from './styles';
 import { getParticle } from '~utils/getParticle';
 
 export const Heading = () => {
-  const { familyRole, name } = useUser();
+  const { familyRole, memberName: name } = useUser();
+  console.log({ familyRole, name });
   return (
     <S.Heading>
       <S.HeadingText fontSize={24}>
@@ -13,7 +14,7 @@ export const Heading = () => {
           getKoreanRoleWithName({
             dogGender: 'FEMALE',
             familyRole,
-            name: name[name.length - 2] + name[name.length - 1],
+            name: name.length >= 2 ? name[name.length - 2] + name[name.length - 1] : name,
           }),
         )}
         랑
