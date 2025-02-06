@@ -10,8 +10,8 @@ import Prev from '~assets/icons/prev.svg';
 import { HomeNavigator } from '~navigation/HomeNavigator';
 import { MyPageNavigator } from '~navigation/MyPageNavigator';
 import { FamilyDangScreen } from '~screens/FamilyDang';
-import { LogScreen } from '~screens/Log';
 import { ProfileScreen } from '~screens/Profile';
+import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
 
 export type TabBarParamList = {
@@ -55,7 +55,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Log"
-        component={LogScreen}
+        component={WalkLogNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="calendar" size={size} color={color} focused={focused} />

@@ -22,6 +22,12 @@ import DogInvite from '~assets/dogs/dog-invite.svg';
 import Kakao from '~assets/icons/kakao.svg';
 import Google from '~assets/icons/google.svg';
 import AvatarSelect from '~assets/icons/avatar-select-button.svg';
+import ArrowDown from '~assets/icons/arrow-down.svg';
+import CaloriesBurned from '~assets/icons/calories-burned.svg';
+import GpsIcon from '~assets/icons/gps.svg';
+import DogHowling from '~assets/dogs/dog-howling.svg';
+import DogAnnoyed from '~assets/dogs/dog-annoyed.svg';
+import DogDisappointed from '~assets/dogs/dog-disappointed.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -47,4 +53,10 @@ export const Icon = {
   Kakao: (props: SvgProps) => <Kakao {...props} />,
   Google: (props: SvgProps) => <Google {...props} />,
   AvatarSelect: (props: SvgProps) => <AvatarSelect {...props} />,
+  ArrowDown: (props: SvgProps) => <ArrowDown {...props} />,
+  CaloriesBurned: (props: SvgProps) => <CaloriesBurned {...props} />,
+  GpsIcon: (props: SvgProps) => <GpsIcon {...props} />,
+  DogHowling: (props: SvgProps) => <DogHowling {...props} />,
+  DogAnnoyed: (props: SvgProps) => <DogAnnoyed {...props} />,
+  DogDisappointed: (props: SvgProps) => <DogDisappointed {...props} />,
 };
