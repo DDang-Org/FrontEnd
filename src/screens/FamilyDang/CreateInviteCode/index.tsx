@@ -1,3 +1,4 @@
+import React from 'react';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import * as S from './styles';
 import { Timer } from '~components/FamilyDang/Timer';
@@ -16,7 +17,7 @@ export const CreateInviteCode = ({}: CreateInviteCodeProps) => {
           <TextRegular fontSize={17}>관리할 수 있어요.</TextRegular>
           <S.DogImage />
         </S.TextArea>
-        <S.CopyInviteCode onPress={() => null}>
+        <S.CopyInviteCode onPress={() => console.log('초대 코드 복사')}>
           <TextBold fontSize={15} color="sub">
             초대 코드 복사
           </TextBold>
@@ -24,7 +25,7 @@ export const CreateInviteCode = ({}: CreateInviteCodeProps) => {
         </S.CopyInviteCode>
         <S.TimerWrapper>
           <TextBold fontSize={15}>유효 시간</TextBold>
-          <Timer time={300} onTimeEnd={() => null} />
+          <Timer time={300} onTimeEnd={() => console.log('타이머 종료')} />
         </S.TimerWrapper>
         <S.Separator />
       </S.StyledScrollView>
