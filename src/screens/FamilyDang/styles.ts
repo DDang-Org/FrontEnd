@@ -1,7 +1,8 @@
 import styled from '@emotion/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActionButton } from '~components/Common/ActionButton';
-import { TextBold } from '~components/Common/Text';
+import { TextBold, TextRegular } from '~components/Common/Text';
+import { BgBox } from '~components/Common/BgBox';
+import { ResizeButton } from '~components/Common/ResizeButton';
 
 export const SafeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -14,13 +15,15 @@ export const HeaderArea = styled.View`
   padding: 15px 20px;
   position: relative;
 `;
-// 텍스트
+
 export const HeaderTitle = styled(TextBold)`
   text-align: center;
 `;
 
 export const InviteComment = styled(TextBold)`
   text-align: start;
+  padding-top: 6px;
+  padding-left: 12px;
 `;
 
 export const GearWrapper = styled.View`
@@ -56,19 +59,46 @@ export const LineWrapper = styled.View`
 
 export const MemberName = styled(TextBold)``;
 
-export const MemberDetails = styled(TextBold)``;
+export const MemberDetails = styled(TextRegular)``;
 
 export const LabelText = styled(TextBold)``;
 
 export const ValueText = styled(TextBold)``;
 
-export const InviteSection = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+export const BrownValueText = styled(TextBold)`
+  color: ${({ theme }) => theme.colors.default};
 `;
 
-export const InviteButton = styled(ActionButton)``;
+export const InviteSection = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const InviteButton = styled(ResizeButton)`
+  display: flex;
+  padding: 7.5px 16px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background-color: #ecf9da;
+  color: #6ca719;
+  align-self: flex-end;
+  font-weight: 900;
+`;
+
+export const ButtonText = styled(TextBold)`
+  font-size: 17px;
+  color: #6ca719;
+`;
 
 export const FamilyContainer = styled.View`
   gap: 100px;
+`;
+
+export const GapBox = styled(BgBox)`
+  margin-top: 15px;
+`;
+
+export const StateBox = styled.View`
+  margin-top: 15px;
 `;
