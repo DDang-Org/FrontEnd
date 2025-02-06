@@ -11,7 +11,9 @@ export type FamilyDdangParamList = {
 
 const Stack = createNativeStackNavigator<FamilyDdangParamList>();
 
-const HeaderComponent = () => <Header left={<Icon.Prev />} center={<Text>초대 코드 생성</Text>} fontSize={17} />;
+const HeaderComponent = () => (
+  <Header left={<Icon.Prev />} center={<Text>초대 코드 생성</Text>} backgroundColorType="white" />
+);
 
 export const FamilyDDangNavigator = () => {
   return (

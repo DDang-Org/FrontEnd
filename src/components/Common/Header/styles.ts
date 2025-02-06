@@ -1,12 +1,11 @@
 import styled from '@emotion/native';
 
-export const HeaderContainer = styled.View`
-  background-color: #f5f5f5;
+export const HeaderContainer = styled.View<{ backgroundColorType: 'white' | 'default' }>`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom-width: 1px;
-  border-bottom-color: #ddd;
+  background-color: ${({ theme, backgroundColorType }) =>
+    backgroundColorType === 'default' ? theme.colors.default : '#ffffff'}; // 옵션에 따라 배경색 설정
 `;
 
 export const LeftContainer = styled.View`
