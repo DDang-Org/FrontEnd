@@ -3,7 +3,7 @@ import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { fetchLogDetails } from '~apis/log/fetchLogDetails';
 import { fetchWalkDates } from '~apis/log/fetchWalkDates';
 
-export const useWalkDates = (dogId: number) => {
+const useWalkDates = (dogId: number) => {
   const { data } = useQuery({
     queryKey: ['walkDates', dogId],
     queryFn: () => fetchWalkDates({ dogId }),

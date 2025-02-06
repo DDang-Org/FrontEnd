@@ -47,31 +47,41 @@ export const LineChart = ({ data }: LineChartProps) => {
       <S.Title fontSize={20}>올해 월 별 산책기록</S.Title>
       <Svg width={width} height={height}>
         <G>
-          {yScale.ticks(5).map((tick, i) => (
-            <G key={i}>
-              <Text
-                x={margin.left - 16}
-                y={yScale(tick)}
-                fontSize={11}
-                fontWeight={700}
-                fontFamily="SUIT-Bold"
-                textAnchor="end"
-                alignmentBaseline="middle"
-                fill={theme.colors.font_1}
-              >
-                {`${tick}회`}
-              </Text>
-              <Line
-                x1={margin.left}
-                y1={yScale(tick)}
-                x2={width - margin.right - paddingHorizontal}
-                y2={yScale(tick)}
-                stroke={theme.colors.gc_2}
-                strokeWidth={0.5}
-              />
-            </G>
-          ))}
+          {yScale
+            .ticks(5)
+            .reduce<number[]>((uniqueTicks, tick) => {
+              const roundedTick = Math.round(tick);
+              if (!uniqueTicks.includes(roundedTick)) {
+                uniqueTicks.push(roundedTick);
+              }
+              return uniqueTicks;
+            }, [])
+            .map((tick, i) => (
+              <G key={i}>
+                <Text
+                  x={margin.left - 16}
+                  y={yScale(tick)}
+                  fontSize={11}
+                  fontWeight={700}
+                  fontFamily="SUIT-Bold"
+                  textAnchor="end"
+                  alignmentBaseline="middle"
+                  fill={theme.colors.font_1}
+                >
+                  {`${tick}회`}
+                </Text>
+                <Line
+                  x1={margin.left}
+                  y1={yScale(tick)}
+                  x2={width - margin.right - paddingHorizontal}
+                  y2={yScale(tick)}
+                  stroke={theme.colors.gc_2}
+                  strokeWidth={0.5}
+                />
+              </G>
+            ))}
         </G>
+
         <Path d={line(data) || ''} stroke={theme.colors.lighten_1} strokeWidth={2} fill="transparent" />
         {data.map((d, i) => (
           <G key={i}>

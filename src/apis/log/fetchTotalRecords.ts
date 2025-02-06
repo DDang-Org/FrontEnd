@@ -1,10 +1,6 @@
 import { api } from '~apis/api';
 import { APIResponse } from '~types/api';
 
-export interface TotalRecordsRequest {
-  dogId: number;
-}
-
 export interface TimeDuration {
   hours: number;
   minutes: number;
@@ -17,9 +13,9 @@ export interface WalkData {
   totalDistanceMeter: number;
 }
 
-export const fetchTotalRecords = async ({ dogId }: TotalRecordsRequest): Promise<APIResponse<WalkData>> => {
+export const fetchTotalRecords = async (): Promise<APIResponse<WalkData>> => {
   try {
-    const response = await api.get(`log/total/${dogId}`).json<APIResponse<WalkData>>();
+    const response = await api.get(`log/total`).json<APIResponse<WalkData>>();
     return response;
   } catch (error) {
     throw error;
