@@ -39,7 +39,16 @@ export const Calendar = React.memo(({ setDate }: CalendarProps) => {
     if (isOpen) {
       calendarHeight.value = MIN_CALENDAR_SIZE + maxAdditionalHeight;
     }
-  }, [currentDate, dateItemSize, isOpen, MIN_CALENDAR_SIZE, maxAdditionalHeight, setDate, weekCalendarList]);
+  }, [
+    currentDate,
+    dateItemSize,
+    isOpen,
+    MIN_CALENDAR_SIZE,
+    maxAdditionalHeight,
+    setDate,
+    weekCalendarList,
+    calendarHeight,
+  ]);
 
   const hasWalkRecord = (walkDates: string[], date: number) => {
     return walkDates.some(walkDate => {
