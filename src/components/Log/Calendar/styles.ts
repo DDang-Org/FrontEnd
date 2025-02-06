@@ -28,24 +28,6 @@ export const DayOfWeek = styled(TextBold)`
   height: 20px;
 `;
 
-export const DateItem = styled.Pressable<{
-  disabled: boolean;
-  isActive: boolean;
-  size: number;
-}>`
-  width: ${props => `${props.size}px`};
-  height: ${props => `${props.size}px`};
-  justify-content: center;
-  align-items: center;
-  background-color: ${props => (props.isActive ? props.theme.colors.sub : 'transparent')};
-  border-radius: 18px;
-`;
-
-export const DateText = styled(TextBold)<{ isActive: boolean; disabled: boolean }>`
-  color: ${props =>
-    props.disabled ? props.theme.colors.font_4 : props.isActive ? props.theme.colors.gc_4 : props.theme.colors.font_1};
-`;
-
 export const DragIndicator = styled.View`
   background-color: ${props => props.theme.colors.gc_1};
   position: absolute;
