@@ -25,9 +25,6 @@ const useLogDetails = (dogId: number, selectDate: string) => {
 
 export const useWalkLog = (selectDate: string) => {
   const myDogInfo = useMyDogInfo();
-  if (!myDogInfo || !myDogInfo[0].dogId) {
-    return { walkDates: undefined, logDetails: undefined };
-  }
   const walkDates = useWalkDates(myDogInfo[0].dogId);
   const logDetails = useLogDetails(myDogInfo[0].dogId, selectDate);
 

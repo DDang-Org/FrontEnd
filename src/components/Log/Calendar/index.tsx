@@ -13,19 +13,19 @@ interface CalendarProps {
   setDate: (date: Date) => void;
 }
 
+const deviceWidth = Dimensions.get('window').width;
+const ITEM_SPACING = 8;
+const SIDE_PADDING = 24;
+
 export const Calendar = React.memo(({ setDate }: CalendarProps) => {
   const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(new Date());
-  const deviceWidth = Dimensions.get('window').width;
-  const ITEM_SPACING = 8;
-  const SIDE_PADDING = 24;
   const dateItemSize = (deviceWidth - (ITEM_SPACING * (weekDays.length - 1) + SIDE_PADDING * 2)) / weekDays.length;
-  const MIN_CALENDAR_SIZE = dateItemSize + 52;
-
   const [isOpen, setIsOpen] = useState(false);
-  const [startHeight, setStartHeight] = useState(MIN_CALENDAR_SIZE);
   const [maxAdditionalHeight, setMaxAdditionalHeight] = useState(
     (dateItemSize + ITEM_SPACING) * (weekCalendarList.length - 1),
   );
+  const MIN_CALENDAR_SIZE = dateItemSize + 52;
+  const [startHeight, setStartHeight] = useState(MIN_CALENDAR_SIZE);
 
   const calendarHeight = useSharedValue(MIN_CALENDAR_SIZE);
   const isOpenShared = useSharedValue(isOpen);
@@ -50,9 +50,12 @@ export const Calendar = React.memo(({ setDate }: CalendarProps) => {
     });
   };
 
-  const handleDatePress = useCallback((date: number) => {
-    setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), date));
-  }, []);
+  const handleDatePress = useCallback(
+    (date: number) => {
+      setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), date));
+    },
+    [setCurrentDate],
+  );
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
