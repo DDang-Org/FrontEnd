@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import Prev from '~assets/icons/prev.svg';
 import { HomeNavigator } from '~navigation/HomeNavigator';
 import { MyPageNavigator } from '~navigation/MyPageNavigator';
@@ -13,6 +13,11 @@ import { FamilyDangScreen } from '~screens/FamilyDang';
 import { LogScreen } from '~screens/Log';
 import { ProfileScreen } from '~screens/Profile';
 import { SocialScreen } from '~screens/Social';
+// import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import { Header } from '~components/Common/Header';
+import { Icon } from '~components/Common/Icons';
+import { Text } from 'react-native';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -21,8 +26,16 @@ export type TabBarParamList = {
   FamilyDang: undefined;
   MyPage: undefined;
   Profile: { userId: number };
+  FamilyDDang: { screen?: keyof FamilyDdangParamList };
+};
+// HeaderComponent를 함수로 정의
+const HeaderComponent = () => {
+  return <Header center={<Text>패밀리댕</Text>} right={<Icon.Gear />} backgroundColorType="default" />;
 };
 
+const HeaderWrapper = () => {
+  return <HeaderComponent />;
+};
 const Tab = createBottomTabNavigator<TabBarParamList>();
 
 const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: string } & IconButtonProps) => (
@@ -32,7 +45,7 @@ const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: strin
       justify-content: center;
     `}
   >
-    <Icon name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
+    <Icon2 name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
   </View>
 );
 
@@ -78,6 +91,8 @@ export const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
           ),
+          header: HeaderWrapper,
+          headerShown: true,
         }}
       />
       <Tab.Screen

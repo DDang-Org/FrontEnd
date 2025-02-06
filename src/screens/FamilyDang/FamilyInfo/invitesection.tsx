@@ -4,15 +4,14 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '~navigation/RootNavigator';
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'FamilyDDang'>;
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const InviteSection = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const handleInvitePress = () => {
-    navigation.navigate('FamilyDDang', {
-      screen: 'CreateInviteCode',
-    });
+    navigation.navigate('FamilyDDang', { screen: 'CreateInviteCode' });
   };
 
   return (

@@ -2,8 +2,6 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
 import { ScrollView } from 'react-native';
-
-import { Header } from './FamilyInfo/header';
 import { DogProfile } from './FamilyInfo/dogprofile';
 import { FamilyList } from './FamilyInfo/familylist';
 import { InviteSection } from './FamilyInfo/invitesection';
@@ -14,7 +12,6 @@ export const FamilyDangScreen = ({}: Props) => {
   return (
     <S.SafeContainer>
       <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }}>
-        <Header />
         <DogProfile />
         <FamilyList />
         <InviteSection />

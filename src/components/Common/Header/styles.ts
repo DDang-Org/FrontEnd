@@ -5,7 +5,7 @@ export const HeaderContainer = styled.View<{ backgroundColorType: 'white' | 'def
   align-items: center;
   justify-content: space-between;
   background-color: ${({ theme, backgroundColorType }) =>
-    backgroundColorType === 'default' ? theme.colors.default : '#ffffff'}; // 옵션에 따라 배경색 설정
+    backgroundColorType === 'default' ? theme.colors.lighten_3 : '#ffffff'}; // 옵션에 따라 배경색 설정
 `;
 
 export const LeftContainer = styled.View`

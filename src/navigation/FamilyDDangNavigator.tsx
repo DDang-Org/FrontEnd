@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { CreateInviteCode } from '~screens/FamilyDang/CreateInviteCode';
-import { Header } from '~components/Common/Header'; // Header 컴포넌트 경로
-import { Icon } from '~components/Common/Icons'; // 아이콘 경로
-import { Text } from 'react-native'; // Import the Text component from the appropriate library
+import { Header } from '~components/Common/Header';
+import { Icon } from '~components/Common/Icons';
+import { Text } from 'react-native';
 
 export type FamilyDdangParamList = {
   CreateInviteCode: undefined;

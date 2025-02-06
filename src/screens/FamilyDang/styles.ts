@@ -23,7 +23,7 @@ export const HeaderTitle = styled(TextBold)`
 export const InviteComment = styled(TextBold)`
   text-align: start;
   padding-top: 6px;
-  padding-left: 12px;
+  padding-left: 5px;
 `;
 
 export const GearWrapper = styled.View`
