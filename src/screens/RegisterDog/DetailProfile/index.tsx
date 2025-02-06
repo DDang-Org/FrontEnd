@@ -14,6 +14,7 @@ import { validateDetailProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
 import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
 import { useAtom } from 'jotai';
+import { WeightInput } from '~components/Common/WeightInput';
 
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
@@ -95,14 +96,7 @@ export const DetailProfile = ({}: DetailProps) => {
 
       <View>
         <FormInput value={dogProfile.breed} onPress={() => setIsModalVisible(true)} placeholder="견종 입력" />
-        <FormInput
-          value={displayWeight}
-          onChangeText={handleChangeWeight}
-          placeholder="몸무게 입력"
-          keyboardType="numeric"
-          onFocus={handleFocusWeightInput}
-          onBlur={handleBlurWeightInput}
-        />
+        <WeightInput weight={dogProfile.weight} updateField={updateField} />
       </View>
       <S.ActionButtonWrapper ref={confirmButtonRef}>
         <ActionButton

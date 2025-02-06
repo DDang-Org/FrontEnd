@@ -1,7 +1,7 @@
 import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import { TextBold, TextRegular } from '~components/Common/Text';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { DogProfileType } from '~providers/DogProfileProvider';
 import FormInput from '~components/Common/FormInput';
 import DatePicker from 'react-native-date-picker';
@@ -14,6 +14,7 @@ import { useToast } from '~hooks/useToast';
 import { SearchModal } from '~components/RegisterDog/SearchModal';
 import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
+import { WeightInput } from '~components/Common/WeightInput';
 
 interface EditDogProfileProps {}
 
@@ -61,36 +62,6 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
     const selectedImage = await handleImagePicker();
     updateField('profileImg', selectedImage);
   };
-
-  const handleChangeWeight = (value: string) => {
-    if (value === '') {
-      updateField('weight', 0);
-      setDisplayWeight('');
-      return;
-    }
-    if (/^\d*\.?\d*$/.test(value)) {
-      const formatted = value.includes('.') ? value.match(/^\d*\.?\d{0,2}/)![0] : value;
-      updateField('weight', Number(formatted));
-      setDisplayWeight(formatted);
-    }
-  };
-
-  const handleFocusWeightInput = () => {
-    if (dogProfile.weight) {
-      setDisplayWeight(dogProfile.weight.toString());
-    }
-  };
-
-  const handleBlurWeightInput = () => {
-    if (dogProfile.weight) {
-      setDisplayWeight(`${dogProfile.weight}kg`);
-    }
-  };
-
-  useEffect(() => {
-    console.log(dogProfile.profileImg);
-  }, [dogProfile.profileImg]);
-
   return (
     <S.EditDogProfile>
       <S.StyledScrollView contentContainerStyle={{ gap: 20, alignItems: 'center' }}>
@@ -119,14 +90,7 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
             value={dogProfile.birthDate}
             placeholder="생년월일 선택"
           />
-          <FormInput
-            value={displayWeight}
-            onChangeText={handleChangeWeight}
-            placeholder="몸무게 입력"
-            keyboardType="numeric"
-            onFocus={handleFocusWeightInput}
-            onBlur={handleBlurWeightInput}
-          />
+          <WeightInput weight={dogProfile.weight} updateField={updateField} />
         </S.InputArea>
         <S.GenderSelectArea>
           <S.GenderButtonWrapper>

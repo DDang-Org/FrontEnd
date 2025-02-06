@@ -34,25 +34,3 @@ export const RootNavigator = () => {
     </Stack.Navigator>
   );
 };
-
-// import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
-// // import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
-// // import { LoginNavigator } from '~navigation/Auth/LoginNavigator';
-// // import { RegisterOwnerNavigator } from '~navigation/Auth/RegisterOwnerNavigator';
-// // import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
-
-// export const RootNavigator = () => {
-//   //  const {isLogin, hasDog} = useAuth();
-//   // if (isLogin && hasDog) {
-//   return (
-//     <>
-//       {/* <RegisterOwnerNavigator /> */}
-//       <RegisterDogNavigator />
-//     </>
-//   );
-//   // }
-//   //if (isLogin) {
-//   //  return <RegisterDogNavigator/>
-//   // }
-//   // return <LoginNavigator/>
-// };

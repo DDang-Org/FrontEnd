@@ -5,7 +5,6 @@ import FormInput from '~components/Common/FormInput';
 import { Icon } from '~components/Common/Icons';
 import { TextBold } from '~components/Common/Text';
 import { ActionButton } from '~components/Common/ActionButton';
-import DatePicker from 'react-native-date-picker';
 import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
 import { dateToString, stringToDate } from '~utils/dateFormat';
@@ -16,6 +15,7 @@ import { validateBasicProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
 import { useAtom } from 'jotai';
 import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
+import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
@@ -51,6 +51,12 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
     navigation.navigate(RegisterDogNavigations.DETAIL_PROFILE);
   };
 
+  const handleConfirmDatePicker = (date: Date) => {
+    setisDatePickerOpen(false);
+    const formattedDate = dateToString(date, '. ');
+    updateField('birthDate', formattedDate);
+  };
+
   return (
     <S.BasicProfile>
       <S.TextWrapper deviceHeight={deviceHeight}>
@@ -80,23 +86,11 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
           bgColor={validateBasicProfile(dogProfile) ? 'gc_1' : 'default'}
         />
       </S.ActionButtonWrapper>
-      <DatePicker
-        title={' '}
-        modal
+      <CustomDatePicker
         open={isDatePickerOpen}
         date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
-        onConfirm={date => {
-          setisDatePickerOpen(false);
-          const formattedDate = dateToString(date, '. ');
-          updateField('birthDate', formattedDate);
-        }}
+        onConfirm={handleConfirmDatePicker}
         onCancel={() => setisDatePickerOpen(false)}
-        mode="date"
-        locale="ko"
-        confirmText="확인"
-        cancelText="취소"
-        minimumDate={new Date(2000, 0, 1)}
-        maximumDate={new Date()}
       />
     </S.BasicProfile>
   );
