@@ -7,21 +7,20 @@ import { ActionButton } from '~components/Common/ActionButton';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
-import { TextBold, TextRegular } from '~components/Common/Text';
-import { Icon } from '~components/Common/Icons';
+import { TextBold } from '~components/Common/Text';
 import { SearchModal } from '~components/RegisterDog/SearchModal';
 import { validateDetailProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
 import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
 import { useAtom } from 'jotai';
 import { WeightInput } from '~components/Common/WeightInput';
+import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
 export const DetailProfile = ({}: DetailProps) => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [displayWeight, setDisplayWeight] = useState(dogProfile.weight ? `${dogProfile.weight}kg` : '');
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
 
@@ -38,31 +37,6 @@ export const DetailProfile = ({}: DetailProps) => {
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile({ ...dogProfile, [key]: value });
-  };
-
-  const handleChangeWeight = (value: string) => {
-    if (value === '') {
-      updateField('weight', 0);
-      setDisplayWeight('');
-      return;
-    }
-    if (/^\d*\.?\d*$/.test(value)) {
-      const formatted = value.includes('.') ? value.match(/^\d*\.?\d{0,2}/)![0] : value;
-      updateField('weight', Number(formatted));
-      setDisplayWeight(formatted);
-    }
-  };
-
-  const handleFocusWeightInput = () => {
-    if (dogProfile.weight) {
-      setDisplayWeight(dogProfile.weight.toString());
-    }
-  };
-
-  const handleBlurWeightInput = () => {
-    if (dogProfile.weight) {
-      setDisplayWeight(`${dogProfile.weight}kg`);
-    }
   };
 
   return (
@@ -84,14 +58,10 @@ export const DetailProfile = ({}: DetailProps) => {
             onPress={() => updateField('gender', 'FEMALE')}
           />
         </S.GenderButtonWrapper>
-        <S.NeuteredCheckButton
+        <NeuteredCheckButton
           onPress={() => updateField('isNeutered', dogProfile.isNeutered === 'TRUE' ? 'FALSE' : 'TRUE')}
-        >
-          {dogProfile.isNeutered === 'TRUE' ? <Icon.NeuteredCheck /> : <S.NotChecked />}
-          <TextRegular fontSize={17} color={dogProfile.isNeutered === 'TRUE' ? 'font_1' : 'font_3'}>
-            중성화했어요
-          </TextRegular>
-        </S.NeuteredCheckButton>
+          isNeutered={dogProfile.isNeutered}
+        />
       </S.GenderSelectArea>
 
       <View>

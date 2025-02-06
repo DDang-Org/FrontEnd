@@ -1,13 +1,12 @@
 import { Dimensions, View } from 'react-native';
 import * as S from './styles';
-import { TextBold, TextRegular } from '~components/Common/Text';
+import { TextBold } from '~components/Common/Text';
 import { useRef, useState } from 'react';
 import { DogProfileType } from '~providers/DogProfileProvider';
 import FormInput from '~components/Common/FormInput';
 import DatePicker from 'react-native-date-picker';
 import { dateToString, stringToDate } from '~utils/dateFormat';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
-import { Icon } from '~components/Common/Icons';
 import { ActionButton } from '~components/Common/ActionButton';
 import { validateBasicProfile, validateDetailProfile } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
@@ -15,6 +14,7 @@ import { SearchModal } from '~components/RegisterDog/SearchModal';
 import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
 import { WeightInput } from '~components/Common/WeightInput';
+import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 
 interface EditDogProfileProps {}
 
@@ -33,7 +33,6 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
-  const [displayWeight, setDisplayWeight] = useState(dogProfile.weight ? `${dogProfile.weight}kg` : '');
   const { requestAndCheckPermission } = usePermission();
   const { handleImagePicker } = useImagePicker();
   const { showFormErrorToast } = useToast();
@@ -105,14 +104,10 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
               onPress={() => updateField('gender', 'FEMALE')}
             />
           </S.GenderButtonWrapper>
-          <S.NeuteredCheckButton
+          <NeuteredCheckButton
             onPress={() => updateField('isNeutered', dogProfile.isNeutered === 'TRUE' ? 'FALSE' : 'TRUE')}
-          >
-            {dogProfile.isNeutered === 'TRUE' ? <Icon.NeuteredCheck /> : <S.NotChecked />}
-            <TextRegular fontSize={17} color={dogProfile.isNeutered === 'TRUE' ? 'font_1' : 'font_3'}>
-              중성화했어요
-            </TextRegular>
-          </S.NeuteredCheckButton>
+            isNeutered={dogProfile.isNeutered}
+          />
         </S.GenderSelectArea>
         <FormInput
           onChangeText={value => updateField('comment', value)}
