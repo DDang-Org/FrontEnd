@@ -35,10 +35,11 @@ export const Calendar = React.memo(({ setDate }: CalendarProps) => {
   useEffect(() => {
     setDate(currentDate);
     setMaxAdditionalHeight((dateItemSize + ITEM_SPACING) * (weekCalendarList.length - 1));
+
     if (isOpen) {
       calendarHeight.value = MIN_CALENDAR_SIZE + maxAdditionalHeight;
     }
-  }, [weekCalendarList]);
+  }, [currentDate, dateItemSize, isOpen, MIN_CALENDAR_SIZE, maxAdditionalHeight, setDate, weekCalendarList]);
 
   const hasWalkRecord = (walkDates: string[], date: number) => {
     return walkDates.some(walkDate => {
