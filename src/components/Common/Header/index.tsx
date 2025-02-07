@@ -34,6 +34,7 @@ export const Header = ({
       </S.LeftContainer>
       <S.CenterContainer>{center && <S.CenterText fontSize={fontSize}>{center}</S.CenterText>}</S.CenterContainer>
       <S.RightContainer>
+        {/* 오른쪽 버튼에 네비게이션 동작 추가 */}
         <TouchableOpacity onPress={onRightPress}>{right}</TouchableOpacity>
       </S.RightContainer>
     </S.HeaderContainer>

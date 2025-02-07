@@ -19,9 +19,10 @@ export const RootNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
+
       <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
 
-      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
       <Stack.Screen
         name="RegisterOwner"
         component={RegisterOwnerNavigator}

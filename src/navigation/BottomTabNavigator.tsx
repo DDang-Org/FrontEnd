@@ -14,9 +14,8 @@ import { LogScreen } from '~screens/Log';
 import { ProfileScreen } from '~screens/Profile';
 import { SocialScreen } from '~screens/Social';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
-import { Header } from '~components/Common/Header';
-import { Icon } from '~components/Common/Icons';
-import { Text } from 'react-native';
+import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
+// import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -27,13 +26,11 @@ export type TabBarParamList = {
   Profile: { userId: number };
   FamilyDDang: { screen?: keyof FamilyDdangParamList };
 };
-const HeaderComponent = () => {
-  return <Header center={<Text>패밀리댕</Text>} right={<Icon.Gear />} backgroundColorType="default" />;
-};
 
 const HeaderWrapper = () => {
-  return <HeaderComponent />;
+  return <FamilyDDangHeaderComponent />;
 };
+
 const Tab = createBottomTabNavigator<TabBarParamList>();
 
 const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: string } & IconButtonProps) => (
@@ -84,7 +81,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="FamilyDang"
-        component={FamilyDangScreen}
+        component={FamilyDangScreen} // FamilyDdangNavigator로 변경
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
@@ -93,6 +90,7 @@ export const BottomTabNavigator = () => {
           headerShown: true,
         }}
       />
+
       <Tab.Screen
         name="MyPage"
         component={MyPageNavigator}
