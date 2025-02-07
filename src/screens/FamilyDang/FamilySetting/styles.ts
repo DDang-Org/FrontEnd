@@ -22,3 +22,7 @@ export const StyledView = styled.View`
 export const FamilystyledView = styled.View`
   padding: 20px 16px;
 `;
+
+export const ActionButtonWrapper = styled.View`
+  padding: 30px 16px;
+`;
