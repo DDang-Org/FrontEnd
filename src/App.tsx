@@ -7,6 +7,8 @@ import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
+import { useWebSocket } from '~hooks/useWebSocket';
+import { WebSocketProvider } from '~providers/WebSocketProvider';
 
 const navTheme = {
   ...DefaultTheme,
@@ -16,13 +18,19 @@ const navTheme = {
   },
 };
 
-const MainApp = () => (
-  <AppProviders>
-    <NavigationContainer theme={navTheme}>
-      <BottomTabNavigator />
-    </NavigationContainer>
-  </AppProviders>
-);
+const MainApp = () => {
+  const { client, sendMessage } = useWebSocket();
+
+  return (
+    <WebSocketProvider client={client} sendMessage={sendMessage}>
+      <AppProviders>
+        <NavigationContainer theme={navTheme}>
+          <BottomTabNavigator />
+        </NavigationContainer>
+      </AppProviders>
+    </WebSocketProvider>
+  );
+};
 
 export const App = () => {
   const { isMswEnabled } = useInitializeMsw();
