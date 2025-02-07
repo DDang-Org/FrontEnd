@@ -102,3 +102,35 @@ export const GapBox = styled(BgBox)`
 export const StateBox = styled.View`
   margin-top: 15px;
 `;
+
+export const ClickFamily = styled.View`
+  margin-top: 15px;
+  background-color: white;
+`;
+
+export const RadioButton = styled.View``;
+
+export const TextAtrea = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 30px;
+`;
+
+export const RadioButtonWrapper = styled.TouchableOpacity`
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  border-width: 2px;
+  border-color: black;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const RadioButtonInner = styled.View`
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: black;
+`;

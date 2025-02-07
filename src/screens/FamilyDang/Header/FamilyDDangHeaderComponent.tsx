@@ -3,7 +3,6 @@ import { Text } from 'react-native';
 import { Header } from '~components/Common/Header';
 import { Icon } from '~components/Common/Icons';
 import { useNavigation } from '@react-navigation/native';
-
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '~navigation/RootNavigator';
 
@@ -18,7 +17,7 @@ const FamilyDDangHeaderComponent = () => {
       right={<Icon.Gear />}
       backgroundColorType="default"
       onRightPress={() => {
-        console.log('Gear icon clicked'); // 클릭 이벤트 확인
+        console.log('Gear icon clicked');
         navigation.navigate('FamilyDDang', { screen: 'FamilySetting' });
       }}
     />
