@@ -23,14 +23,14 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
   const { requestAndCheckPermission } = usePermission();
-  const { handleImagePicker } = useImagePicker();
+  const { getImageFile, handleImagePicker } = useImagePicker();
   const { showFormErrorToast } = useToast();
   const nextButtonRef = useRef<View | null>(null);
 
   const deviceHeight = Dimensions.get('screen').height;
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
-    setDogProfile({ ...dogProfile, [key]: value });
+    setDogProfile(prevState => ({ ...prevState, [key]: value }));
   };
 
   const handleAddImageButton = async () => {
@@ -38,8 +38,9 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
     if (!isGranted) {
       return;
     }
-    const selectedImage = await handleImagePicker();
-    updateField('profileImg', selectedImage);
+    const image = await handleImagePicker();
+    updateField('profileImg', image.path);
+    updateField('profileImgFile', getImageFile(image));
   };
 
   const handleClickNext = () => {

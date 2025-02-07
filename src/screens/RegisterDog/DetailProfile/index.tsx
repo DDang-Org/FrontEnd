@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
@@ -15,6 +15,7 @@ import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
 import { useAtom } from 'jotai';
 import { WeightInput } from '~components/Common/WeightInput';
 import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
+import { useCreateDog } from '~apis/dog/useDogProfile';
 
 type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
 
@@ -23,6 +24,7 @@ export const DetailProfile = ({}: DetailProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
+  const registerDog = useCreateDog();
 
   const deviceHeight = Dimensions.get('screen').height;
 
@@ -32,11 +34,17 @@ export const DetailProfile = ({}: DetailProps) => {
       showFormErrorToast(error, confirmButtonRef);
       return;
     }
-    console.log(dogProfile);
+
+    registerDog.mutate(dogProfile, {
+      onSuccess: data => {
+        console.log(data), Alert.alert('성공하셨습니다!!');
+      },
+      onError: () => console.error('업로드 실패!!!!'),
+    });
   };
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
-    setDogProfile({ ...dogProfile, [key]: value });
+    setDogProfile(prevState => ({ ...prevState, [key]: value }));
   };
 
   return (

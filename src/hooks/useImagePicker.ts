@@ -1,6 +1,22 @@
+import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import { ImageFileType } from '~types/image-file';
 
 export const useImagePicker = () => {
+  const getImageFile = (image: any): ImageFileType => {
+    if (!image || !image.path || !image.mime) {
+      throw new Error('Invalid image object');
+    }
+
+    const file: ImageFileType = {
+      uri: Platform.OS === 'android' ? image.path.replace('file://', '') : `file://${image.path}`,
+      type: image.mime,
+      name: image.path.split('/').pop() || 'unknown.jpg',
+    };
+
+    return file;
+  };
+
   const handleImagePicker = async () => {
     const image = await ImageCropPicker.openPicker({
       mediaType: 'photo',
@@ -10,7 +26,8 @@ export const useImagePicker = () => {
       cropperChooseText: '완료',
       cropperCancelText: '취소',
     });
-    return image.path;
+
+    return image;
   };
 
   const handleCameraPicker = async () => {
@@ -22,8 +39,8 @@ export const useImagePicker = () => {
       cropperChooseText: '완료',
       cropperCancelText: '취소',
     });
-    return image.path;
+    return image;
   };
 
-  return { handleImagePicker, handleCameraPicker };
+  return { getImageFile, handleImagePicker, handleCameraPicker };
 };

@@ -1,4 +1,5 @@
 import { Gender } from '~types/gender';
+import { ImageFileType } from '~types/image-file';
 
 export interface RequestDogProfile {
   dogName: string;
@@ -8,6 +9,7 @@ export interface RequestDogProfile {
   dogGender: 'MALE' | 'FEMALE';
   isNeutered: 'TRUE' | 'FALSE';
   comment: string;
+  profileImgFile: ImageFileType;
 }
 
 export interface ResponseDogProfile {
@@ -17,7 +19,7 @@ export interface ResponseDogProfile {
   dogBirthDate: string;
   weight: number;
   dogGender: Gender;
-  dogProfileImg: 'string';
+  dogProfileImg: string;
   isNeutered: 'TRUE' | 'FALSE';
   walkCount: number;
   familyId: number;
