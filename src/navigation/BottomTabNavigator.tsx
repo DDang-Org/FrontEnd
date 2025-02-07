@@ -27,10 +27,6 @@ export type TabBarParamList = {
   FamilyDDang: { screen?: keyof FamilyDdangParamList };
 };
 
-const HeaderWrapper = () => {
-  return <FamilyDDangHeaderComponent />;
-};
-
 const Tab = createBottomTabNavigator<TabBarParamList>();
 
 const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: string } & IconButtonProps) => (
@@ -81,12 +77,12 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="FamilyDang"
-        component={FamilyDangScreen} // FamilyDdangNavigator로 변경
+        component={FamilyDangScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
           ),
-          header: HeaderWrapper,
+          header: () => <FamilyDDangHeaderComponent />,
           headerShown: true,
         }}
       />
