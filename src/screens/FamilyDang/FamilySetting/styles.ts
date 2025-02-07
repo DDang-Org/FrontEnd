@@ -16,5 +16,9 @@ export const NextButton = styled(Icon.Prev)`
 
 export const FamilySetting = styled.SafeAreaView``;
 export const StyledView = styled.View`
-  padding: 24px 20px 36px 20px;
+  padding: 0px 0px 36px 0px;
+`;
+
+export const FamilystyledView = styled.View`
+  padding: 20px 16px;
 `;

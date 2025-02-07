@@ -104,7 +104,7 @@ export const StateBox = styled.View`
 `;
 
 export const ClickFamily = styled.View`
-  margin-top: 15px;
+  margin-top: 5px;
   background-color: white;
 `;
 
@@ -133,4 +133,21 @@ export const RadioButtonInner = styled.View`
   height: 12px;
   border-radius: 6px;
   background-color: black;
+`;
+export const FamilyComment = styled.View`
+  /* margin-top: 15px; */
+  background-color: white;
+`;
+export const FamilyCommentTextAtrea = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 26px 30px;
+`;
+export const FamilyCommentTextCommentAtrea = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 30px;
 `;

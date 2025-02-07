@@ -19,7 +19,7 @@ export const FamilySetting = () => {
 
   return (
     <S.FamilySetting>
-      <S.StyledView>
+      <S.FamilystyledView>
         <S.NavigationToSettingScreen paddingHorizontal={20} paddingVertical={16.5}>
           <S.TypoWrapper>
             <TextBold fontSize={17}>강아지 추가하기</TextBold>
@@ -41,7 +41,7 @@ export const FamilySetting = () => {
           </S.TypoWrapper>
           <S.NextButton onPress={handleFamilyCaptain} />
         </S.NavigationToSettingScreen>
-      </S.StyledView>
+      </S.FamilystyledView>
     </S.FamilySetting>
   );
 };
