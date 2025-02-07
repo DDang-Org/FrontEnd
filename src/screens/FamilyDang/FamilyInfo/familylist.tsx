@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from '../styles';
-import * as Avatars from '~assets/avatars'; // 아바타 SVG 파일들
+import * as Avatars from '~assets/avatars';
 import { Separator } from '~components/Common/Seperator';
 
 const familyMembers = [

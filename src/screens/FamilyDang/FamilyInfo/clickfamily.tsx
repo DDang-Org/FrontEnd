@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import * as S from '../styles';
 import { TextBold } from '~components/Common/Text';
-import { RadioButton } from './radionbutton'; // 라디오 버튼 컴포넌트 임포트
+import { RadioButton } from './radionbutton';
 
 type ClickFamilyProps = {
-  onSelect: (isSelected: boolean) => void; // 선택 상태를 부모로 전달하는 콜백
+  onSelect: (isSelected: boolean) => void;
 };
 
 export const ClickFamily = ({ onSelect }: ClickFamilyProps) => {
-  const [isSelected, setIsSelected] = useState(false); // 선택 상태 관리
+  const [isSelected, setIsSelected] = useState(false);
 
   const handlePress = () => {
     const newState = !isSelected;
     setIsSelected(newState);
-    onSelect(newState); // 새로운 선택 상태를 부모로 전달
+    onSelect(newState);
   };
 
   return (
