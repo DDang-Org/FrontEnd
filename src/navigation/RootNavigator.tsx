@@ -6,6 +6,7 @@ import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { LoginNavigator, LoginParamList } from '~navigation/Auth/LoginNavigator';
 import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+
 export type RootStackParamList = {
   Login: { screen?: keyof LoginParamList };
   RegisterOwner: { screen?: keyof RegisterOwnerParamList };

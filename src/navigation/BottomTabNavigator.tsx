@@ -15,7 +15,6 @@ import { ProfileScreen } from '~screens/Profile';
 import { SocialScreen } from '~screens/Social';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
-// import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
 
 export type TabBarParamList = {
   Home: undefined;
