@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import Prev from '~assets/icons/prev.svg';
 import { HomeNavigator } from '~navigation/HomeNavigator';
 import { MyPageNavigator } from '~navigation/MyPageNavigator';
@@ -13,6 +13,8 @@ import { FamilyDangScreen } from '~screens/FamilyDang';
 import { ProfileScreen } from '~screens/Profile';
 import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -21,6 +23,7 @@ export type TabBarParamList = {
   FamilyDang: undefined;
   MyPage: undefined;
   Profile: { userId: number };
+  FamilyDDang: { screen?: keyof FamilyDdangParamList };
 };
 
 const Tab = createBottomTabNavigator<TabBarParamList>();
@@ -32,7 +35,7 @@ const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: strin
       justify-content: center;
     `}
   >
-    <Icon name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
+    <Icon2 name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
   </View>
 );
 
@@ -78,8 +81,11 @@ export const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
           ),
+          header: () => <FamilyDDangHeaderComponent />,
+          headerShown: true,
         }}
       />
+
       <Tab.Screen
         name="MyPage"
         component={MyPageNavigator}

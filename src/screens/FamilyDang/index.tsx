@@ -1,21 +1,22 @@
-import styled from '@emotion/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
-
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import * as S from './styles';
+import { ScrollView } from 'react-native';
+import { DogProfile } from './FamilyInfo/dogprofile';
+import { FamilyList } from './FamilyInfo/familylist';
+import { InviteSection } from './FamilyInfo/invitesection';
+import { StatSection } from './FamilyInfo/statecontainer';
 
 type Props = BottomTabScreenProps<TabBarParamList, 'FamilyDang'>;
-
 export const FamilyDangScreen = ({}: Props) => {
   return (
-    <SafeContainer>
-      <Text>FamilyDangScreen</Text>
-    </SafeContainer>
+    <S.SafeContainer>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }}>
+        <DogProfile />
+        <FamilyList />
+        <InviteSection />
+        <StatSection />
+      </ScrollView>
+    </S.SafeContainer>
   );
 };
