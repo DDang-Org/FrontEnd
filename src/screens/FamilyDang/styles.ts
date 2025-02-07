@@ -96,7 +96,7 @@ export const FamilyContainer = styled.View`
 `;
 
 export const GapBox = styled(BgBox)`
-  margin-top: 15px;
+  margin-top: 20px;
 `;
 
 export const StateBox = styled.View`
