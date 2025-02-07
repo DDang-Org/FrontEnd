@@ -3,6 +3,7 @@ import { useTodayWalkInfo } from '~apis/dog/useTodayWalkInfo';
 import { Icon } from '~components/Common/Icons';
 import { Separator } from '~components/Common/Seperator';
 import * as S from './styles';
+import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 
 const WalkInfoItem = ({ WalkInfoIcon, label, value }: { WalkInfoIcon: ReactNode; label: string; value: string }) => {
   return (
@@ -17,7 +18,8 @@ const WalkInfoItem = ({ WalkInfoIcon, label, value }: { WalkInfoIcon: ReactNode;
 };
 
 export const WalkInfo = () => {
-  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({ dogId: 1 });
+  const [dogInfo] = useMyDogInfo();
+  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({ dogId: dogInfo.dogId });
 
   return (
     <S.WalkInfo paddingHorizontal={24} paddingVertical={20}>
