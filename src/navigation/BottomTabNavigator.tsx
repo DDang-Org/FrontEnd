@@ -13,7 +13,6 @@ import { FamilyDangScreen } from '~screens/FamilyDang';
 import { LogScreen } from '~screens/Log';
 import { ProfileScreen } from '~screens/Profile';
 import { SocialScreen } from '~screens/Social';
-// import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { Header } from '~components/Common/Header';
 import { Icon } from '~components/Common/Icons';
@@ -28,7 +27,6 @@ export type TabBarParamList = {
   Profile: { userId: number };
   FamilyDDang: { screen?: keyof FamilyDdangParamList };
 };
-// HeaderComponent를 함수로 정의
 const HeaderComponent = () => {
   return <Header center={<Text>패밀리댕</Text>} right={<Icon.Gear />} backgroundColorType="default" />;
 };

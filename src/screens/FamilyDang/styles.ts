@@ -6,7 +6,7 @@ import { ResizeButton } from '~components/Common/ResizeButton';
 
 export const SafeContainer = styled(SafeAreaView)`
   flex: 1;
-  padding: 0 20px;
+  padding: -55px 20px;
   gap: 20px;
   background-color: ${({ theme }) => theme.colors.lighten_3};
 `;
