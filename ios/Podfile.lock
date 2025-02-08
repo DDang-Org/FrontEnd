@@ -1290,7 +1290,13 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+<<<<<<< HEAD
   - react-native-safe-area-context (5.2.0):
+=======
+  - react-native-encrypted-storage (4.0.3):
+    - React-Core
+  - react-native-safe-area-context (5.1.0):
+>>>>>>> e3a6c3d (chore: Encrypted storage 설치)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2000,6 +2006,7 @@ DEPENDENCIES:
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
+  - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -2125,6 +2132,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
+  react-native-encrypted-storage:
+    :path: "../node_modules/react-native-encrypted-storage"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -2231,6 +2240,7 @@ SPEC CHECKSUMS:
   React-FabricComponents: bb2d6b89321bf79653ae3d4ec890ba7cb9fe51c8
   React-FabricImage: 019a5e834378e460ef39bf19cb506fd36491ae74
   React-featureflags: cb3dca1c74ba813f2e578c8c635989d01d14739f
+<<<<<<< HEAD
   React-featureflagsnativemodule: 4a1eaf7a29e48ddd60bce9a2f4c4ef74dc3b9e53
   React-graphics: e626f3b24227a3a8323ed89476c8f0927c0264c7
   React-hermes: 63678d262d94835f986fa2fac1c835188f14160b
@@ -2247,6 +2257,25 @@ SPEC CHECKSUMS:
   react-native-date-picker: f74674c6cff1d4ed370e4e50f47cc08a856909df
   react-native-safe-area-context: a95e75ab816db4438a319aa4b43dfe6def22026f
   react-native-slider: 124ce99f9cd2d04c79f020da6dee9f8d38a6b8c7
+=======
+  React-featureflagsnativemodule: 8fe6e6279a0ead0735749724e6ecd8e03f3893ca
+  React-graphics: f7d97c8bcc5f1568fb840b6d8940af0ae89b387c
+  React-hermes: a12bf33d9915dbe2dcde5b6b781faab6684883fb
+  React-idlecallbacksnativemodule: 4dfe6da504ae4f7792132ba164c00ae192aa4a57
+  React-ImageManager: 28861af68262a45e585eca5491d05cd963ab0071
+  React-jserrorhandler: 15bea720b272a2e78b7731df122dbfa6e27b65aa
+  React-jsi: 217274301608d7fa529bd275c73020b55cf39361
+  React-jsiexecutor: 1bcbc63a8c1d698b35c9fb521ee87aa48a3702d2
+  React-jsinspector: 1a3345f90762b3ba2d0ab3ff5f91022487b2ed38
+  React-jsitracing: 46adf5fbb769aa673145b5c57ed7cd4b7cd08e1c
+  React-logger: ae95f0effa7e1791bd6f7283caddca323d4fbc1e
+  React-Mapbuffer: 7eb5d69e1154e7743487ef0c8d7261e5b59afb32
+  React-microtasksnativemodule: 01dd998649ff5f8814846b7eee84c4d57f5d3671
+  react-native-date-picker: a9185f7a580bfefc9b017609ee3a9c7ff94b24b8
+  react-native-encrypted-storage: 569d114e329b1c2c2d9f8c84bcdbe4478dda2258
+  react-native-safe-area-context: 0d8827b2420dfb4c8a8e27639585e61b912261be
+  react-native-slider: d1a9121980fc81678c6d30b82f312c778fba563c
+>>>>>>> e3a6c3d (chore: Encrypted storage 설치)
   React-nativeconfig: f7ab6c152e780b99a8c17448f2d99cf5f69a2311
   React-NativeModulesApple: 70600f7edfc2c2a01e39ab13a20fd59f4c60df0b
   React-perflogger: ceb97dd4e5ca6ff20eebb5a6f9e00312dcdea872

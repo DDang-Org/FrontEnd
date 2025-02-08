@@ -1,16 +1,13 @@
-import React from 'react';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import * as S from './styles';
 import { Timer } from '~components/FamilyDang/Timer';
 import { Icon } from '~components/Common/Icons';
 import { SafeAreaView } from 'react-native';
 
-interface CreateInviteCodeProps {}
-
-export const CreateInviteCode = ({}: CreateInviteCodeProps) => {
+export const CreateInviteCode = () => {
   return (
     <SafeAreaView>
-      <S.StyledScrollView>
+      <S.StyledScrollView contentContainerStyle={{ paddingBottom: 130 }}>
         <S.Title fontSize={24}>가족과 함께해요</S.Title>
         <S.TextArea>
           <TextRegular fontSize={17}>가족으로 등록된 회원의 앱에서도 동일한</TextRegular>

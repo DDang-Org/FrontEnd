@@ -4,6 +4,7 @@ import { Icon } from '~components/Common/Icons';
 
 export const StyledScrollView = styled.ScrollView`
   padding: 24px 20px 36px 20px;
+  background-color: ${props => props.theme.colors.gc_4};
 `;
 
 export const Title = styled(TextBold)`

@@ -6,8 +6,10 @@ import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { LoginNavigator, LoginParamList } from '~navigation/Auth/LoginNavigator';
 import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import { AuthNavigator } from '~navigation/AuthNavigator';
 
 export type RootStackParamList = {
+  Auth: undefined;
   Login: { screen?: keyof LoginParamList };
   RegisterOwner: { screen?: keyof RegisterOwnerParamList };
   RegisterDog: { screen?: keyof RegisterDogParamList };
@@ -20,16 +22,17 @@ export const RootNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
-
+      <Stack.Screen name="Auth" component={AuthNavigator} />
       <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
-
+      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
+      <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
       <Stack.Screen
         name="RegisterOwner"
         component={RegisterOwnerNavigator}
         options={{ headerShown: true, headerTitle: '' }}
       />
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
+
       <Stack.Screen name="Login" component={LoginNavigator} options={{ headerTitle: '' }} />
     </Stack.Navigator>
   );
