@@ -49,6 +49,10 @@ export const TalkScreen = ({ navigation, route }: TalkScreenProps) => {
         <Icon.Ellipsis style={{ position: 'absolute', right: 20, top: 24 }} />
       </S.Header>
       <TalkArea />
+      <S.TalkInputWrapper>
+        <S.TalkInput fontSize={15} placeholder="채팅 내용 입력" />
+      </S.TalkInputWrapper>
+      {/* 전송 버튼 만들기 */}
     </S.Talk>
   );
 };
