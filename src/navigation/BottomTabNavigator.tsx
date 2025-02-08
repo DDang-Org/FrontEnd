@@ -127,29 +127,12 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="Talk"
         component={TalkScreen}
-        options={({ navigation }) => ({
+        options={{
           tabBarButton: () => null,
           tabBarItemStyle: {
             display: 'none',
           },
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerTintColor: theme.colors.font_1,
-          headerStyle: {
-            backgroundColor: theme.colors.lighten_3,
-          },
-          headerShadowVisible: false,
-          headerTitleStyle: {
-            fontFamily: 'SUIT-Bold',
-            fontSize: 18,
-          },
-          headerLeft: () => (
-            <View style={{ paddingLeft: 14 }}>
-              <Prev onPress={() => navigation.goBack()} />
-            </View>
-          ),
-          animation: 'shift',
-        })}
+        }}
       />
     </Tab.Navigator>
   );

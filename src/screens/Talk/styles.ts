@@ -1,9 +1,16 @@
 import styled from '@emotion/native';
 import { TextBold, TextMedium } from '~components/Common/Text';
 
-export const Talk = styled.View``;
+export const Talk = styled.View`
+  flex: 1;
+`;
+export const Header = styled.View`
+  padding: 26px 20px;
+  background-color: ${({ theme }) => theme.colors.gc_4};
+`;
 export const LeftContentContainer = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 export const TypoWrapper = styled.View`
   margin-left: 12px;
