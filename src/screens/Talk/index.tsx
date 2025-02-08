@@ -38,14 +38,15 @@ export const TalkScreen = ({ navigation, route }: TalkScreenProps) => {
           <Icon.Prev style={{ marginRight: 8 }} />
           <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
           <S.TypoWrapper>
-            <S.Name fontSize={17}>{name}</S.Name>
+            <S.Name fontSize={15}>{name}</S.Name>
             <S.GenderFamilyRoleWrapper>
-              <S.Gender fontSize={14}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
+              <S.Gender fontSize={11}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
               <Separator $height={8} />
-              <S.FamilyRole fontSize={14}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
+              <S.FamilyRole fontSize={11}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
             </S.GenderFamilyRoleWrapper>
           </S.TypoWrapper>
         </S.LeftContentContainer>
+        <Icon.Ellipsis style={{ position: 'absolute', right: 20, top: 24 }} />
       </S.Header>
       <TalkArea />
     </S.Talk>
