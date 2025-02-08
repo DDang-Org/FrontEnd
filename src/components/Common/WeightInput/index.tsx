@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormInput from '~components/Common/FormInput';
 import { DogProfileType } from '~providers/DogProfileProvider';
 
@@ -10,7 +10,15 @@ interface WeightInputProps {
 }
 
 export const WeightInput = ({ weight, updateField }: WeightInputProps) => {
-  const [displayWeight, setDisplayWeight] = useState(weight ? `${weight}kg` : '');
+  const [displayWeight, setDisplayWeight] = useState('');
+  const isInitialized = useRef(false);
+
+  useEffect(() => {
+    if (!isInitialized.current && weight !== undefined) {
+      setDisplayWeight(`${weight}kg`);
+      isInitialized.current = true;
+    }
+  }, [weight]);
 
   const handleChangeWeight = (value: string) => {
     if (value === '') {

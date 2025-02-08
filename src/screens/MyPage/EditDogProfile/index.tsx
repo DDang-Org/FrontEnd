@@ -1,11 +1,10 @@
-import { Dimensions, View } from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
 import * as S from './styles';
 import { TextBold } from '~components/Common/Text';
-import { useRef, useState } from 'react';
-import { DogProfileType } from '~providers/DogProfileProvider';
+import { useEffect, useRef, useState } from 'react';
+import { DogProfileType, INITIAL_DOG_PROFILE } from '~providers/DogProfileProvider';
 import FormInput from '~components/Common/FormInput';
-import DatePicker from 'react-native-date-picker';
-import { dateToString, stringToDate } from '~utils/dateFormat';
+import { dateToString } from '~utils/dateFormat';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { ActionButton } from '~components/Common/ActionButton';
 import { validateBasicProfile, validateDetailProfile } from '~utils/validateDogProfile';
@@ -15,42 +14,68 @@ import { usePermission } from '~hooks/usePermission';
 import { useImagePicker } from '~hooks/useImagePicker';
 import { WeightInput } from '~components/Common/WeightInput';
 import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDogInfoById } from '~apis/dog/useDogInfoById';
+import { useDogProfile } from '~apis/dog/useDogProfile';
+import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 
-interface EditDogProfileProps {}
-
-export const EditDogProfile = ({}: EditDogProfileProps) => {
-  const [dogProfile, setDogProfile] = useState<DogProfileType>({
-    name: '퓨둘',
-    profileImg:
-      '/Users/wonil/Library/Developer/CoreSimulator/Devices/B3A8DAE7-B6C0-4B43-A42C-1511F074F1D3/data/Containers/Data/Application/4F7A8AFA-2D8E-4121-A252-18530A186BE2/tmp/react-native-image-crop-picker/4BDE37C2-C0F0-473B-9876-2388898723DF.jpg',
-    profileImgFile: undefined,
-    birthDate: '2024-12-11',
-    gender: 'MALE',
-    isNeutered: 'FALSE',
-    breed: '리트리버',
-    weight: 15.64,
-    comment: 'hihi',
-  });
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
+export const EditDogProfile = () => {
+  const route = useRoute();
+  const { dogId } = route.params as { dogId: number };
+  const targetDogProfile = useDogInfoById({ dogId });
+  const [dogProfile, setDogProfile] = useState<DogProfileType>(INITIAL_DOG_PROFILE);
   const { requestAndCheckPermission } = usePermission();
   const { getImageFile, handleImagePicker } = useImagePicker();
-  const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDatePickerOpen, setisDatePickerOpen] = useState(false);
+  const { showFormErrorToast } = useToast();
+  const { updateDog, deleteDog } = useDogProfile(dogId);
+  const navigation = useNavigation();
 
   const deviceHeight = Dimensions.get('screen').height;
+
+  useEffect(() => {
+    if (targetDogProfile) {
+      setDogProfile({
+        name: targetDogProfile.dogName,
+        profileImg: targetDogProfile.dogProfileImg,
+        birthDate: targetDogProfile.dogBirthDate,
+        gender: targetDogProfile.dogGender,
+        ...targetDogProfile,
+      });
+    }
+  }, [targetDogProfile]);
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile(prevState => ({ ...prevState, [key]: value }));
   };
 
-  const handleClickConfirm = () => {
+  const handleUpdateConfirm = () => {
     const error = validateBasicProfile(dogProfile) || validateDetailProfile(dogProfile);
     if (error) {
       showFormErrorToast(error, confirmButtonRef);
       return;
     }
-    console.log(dogProfile);
+    updateDog.mutate(dogProfile, {
+      onSuccess: () => navigation.goBack(),
+    });
+  };
+
+  const handleClickDelete = () => {
+    Alert.alert('정말로 삭제하시겠습니까?', '삭제된 반려견은 복구할 수 없습니다.', [
+      {
+        text: '삭제하기',
+        onPress: () =>
+          deleteDog.mutate(dogId, {
+            onSuccess: () => navigation.goBack(),
+          }),
+      },
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+    ]);
   };
 
   const handleAddImageButton = async () => {
@@ -62,6 +87,7 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
     updateField('profileImg', image.path);
     updateField('profileImgFile', getImageFile(image));
   };
+
   return (
     <S.EditDogProfile>
       <S.StyledScrollView contentContainerStyle={{ gap: 20, alignItems: 'center' }}>
@@ -118,29 +144,24 @@ export const EditDogProfile = ({}: EditDogProfileProps) => {
         />
         <S.ActionButtonWrapper ref={confirmButtonRef}>
           <ActionButton
-            onPress={handleClickConfirm}
+            onPress={handleUpdateConfirm}
             text="확인"
             disabled={isDatePickerOpen}
             bgColor={validateBasicProfile(dogProfile) && validateDetailProfile(dogProfile) ? 'gc_1' : 'default'}
           />
         </S.ActionButtonWrapper>
-        <DatePicker
-          title={' '}
-          modal
+        <S.DeleteButton onPress={handleClickDelete}>
+          <S.DeleteButtonText fontSize={17}>삭제하기</S.DeleteButtonText>
+        </S.DeleteButton>
+        <CustomDatePicker
           open={isDatePickerOpen}
-          date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
+          date={new Date()}
           onConfirm={date => {
             setisDatePickerOpen(false);
             const formattedDate = dateToString(date, '. ');
             updateField('birthDate', formattedDate);
           }}
           onCancel={() => setisDatePickerOpen(false)}
-          mode="date"
-          locale="ko"
-          confirmText="확인"
-          cancelText="취소"
-          minimumDate={new Date(2000, 0, 1)}
-          maximumDate={new Date()}
         />
         <SearchModal isVisible={isModalVisible} setIsVisible={setIsModalVisible} setBreed={updateField} />
       </S.StyledScrollView>

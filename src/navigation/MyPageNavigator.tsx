@@ -11,7 +11,7 @@ export type MyPageStackProps = {
   Setting: undefined;
   Block: undefined;
   ProfileEdit: undefined;
-  DogProfileEdit: undefined;
+  DogProfileEdit: { dogId: number };
 };
 
 const Stack = createNativeStackNavigator<MyPageStackProps>();

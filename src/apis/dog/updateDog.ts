@@ -5,7 +5,7 @@ import { APIResponse } from '~types/api';
 import { ResponseDogProfile } from '~types/dog-profile';
 
 export const updateDog = async (
-  dogId: { dogId: number },
+  dogId: number,
   dogProfile: DogProfileType,
 ): Promise<APIResponse<ResponseDogProfile>> => {
   try {
@@ -39,9 +39,6 @@ export const updateDog = async (
       console.error('Error Response:', errorResponse);
       console.error('Status Code:', error.response.status);
       throw new Error(errorResponse.message || 'HTTP Error occurred');
-    } else if (error instanceof Error) {
-      console.error('Error Message:', error.message);
-      throw new Error(error.message || 'Unknown error occurred');
     } else {
       console.error(error);
       throw new Error('An unexpected error occurred');
