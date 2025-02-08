@@ -1,7 +1,7 @@
 import styled from '@emotion/native';
 import { TextBold, TextMedium } from '~components/Common/Text';
 
-export const Talk = styled.View`
+export const TalkTab = styled.View`
   padding: 0 20px;
   justify-content: center;
 `;

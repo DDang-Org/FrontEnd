@@ -3,9 +3,9 @@ import { Suspense, useState } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
 import { BlockedUsersFallback } from '~components/MyPage/Block/BlockedUsers/fallback';
 import { BlockedUsersLoader } from '~components/MyPage/Block/BlockedUsers/loader';
-import { Friend } from '~components/Social/Friend';
+import { FriendTab } from '~components/Social/Friend';
 import { Tab } from '~components/Social/Tab';
-import { Talk } from '~components/Social/Talk';
+import { TalkTab } from '~components/Social/Talk';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
 
@@ -23,11 +23,11 @@ export const SocialScreen = ({}: Props) => {
       {selectedTab === '댕친' ? (
         <ErrorBoundary FallbackComponent={BlockedUsersFallback}>
           <Suspense fallback={<BlockedUsersLoader />}>
-            <Friend />
+            <FriendTab />
           </Suspense>
         </ErrorBoundary>
       ) : (
-        <Talk />
+        <TalkTab />
       )}
     </S.SocialScreen>
   );

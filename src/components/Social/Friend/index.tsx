@@ -1,8 +1,12 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useBlockedUsers } from '~apis/member/useBlockedUsers';
 import { UserInfo } from '~components/Common/UserInfo';
+import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
-export const Friend = () => {
+export const FriendTab = () => {
+  const navigation = useNavigation<NavigationProp<TabBarParamList>>();
   const blockedUsers = useBlockedUsers();
+
   return (
     <UserInfo>
       (
@@ -19,7 +23,8 @@ export const Friend = () => {
           <UserInfo.Item
             {...item}
             isLast={index === blockedUsers.length - 1}
-            onPressButton={() => console.log(`${item.name} button clicked`)}
+            // 채팅창 띄우기
+            onPressButton={() => navigation.navigate('Talk', { userId: item.userId })}
           />
         )}
       />
