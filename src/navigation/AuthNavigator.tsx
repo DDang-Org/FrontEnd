@@ -2,9 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@emotion/react';
 import { Login } from '~screens/Login';
 import { RegisterOwnerProfile } from '~screens/RegisterOwner/OwnerProfile';
+import { KakaoLogin } from '~screens/Auth/KakaoLogin';
 
 export type AuthParamList = {
   Login: undefined;
+  KakaoLogin: undefined;
   OwnerProfile: undefined;
 };
 
@@ -36,6 +38,7 @@ export const AuthNavigator = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen name="KakaoLogin" component={KakaoLogin} options={{ headerTitle: '카카오 로그인' }} />
       <Stack.Screen
         name="OwnerProfile"
         component={RegisterOwnerProfile}
