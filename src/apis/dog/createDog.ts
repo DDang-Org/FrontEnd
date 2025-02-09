@@ -31,15 +31,7 @@ export const createDog = async (dogProfile: DogProfileType): Promise<APIResponse
 
     return response;
   } catch (error) {
-    if (error instanceof HTTPError) {
-      const errorResponse = await error.response.json();
-      console.error('Error Response:', errorResponse);
-      console.error('Status Code:', error.response.status);
-    } else if (error instanceof Error) {
-      console.error('Error Message:', error.message);
-    } else {
-      console.error(error);
-    }
+    console.error(error as HTTPError);
     throw error;
   }
 };

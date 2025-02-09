@@ -22,17 +22,15 @@ export const RootNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Auth" component={AuthNavigator} />
-      <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
       <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
+      <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
+      <Stack.Screen name="Auth" component={AuthNavigator} />
       <Stack.Screen
         name="RegisterOwner"
         component={RegisterOwnerNavigator}
         options={{ headerShown: true, headerTitle: '' }}
       />
-      <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
-
       <Stack.Screen name="Login" component={LoginNavigator} options={{ headerTitle: '' }} />
     </Stack.Navigator>
   );

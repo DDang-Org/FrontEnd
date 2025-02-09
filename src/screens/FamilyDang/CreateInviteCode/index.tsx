@@ -2,9 +2,12 @@ import { TextBold, TextRegular } from '~components/Common/Text';
 import * as S from './styles';
 import { Timer } from '~components/FamilyDang/Timer';
 import { Icon } from '~components/Common/Icons';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Share } from 'react-native';
+import { useCreateInviteCode } from '~apis/family/useInviteCode';
 
 export const CreateInviteCode = () => {
+  const { data, refetch } = useCreateInviteCode();
+
   return (
     <SafeAreaView>
       <S.StyledScrollView contentContainerStyle={{ paddingBottom: 130 }}>
@@ -16,15 +19,15 @@ export const CreateInviteCode = () => {
           <TextRegular fontSize={17}>관리할 수 있어요.</TextRegular>
           <S.DogImage />
         </S.TextArea>
-        <S.CopyInviteCode onPress={() => console.log('초대 코드 복사')}>
+        <S.CopyInviteCode onPress={async () => await Share.share({ message: '공유할 메세지' })}>
           <TextBold fontSize={15} color="sub">
-            초대 코드 복사
+            초대 코드 공유
           </TextBold>
-          <TextBold fontSize={15}>GaMJATaNG01</TextBold>
+          <TextBold fontSize={15}>{data.inviteCode}</TextBold>
         </S.CopyInviteCode>
         <S.TimerWrapper>
           <TextBold fontSize={15}>유효 시간</TextBold>
-          <Timer time={300} onTimeEnd={() => console.log('타이머 종료')} />
+          <Timer time={data.expiresInSeconds} onTimeEnd={() => refetch()} />
         </S.TimerWrapper>
         <S.Separator />
         <S.InviteGuideArea>
