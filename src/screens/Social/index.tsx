@@ -5,7 +5,7 @@ import { BlockedUsersFallback } from '~components/MyPage/Block/BlockedUsers/fall
 import { BlockedUsersLoader } from '~components/MyPage/Block/BlockedUsers/loader';
 import { FriendTab } from '~components/Social/Friend';
 import { Tab } from '~components/Social/Tab';
-import { TalkTab } from '~components/Social/Talk';
+import { TalkTab } from '~components/Social/TalkTab';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
 

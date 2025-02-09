@@ -1,5 +1,6 @@
 import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
+import { AvatarNumber } from '~types/avatar-number';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
 
@@ -15,7 +16,7 @@ export type FetchChatRoomsResponseType = {
       email: string;
       memberGender: Gender;
       familyRole: FamilyRole;
-      memberProfileImg: number;
+      memberProfileImg: AvatarNumber;
     },
   ];
 }[];

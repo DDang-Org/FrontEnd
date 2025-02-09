@@ -35,7 +35,7 @@ export const TalkScreen = ({ navigation, route }: TalkScreenProps) => {
     <S.Talk>
       <S.Header>
         <S.LeftContentContainer>
-          <Icon.Prev style={{ marginRight: 8 }} />
+          <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.navigate('Social')} />
           <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
           <S.TypoWrapper>
             <S.Name fontSize={15}>{name}</S.Name>

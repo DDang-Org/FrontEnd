@@ -7,7 +7,7 @@ import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
 export const FriendTab = () => {
   const friends = useFriends();
-  console.log(friends);
+  console.log({ friends });
   return (
     <UserInfo>
       (
