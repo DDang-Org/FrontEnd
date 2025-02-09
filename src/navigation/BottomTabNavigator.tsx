@@ -15,6 +15,7 @@ import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
+import { TalkScreen } from '~screens/Talk';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -24,6 +25,7 @@ export type TabBarParamList = {
   MyPage: undefined;
   Profile: { userId: number };
   FamilyDDang: { screen?: keyof FamilyDdangParamList };
+  Talk: { userId: number };
 };
 
 const Tab = createBottomTabNavigator<TabBarParamList>();
@@ -114,12 +116,23 @@ export const BottomTabNavigator = () => {
             fontFamily: 'SUIT-Bold',
             fontSize: 18,
           },
-          headerLeftContainerStyle: {
-            paddingLeft: 14,
-          },
-          headerLeft: () => <Prev onPress={() => navigation.goBack()} />,
+          headerLeft: () => (
+            <View style={{ paddingLeft: 14 }}>
+              <Prev onPress={() => navigation.goBack()} />
+            </View>
+          ),
           animation: 'shift',
         })}
+      />
+      <Tab.Screen
+        name="Talk"
+        component={TalkScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: {
+            display: 'none',
+          },
+        }}
       />
     </Tab.Navigator>
   );

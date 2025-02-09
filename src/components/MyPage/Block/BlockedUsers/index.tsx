@@ -5,16 +5,21 @@ export const BlockedUsers = () => {
   const blockedUsers = useBlockedUsers();
 
   return (
-    <UserInfo.Container
-      data={blockedUsers?.map(user => ({ ...user, userId: user.memberId, onPressButton: () => {}, isLast: false }))}
-      keyExtractor={(item, index) => `${item.name}-${index}`}
-      renderItem={({ item, index }) => (
+    <UserInfo.Container>
+      {blockedUsers?.map((user, idx) => (
         <UserInfo.Item
-          {...item}
-          isLast={index === blockedUsers.length - 1} // Mark the last item
-          onPressButton={() => console.log(`${item.name} button clicked`)}
+          key={user.memberId}
+          avatarNumber={user.avatarNumber}
+          buttonText={user.buttonText}
+          dogGender={user.dogGender}
+          familyRole={user.familyRole}
+          gender={user.gender}
+          name={user.name}
+          onPressButton={() => {}}
+          userId={user.memberId}
+          isLast={idx === blockedUsers.length - 1}
         />
-      )}
-    />
+      ))}
+    </UserInfo.Container>
   );
 };

@@ -2,8 +2,6 @@ import styled from '@emotion/native';
 import { TextBold } from '~components/Common/Text';
 
 export const UnreadChatCount = styled.View`
-  position: absolute;
-  left: 20px;
   border-radius: 22px;
   background-color: ${({ theme }) => theme.colors.sub};
   min-width: 20px;
