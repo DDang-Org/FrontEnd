@@ -1,12 +1,9 @@
 import styled from '@emotion/native';
-import { FlatList } from 'react-native';
 import { TextBold, TextMedium } from '~components/Common/Text';
-import { UserItemProps } from '~components/Common/UserInfo';
 
 export const UserInfo = styled.View``;
 
-//todo 친구 목록에서의 타입도 추가
-export const Container = styled(FlatList<UserItemProps>)`
+export const Container = styled.ScrollView`
   background-color: ${({ theme }) => theme.colors.gc_4};
 `;
 export const Item = styled.View`
