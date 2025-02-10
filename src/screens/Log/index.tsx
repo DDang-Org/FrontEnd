@@ -1,21 +1,33 @@
-import styled from '@emotion/native';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import * as S from './styles';
+import { useState } from 'react';
+import { View } from 'react-native';
+import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useWalkLog } from '~apis/log/useWalkLog';
+import { Calendar } from '~components/Log/Calendar';
+import { NoWalkLog } from '~components/Log/NoWalkLog';
+import { WalkLogCard } from '~components/Log/WalkLogCard';
+import { dateToString } from '~utils/dateFormat';
 
-const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
-type Props = BottomTabScreenProps<TabBarParamList, 'Log'>;
-
-export const LogScreen = ({}: Props) => {
+export const LogHome = () => {
+  const [date, setDate] = useState(new Date());
+  const { logDetails } = useWalkLog(dateToString(date, '-'));
   return (
-    <SafeContainer>
-      <Text>LogScreen</Text>
-    </SafeContainer>
+    <GestureHandlerRootView>
+      <S.LogHome>
+        <Calendar setDate={setDate} />
+        <FlatList
+          contentContainerStyle={{
+            padding: 20,
+            paddingBottom: 26,
+            flex: 1,
+          }}
+          data={logDetails}
+          renderItem={({ item }) => <WalkLogCard logDetail={item} />}
+          keyExtractor={item => item.walkId.toString()}
+          ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+          ListEmptyComponent={<NoWalkLog />}
+        />
+      </S.LogHome>
+    </GestureHandlerRootView>
   );
 };

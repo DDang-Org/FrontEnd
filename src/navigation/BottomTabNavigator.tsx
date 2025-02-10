@@ -1,15 +1,21 @@
 /* eslint-disable react/no-unstable-nested-components */
 
 import { css } from '@emotion/native';
+import { useTheme } from '@emotion/react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { IconButtonProps } from 'react-native-vector-icons/Icon';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+import Prev from '~assets/icons/prev.svg';
 import { HomeNavigator } from '~navigation/HomeNavigator';
+import { MyPageNavigator } from '~navigation/MyPageNavigator';
 import { FamilyDangScreen } from '~screens/FamilyDang';
-import { LogScreen } from '~screens/Log';
-import { MyPageScreen } from '~screens/MyPage';
+import { ProfileScreen } from '~screens/Profile';
+import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
+import { TalkScreen } from '~screens/Talk';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -17,7 +23,9 @@ export type TabBarParamList = {
   Social: undefined;
   FamilyDang: undefined;
   MyPage: undefined;
-  Profile: { userId: string };
+  Profile: { userId: number };
+  FamilyDDang: { screen?: keyof FamilyDdangParamList };
+  Talk: { userId: number };
 };
 
 const Tab = createBottomTabNavigator<TabBarParamList>();
@@ -29,11 +37,12 @@ const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: strin
       justify-content: center;
     `}
   >
-    <Icon name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
+    <Icon2 name={`${name}${focused ? '' : '-outline'}`} size={size} color={color} />
   </View>
 );
 
 export const BottomTabNavigator = () => {
+  const theme = useTheme();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -51,7 +60,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Log"
-        component={LogScreen}
+        component={WalkLogNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="calendar" size={size} color={color} focused={focused} />
@@ -74,15 +83,55 @@ export const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
           ),
+          header: () => <FamilyDDangHeaderComponent />,
+          headerShown: true,
         }}
       />
+
       <Tab.Screen
         name="MyPage"
-        component={MyPageScreen}
+        component={MyPageNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="person" size={size} color={color} focused={focused} />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={({ navigation }) => ({
+          tabBarButton: () => null,
+          tabBarItemStyle: {
+            display: 'none',
+          },
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTintColor: theme.colors.font_1,
+          headerStyle: {
+            backgroundColor: theme.colors.lighten_3,
+          },
+          headerShadowVisible: false,
+          headerTitleStyle: {
+            fontFamily: 'SUIT-Bold',
+            fontSize: 18,
+          },
+          headerLeft: () => (
+            <View style={{ paddingLeft: 14 }}>
+              <Prev onPress={() => navigation.goBack()} />
+            </View>
+          ),
+          animation: 'shift',
+        })}
+      />
+      <Tab.Screen
+        name="Talk"
+        component={TalkScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: {
+            display: 'none',
+          },
         }}
       />
     </Tab.Navigator>

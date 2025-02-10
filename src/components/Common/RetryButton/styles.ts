@@ -3,6 +3,7 @@ import { Pressable } from 'react-native';
 import { TextBold } from '~components/Common/Text';
 
 export const RetryButton = styled(Pressable)`
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.font_1};
   padding: 4px;
   border-radius: 8px;
