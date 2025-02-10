@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createDog } from '~apis/dog/createDog';
 import { deleteDog } from '~apis/dog/deleteDog';
@@ -13,10 +12,8 @@ const successMessage = {
   DELETE_DOG: '반려견 삭제가 완료되었습니다',
 };
 
-const queryClient = useQueryClient();
-const navigation = useNavigation();
-
 export const useCreateDog = (mutationOptions?: UseMutationCustomOptions) => {
+  const queryClient = useQueryClient();
   const { successToast } = useToast();
   return useMutation({
     mutationFn: createDog,
@@ -26,31 +23,34 @@ export const useCreateDog = (mutationOptions?: UseMutationCustomOptions) => {
   });
 };
 
-export const useDogProfile = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
+export const useUpdateDog = (mutationOptions?: UseMutationCustomOptions) => {
+  const queryClient = useQueryClient();
   const { successToast } = useToast();
-  const useUpdateDog = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
-    return useMutation({
-      mutationFn: (dogProfile: DogProfileType) => updateDog(dogId, dogProfile),
-      onSuccess: () => successToast(successMessage['UPDATE_DOG']),
-      onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
-      ...mutationOptions,
-    });
-  };
+  return useMutation({
+    mutationFn: ({ dogId, dogProfile }: { dogId: number; dogProfile: DogProfileType }) => updateDog(dogId, dogProfile),
+    onSuccess: () => successToast(successMessage['UPDATE_DOG']),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
+    ...mutationOptions,
+  });
+};
 
-  const useDeleteDog = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
-    return useMutation({
-      mutationFn: () => deleteDog(dogId),
-      onSuccess: () => successToast(successMessage['DELETE_DOG']),
-      onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
-      ...mutationOptions,
-    });
-  };
+export const useDeleteDog = (mutationOptions?: UseMutationCustomOptions) => {
+  const queryClient = useQueryClient();
+  const { successToast } = useToast();
+  return useMutation({
+    mutationFn: (dogId: number) => deleteDog(dogId),
+    onSuccess: () => successToast(successMessage['DELETE_DOG']),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
+    ...mutationOptions,
+  });
+};
 
-  const updateDogMutation = useUpdateDog(dogId, mutationOptions);
-  const deleteDogMutation = useDeleteDog(dogId, mutationOptions);
+export const useDogProfile = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
+  const updateDogMutation = useUpdateDog(mutationOptions);
+  const deleteDogMutation = useDeleteDog(mutationOptions);
 
   return {
-    updateDog: updateDogMutation,
-    deleteDog: deleteDogMutation,
+    updateDog: (dogProfile: DogProfileType) => updateDogMutation.mutate({ dogId, dogProfile }),
+    deleteDog: () => deleteDogMutation.mutate(dogId),
   };
 };
