@@ -17,7 +17,6 @@ export const validateBasicProfile = (dogProfile: DogProfileType): string | null 
   if (!HangeulRegex.test(name) || name.length > 10) return '최대 10자의 한글이름만 사용해 주세요';
   if (!profileImg) return '반려견의 사진을 등록해주세요';
   if (profileImgFile && !profileImgFile.type.startsWith('image/')) return '올바른 이미지 파일이 아닙니다';
-  if (profileImgFile && profileImgFile.size > 5 * 1024 * 1024) return '이미지 크기는 5MB 이하여야 합니다';
   if (!birthDate) return '반려견의 생일을 입력해주세요';
   if (isFutureDate(stringToDate(birthDate, '-'))) return '생일은 미래 날짜를 선택할 수 없습니다';
   if (!comment) return '한줄 소개를 적어주세요';

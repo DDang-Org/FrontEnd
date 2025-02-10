@@ -6,7 +6,7 @@ export const SOCIAL_LOGIN_BUTTONS = [
     textColor: '#000000',
     IconComponent: Icon.Kakao,
     text: '카카오계정 로그인',
-    onPress: (navigation: any) => navigation.navigate('RegisterOwner', { screen: 'OwnerProfile' }),
+    onPress: (navigation: any) => navigation.navigate('KakaoLogin'),
   },
   {
     backgroundColor: '#F2F2F2',

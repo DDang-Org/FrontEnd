@@ -9,6 +9,8 @@ import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { validateFamilyCode } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
+import { useVerifyInviteCode } from '~apis/family/useInviteCode';
+import { HTTPError } from 'ky';
 
 type InviteCodeProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.INVITE_CODE>;
 
@@ -16,6 +18,7 @@ export const InviteCode = ({ navigation }: InviteCodeProps) => {
   const [inviteCode, setInviteCode] = useState('');
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
+  const inviteCodeMutation = useVerifyInviteCode();
 
   const handleClickConfirm = () => {
     const error = validateFamilyCode(inviteCode);
@@ -23,7 +26,26 @@ export const InviteCode = ({ navigation }: InviteCodeProps) => {
       showFormErrorToast(error, confirmButtonRef);
       return;
     }
-    navigation.navigate(RegisterDogNavigations.DOG_CONFIRMATION, { inviteCode: inviteCode });
+    inviteCodeMutation.mutate(inviteCode, {
+      onSuccess: response =>
+        navigation.navigate(RegisterDogNavigations.DOG_CONFIRMATION, {
+          inviteCode: inviteCode,
+          dogInfos: response.data,
+        }),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          try {
+            const errorData = await error.response.json();
+            const message = errorData.message;
+            showFormErrorToast(message, confirmButtonRef);
+          } catch (parseError) {
+            console.error('Failed to parse error response:', parseError);
+          }
+        } else {
+          console.error('Unexpected Error:', error);
+        }
+      },
+    });
   };
 
   return (

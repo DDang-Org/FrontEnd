@@ -1,12 +1,12 @@
 import * as S from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~navigation/RootNavigator';
 import Dog from '~assets/dogs/dog-walk.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LoginComment } from '~components/Login/\bLoginComment/index';
 import { SOCIAL_LOGIN_BUTTONS } from '~components/Login/LoginButton';
+import { AuthParamList } from '~navigation/AuthNavigator';
 
-type RootNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type RootNavigationProp = NativeStackScreenProps<AuthParamList, 'Login'>;
 
 export const Login = ({ navigation }: RootNavigationProp) => {
   return (

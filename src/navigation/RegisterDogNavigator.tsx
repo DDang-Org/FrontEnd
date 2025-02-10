@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FetchMyDogInfoResponseType } from '~apis/dog/fetchMyDogInfo';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { DogProfileProvider } from '~providers/DogProfileProvider';
 import { RegisterDog } from '~screens/RegisterDog';
@@ -12,7 +13,7 @@ export type RegisterDogParamList = {
   BasicProfile: undefined;
   DetailProfile: undefined;
   InviteCode: undefined;
-  DogConfirmation: { inviteCode: string };
+  DogConfirmation: { inviteCode: string; dogInfos: FetchMyDogInfoResponseType };
 };
 
 export const RegisterDogNavigator = () => {

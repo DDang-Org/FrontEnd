@@ -28,6 +28,11 @@ import GpsIcon from '~assets/icons/gps.svg';
 import DogHowling from '~assets/dogs/dog-howling.svg';
 import DogAnnoyed from '~assets/dogs/dog-annoyed.svg';
 import DogDisappointed from '~assets/dogs/dog-disappointed.svg';
+import StandingDog from '~assets/dogs/dog-stand-pose.svg';
+import FamilyInvitationGuide from '~assets/family-invitation-guide.svg';
+import FamilyJoinGuide from '~assets/family-join-guide.svg';
+import FamilyJoinGuide2 from '~assets/family-join-guide2.svg';
+import FamilyJoinGuide3 from '~assets/family-join-guide3.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -59,4 +64,9 @@ export const Icon = {
   DogHowling: (props: SvgProps) => <DogHowling {...props} />,
   DogAnnoyed: (props: SvgProps) => <DogAnnoyed {...props} />,
   DogDisappointed: (props: SvgProps) => <DogDisappointed {...props} />,
+  StandingDog: (props: SvgProps) => <StandingDog {...props} />,
+  FamilyInvitationGuide: (props: SvgProps) => <FamilyInvitationGuide {...props} />,
+  FamilyJoinGuide: (props: SvgProps) => <FamilyJoinGuide {...props} />,
+  FamilyJoinGuide2: (props: SvgProps) => <FamilyJoinGuide2 {...props} />,
+  FamilyJoinGuide3: (props: SvgProps) => <FamilyJoinGuide3 {...props} />,
 };

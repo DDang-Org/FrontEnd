@@ -35,7 +35,7 @@ export const ImagePreviewer = styled.Image`
   bottom: 0;
   right: 0;
   left: 0;
-  border-radius: 50%;
+  border-radius: 50px;
 `;
 
 export const InputArea = styled.View`

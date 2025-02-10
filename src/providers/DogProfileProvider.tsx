@@ -2,11 +2,12 @@ import { Provider } from 'jotai';
 import { Gender } from '~types/gender';
 import { PropsWithChildren } from 'react';
 import { atomWithReset } from 'jotai/utils';
+import { ImageFileType } from '~types/image-file';
 
 export interface DogProfileType {
   name: string;
   profileImg: string;
-  profileImgFile?: File;
+  profileImgFile?: ImageFileType;
   birthDate: string;
   gender: Gender | null;
   isNeutered: 'TRUE' | 'FALSE';
