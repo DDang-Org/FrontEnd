@@ -19,6 +19,7 @@ type ResizeButtonProps = {
   disabled?: boolean;
   onPress?: () => void;
   text: string;
+  children?: React.ReactNode;
   width?: string;
   flexGrow?: boolean;
   style?: ViewStyle;
@@ -47,6 +48,7 @@ export const ResizeButton = ({
   flexGrow = false,
   onPress,
   text,
+  children,
   style,
   ...rest
 }: ResizeButtonProps) => {
@@ -67,9 +69,11 @@ export const ResizeButton = ({
       style={style}
       {...rest}
     >
-      <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
-        {text}
-      </S.ButtonText>
+      {children || (
+        <S.ButtonText fontSize={17} color={disabled ? 'font_4' : ACTION_BUTTON_FONT_COLORS[bgColor]}>
+          {text}
+        </S.ButtonText>
+      )}
     </S.ResizeButton>
   );
 };

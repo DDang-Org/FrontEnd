@@ -1,7 +1,15 @@
+import { useInfiniteNotifications } from '~apis/notification/useInfiniteNotifications';
+import { DescriptionWithTimeStamp } from '~components/Common/DescriptionWithTimeStamp';
 import * as S from './styles';
 
-interface NotificationProps {}
+export const NotificationScreen = () => {
+  const notifications = useInfiniteNotifications();
 
-export const NotificationScreen = ({}: NotificationProps) => {
-  return <S.NotificationScreen />;
+  return (
+    <S.NotificationScreen>
+      {notifications?.pages.map(n =>
+        n.data.content.map(d => <DescriptionWithTimeStamp description={d.content} time={d.createdAt.slice(0, 10)} />),
+      )}
+    </S.NotificationScreen>
+  );
 };

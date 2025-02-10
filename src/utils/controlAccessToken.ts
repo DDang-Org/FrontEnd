@@ -1,28 +1,28 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const KEY = 'accessToken';
 
 export const storeAccessToken = async (accessToken: string) => {
   try {
-    await AsyncStorage.setItem(KEY, accessToken);
+    await EncryptedStorage.setItem(KEY, accessToken);
   } catch (error) {
-    console.error('Error storing the access token', error);
+    console.error('Failed to save access token:', error);
   }
 };
 
-export const getAccessToken = async (): Promise<string | null> => {
+export const getAccessToken = async () => {
   try {
-    return await AsyncStorage.getItem(KEY);
+    return await EncryptedStorage.getItem(KEY);
   } catch (error) {
-    console.error('Error retrieving the access token', error);
+    console.error('Failed to fetch access token:', error);
     return null;
   }
 };
 
 export const removeAccessToken = async () => {
   try {
-    await AsyncStorage.removeItem(KEY);
+    await EncryptedStorage.removeItem(KEY);
   } catch (error) {
-    console.error('Error removing the access token', error);
+    console.error('Failed to remove access token:', error);
   }
 };
