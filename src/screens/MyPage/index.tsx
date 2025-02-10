@@ -14,8 +14,29 @@ const SafeContainer = styled(SafeAreaView)`
 
 export const MyPageScreen = ({}: Props) => {
   return (
-    <SafeContainer edges={['top']}>
-      <Text>This is My profile</Text>
-    </SafeContainer>
+    <S.MyPage>
+      <S.Header>
+        <S.Title fontSize={17}>마이페이지</S.Title>
+        <S.GearWrapper>
+          <Icon.Gear onPress={() => navigation.navigate('Setting')} />
+        </S.GearWrapper>
+      </S.Header>
+      <ErrorBoundary FallbackComponent={UserProfileFallback}>
+        <Suspense fallback={<UserProfileLoader />}>
+          <UserProfile navigateToProfileEdit={() => navigation.navigate('ProfileEdit')} />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={WalkInfoFallback}>
+        <Suspense fallback={<WalkInfoLoader />}>
+          <WalkInfo dogId={1} />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={DogProfileFallback}>
+        <Suspense fallback={<DogProfileLoader />}>
+          {/* 여기에 강아지 아이디 넣어줄것 */}
+          <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit', { dogId: 0 })} />
+        </Suspense>
+      </ErrorBoundary>
+    </S.MyPage>
   );
 };

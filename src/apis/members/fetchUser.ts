@@ -4,13 +4,14 @@ import { FamilyRole } from '~types/family-role';
 
 export type FetchUserResponseType = {
   memberId: number;
-  name: string;
+  memberName: string;
   email: string;
   provider: string;
-  gender: string;
+  memberGender: Gender;
   address: string;
   familyRole: FamilyRole;
-  profileImg: string;
+  memberProfileImg: AvatarNumber;
+  memberBirthDate: string;
 };
 
 export const fetchUser = async (): Promise<APIResponse<FetchUserResponseType>> => {
