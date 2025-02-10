@@ -3,10 +3,11 @@ import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import Config from 'react-native-config';
 import ky from 'ky';
 
-const REDIRECT_URI = `https://ddang.site/login/oauth2/code/kakao`;
+const REDIRECT_URI = `https://ddang.pages.dev/register`;
 
 export const KakaoLogin = () => {
   const handleOnMessage = (event: WebViewMessageEvent) => {
+    console.log('url', event.nativeEvent);
     if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
       const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
 
