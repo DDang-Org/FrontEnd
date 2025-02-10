@@ -8,10 +8,11 @@ export interface ResponseJoinFamily {
 }
 
 export const joinFamily = async (inviteCode: string): Promise<APIResponse<ResponseJoinFamily>> => {
+  const code = { inviteCode };
   try {
     const response = await api
       .post('family/join', {
-        json: inviteCode,
+        json: code,
       })
       .json<APIResponse<ResponseJoinFamily>>();
     return response;

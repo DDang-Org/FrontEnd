@@ -13,16 +13,16 @@ export const useCreateInviteCode = () => {
   });
 };
 
-export const useVerifyInviteCode = (inviteCode: string, mutationOptions?: UseMutationCustomOptions) => {
+export const useVerifyInviteCode = (mutationOptions?: UseMutationCustomOptions) => {
   return useMutation({
-    mutationFn: () => verifyInviteCode(inviteCode),
+    mutationFn: (inviteCode: string) => verifyInviteCode(inviteCode),
     ...mutationOptions,
   });
 };
 
-export const useJoinFamily = (inviteCode: string, mutationOptions?: UseMutationCustomOptions) => {
+export const useJoinFamily = (mutationOptions?: UseMutationCustomOptions) => {
   return useMutation({
-    mutationFn: () => joinFamily(inviteCode),
+    mutationFn: (inviteCode: string) => joinFamily(inviteCode),
     ...mutationOptions,
   });
 };
