@@ -9,3 +9,7 @@ export const FAMILY_ROLE = {
 } as const;
 
 export type FamilyRole = keyof typeof FAMILY_ROLE;
+
+export const REVERSE_FAMILY_ROLE = Object.fromEntries(
+  Object.entries(FAMILY_ROLE).map(([key, value]) => [value, key]),
+) as { [key in (typeof FAMILY_ROLE)[keyof typeof FAMILY_ROLE]]: keyof typeof FAMILY_ROLE };
