@@ -14,11 +14,6 @@ const SafeContainer = styled(SafeAreaView)`
 
 export const MyPageScreen = ({}: Props) => {
   return (
-<<<<<<< HEAD
-    <SafeContainer edges={['top']}>
-      <Text>This is My profile</Text>
-    </SafeContainer>
-=======
     <S.MyPage>
       <S.Header>
         <S.Title fontSize={17}>마이페이지</S.Title>
@@ -43,6 +38,5 @@ export const MyPageScreen = ({}: Props) => {
         </Suspense>
       </ErrorBoundary>
     </S.MyPage>
->>>>>>> develop
   );
 };
