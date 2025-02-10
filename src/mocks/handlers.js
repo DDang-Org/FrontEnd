@@ -117,6 +117,7 @@ export const handlers = [
           address: '서울시 강남구',
           familyRole: 'FATHER',
           memberProfileImg: 1,
+          memberWalkCount: 4,
           isRepresent: false,
         },
         {
@@ -129,6 +130,7 @@ export const handlers = [
           address: '서울시 서초구',
           familyRole: 'MOTHER',
           memberProfileImg: 2,
+          memberWalkCount: 8,
           isRepresent: true,
         },
         {
@@ -141,6 +143,7 @@ export const handlers = [
           address: '서울시 송파구',
           familyRole: 'GRANDFATHER',
           memberProfileImg: 3,
+          memberWalkCount: 32,
           isRepresent: false,
         },
       ],
