@@ -49,10 +49,10 @@ export const FamilyList = () => {
             </S.LineWrapper>
             <S.LineWrapper>
               <S.MemberDetails fontSize={13}>
-                {item.memberGender === 'MALE' ? '남자' : '여자'} 
-                <Separator $height={8} /> 
+                {item.memberGender === 'MALE' ? '남자' : '여자'}
+                <Separator $height={8} />
                 {item.familyRole}
-                <Separator $height={8} /> 
+                <Separator $height={8} />
                 {item.memberBirthDate}세
               </S.MemberDetails>
             </S.LineWrapper>

@@ -87,25 +87,8 @@ export const handlers = [
       },
     });
   }),
-  http.get(`${BASE_URL}/dogs`, () => {
+  http.get(`${BASE_URL}/family`, () => {
     return HttpResponse.json({
-      data: {
-        dogId: 0,
-        dogName: '밤톨이',
-        breed: '포메라니안',
-        dogBirthDate: '2024-12-24',
-        weight: 6,
-        dogGender: 'MALE',
-        dogProfileImg: 'https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg',
-        isNeutered: 'TRUE',
-        familyId: 0,
-        comment: '우리아이 안 물어요 착해요. 강아지껌을 너무 좋아해요 같이 놀아요.',
-      },
-    });
-  }),
-  http.get(`${BASE_URL}/fmaily`),
-  () => {
-    return HttpResponse.jspn({
       data: [
         {
           memberId: 1,
@@ -148,7 +131,7 @@ export const handlers = [
         },
       ],
     });
-  },
+  }),
   http.get(`${BASE_URL}/member/block`, () => {
     return HttpResponse.json({
       data: [
