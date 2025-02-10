@@ -1,77 +1,47 @@
-import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { useEffect, useRef } from 'react';
+import SockJS from 'sockjs-client';
+import { Client } from '@stomp/stompjs';
 
-const SOCKET_URL = 'https://ddang.site/ws';
+const token =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiR09PR0xFIiwiZXhwIjoxNzQwMjQ4MjA3LCJlbWFpbCI6ImJibGJibGFuNjlAZ21haWwuY29tIn0.CpauBw9_yXlYQjr-BZP7xqm1u63pj1g1aM3kX9HwCm37BMhpOQGz1Mq8R42CihtC8henTRy0OHaxa7q9-1Svzw';
+
+const SERVER_URL = 'https://ddang.site/ws';
 
 export const useWebSocket = () => {
-  const clientRef = useRef<Client | null>(null);
+  const stompClientRef = useRef<Client | null>(null);
 
   useEffect(() => {
-    const connectWebSocket = async () => {
-      const token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiS0FLQU8iLCJleHAiOjE3Mzk3NjQwMDIsImVtYWlsIjoibWtoNjc5M0BuYXZlci5jb20ifQ.EF03NpevMSZ2DcM5Q-trEEmRa0KEb5HpJ1HlD-Vj8xy3N2JoFvdQFoWDJRM3IGVwx58L9T2oV7GBTr6wJOevnA';
+    const stompClient = new Client({
+      webSocketFactory: () => new SockJS(SERVER_URL),
+      reconnectDelay: 5000,
+      debug: msg => console.log(msg),
+      connectHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      const socket = new SockJS(SOCKET_URL);
+    stompClient.onConnect = frame => {
+      console.log('STOMP 연결 성공:', frame);
 
-      const client = new Client({
-        webSocketFactory: () => socket,
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-        connectionTimeout: 10000,
-
-        connectHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-
-        debug: msg => {
-          console.log('STOMP:', msg);
-        },
-
-        onConnect: () => {
-          console.log('웹소켓 연결 성공');
-        },
-
-        onStompError: frame => {
-          console.error('STOMP 에러:', frame.body);
-        },
-
-        onWebSocketError: event => {
-          console.error('웹소켓 에러:', event);
-        },
-      });
-
-      clientRef.current = client;
-      client.activate();
+      // 메시지 구독 예제
+      // stompClient.subscribe('/sub/walk/bblbblan69@gmail.com', message => {
+      //   console.log('받은 메시지:', message.body);
+      // });
     };
 
-    connectWebSocket();
+    stompClient.activate();
+    stompClientRef.current = stompClient;
 
     return () => {
-      if (clientRef.current) {
-        clientRef.current.deactivate();
-      }
+      stompClient.deactivate();
     };
   }, []);
 
-  // 메시지 전송 헬퍼 함수
-  const sendMessage = (destination: string, body: any) => {
-    if (clientRef.current?.connected) {
-      clientRef.current.publish({
-        destination,
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
-    } else {
-      console.warn('웹소켓이 연결되어 있지 않습니다.');
+  const sendMessage = (destination: string, body: string) => {
+    if (stompClientRef.current && stompClientRef.current.connected) {
+      stompClientRef.current.publish({ destination, body });
     }
   };
 
-  return {
-    client: clientRef.current,
-    sendMessage,
-  };
+  return { client: stompClientRef.current, sendMessage };
 };

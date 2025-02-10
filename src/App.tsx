@@ -1,14 +1,15 @@
 import styled from '@emotion/native';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
-import { Text } from 'react-native';
-import { useInitializeMsw } from '~hooks/useInitializeMsw';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
 import { useWebSocket } from '~hooks/useWebSocket';
 import { WebSocketProvider } from '~providers/WebSocketProvider';
+
+import 'react-native-url-polyfill/auto';
+import 'fast-text-encoding';
 
 const navTheme = {
   ...DefaultTheme,
@@ -33,13 +34,7 @@ const MainApp = () => {
 };
 
 export const App = () => {
-  const { isMswEnabled } = useInitializeMsw();
   const [storybookEnabled, setStorybookEnabled] = useState(false);
-
-  if (__DEV__ && !isMswEnabled) {
-    return <Text>Loading MSW...</Text>;
-  }
-
   const toggleStorybook = () => setStorybookEnabled(prev => !prev);
 
   return (
