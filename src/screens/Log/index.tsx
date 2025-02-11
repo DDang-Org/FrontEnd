@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { FlatList, GestureHandlerRootView, Pressable } from 'react-native-gesture-handler';
 import { useWalkLog } from '~apis/log/useWalkLog';
 import { Calendar } from '~components/Log/Calendar';
@@ -15,8 +15,11 @@ import { WalkLogNavigations } from '~constants/navigations';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { WalkLogParamList } from '~navigation/WalkLogNavigator';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
-import { DogListModal } from '../../components/Common/ListModal/index';
 import { getAge } from '~utils/getAge';
+import { DogListModal } from '~components/Common/ListModal';
+import { Portal, Provider } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ExtraDimensions from 'react-native-extra-dimensions-android';
 
 type NavigationProps = NativeStackNavigationProp<WalkLogParamList>;
 
@@ -27,6 +30,7 @@ export const LogHome = () => {
   const { logDetails, walkDates } = useWalkLog(selectedDogIndex, dateToString(date, '-'));
   const [dogListOpened, setDogListOpened] = useState(false);
   const navigation = useNavigation<NavigationProps>();
+  const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? useSafeAreaInsets().top : ExtraDimensions.get('STATUS_BAR_HEIGHT');
 
   const handleSelectDog = (selectedDog: any) => {
     myDogs.forEach((dog, index) => {
@@ -54,7 +58,7 @@ export const LogHome = () => {
           </Pressable>
         }
       />
-      <S.LogHome>
+      <S.LogHome statusBarHeight={STATUS_BAR_HEIGHT}>
         <Calendar setDate={setDate} walkDates={walkDates} />
         <FlatList
           contentContainerStyle={{
@@ -69,21 +73,25 @@ export const LogHome = () => {
           ListEmptyComponent={<NoWalkLog />}
         />
       </S.LogHome>
-      <DogListModal
-        type={'select'}
-        isVisible={dogListOpened}
-        dogs={myDogs.map(dog => ({
-          id: String(dog.dogId),
-          name: dog.dogName,
-          breed: dog.breed,
-          age: String(getAge(dog.dogBirthDate)),
-          gender: dog.dogGender,
-          walkCount: dog.walkCount,
-          imageUrl: dog.dogProfileImg,
-        }))}
-        onSelectDog={handleSelectDog}
-        onClose={() => setDogListOpened(false)}
-      />
+      <Provider>
+        <Portal>
+          <DogListModal
+            type={'select'}
+            isVisible={dogListOpened}
+            dogs={myDogs.map(dog => ({
+              id: String(dog.dogId),
+              name: dog.dogName,
+              breed: dog.breed,
+              age: String(getAge(dog.dogBirthDate)),
+              gender: dog.dogGender,
+              walkCount: dog.walkCount,
+              imageUrl: dog.dogProfileImg,
+            }))}
+            onSelectDog={handleSelectDog}
+            onClose={() => setDogListOpened(false)}
+          />
+        </Portal>
+      </Provider>
     </GestureHandlerRootView>
   );
 };
