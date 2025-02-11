@@ -14,18 +14,39 @@ import { Header } from '~components/Common/Header';
 import { WalkLogNavigations } from '~constants/navigations';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { WalkLogParamList } from '~navigation/WalkLogNavigator';
+import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
+import { DogListModal } from '../../components/Common/ListModal/index';
+import { getAge } from '~utils/getAge';
 
 type NavigationProps = NativeStackNavigationProp<WalkLogParamList>;
 
 export const LogHome = () => {
   const [date, setDate] = useState(new Date());
-  const { logDetails } = useWalkLog(dateToString(date, '-'));
+  const myDogs = useMyDogInfo();
+  const [selectedDogIndex, setSelectedDogIndex] = useState(0);
+  const { logDetails, walkDates } = useWalkLog(selectedDogIndex, dateToString(date, '-'));
+  const [dogListOpened, setDogListOpened] = useState(false);
   const navigation = useNavigation<NavigationProps>();
+
+  const handleSelectDog = (selectedDog: any) => {
+    myDogs.forEach((dog, index) => {
+      if (dog.dogId == selectedDog.id) {
+        setSelectedDogIndex(index);
+        setDogListOpened(false);
+        return;
+      }
+    });
+  };
+
   return (
     <GestureHandlerRootView>
       <Header
         left={
-          <DogProfile dogName="밤톨이" imageUri="https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg" />
+          <DogProfile
+            dogName={myDogs[selectedDogIndex].dogName}
+            imageUri={myDogs[selectedDogIndex].dogProfileImg}
+            onPress={() => setDogListOpened(true)}
+          />
         }
         right={
           <Pressable onPress={() => navigation.navigate(WalkLogNavigations.Stats)}>
@@ -34,7 +55,7 @@ export const LogHome = () => {
         }
       />
       <S.LogHome>
-        <Calendar setDate={setDate} />
+        <Calendar setDate={setDate} walkDates={walkDates} />
         <FlatList
           contentContainerStyle={{
             padding: 20,
@@ -48,6 +69,21 @@ export const LogHome = () => {
           ListEmptyComponent={<NoWalkLog />}
         />
       </S.LogHome>
+      <DogListModal
+        type={'select'}
+        isVisible={dogListOpened}
+        dogs={myDogs.map(dog => ({
+          id: String(dog.dogId),
+          name: dog.dogName,
+          breed: dog.breed,
+          age: String(getAge(dog.dogBirthDate)),
+          gender: dog.dogGender,
+          walkCount: dog.walkCount,
+          imageUrl: dog.dogProfileImg,
+        }))}
+        onSelectDog={handleSelectDog}
+        onClose={() => setDogListOpened(false)}
+      />
     </GestureHandlerRootView>
   );
 };

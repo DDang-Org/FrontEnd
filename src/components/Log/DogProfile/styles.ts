@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 
 export const DogProfile = styled.Pressable`
   flex-direction: row;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 `;
 
