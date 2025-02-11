@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
 import { useState } from 'react';
-import { Platform, View } from 'react-native';
-import { FlatList, GestureHandlerRootView, Pressable } from 'react-native-gesture-handler';
+import { Platform, ScrollView, View } from 'react-native';
+import { GestureHandlerRootView, Pressable } from 'react-native-gesture-handler';
 import { useWalkLog } from '~apis/log/useWalkLog';
 import { Calendar } from '~components/Log/Calendar';
 import { DogProfile } from '~components/Log/DogProfile';
@@ -60,18 +60,21 @@ export const LogHome = () => {
       />
       <S.LogHome statusBarHeight={STATUS_BAR_HEIGHT}>
         <Calendar setDate={setDate} walkDates={walkDates} />
-        <FlatList
+        <ScrollView
           contentContainerStyle={{
+            flexGrow: 1,
             padding: 20,
             paddingBottom: 26,
-            flex: 1,
           }}
-          data={logDetails}
-          renderItem={({ item }) => <WalkLogCard logDetail={item} />}
-          keyExtractor={item => item.walkId.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
-          ListEmptyComponent={<NoWalkLog />}
-        />
+        >
+          {logDetails?.map((item, index) => (
+            <View key={item.walkId || index}>
+              <WalkLogCard logDetail={item} />
+              <View style={{ height: 8 }} /> {/* ItemSeparatorComponent 대체 */}
+            </View>
+          ))}
+          {logDetails?.length === 0 && <NoWalkLog />} {/* ListEmptyComponent 대체 */}
+        </ScrollView>
       </S.LogHome>
       <Provider>
         <Portal>
