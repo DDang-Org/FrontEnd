@@ -11,7 +11,7 @@ export const ModalBackground = styled.TouchableOpacity`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const ModalContainer = styled(Animated.View)<{ type: 'walk' | 'default' }>`
+export const ModalContainer = styled(Animated.View)<{ type: 'walk' | 'default' | 'multi-select' }>`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -74,3 +74,26 @@ export const InfoContainer = styled.View`
 export const WalkText = styled(TextBold)``;
 
 export const SelectButton = styled(ResizeButton)``;
+
+interface ConfirmButtonProps {
+  bgColor?: string;
+}
+
+export const ConfirmButton = styled.TouchableOpacity<ConfirmButtonProps>`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: ${({ theme, bgColor }) => (bgColor === 'default' ? theme.colors.default : theme.colors.lighten_3)};
+  padding: 5px 10px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 40px;
+`;
+
+export const ConfirmButtonText = styled.Text`
+  color: ${({ theme }) => theme.colors.font_1};
+  font-size: 14px;
+  font-weight: bold;
+`;

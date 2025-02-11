@@ -1,37 +1,40 @@
 import { Modal, ScrollView, Animated, Dimensions, GestureResponderEvent } from 'react-native';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Separator } from '~components/Common/Seperator';
 import * as S from './styles';
+
+interface Dog {
+  dogId: number;
+  dogName: string;
+  breed: string;
+  dogBirthDate: string;
+  dogGender: string;
+  walkCount: number;
+  dogProfileImg: string;
+}
 
 interface DogListModalProps {
   isVisible: boolean;
   onClose: () => void;
-  dogs: {
-    id: string;
-    name: string;
-    breed: string;
-    age: string;
-    gender: string;
-    walkCount: number;
-    imageUrl: string;
-  }[];
-  onSelectDog: (dog: {
-    id: string;
-    name: string;
-    breed: string;
-    age: string;
-    gender: string;
-    walkCount: number;
-    imageUrl: string;
-  }) => void;
-  type?: 'walk' | 'default';
+  dogs: Dog[];
+  onSelectDog: (dog: Dog) => void;
+  onSelectMultipleDogs?: (dogs: Dog[]) => void;
+  type?: 'walk' | 'default' | 'multi-select';
 }
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const WALK_MODAL_HEIGHT = SCREEN_HEIGHT * 0.85;
 
-export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'default' }: DogListModalProps) => {
+export const DogListModal = ({
+  isVisible,
+  onClose,
+  dogs,
+  onSelectDog,
+  onSelectMultipleDogs,
+  type = 'default',
+}: DogListModalProps) => {
   const slideAnim = useRef(new Animated.Value(type === 'walk' ? WALK_MODAL_HEIGHT : 500)).current;
+  const [selectedDogs, setSelectedDogs] = useState<Dog[]>([]);
 
   useEffect(() => {
     if (isVisible) {
@@ -49,8 +52,24 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
         friction: 10,
       }).start();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, type]);
+
+  const toggleDogSelection = (dog: Dog) => {
+    setSelectedDogs(prevSelected => {
+      if (prevSelected.some(selectedDog => selectedDog.dogId === dog.dogId)) {
+        return prevSelected.filter(selectedDog => selectedDog.dogId !== dog.dogId);
+      } else {
+        return [...prevSelected, dog];
+      }
+    });
+  };
+
+  const handleConfirmSelection = () => {
+    if (onSelectMultipleDogs) {
+      onSelectMultipleDogs(selectedDogs);
+    }
+    onClose();
+  };
 
   return (
     <Modal visible={isVisible} transparent={true} onRequestClose={onClose} animationType="fade">
@@ -65,30 +84,48 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
         >
           <S.HeaderContainer>
             <S.Title>{type === 'walk' ? '강번따 리스트' : '강아지 리스트'}</S.Title>
+            {type === 'multi-select' && (
+              <S.ConfirmButton onPress={handleConfirmSelection} bgColor="lighten_3">
+                <S.ConfirmButtonText>선택 완료</S.ConfirmButtonText>
+              </S.ConfirmButton>
+            )}
           </S.HeaderContainer>
 
           <ScrollView>
             {dogs.map(dog => (
-              <S.DogItem key={dog.id}>
+              <S.DogItem
+                key={dog.dogId}
+                style={{
+                  backgroundColor: selectedDogs.some(selectedDog => selectedDog.dogId === dog.dogId)
+                    ? 'lightgray'
+                    : 'white',
+                }}
+              >
                 <S.DogImage
                   source={{
-                    uri: dog.imageUrl ? dog.imageUrl : '',
+                    uri: dog.dogProfileImg ? dog.dogProfileImg : '',
                   }}
                 />
                 <S.DogInfo>
-                  <S.NameText fontSize={17}>{dog.name}</S.NameText>
+                  <S.NameText fontSize={17}>{dog.dogName}</S.NameText>
                   <S.InfoContainer>
                     <S.InfoText fontSize={14}>{dog.breed}</S.InfoText>
                     <Separator $height={14} />
-                    <S.InfoText fontSize={14}>{dog.age}</S.InfoText>
+                    <S.InfoText fontSize={14}>{dog.dogBirthDate}</S.InfoText>
                     <Separator $height={14} />
-                    <S.InfoText fontSize={14}>{dog.gender}</S.InfoText>
+                    <S.InfoText fontSize={14}>{dog.dogGender}</S.InfoText>
                   </S.InfoContainer>
                   <S.WalkText fontSize={14}>산책 횟수 {dog.walkCount}회</S.WalkText>
                 </S.DogInfo>
                 <S.ButtonContainer>
                   <S.SelectButton
-                    onPress={() => onSelectDog(dog)}
+                    onPress={() => {
+                      if (type === 'multi-select') {
+                        toggleDogSelection(dog);
+                      } else {
+                        onSelectDog(dog);
+                      }
+                    }}
                     type="roundedRect"
                     bgColor="lighten_3"
                     text={type === 'walk' ? '강번따' : '추가'}
