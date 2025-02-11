@@ -1,8 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Pressable } from 'react-native';
+import { Header } from '~components/Common/Header';
 import { Icon } from '~components/Common/Icons';
-import { DogProfile } from '~components/Log/DogProfile';
 import { WalkLogNavigations } from '~constants/navigations';
 import { LogHome } from '~screens/Log';
 import { Stats } from '~screens/Log/Stats';
@@ -24,29 +23,24 @@ export const WalkLogNavigator = () => {
       }}
     >
       <Stack.Screen
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <DogProfile dogName="밤톨이" imageUri="https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg" />
-          ),
-          headerTitle: '',
-          headerRight: () => (
-            <Pressable onPress={() => navigation.navigate(WalkLogNavigations.Stats)}>
-              <Icon.Graph />
-            </Pressable>
-          ),
+        options={() => ({
+          headerShown: false,
         })}
         name={WalkLogNavigations.LogHome}
         component={LogHome}
       />
       <Stack.Screen
-        options={({ navigation }) => ({
+        options={() => ({
           headerStyle: {
             backgroundColor: theme.colors.lighten_3,
           },
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <Icon.Prev />
-            </Pressable>
+          header: ({ navigation }) => (
+            <Header
+              left={<Icon.Prev />}
+              backgroundColorType="default"
+              center={'산책 분석'}
+              onLeftPress={() => navigation.goBack()}
+            />
           ),
           headerTitle: '산책 분석',
         })}
