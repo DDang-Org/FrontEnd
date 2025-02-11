@@ -15,11 +15,14 @@ import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
 import axios from 'axios';
+import { useWebSocket } from '~hooks/useWebSocket';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
 const MIN_MARKER_DISTANCE = 5;
+
+const USER_EMAIL = 'mkh6793@naver.com';
 
 const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371e3;
@@ -76,6 +79,14 @@ const MapView = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [routeCoordinates, setRouteCoordinates] = useState<number[][]>([]);
+
+  const { subscribe } = useWebSocket();
+
+  useEffect(() => {
+    subscribe(`/sub/walk/${USER_EMAIL}`, message => {
+      console.log(message);
+    });
+  }, [subscribe]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
