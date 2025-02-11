@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
 
 const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiR09PR0xFIiwiZXhwIjoxNzQwMjQ4MjA3LCJlbWFpbCI6ImJibGJibGFuNjlAZ21haWwuY29tIn0.CpauBw9_yXlYQjr-BZP7xqm1u63pj1g1aM3kX9HwCm37BMhpOQGz1Mq8R42CihtC8henTRy0OHaxa7q9-1Svzw';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiS0FLQU8iLCJleHAiOjE3Mzk3NjQwMDIsImVtYWlsIjoibWtoNjc5M0BuYXZlci5jb20ifQ.EF03NpevMSZ2DcM5Q-trEEmRa0KEb5HpJ1HlD-Vj8xy3N2JoFvdQFoWDJRM3IGVwx58L9T2oV7GBTr6wJOevnA';
 
 const SERVER_URL = 'https://ddang.site/ws';
 
@@ -43,5 +43,11 @@ export const useWebSocket = () => {
     }
   };
 
-  return { client: stompClientRef.current, sendMessage };
+  const subscribe = (destination: string, callback: (message: IMessage) => void) => {
+    if (stompClientRef.current && stompClientRef.current.connected) {
+      return stompClientRef.current.subscribe(destination, callback);
+    }
+  };
+
+  return { client: stompClientRef.current, sendMessage, subscribe };
 };
