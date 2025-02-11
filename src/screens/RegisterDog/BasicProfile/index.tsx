@@ -16,6 +16,7 @@ import { useToast } from '~hooks/useToast';
 import { useAtom } from 'jotai';
 import { dogProfileAtom, DogProfileType } from '~providers/DogProfileProvider';
 import { CustomDatePicker } from '~components/Common/CustomDatePicker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type BasicProfileProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.BASIC_PROFILE>;
 
@@ -59,40 +60,54 @@ export const BasicProfile = ({ navigation }: BasicProfileProps) => {
   };
 
   return (
-    <S.BasicProfile>
-      <S.TextWrapper deviceHeight={deviceHeight}>
-        <TextBold fontSize={24}>반려견의 기본 정보를</TextBold>
-        <TextBold fontSize={24}>알려주세요!</TextBold>
-      </S.TextWrapper>
-      <S.AddImageButton onPress={handleAddImageButton}>
-        <Icon.AddDogImage />
-        <S.AddImageText fontSize={15}>반려견 사진 추가</S.AddImageText>
-        {dogProfile.profileImg && <S.ImagePreviewer source={{ uri: dogProfile.profileImg }} resizeMode="cover" />}
-      </S.AddImageButton>
-      <S.InputArea>
-        <FormInput onChangeText={value => updateField('name', value)} value={dogProfile.name} placeholder="이름 입력" />
-        <FormInput onPress={() => setisDatePickerOpen(true)} value={dogProfile.birthDate} placeholder="생년월일 선택" />
-        <FormInput
-          onChangeText={value => updateField('comment', value)}
-          value={dogProfile.comment}
-          placeholder="한줄 소개 입력"
-          multiline
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraScrollHeight={80} // 키보드 위 여백
+    >
+      <S.BasicProfile>
+        <S.TextWrapper deviceHeight={deviceHeight}>
+          <TextBold fontSize={24}>반려견의 기본 정보를</TextBold>
+          <TextBold fontSize={24}>알려주세요!</TextBold>
+        </S.TextWrapper>
+        <S.AddImageButton onPress={handleAddImageButton}>
+          <Icon.AddDogImage />
+          <S.AddImageText fontSize={15}>반려견 사진 추가</S.AddImageText>
+          {dogProfile.profileImg && <S.ImagePreviewer source={{ uri: dogProfile.profileImg }} resizeMode="cover" />}
+        </S.AddImageButton>
+        <S.InputArea>
+          <FormInput
+            onChangeText={value => updateField('name', value)}
+            value={dogProfile.name}
+            placeholder="이름 입력"
+          />
+          <FormInput
+            onPress={() => setisDatePickerOpen(true)}
+            value={dogProfile.birthDate}
+            placeholder="생년월일 선택"
+          />
+          <FormInput
+            onChangeText={value => updateField('comment', value)}
+            value={dogProfile.comment}
+            placeholder="한줄 소개 입력"
+            multiline
+          />
+        </S.InputArea>
+        <S.ActionButtonWrapper ref={nextButtonRef}>
+          <ActionButton
+            onPress={handleClickNext}
+            text="다음"
+            disabled={isDatePickerOpen}
+            bgColor={validateBasicProfile(dogProfile) ? 'gc_1' : 'default'}
+          />
+        </S.ActionButtonWrapper>
+        <CustomDatePicker
+          open={isDatePickerOpen}
+          date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
+          onConfirm={handleConfirmDatePicker}
+          onCancel={() => setisDatePickerOpen(false)}
         />
-      </S.InputArea>
-      <S.ActionButtonWrapper ref={nextButtonRef}>
-        <ActionButton
-          onPress={handleClickNext}
-          text="다음"
-          disabled={isDatePickerOpen}
-          bgColor={validateBasicProfile(dogProfile) ? 'gc_1' : 'default'}
-        />
-      </S.ActionButtonWrapper>
-      <CustomDatePicker
-        open={isDatePickerOpen}
-        date={dogProfile.birthDate ? stringToDate(dogProfile.birthDate, '. ') : new Date()}
-        onConfirm={handleConfirmDatePicker}
-        onCancel={() => setisDatePickerOpen(false)}
-      />
-    </S.BasicProfile>
+      </S.BasicProfile>
+    </KeyboardAwareScrollView>
   );
 };

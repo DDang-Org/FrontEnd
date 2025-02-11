@@ -32,6 +32,7 @@
     "react-native-error-boundary": "^1.2.7",
     "react-native-extra-dimensions-android": "^1.2.5",
     "react-native-image-crop-picker": "^0.42.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-mime-types": "^2.5.0",
     "react-native-paper": "^5.13.1",

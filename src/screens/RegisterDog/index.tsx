@@ -29,7 +29,7 @@ export const RegisterDog = ({ navigation }: RegisterDogProps) => {
         <TextBold fontSize={24}>즐거운 산책을 시작하세요</TextBold>
       </S.TextWrapper>
       <S.ButtonWrapper>
-        <S.NavigateBtn onPress={() => navigation.navigate(RegisterDogNavigations.BASIC_PROFILE)}>
+        <S.NavigateBtn onPress={() => navigation.navigate(RegisterDogNavigations.BASIC_PROFILE, { dogId: 10 })}>
           <View>
             <TextBold fontSize={20}>반려견 프로필</TextBold>
             <TextBold fontSize={20}>추가하기</TextBold>
