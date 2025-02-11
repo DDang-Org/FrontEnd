@@ -70,10 +70,10 @@ export const LogHome = () => {
           {logDetails?.map((item, index) => (
             <View key={item.walkId || index}>
               <WalkLogCard logDetail={item} />
-              <View style={{ height: 8 }} /> {/* ItemSeparatorComponent 대체 */}
+              <View style={{ height: 8 }} />
             </View>
           ))}
-          {logDetails?.length === 0 && <NoWalkLog />} {/* ListEmptyComponent 대체 */}
+          {logDetails?.length === 0 && <NoWalkLog />}
         </ScrollView>
       </S.LogHome>
       <Provider>
