@@ -4,6 +4,7 @@ import {
   NaverMapView,
   NaverMapViewRef,
   NaverMapCircleOverlay,
+  NaverMapPolygonOverlay,
 } from '@mj-studio/react-native-naver-map';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
@@ -13,6 +14,7 @@ import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
 import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
+import axios from 'axios';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
@@ -34,8 +36,6 @@ const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2:
 
 const MapView = () => {
   const myDogInfo = useMyDogInfo();
-
-  // console.log(myDogInfo);
 
   const mapRef = useRef<NaverMapViewRef>(null);
   const [isWalking, setIsWalking] = useState(false);
@@ -74,6 +74,8 @@ const MapView = () => {
   const [isLocationCentered, setIsLocationCentered] = useState(true);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [routeCoordinates, setRouteCoordinates] = useState<number[][]>([]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -300,6 +302,51 @@ const MapView = () => {
     setIsLocationCentered(calDistance < 20);
   };
 
+  const fetchRouteData = async (coordinates: number[][]) => {
+    try {
+      const response = await axios.post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
+        coordinates,
+      });
+      const routeData = response.data;
+      const newRouteCoordinates = routeData.features[0].geometry.coordinates;
+      const routeDistance = routeData.features[0].properties.segments[0].distance;
+
+      // 지도에 폴리곤 그리기
+      setRouteCoordinates(newRouteCoordinates);
+
+      // 거리 정보 업데이트
+      setDistance(routeDistance);
+    } catch (error) {
+      console.error('경로 데이터 가져오기 실패:', error);
+    }
+  };
+
+  const drawRoutePolygon = () => {
+    if (isWalking && routeCoordinates.length >= 3) {
+      return (
+        <NaverMapPolygonOverlay
+          outlineWidth={5}
+          outlineColor={'#f2f2'}
+          color={'#0068'}
+          coords={routeCoordinates.map(([longitude, latitude]) => ({ latitude, longitude }))}
+        />
+      );
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    if (isWalking && locationMarkers.length > 1) {
+      const lastMarker = locationMarkers[locationMarkers.length - 1];
+      const secondLastMarker = locationMarkers[locationMarkers.length - 2];
+      const newCoordinates = [
+        [secondLastMarker.longitude, secondLastMarker.latitude],
+        [lastMarker.longitude, lastMarker.latitude],
+      ];
+      fetchRouteData(newCoordinates);
+    }
+  }, [locationMarkers, isWalking]);
+
   return (
     <>
       <NaverMapView
@@ -331,6 +378,7 @@ const MapView = () => {
             zIndex={2000 + index}
           />
         ))}
+        {drawRoutePolygon()}
       </NaverMapView>
 
       {!isLocationCentered && (
@@ -339,13 +387,15 @@ const MapView = () => {
 
       {renderWalkButton()}
 
-      <DogListModal
-        isVisible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-        dogs={myDogInfo} // 강아지 목록을 전달합니다.
-        onSelectMultipleDogs={handleSelectDog}
-        type="multi-select"
-      />
+      {isModalVisible && (
+        <DogListModal
+          isVisible={isModalVisible}
+          onClose={() => setIsModalVisible(false)}
+          dogs={myDogInfo} // 강아지 목록을 전달합니다.
+          onSelectDog={handleSelectDog}
+          type="multi-select"
+        />
+      )}
     </>
   );
 };
