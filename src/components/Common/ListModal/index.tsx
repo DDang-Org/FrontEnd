@@ -25,6 +25,19 @@ interface DogListModalProps {
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const WALK_MODAL_HEIGHT = SCREEN_HEIGHT * 0.85;
 
+const calculateAge = (birthDate: string): number => {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+
 export const DogListModal = ({
   isVisible,
   onClose,
@@ -111,7 +124,7 @@ export const DogListModal = ({
                   <S.InfoContainer>
                     <S.InfoText fontSize={14}>{dog.breed}</S.InfoText>
                     <Separator $height={14} />
-                    <S.InfoText fontSize={14}>{dog.dogBirthDate}</S.InfoText>
+                    <S.InfoText fontSize={14}>{calculateAge(dog.dogBirthDate)}살</S.InfoText>
                     <Separator $height={14} />
                     <S.InfoText fontSize={14}>{dog.dogGender}</S.InfoText>
                   </S.InfoContainer>
