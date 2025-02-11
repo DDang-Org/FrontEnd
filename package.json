@@ -14,9 +14,11 @@
     "@emotion/native": "^11.11.0",
     "@emotion/react": "^11.14.0",
     "@mj-studio/react-native-naver-map": "^2.2.0",
+    "@react-native-community/netinfo": "^11.4.1",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/native-stack": "^7.2.0",
+    "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^5.63.0",
     "d3": "^7.9.0",
     "fast-text-encoding": "^1.0.6",
@@ -35,10 +37,12 @@
     "react-native-permissions": "^5.2.4",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.4.0",
+    "react-native-sync-localstorage": "^0.0.3",
     "react-native-toast-message": "^2.2.1",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-webview": "^13.13.2"
+    "react-native-webview": "^13.13.2",
+    "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -67,6 +71,7 @@
     "@types/react": "^18.2.6",
     "@types/react-native-vector-icons": "^6.4.18",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/sockjs-client": "^1.5.4",
     "babel-jest": "^29.6.3",
     "babel-loader": "^8.4.1",
     "babel-plugin-module-resolver": "^5.0.2",
