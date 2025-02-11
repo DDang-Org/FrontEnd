@@ -1,7 +1,6 @@
 import styled from '@emotion/native';
 
 export const LogHome = styled.SafeAreaView<{ statusBarHeight: number }>`
-  flex: 1;
   position: absolute;
   left: 0;
   right: 0;
