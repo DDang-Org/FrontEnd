@@ -111,7 +111,7 @@ export const handlers = [
           memberGender: 'FEMALE',
           memberBirthDate: '1995-05-15',
           address: '서울시 서초구',
-          familyRole: 'MOTHER',
+          familyRole: 'SISTER',
           memberProfileImg: 2,
           memberWalkCount: 8,
           isRepresent: true,

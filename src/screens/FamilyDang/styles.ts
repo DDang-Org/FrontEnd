@@ -35,7 +35,7 @@ export const GearWrapper = styled.View`
 export const ProfileWrapper = styled.View<{ isLast: boolean }>`
   flex-direction: row;
   align-items: center;
-  padding: 16px;
+  padding: 14px;
   border-bottom-width: ${({ isLast }) => (isLast ? '0px' : '1px')}; /* 마지막 항목은 라인 제거 */
   border-bottom-color: #ccc;
 `;
@@ -59,7 +59,11 @@ export const LineWrapper = styled.View`
 
 export const MemberName = styled(TextBold)``;
 
-export const MemberDetails = styled(TextRegular)``;
+export const MemberDetails = styled(TextRegular)`
+  line-height: 20px; /* 줄 간격 추가 */
+  gap: 10px; /* 데이터 간의 간격 */
+`;
+
 
 export const LabelText = styled(TextBold)``;
 

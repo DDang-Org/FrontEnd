@@ -4,6 +4,7 @@ import { Gender } from '~types/gender';
 import { FamilyRole } from '~types/family-role';
 import { BooleanString } from '~types/boolean-string';
 import { Provider } from '~types/provider';
+import { AvatarNumber } from '~types/avatar-number';
 
 export type FetchfamilyInfoResponseType = {
   memberId: number;
@@ -14,7 +15,7 @@ export type FetchfamilyInfoResponseType = {
   memberBirthDate: string;
   address: string;
   familyRole: FamilyRole;
-  memberProfileImg: number;
+  memberProfileImg: AvatarNumber;
   memberWalkCount: number;
   isRepresent: BooleanString;
 };
