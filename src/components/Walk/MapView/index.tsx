@@ -6,11 +6,13 @@ import {
   NaverMapCircleOverlay,
 } from '@mj-studio/react-native-naver-map';
 import { useEffect, useRef, useState } from 'react';
-import { Image, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { request, PERMISSIONS, requestLocationAccuracy, requestMultiple } from 'react-native-permissions';
 import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
 import * as S from './styles';
+import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
+import { DogListModal } from '~components/Common/ListModal';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
@@ -31,6 +33,10 @@ const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2:
 };
 
 const MapView = () => {
+  const myDogInfo = useMyDogInfo();
+
+  // console.log(myDogInfo);
+
   const mapRef = useRef<NaverMapViewRef>(null);
   const [isWalking, setIsWalking] = useState(false);
   const [walkTime, setWalkTime] = useState(0);
@@ -66,6 +72,8 @@ const MapView = () => {
   const [lastUpdateTime, setLastUpdateTime] = useState<number>(Date.now());
 
   const [isLocationCentered, setIsLocationCentered] = useState(true);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -240,9 +248,20 @@ const MapView = () => {
     });
   };
 
+  const handleStartWalkPress = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleSelectDog = (dog: any) => {
+    console.log(dog);
+    setIsModalVisible(false);
+    setIsWalking(true);
+    // 선택된 강아지 정보를 사용하여 추가 로직을 구현할 수 있습니다.
+  };
+
   const renderWalkButton = () => {
     if (!isWalking) {
-      return <S.StartButton onPress={() => setIsWalking(true)} bgColor="default" text="산책 시작" />;
+      return <S.StartButton onPress={handleStartWalkPress} bgColor="default" text="산책 시작" />;
     }
 
     return (
@@ -276,8 +295,6 @@ const MapView = () => {
       currentLocation.latitude,
       currentLocation.longitude,
     );
-
-    console.log(calDistance);
 
     // 현재 위치와 카메라 중심점의 거리가 20미터 이상이면 중심에서 벗어난 것으로 판단
     setIsLocationCentered(calDistance < 20);
@@ -321,6 +338,14 @@ const MapView = () => {
       )}
 
       {renderWalkButton()}
+
+      <DogListModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        dogs={myDogInfo} // 강아지 목록을 전달합니다.
+        onSelectMultipleDogs={handleSelectDog}
+        type="multi-select"
+      />
     </>
   );
 };
