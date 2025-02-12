@@ -45,7 +45,11 @@ const toastConfig = {
   ),
 };
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+interface ToastProviderProps {
+  children: React.ReactNode;
+}
+
+export const ToastProvider = ({ children }: ToastProviderProps) => (
   <>
     {children}
     <Toast config={toastConfig} />

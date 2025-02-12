@@ -78,7 +78,8 @@ const DefaultProfile = ({ size }: { size: number }) => <S.ProfileImageLoader sty
 const MyProfileFallback = ({}: FallbackComponentProps) => <S.ProfileImageFallback />;
 
 const MyProfileDataProvider = ({ size }: { size: number }) => {
-  const { avatarNumber, memberId } = useUser();
+  const { memberProfileImg: avatarNumber, memberId } = useUser();
+  console.log(avatarNumber, memberId);
   return <Profile size={size} avatarNumber={avatarNumber} userId={memberId} />;
 };
 

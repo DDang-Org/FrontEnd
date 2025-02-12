@@ -5,3 +5,8 @@ export const RegisterDogNavigations = {
   INVITE_CODE: 'InviteCode',
   DOG_CONFIRMATION: 'DogConfirmation',
 } as const;
+
+export const WalkLogNavigations = {
+  LogHome: 'LogHome',
+  Stats: 'Stats',
+} as const;

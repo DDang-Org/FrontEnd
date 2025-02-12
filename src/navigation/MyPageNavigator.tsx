@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MyPageScreen } from '~screens/MyPage';
 import { BlockScreen } from '~screens/MyPage/Block';
-import { DogProfileEditScreen } from '~screens/MyPage/DogProfileEdit';
+import { EditDogProfile } from '~screens/MyPage/EditDogProfile';
 import { ProfileEditScreen } from '~screens/MyPage/ProfileEdit';
 import { SettingScreen } from '~screens/MyPage/Setting';
 
@@ -11,7 +11,7 @@ export type MyPageStackProps = {
   Setting: undefined;
   Block: undefined;
   ProfileEdit: undefined;
-  DogProfileEdit: undefined;
+  DogProfileEdit: { dogId: number };
 };
 
 const Stack = createNativeStackNavigator<MyPageStackProps>();
@@ -36,7 +36,7 @@ export const MyPageNavigator = () => {
       <Stack.Screen name="Setting" component={SettingScreen} options={{ title: '설정' }} />
       <Stack.Screen name="Block" component={BlockScreen} options={{ title: '차단 목록' }} />
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} options={{ title: '내 정보 수정' }} />
-      <Stack.Screen name="DogProfileEdit" component={DogProfileEditScreen} options={{ title: '반려견 정보 수정' }} />
+      <Stack.Screen name="DogProfileEdit" component={EditDogProfile} options={{ title: '반려견 정보 수정' }} />
     </Stack.Navigator>
   );
 };

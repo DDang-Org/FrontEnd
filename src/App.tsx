@@ -1,12 +1,15 @@
 import styled from '@emotion/native';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
-// import { Text } from 'react-native';
-// import { useInitializeMsw } from '~hooks/useInitializeMsw';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
 import { RootNavigator } from '~navigation/RootNavigator';
+import { useWebSocket } from '~hooks/useWebSocket';
+import { WebSocketProvider } from '~providers/WebSocketProvider';
+
+import 'react-native-url-polyfill/auto';
+import 'fast-text-encoding';
 
 const navTheme = {
   ...DefaultTheme,
@@ -16,20 +19,26 @@ const navTheme = {
   },
 };
 
-const MainApp = () => (
-  <AppProviders>
-    <NavigationContainer theme={navTheme}>
-      <RootNavigator />
-    </NavigationContainer>
-  </AppProviders>
-);
+const MainApp = () => {
+  const { client, sendMessage } = useWebSocket();
+
+  return (
+    <WebSocketProvider client={client} sendMessage={sendMessage}>
+      <AppProviders>
+        <NavigationContainer theme={navTheme}>
+          <RootNavigator />
+        </NavigationContainer>
+      </AppProviders>
+    </WebSocketProvider>
+  );
+};
 
 export const App = () => {
   // const { isMswEnabled } = useInitializeMsw();
   const [storybookEnabled, setStorybookEnabled] = useState(false);
 
   // if (__DEV__ && !isMswEnabled) {
-  //   return <Text>Loading MSW...</Text>;
+  // return <Text>Loading MSW...</Text>;
   // }
 
   const toggleStorybook = () => setStorybookEnabled(prev => !prev);
