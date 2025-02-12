@@ -16,6 +16,9 @@ import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
 import axios from 'axios';
 
+import ViewShot, { captureRef } from 'react-native-view-shot';
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
@@ -78,6 +81,8 @@ const MapView = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [routeCoordinates, setRouteCoordinates] = useState<number[][]>([]);
+
+  const viewShotRef = useRef<ViewShot>(null);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -250,6 +255,25 @@ const MapView = () => {
     setIsModalVisible(true);
   };
 
+  const handleStopWalkPress = async () => {
+    setIsWalking(false);
+    setWalkTime(0);
+    setDistance(0);
+    setLocationMarkers([]);
+
+    try {
+      const uri = await captureRef(viewShotRef, {
+        format: 'png',
+        quality: 0.8,
+      });
+      await CameraRoll.save(uri, { type: 'photo' });
+      console.log('스크린샷 저장 성공:', uri);
+      console.log(uri);
+    } catch (error) {
+      console.error('산책 종료 이미지 저장 실패:', error);
+    }
+  };
+
   const handleSelectDog = (dog: any) => {
     console.log(dog);
     setIsModalVisible(false);
@@ -266,16 +290,7 @@ const MapView = () => {
       <S.WalkingInfoContainer>
         <S.WalkingInfo>
           <S.InfoText fontSize={15}>{formatDuration(walkTime)}</S.InfoText>
-          <S.StopButton
-            onPress={() => {
-              setIsWalking(false);
-              setWalkTime(0);
-              setDistance(0);
-              setLocationMarkers([]);
-            }}
-            bgColor="lighten_2"
-            text="산책 끝"
-          />
+          <S.StopButton onPress={handleStopWalkPress} bgColor="lighten_2" text="산책 끝" />
           <S.InfoText fontSize={15}>{formatDistance(distance)}</S.InfoText>
         </S.WalkingInfo>
       </S.WalkingInfoContainer>
@@ -346,37 +361,39 @@ const MapView = () => {
 
   return (
     <>
-      <NaverMapView
-        ref={mapRef}
-        style={{ width: '100%', height: '100%' }}
-        isShowLocationButton={false}
-        isShowZoomControls={false}
-        isShowCompass={false}
-        camera={camera}
-        onCameraChanged={handleCameraChange}
-      >
-        <NaverMapMarkerOverlay
-          latitude={currentLocation.latitude}
-          longitude={currentLocation.longitude}
-          anchor={{ x: 0.5, y: 1 }}
-          width={40}
-          height={40}
-          image={require('../../../assets/avatars/Avatar1.png')}
-        />
-        {locationMarkers.map((marker, index) => (
-          <NaverMapCircleOverlay
-            key={index}
-            latitude={marker.latitude}
-            longitude={marker.longitude}
-            radius={1}
-            color={'rgba(66, 135, 245, 0.3)'}
-            outlineColor={'#4287f5'}
-            outlineWidth={2}
-            zIndex={2000 + index}
+      <ViewShot ref={viewShotRef} style={{ width: '100%', height: '100%' }}>
+        <NaverMapView
+          ref={mapRef}
+          style={{ width: '100%', height: '100%' }}
+          isShowLocationButton={false}
+          isShowZoomControls={false}
+          isShowCompass={false}
+          camera={camera}
+          onCameraChanged={handleCameraChange}
+        >
+          <NaverMapMarkerOverlay
+            latitude={currentLocation.latitude}
+            longitude={currentLocation.longitude}
+            anchor={{ x: 0.5, y: 1 }}
+            width={40}
+            height={40}
+            image={require('../../../assets/avatars/Avatar1.png')}
           />
-        ))}
-        {drawRoutePolygon()}
-      </NaverMapView>
+          {locationMarkers.map((marker, index) => (
+            <NaverMapCircleOverlay
+              key={index}
+              latitude={marker.latitude}
+              longitude={marker.longitude}
+              radius={1}
+              color={'rgba(66, 135, 245, 0.3)'}
+              outlineColor={'#4287f5'}
+              outlineWidth={2}
+              zIndex={2000 + index}
+            />
+          ))}
+          {drawRoutePolygon()}
+        </NaverMapView>
+      </ViewShot>
 
       {!isLocationCentered && (
         <S.LocationButton onPress={handleLocationButtonPress} text="⊕ 내 위치로" bgColor="font_1" />
