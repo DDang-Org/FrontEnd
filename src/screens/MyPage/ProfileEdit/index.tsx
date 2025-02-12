@@ -60,7 +60,7 @@ export const ProfileEditScreen = () => {
     if (selectedAvatarIndex != null) {
       setUser({ ...user, memberProfileImg: selectedAvatarIndex + 1 });
     }
-  }, [selectedAvatarIndex]);
+  }, [user, selectedAvatarIndex]);
 
   return (
     <GestureHandlerRootView>
