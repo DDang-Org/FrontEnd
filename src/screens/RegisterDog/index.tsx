@@ -5,14 +5,16 @@ import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { Icon } from '~components/Common/Icons';
 import { Dimensions, View } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useResetAtom } from 'jotai/utils';
 import { dogProfileAtom } from '~providers/DogProfileProvider';
+import { AccountOptions } from '~components/RegisterDog/AccountOptions';
 
 type RegisterDogProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.HOME>;
 
 export const RegisterDog = ({ navigation }: RegisterDogProps) => {
   const resetDogProfile = useResetAtom(dogProfileAtom)!;
+  const [isOptionVisible, setIsOptionVisible] = useState(false);
 
   useEffect(() => {
     resetDogProfile();
@@ -21,7 +23,7 @@ export const RegisterDog = ({ navigation }: RegisterDogProps) => {
   const deviceHeight = Dimensions.get('screen').height;
   return (
     <S.RegisterDog>
-      <S.OptionBtn>
+      <S.OptionBtn onPress={() => setIsOptionVisible(true)}>
         <Icon.Option />
       </S.OptionBtn>
       <S.TextWrapper deviceHeight={deviceHeight}>
@@ -39,7 +41,7 @@ export const RegisterDog = ({ navigation }: RegisterDogProps) => {
             <Icon.AddDogProfile />
           </S.IconWrapper>
         </S.NavigateBtn>
-        <S.NavigateBtn onPress={() => navigation.navigate(RegisterDogNavigations.INVITE_CODE, { dogId: 10 })}>
+        <S.NavigateBtn onPress={() => navigation.navigate(RegisterDogNavigations.INVITE_CODE)}>
           <View>
             <TextBold fontSize={20}>가족 반려견</TextBold>
             <TextBold fontSize={20}>등록하기</TextBold>
@@ -50,6 +52,7 @@ export const RegisterDog = ({ navigation }: RegisterDogProps) => {
           </S.IconWrapper>
         </S.NavigateBtn>
       </S.ButtonWrapper>
+      <AccountOptions isVisible={isOptionVisible} hideOption={() => setIsOptionVisible(false)} />
     </S.RegisterDog>
   );
 };
