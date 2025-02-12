@@ -15,7 +15,7 @@ import { useToast } from '~hooks/useToast';
 import { UserProfileType } from '~types/user-profile';
 import { validateUserProfile } from '~utils/validateUserProfile';
 
-export function RegisterOwnerProfile() {
+export const RegisterOwnerProfile = () => {
   const { showFormErrorToast } = useToast();
   const [user, setUser] = useState<UserProfileType>({
     memberName: '',
@@ -47,7 +47,7 @@ export function RegisterOwnerProfile() {
     if (selectedAvatarIndex) {
       setUser({ ...user, memberProfileImg: selectedAvatarIndex + 1 });
     }
-  }, [selectedAvatarIndex]);
+  }, [user, selectedAvatarIndex]);
 
   return (
     <>
@@ -222,4 +222,4 @@ export function RegisterOwnerProfile() {
       </Modal>
     </>
   );
-}
+};
