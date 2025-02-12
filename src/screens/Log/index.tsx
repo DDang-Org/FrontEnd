@@ -30,7 +30,8 @@ export const LogHome = () => {
   const { logDetails, walkDates } = useWalkLog(selectedDogIndex, dateToString(date, '-'));
   const [dogListOpened, setDogListOpened] = useState(false);
   const navigation = useNavigation<NavigationProps>();
-  const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? useSafeAreaInsets().top : ExtraDimensions.get('STATUS_BAR_HEIGHT');
+  const insets = useSafeAreaInsets();
+  const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? insets.top : ExtraDimensions.get('STATUS_BAR_HEIGHT');
 
   const handleSelectDog = (selectedDog: any) => {
     myDogs.forEach((dog, index) => {

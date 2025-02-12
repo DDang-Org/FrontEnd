@@ -54,7 +54,7 @@ export const ProfileEditScreen = () => {
 
   useEffect(() => {
     setSelectedAvatarIndex(user.memberProfileImg! - 1);
-  }, []);
+  }, [user.memberProfileImg]);
 
   useEffect(() => {
     if (selectedAvatarIndex != null) {
