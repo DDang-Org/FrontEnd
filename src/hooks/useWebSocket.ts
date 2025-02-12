@@ -23,10 +23,9 @@ export const useWebSocket = () => {
     stompClient.onConnect = frame => {
       console.log('STOMP 연결 성공:', frame);
 
-      // 메시지 구독 예제
-      // stompClient.subscribe('/sub/walk/bblbblan69@gmail.com', message => {
-      //   console.log('받은 메시지:', message.body);
-      // });
+      stompClient.subscribe('/sub/walk/mkh6793@naver.com', message => {
+        console.log('받은 메시지:', message.body);
+      });
     };
 
     stompClient.activate();
