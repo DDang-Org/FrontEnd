@@ -4,7 +4,7 @@ import {
   NaverMapView,
   NaverMapViewRef,
   NaverMapCircleOverlay,
-  NaverMapPolygonOverlay,
+  NaverMapPathOverlay,
 } from '@mj-studio/react-native-naver-map';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
@@ -15,7 +15,6 @@ import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
 import axios from 'axios';
-import { useWebSocket } from '~hooks/useWebSocket';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
@@ -80,14 +79,6 @@ const MapView = () => {
 
   const [routeCoordinates, setRouteCoordinates] = useState<number[][]>([]);
 
-  const { subscribe } = useWebSocket();
-
-  useEffect(() => {
-    subscribe(`/sub/walk/${USER_EMAIL}`, message => {
-      console.log(message);
-    });
-  }, [subscribe]);
-
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isWalking) {
@@ -119,8 +110,6 @@ const MapView = () => {
   };
 
   useEffect(() => {
-    console.log('위치 추적 시작:', { isWalking });
-
     const requestLocationPermission = async () => {
       if (Platform.OS === 'ios') {
         const status = await request(PERMISSIONS.IOS.LOCATION_ALWAYS);
@@ -196,11 +185,7 @@ const MapView = () => {
         timeout: 5000,
       },
     );
-
-    console.log('watchPosition 설정됨:', { watchId });
-
     return () => {
-      console.log('위치 추적 정리(cleanup):', watchId);
       Geolocation.clearWatch(watchId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -300,7 +285,6 @@ const MapView = () => {
   // 카메라 이동이 완료될 때마다 호출되는 함수
   const handleCameraChange = (event: any) => {
     const { latitude, longitude } = event;
-    // console.log(latitude, longitude);
 
     const calDistance = calculateDirectDistance(
       latitude,
@@ -313,19 +297,27 @@ const MapView = () => {
     setIsLocationCentered(calDistance < 20);
   };
 
-  const fetchRouteData = async (coordinates: number[][]) => {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const fetchRouteData = async (locationMarkers: { longitude: number; latitude: number }[]) => {
+    if (locationMarkers.length < 2) {
+      return;
+    }
+
+    const lastTwoCoordinates = [
+      [locationMarkers[locationMarkers.length - 2].longitude, locationMarkers[locationMarkers.length - 2].latitude],
+      [locationMarkers[locationMarkers.length - 1].longitude, locationMarkers[locationMarkers.length - 1].latitude],
+    ];
+
     try {
       const response = await axios.post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
-        coordinates,
+        coordinates: lastTwoCoordinates,
       });
       const routeData = response.data;
       const newRouteCoordinates = routeData.features[0].geometry.coordinates;
       const routeDistance = routeData.features[0].properties.segments[0].distance;
 
-      // 지도에 폴리곤 그리기
       setRouteCoordinates(newRouteCoordinates);
 
-      // 거리 정보 업데이트
       setDistance(routeDistance);
     } catch (error) {
       console.error('경로 데이터 가져오기 실패:', error);
@@ -333,12 +325,12 @@ const MapView = () => {
   };
 
   const drawRoutePolygon = () => {
-    if (isWalking && routeCoordinates.length >= 3) {
+    if (isWalking && routeCoordinates.length >= 2) {
       return (
-        <NaverMapPolygonOverlay
-          outlineWidth={5}
-          outlineColor={'#f2f2'}
-          color={'#0068'}
+        <NaverMapPathOverlay
+          // outlineColor={'#f2f2'}
+          width={5}
+          color={'#ECB99A'}
           coords={routeCoordinates.map(([longitude, latitude]) => ({ latitude, longitude }))}
         />
       );
@@ -347,14 +339,8 @@ const MapView = () => {
   };
 
   useEffect(() => {
-    if (isWalking && locationMarkers.length > 1) {
-      const lastMarker = locationMarkers[locationMarkers.length - 1];
-      const secondLastMarker = locationMarkers[locationMarkers.length - 2];
-      const newCoordinates = [
-        [secondLastMarker.longitude, secondLastMarker.latitude],
-        [lastMarker.longitude, lastMarker.latitude],
-      ];
-      fetchRouteData(newCoordinates);
+    if (isWalking && locationMarkers.length >= 2) {
+      fetchRouteData(locationMarkers);
     }
   }, [locationMarkers, isWalking]);
 
@@ -403,7 +389,8 @@ const MapView = () => {
           isVisible={isModalVisible}
           onClose={() => setIsModalVisible(false)}
           dogs={myDogInfo} // 강아지 목록을 전달합니다.
-          onSelectDog={handleSelectDog}
+          // onSelectDog={handleSelectDog}
+          onSelectMultipleDogs={handleSelectDog}
           type="multi-select"
         />
       )}
