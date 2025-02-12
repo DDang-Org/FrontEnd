@@ -1,9 +1,8 @@
 import * as S from '../styles';
-import { useState } from 'react';
-import { ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { ScrollView, Modal, TouchableOpacity, View } from 'react-native';
 import { ActionButton } from '~components/Common/ActionButton';
 import { BaseInput } from '~components/Common/BaseInput';
-import { FormErrorToast } from '~components/Common/FormErrorToast';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { PressableInput } from '~components/Common/PressableInput';
 import DatePicker from 'react-native-date-picker';
@@ -11,33 +10,44 @@ import { stringToDate, dateToString } from '~utils/dateFormat';
 import { Profile } from '~components/Common/Profile';
 import * as Avatars from '~assets/avatars';
 import Check from '~assets/avatars/AvatarSelected.svg';
-import { Gender } from '~types/gender';
 import { Icon } from '~components/Common/Icons/index.tsx';
+import { useToast } from '~hooks/useToast';
+import { UserProfileType } from '~types/user-profile';
+import { validateUserProfile } from '~utils/validateUserProfile';
 
-export function RegisterOwnerProfile() {
-  const [familyRole, setFamilyRole] = useState('');
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [birth, setBirth] = useState('');
-  const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
-  const [showToast, setShowToast] = useState(false);
+export const RegisterOwnerProfile = () => {
+  const { showFormErrorToast } = useToast();
+  const [user, setUser] = useState<UserProfileType>({
+    memberName: '',
+    address: '',
+    memberGender: null,
+    memberBirthDate: '',
+    familyRole: '',
+    memberProfileImg: 0,
+  });
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
   const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
+  const confirmButtonRef = useRef<View | null>(null);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
-  const isComplete = name && address && birth && selectedGender && familyRole && selectedAvatarIndex !== null;
 
   const handleNextPress = () => {
-    if (!isComplete) {
-      setShowToast(true);
-    } else {
-      setShowToast(false);
-      console.log('다음 화면으로 이동');
+    const error = validateUserProfile(user);
+    if (error) {
+      showFormErrorToast(error, confirmButtonRef);
+      return;
     }
+    console.log('다음으로');
   };
+
+  useEffect(() => {
+    if (selectedAvatarIndex) {
+      setUser({ ...user, memberProfileImg: selectedAvatarIndex + 1 });
+    }
+  }, [user, selectedAvatarIndex]);
 
   return (
     <>
@@ -60,29 +70,43 @@ export function RegisterOwnerProfile() {
 
         {/* 프로필 데이터 입력 */}
         <S.ProfileDataContainer>
-          <BaseInput placeholder="닉네임 입력" value={name} onChangeText={setName} />
+          <BaseInput
+            placeholder="닉네임 입력"
+            value={user.memberName}
+            onChangeText={text => setUser({ ...user, memberName: text })}
+          />
 
           {/* 가족 구성원 선택 */}
           <PressableInput
             onPress={() => setIsFamilyModalVisible(true)}
-            value={familyRole}
+            value={user.familyRole || ''}
             placeholder="가족 포지션 입력"
           />
 
           {/* 주소 입력 */}
-          <PressableInput onPress={() => setAddress('양천구 신월동')} value={address} placeholder="내 동네 불러오기" />
+          <PressableInput
+            onPress={
+              () => setUser({ ...user, address: '양천구 신월동' }) // 주소 선택 로직 추가 가능
+            }
+            value={user.address}
+            placeholder="내 동네 불러오기"
+          />
 
           {/* 생년월일 선택 */}
-          <PressableInput onPress={() => setOpenDatePicker(true)} value={birth} placeholder="생년월일 선택" />
+          <PressableInput
+            onPress={() => setOpenDatePicker(true)}
+            value={user.memberBirthDate}
+            placeholder="생년월일 선택"
+          />
           <DatePicker
             title={' '}
             modal
             open={openDatePicker}
-            date={birth ? stringToDate(birth, '. ') : new Date()}
+            date={user.memberBirthDate ? stringToDate(user.memberBirthDate, '. ') : new Date()}
             onConfirm={date => {
               setOpenDatePicker(false);
               const formattedDate = dateToString(date, '. ');
-              setBirth(formattedDate);
+              setUser({ ...user, memberBirthDate: formattedDate });
             }}
             onCancel={() => setOpenDatePicker(false)}
             mode="date"
@@ -97,25 +121,22 @@ export function RegisterOwnerProfile() {
           <S.GenderButtonWrapper>
             <GenderSelectButton
               gender="MALE"
-              isActive={selectedGender === 'MALE'}
+              isActive={user.memberGender === 'MALE'}
               direction="row"
-              onPress={() => setSelectedGender(selectedGender === 'MALE' ? null : 'MALE')}
+              onPress={() => setUser({ ...user, memberGender: user.memberGender === 'MALE' ? null : 'MALE' })}
             />
             <GenderSelectButton
               gender="FEMALE"
-              isActive={selectedGender === 'FEMALE'}
+              isActive={user.memberGender === 'FEMALE'}
               direction="row"
-              onPress={() => setSelectedGender(selectedGender === 'FEMALE' ? null : 'FEMALE')}
+              onPress={() => setUser({ ...user, memberGender: user.memberGender === 'FEMALE' ? null : 'FEMALE' })}
             />
           </S.GenderButtonWrapper>
         </S.ProfileDataContainer>
 
-        {/* 에러 메시지 */}
-        {showToast && <FormErrorToast message="모든 정보를 입력해 주세요" />}
-
         {/* 다음 버튼 */}
-        <S.NextButtonWrapper>
-          <ActionButton onPress={handleNextPress} text="다음" disabled={!isComplete} />
+        <S.NextButtonWrapper ref={confirmButtonRef}>
+          <ActionButton onPress={handleNextPress} text="다음" />
         </S.NextButtonWrapper>
       </ScrollView>
 
@@ -131,23 +152,19 @@ export function RegisterOwnerProfile() {
               {familyOptions.map(option => (
                 <S.FamilyRoleOption
                   key={option}
-                  isSelected={familyRole === option}
-                  onPress={() => setFamilyRole(option)} // 선택된 가족 구성원 설정
+                  isSelected={user.familyRole === option}
+                  onPress={() => setUser({ ...user, familyRole: option })}
                 >
-                  <S.FamilyRoleIcon isSelected={familyRole === option}>
-                    {familyRole === option && <S.FamilyRoleIconInner />}
+                  <S.FamilyRoleIcon isSelected={user.familyRole === option}>
+                    {user.familyRole === option && <S.FamilyRoleIconInner />}
                   </S.FamilyRoleIcon>
-                  <S.FamilyRoleText isSelected={familyRole === option}>{option}</S.FamilyRoleText>
+                  <S.FamilyRoleText isSelected={user.familyRole === option}>{option}</S.FamilyRoleText>
                 </S.FamilyRoleOption>
               ))}
             </S.FamilyRoleSelectWrapper>
 
             {/* 완료 버튼 */}
-            <ActionButton
-              onPress={() => setIsFamilyModalVisible(false)}
-              text="완료"
-              disabled={!familyRole} // 선택되지 않으면 비활성화
-            />
+            <ActionButton onPress={() => setIsFamilyModalVisible(false)} text="완료" disabled={!user.familyRole} />
           </S.FamilyModalContent>
         </S.FamilyModalContainer>
       </Modal>
@@ -175,7 +192,14 @@ export function RegisterOwnerProfile() {
                 {avatarList.map((Avatar, index) => (
                   <S.AvatarWrapper key={index}>
                     {/* 아바타 */}
-                    <Profile size={157} src={Avatar} userId={1} onPress={() => setSelectedAvatarIndex(index)} />
+                    <Profile
+                      size={157}
+                      src={Avatar}
+                      userId={1}
+                      onPress={() => {
+                        setSelectedAvatarIndex(index);
+                      }}
+                    />
                     {/* 선택된 아바타 위에 Check 표시 */}
                     {selectedAvatarIndex === index && (
                       <S.AvatarOverlay>
@@ -198,4 +222,4 @@ export function RegisterOwnerProfile() {
       </Modal>
     </>
   );
-}
+};

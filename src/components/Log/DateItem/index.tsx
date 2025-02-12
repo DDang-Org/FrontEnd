@@ -35,7 +35,7 @@ export const DateItem = React.memo(({ date, isActive, disabled, hasRecord, size,
   }
 
   return (
-    <S.DateItem isActive={isActive} size={size} onPress={() => onPress(date)}>
+    <S.DateItem isActive={isActive} size={size} disabled={disabled} onPress={() => onPress(date)}>
       {content}
     </S.DateItem>
   );

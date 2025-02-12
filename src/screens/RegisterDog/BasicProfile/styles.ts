@@ -2,14 +2,14 @@ import styled from '@emotion/native';
 import { TextBold } from '~components/Common/Text';
 
 export const BasicProfile = styled.View`
-  padding: 0px 20px 36px 20px;
+  padding: 0px 20px 78px 20px;
   flex: 1;
   align-items: center;
-  gap: 30px;
+  justify-content: space-between;
 `;
 
 export const TextWrapper = styled.View<{ deviceHeight: number }>`
-  margin-top: ${props => (props.deviceHeight > 900 ? '70px' : '50px')};
+  margin-top: ${props => (props.deviceHeight > 900 ? '36px' : '24px')};
   align-items: center;
 `;
 
@@ -18,7 +18,7 @@ export const AddImageButton = styled.Pressable`
   overflow: hidden;
   width: 180px;
   height: 180px;
-  border-radius: 50%;
+  border-radius: 180px;
   background-color: ${props => props.theme.colors.lighten_2};
   justify-content: center;
   align-items: center;

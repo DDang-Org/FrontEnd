@@ -24,7 +24,7 @@ interface DogListModalProps {
     walkCount: number;
     imageUrl: string;
   }) => void;
-  type?: 'walk' | 'default';
+  type?: 'walk' | 'default' | 'select';
 }
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -66,7 +66,6 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
           <S.HeaderContainer>
             <S.Title>{type === 'walk' ? '강번따 리스트' : '강아지 리스트'}</S.Title>
           </S.HeaderContainer>
-
           <ScrollView>
             {dogs.map(dog => (
               <S.DogItem key={dog.id}>
@@ -91,7 +90,7 @@ export const DogListModal = ({ isVisible, onClose, dogs, onSelectDog, type = 'de
                     onPress={() => onSelectDog(dog)}
                     type="roundedRect"
                     bgColor="lighten_3"
-                    text={type === 'walk' ? '강번따' : '추가'}
+                    text={type === 'walk' ? '강번따' : type === 'select' ? '선택' : '추가'}
                   />
                 </S.ButtonContainer>
               </S.DogItem>

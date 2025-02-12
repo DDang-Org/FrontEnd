@@ -23,7 +23,7 @@ export const WalkLogCard = ({ logDetail }: WalkLogCardProps) => {
         <S.WalkLogDetailItem>
           <Icon.Clock color={theme.colors.default} />
           <TextBold fontSize={15}>
-            {hours}:{minutes}:{seconds}
+            {hours}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
           </TextBold>
         </S.WalkLogDetailItem>
         <S.Separator />

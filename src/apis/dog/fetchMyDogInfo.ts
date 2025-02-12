@@ -11,6 +11,7 @@ export type FetchMyDogInfoResponseType = {
   weight: number;
   dogGender: Gender;
   dogProfileImg: string;
+  walkCount: number;
   isNeutered: BooleanString;
   familyId: number;
   comment: string;
