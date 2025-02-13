@@ -16,6 +16,7 @@ export const KakaoLogin = () => {
 
   const handleNavigationStateChange = (navState: WebViewNavigation) => {
     const { url } = navState;
+    console.log(url);
 
     if (url.includes('/register')) {
       const params = new URLSearchParams(url.split('?')[1]);
