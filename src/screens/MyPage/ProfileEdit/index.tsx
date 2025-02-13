@@ -57,10 +57,10 @@ export const ProfileEditScreen = () => {
   }, [user.memberProfileImg]);
 
   useEffect(() => {
-    if (selectedAvatarIndex != null) {
-      setUser({ ...user, memberProfileImg: selectedAvatarIndex + 1 });
+    if (selectedAvatarIndex !== null) {
+      setUser(prevUser => ({ ...prevUser, memberProfileImg: selectedAvatarIndex + 1 }));
     }
-  }, [user, selectedAvatarIndex]);
+  }, [selectedAvatarIndex]);
 
   return (
     <GestureHandlerRootView>

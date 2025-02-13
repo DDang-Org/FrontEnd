@@ -23,9 +23,9 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Auth" component={AuthNavigator} />
+      <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
       <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
-      <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} />
       <Stack.Screen
         name="RegisterOwner"
         component={RegisterOwnerNavigator}

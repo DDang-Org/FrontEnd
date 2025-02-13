@@ -8,6 +8,12 @@ import { useCreateInviteCode } from '~apis/family/useInviteCode';
 export const CreateInviteCode = () => {
   const { data, refetch } = useCreateInviteCode();
 
+  const refetchInviteCode = () => {
+    setTimeout(() => {
+      refetch();
+    }, 1000);
+  };
+
   return (
     <SafeAreaView>
       <S.StyledScrollView contentContainerStyle={{ paddingBottom: 130 }}>
@@ -27,7 +33,7 @@ export const CreateInviteCode = () => {
         </S.CopyInviteCode>
         <S.TimerWrapper>
           <TextBold fontSize={15}>유효 시간</TextBold>
-          <Timer time={data.expiresInSeconds} onTimeEnd={() => refetch()} />
+          <Timer time={data.expiresInSeconds} onTimeEnd={refetchInviteCode} />
         </S.TimerWrapper>
         <S.Separator />
         <S.InviteGuideArea>

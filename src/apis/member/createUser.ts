@@ -8,7 +8,7 @@ export interface RequestUserProfile {
   email: string;
   provider: string;
   memberName: string;
-  memberGender: Gender;
+  memberGender: Gender | null;
   memberBirthDate: string;
   address: string;
   familyRole: FamilyRole;
@@ -39,8 +39,6 @@ export const createUser = async (userInfo: RequestUserProfile): Promise<APIRespo
     if (error instanceof HTTPError) {
       const errorData = await error.response.json();
       console.error(errorData);
-    } else {
-      console.error(error);
     }
     throw error;
   }
