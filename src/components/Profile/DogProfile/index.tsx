@@ -1,13 +1,12 @@
-import { useDogInfoById } from '~apis/dog/useDogInfoById';
+// import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
+import { useFirstMyDogInfo } from '~apis/dog/useFirstMyDogInfo';
 import { Profile } from '~components/Common/Profile';
 import { Separator } from '~components/Common/Seperator';
 import { getAge } from '~utils/getAge';
 import * as S from './styles';
 
-export const DogProfile = ({ dogId }: { dogId: number }) => {
-  const { dogName, breed, dogBirthDate, dogGender, isNeutered, weight, comment, dogProfileImg } = useDogInfoById({
-    dogId,
-  });
+export const DogProfile = () => {
+  const { dogName, breed, dogBirthDate, dogGender, isNeutered, weight, comment, dogProfileImg } = useFirstMyDogInfo();
   return (
     <S.DogProfile paddingHorizontal={25} paddingVertical={14}>
       <Profile src={dogProfileImg} size={80} />
