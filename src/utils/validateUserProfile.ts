@@ -4,9 +4,9 @@ const regex = /^[가-힣]{1,10}$/;
 
 export const validateUserProfile = (
   userProfile: UserProfileType,
-  options?: { skipAddress?: boolean }, // 옵션 추가
+  options?: { skipAddress?: boolean },
 ): string | null => {
-  if (!userProfile.memberProfileImg) return '아바타를 선택해 주세요';
+  if (userProfile.memberProfileImg == null) return '아바타를 선택해 주세요';
   if (!userProfile.memberName) return '견주님의 닉네임을 입력해주세요';
   if (!regex.test(userProfile.memberName)) return '닉네임은 한글로 10자 이내로 작성해 주세요';
   if (!userProfile.familyRole) return '견주님의 역할을 선택해주세요';
