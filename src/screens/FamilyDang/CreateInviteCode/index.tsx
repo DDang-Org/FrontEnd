@@ -19,7 +19,7 @@ export const CreateInviteCode = () => {
           <TextRegular fontSize={17}>관리할 수 있어요.</TextRegular>
           <S.DogImage />
         </S.TextArea>
-        <S.CopyInviteCode onPress={async () => await Share.share({ message: '공유할 메세지' })}>
+        <S.CopyInviteCode onPress={async () => await Share.share({ message: data.inviteCode })}>
           <TextBold fontSize={15} color="sub">
             초대 코드 공유
           </TextBold>
