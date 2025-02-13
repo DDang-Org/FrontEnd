@@ -60,8 +60,8 @@ export const LineWrapper = styled.View`
 export const MemberName = styled(TextBold)``;
 
 export const MemberDetails = styled(TextRegular)`
-  line-height: 20px; /* 줄 간격 추가 */
-  gap: 10px; /* 데이터 간의 간격 */
+  line-height: 20px;
+  gap: 10px;
 `;
 
 
