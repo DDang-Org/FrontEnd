@@ -64,7 +64,6 @@ export const MemberDetails = styled(TextRegular)`
   gap: 10px;
 `;
 
-
 export const LabelText = styled(TextBold)``;
 
 export const ValueText = styled(TextBold)``;

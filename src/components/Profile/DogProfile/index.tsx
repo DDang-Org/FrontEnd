@@ -11,14 +11,13 @@ import { FetchMyDogInfoResponseType } from '~apis/dog/fetchMyDogInfo'; // 타입
 export const DogProfile = () => {
   const [expanded, setExpanded] = useState(false);
   const [selectedDog, setSelectedDog] = useState<FetchMyDogInfoResponseType | null>(null);
-  const allDogs = useMyDogInfo(); // 모든 강아지 데이터
-  const firstDog = useFirstMyDogInfo(); // 첫 번째 강아지 데이터
-  const currentDog = selectedDog || firstDog; // 현재 렌더링할 강아지
+  const allDogs = useMyDogInfo();
+  const firstDog = useFirstMyDogInfo();
+  const currentDog = selectedDog || firstDog;
 
   console.log('allDogs : ', allDogs);
   console.log('firstDog : ', firstDog);
 
-  // 데이터가 비어 있을 때 처리
   if (!allDogs || allDogs.length === 0) {
     return (
       <S.DogProfile paddingHorizontal={25} paddingVertical={14}>
@@ -51,7 +50,7 @@ export const DogProfile = () => {
           </S.Heading>
           <S.Wrapper>
             <S.IsNeutered fontSize={13} color="font_2">
-              중성화 {currentDog.isNeutered === "FALSE" ? 'O' : 'X'}
+              중성화 {currentDog.isNeutered === 'FALSE' ? 'O' : 'X'}
             </S.IsNeutered>
             <Separator $height={8} />
             <S.Weight fontSize={13} color="font_2">
@@ -62,17 +61,20 @@ export const DogProfile = () => {
             {currentDog.comment}
           </S.Comment>
         </S.Info>
+
         {/* 확장/축소 버튼 */}
         <S.EditButton onPress={toggleExpand}>
+          <S.StyledIcon expanded={expanded} />
           {expanded ? '접기' : '모두 보기'}
         </S.EditButton>
       </S.FirstDogProfile>
 
-<S.Line/>
+      <S.Line />
+
       {/* 확장 시 모든 강아지 목록 표시 */}
       {expanded && (
         <S.OtherDogWrapper>
-          {allDogs.map((dog) => (
+          {allDogs.map(dog => (
             <Pressable key={dog.dogId} onPress={() => handleSelectDog(dog)}>
               {/* FirstDogProfile과 동일한 구조로 렌더링 */}
               <S.OtherDogProfile key={dog.dogId}>
@@ -90,7 +92,7 @@ export const DogProfile = () => {
                   </S.Heading>
                   <S.Wrapper>
                     <S.IsNeutered fontSize={13} color="font_2">
-                      중성화 {dog.isNeutered === "FALSE" ? 'O' : 'X'}
+                      중성화 {dog.isNeutered === 'FALSE' ? 'O' : 'X'}
                     </S.IsNeutered>
                     <Separator $height={8} />
                     <S.Weight fontSize={13} color="font_2">
