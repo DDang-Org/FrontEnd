@@ -13,7 +13,7 @@ type Props = BottomTabScreenProps<TabBarParamList, 'FamilyDang'>;
 export const FamilyDangScreen = ({}: Props) => {
   return (
     <S.SafeContainer>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
         <DogProfile />
         <FamilyList />
         <InviteSection />

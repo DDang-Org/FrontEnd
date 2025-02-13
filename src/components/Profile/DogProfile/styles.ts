@@ -16,6 +16,7 @@ export const DogProfile = styled(BgBox)<{ expanded?: boolean }>`
   gap: 20px;
   align-items: center;
 `;
+
 export const FirstDogProfile = styled.View`
   flex-direction: row;
   min-height: 108px;
@@ -31,6 +32,7 @@ export const OtherDogWrapper = styled.View`
   min-width: 300px;
   gap: 10px;
 `;
+
 export const OtherDogProfile = styled.View`
   flex-direction: row;
   margin: 7px 0;
@@ -45,13 +47,16 @@ export const Line = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: #ccc;
 `;
+
 export const Info = styled.View`
   flex: 1;
 `;
+
 export const Heading = styled.View`
   flex-direction: row;
   gap: 3px;
 `;
+
 export const EditButton = styled.Pressable`
   width: 40px;
   height: 40px;
