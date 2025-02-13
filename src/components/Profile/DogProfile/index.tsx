@@ -21,7 +21,7 @@ export const DogProfile = () => {
   if (!allDogs || allDogs.length === 0) {
     return (
       <S.DogProfile paddingHorizontal={25} paddingVertical={14}>
-        강아지 정보가 없습니다.
+        <S.Breed fontSize={13}>강아지 정보가 없습니다.</S.Breed>
       </S.DogProfile>
     );
   }

@@ -38,7 +38,6 @@ export const MyPageScreen = ({ navigation }: Props) => {
         </ErrorBoundary>
         <ErrorBoundary FallbackComponent={DogProfileFallback}>
           <Suspense fallback={<DogProfileLoader />}>
-            {/* 여기에 강아지 아이디 넣어줄것 */}
             <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit', { dogId: 0 })} />
           </Suspense>
         </ErrorBoundary>

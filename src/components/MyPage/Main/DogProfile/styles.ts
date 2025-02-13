@@ -10,12 +10,12 @@ interface IconProps {
 export const DogProfile = styled(BgBox)<{ expanded: boolean }>`
   min-height: 80px;
   height: ${({ expanded }) => (expanded ? 'auto' : '108px')}; // 확장 여부에 따라 높이 조정
-  overflow: hidden; // 확장되지 않았을 때 넘치는 내용 숨김
-  flex: 1;
+  overflow: hidden;
   flex-direction: column;
   gap: 20px;
   align-items: center;
   padding-bottom: 10px;
+  padding-top: -10px;
 `;
 
 export const FirstDogProfile = styled.View`
