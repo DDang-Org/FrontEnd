@@ -67,7 +67,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
 
   useEffect(() => {
     console.log(email, provider);
-  }, []);
+  }, [email, provider]);
 
   useEffect(() => {
     if (selectedAvatarIndex !== null) {

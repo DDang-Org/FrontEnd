@@ -1,18 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
-import WebView, { WebViewMessageEvent, WebViewNavigation } from 'react-native-webview';
+import WebView, { WebViewNavigation } from 'react-native-webview';
 import { AuthParamList } from '~navigation/AuthNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
-  const handleOnMessage = (event: WebViewMessageEvent) => {
-    // console.log('url', event.nativeEvent);
-    // if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
-    //   const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
-    //   requestToken(code);
-    // }
-  };
+  // const handleOnMessage = (event: WebViewMessageEvent) => {
+  //   console.log('url', event.nativeEvent);
+  //   if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
+  //     const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
+  //     requestToken(code);
+  //   }
+  // };
 
   const handleNavigationStateChange = (navState: WebViewNavigation) => {
     const { url } = navState;
@@ -35,7 +35,7 @@ export const KakaoLogin = () => {
         source={{
           uri: `https://ddang.site/oauth2/authorization/kakao`,
         }}
-        onMessage={handleOnMessage}
+        // onMessage={handleOnMessage}
         onNavigationStateChange={handleNavigationStateChange}
         injectedJavaScript="window.ReactNativeWebView.postMessage('')"
       />
