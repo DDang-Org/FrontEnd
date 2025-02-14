@@ -3,13 +3,18 @@ import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { createUser, RequestUserProfile } from '~apis/member/createUser';
 import { logout } from '~apis/member/logout';
 import { reissueToken } from '~apis/member/reissueToken';
+import { useToast } from '~hooks/useToast';
 import { queryClient } from '~providers/QueryClientProvider';
 import { UseMutationCustomOptions } from '~types/api';
 
 const useSignup = (mutationOptions?: UseMutationCustomOptions) => {
+  const { successToast } = useToast();
   return useMutation({
     mutationFn: (userInfo: RequestUserProfile) => createUser(userInfo),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myDogInfo'] });
+      successToast('회원가입이 완료되었습니다.');
+    },
     ...mutationOptions,
   });
 };
@@ -35,7 +40,6 @@ export const useAuth = () => {
   const logoutMutation = useLogout();
   const isLoggedIn = myDogInfo.isSuccess;
   const hasDog = Array.isArray(myDogInfo.data) && myDogInfo.data.length > 0;
-  console.log(myDogInfo.data);
 
   return { signupMutaion, myDogInfo, logoutMutation, isLoggedIn, hasDog };
 };

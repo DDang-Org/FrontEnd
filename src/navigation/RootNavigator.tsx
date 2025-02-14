@@ -5,10 +5,6 @@ import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
 
 export type RootStackParamList = {
-  // Auth: undefined;
-  // Login: { screen?: keyof LoginParamList };
-  // RegisterOwner: { screen?: keyof RegisterOwnerParamList };
-  // FamilyDDang: { screen?: keyof FamilyDdangParamList };
   RegisterDog: undefined;
   BottomTab: undefined;
 };
@@ -37,15 +33,7 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {hasDog && <Stack.Screen name="BottomTab" component={BottomTabNavigator} />}
-      {/* <Stack.Screen name="Auth" component={AuthNavigator} /> */}
-      {/* <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} /> */}
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
-      {/* <Stack.Screen
-        name="RegisterOwner"
-        component={RegisterOwnerNavigator}
-        options={{ headerShown: true, headerTitle: '' }}
-      /> */}
-      {/* <Stack.Screen name="Login" component={LoginNavigator} options={{ headerTitle: '' }} /> */}
     </Stack.Navigator>
   );
 };

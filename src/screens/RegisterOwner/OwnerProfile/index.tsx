@@ -19,6 +19,7 @@ import { RouteProp } from '@react-navigation/native';
 import { RequestUserProfile } from '~apis/member/createUser';
 import { REVERSE_FAMILY_ROLE } from '~constants/family-role';
 import { FamilyRole } from '~types/family-role';
+import { useAuth } from '~apis/member/useAuth';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -41,6 +42,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
   const confirmButtonRef = useRef<View | null>(null);
+  const { signupMutaion } = useAuth();
   const { email, provider } = route.params;
 
   const avatarList = Object.values(Avatars);
@@ -62,7 +64,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
       familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE] as FamilyRole,
       memberProfileImg: user.memberProfileImg!,
     };
-    console.log('보낼 데이터', registerData);
+    signupMutaion.mutate(registerData);
   };
 
   useEffect(() => {
