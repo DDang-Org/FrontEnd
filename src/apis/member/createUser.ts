@@ -45,7 +45,7 @@ export const createUser = async (userInfo: RequestUserProfile): Promise<APIRespo
 
       await storeAccessToken(accessToken);
     } else {
-      console.warn('Authorization 헤더가 존재하지 않거나 형식이 올바르지 않습니다.');
+      throw new Error('Authorization 헤더가 존재하지 않거나 형식이 올바르지 않습니다.');
     }
 
     const responseData = await response.json<APIResponse<ResponseUserProfile>>();
