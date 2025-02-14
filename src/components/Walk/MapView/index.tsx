@@ -19,6 +19,8 @@ import ky from 'ky';
 import ViewShot, { captureRef } from 'react-native-view-shot';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import WalkSummaryModal from '../WalkSummary';
+import { startWalk } from '~apis/walk/startWalk';
+import { completeWalk } from '~apis/walk/completeWalk';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
@@ -262,13 +264,23 @@ const MapView = () => {
         format: 'png',
         quality: 0.8,
       });
-      await CameraRoll.save(uri, { type: 'photo' });
+      const savedUri = await CameraRoll.save(uri, { type: 'photo' });
 
       console.log(walkTime);
       console.log(distance);
       console.log(uri);
+      console.log(savedUri);
 
-      setScreenshotUri(uri);
+      const response = await completeWalk({
+        request: {
+          totalDistanceMeter: distance,
+          totalWalkTimeSecond: walkTime,
+        },
+        walkImgFile: savedUri,
+      });
+      console.log('산책 완료 API 호출 성공:', response);
+
+      setScreenshotUri(savedUri);
       setIsWalkSummaryVisible(true);
     } catch (error) {
       console.error('산책 종료 이미지 저장 실패:', error);
@@ -283,10 +295,18 @@ const MapView = () => {
     setIsWalkSummaryVisible(false);
   };
 
-  const handleSelectDog = (dog: any) => {
+  const handleSelectDog = async (dog: any) => {
     console.log(dog);
     setIsModalVisible(false);
     setIsWalking(true);
+
+    try {
+      const dogIds = dog.map((d: any) => d.dogId);
+      const response = await startWalk({ dogIds });
+      console.log(response);
+    } catch (error) {
+      console.error('산책 시작 실패:', error);
+    }
   };
 
   const renderWalkButton = () => {
