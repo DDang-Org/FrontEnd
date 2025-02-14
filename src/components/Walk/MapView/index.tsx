@@ -14,15 +14,16 @@ import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
 import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
-import axios from 'axios';
+import ky from 'ky';
 
 import ViewShot, { captureRef } from 'react-native-view-shot';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import WalkSummaryModal from '../WalkSummary';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
-const MIN_MARKER_DISTANCE = 5;
+const MIN_MARKER_DISTANCE = 20;
 
 const USER_EMAIL = 'mkh6793@naver.com';
 
@@ -75,14 +76,12 @@ const MapView = () => {
   >([]);
 
   const [lastUpdateTime, setLastUpdateTime] = useState<number>(Date.now());
-
   const [isLocationCentered, setIsLocationCentered] = useState(true);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const [routeCoordinates, setRouteCoordinates] = useState<number[][]>([]);
-
   const viewShotRef = useRef<ViewShot>(null);
+  const [screenshotUri, setScreenshotUri] = useState('');
+  const [isWalkSummaryVisible, setIsWalkSummaryVisible] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -257,9 +256,6 @@ const MapView = () => {
 
   const handleStopWalkPress = async () => {
     setIsWalking(false);
-    setWalkTime(0);
-    setDistance(0);
-    setLocationMarkers([]);
 
     try {
       const uri = await captureRef(viewShotRef, {
@@ -267,18 +263,30 @@ const MapView = () => {
         quality: 0.8,
       });
       await CameraRoll.save(uri, { type: 'photo' });
-      console.log('스크린샷 저장 성공:', uri);
+
+      console.log(walkTime);
+      console.log(distance);
       console.log(uri);
+
+      setScreenshotUri(uri);
+      setIsWalkSummaryVisible(true);
     } catch (error) {
       console.error('산책 종료 이미지 저장 실패:', error);
     }
+  };
+
+  // WalkSummaryModal이 닫힐 때 호출되는 함수
+  const handleWalkSummaryClose = () => {
+    setWalkTime(0);
+    setDistance(0);
+    setLocationMarkers([]);
+    setIsWalkSummaryVisible(false);
   };
 
   const handleSelectDog = (dog: any) => {
     console.log(dog);
     setIsModalVisible(false);
     setIsWalking(true);
-    // 선택된 강아지 정보를 사용하여 추가 로직을 구현할 수 있습니다.
   };
 
   const renderWalkButton = () => {
@@ -297,7 +305,6 @@ const MapView = () => {
     );
   };
 
-  // 카메라 이동이 완료될 때마다 호출되는 함수
   const handleCameraChange = (event: any) => {
     const { latitude, longitude } = event;
 
@@ -308,7 +315,6 @@ const MapView = () => {
       currentLocation.longitude,
     );
 
-    // 현재 위치와 카메라 중심점의 거리가 20미터 이상이면 중심에서 벗어난 것으로 판단
     setIsLocationCentered(calDistance < 20);
   };
 
@@ -324,15 +330,33 @@ const MapView = () => {
     ];
 
     try {
-      const response = await axios.post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
-        coordinates: lastTwoCoordinates,
-      });
-      const routeData = response.data;
+      const response = await ky
+        .post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
+          json: {
+            coordinates: lastTwoCoordinates,
+          },
+        })
+        .json();
+      const routeData = response as {
+        features: [
+          {
+            geometry: {
+              coordinates: number[][];
+            };
+            properties: {
+              segments: [
+                {
+                  distance: number;
+                },
+              ];
+            };
+          },
+        ];
+      };
       const newRouteCoordinates = routeData.features[0].geometry.coordinates;
       const routeDistance = routeData.features[0].properties.segments[0].distance;
 
       setRouteCoordinates(newRouteCoordinates);
-
       setDistance(routeDistance);
     } catch (error) {
       console.error('경로 데이터 가져오기 실패:', error);
@@ -405,12 +429,19 @@ const MapView = () => {
         <DogListModal
           isVisible={isModalVisible}
           onClose={() => setIsModalVisible(false)}
-          dogs={myDogInfo} // 강아지 목록을 전달합니다.
-          // onSelectDog={handleSelectDog}
+          dogs={myDogInfo}
           onSelectMultipleDogs={handleSelectDog}
           type="multi-select"
         />
       )}
+
+      <WalkSummaryModal
+        visible={isWalkSummaryVisible}
+        walkTime={walkTime}
+        distance={distance}
+        screenshotUri={screenshotUri}
+        onClose={handleWalkSummaryClose}
+      />
     </>
   );
 };
