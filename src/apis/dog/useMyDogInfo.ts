@@ -1,11 +1,9 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchMyDogInfo } from '~apis/dog/fetchMyDogInfo';
 
 export const useMyDogInfo = () => {
-  const { data: myDogInfo } = useSuspenseQuery({
+  return useQuery({
     queryKey: ['myDogInfo'],
     queryFn: fetchMyDogInfo,
-    select: ({ data }) => data,
   });
-  return myDogInfo;
 };

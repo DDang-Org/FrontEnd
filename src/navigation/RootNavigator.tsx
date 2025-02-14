@@ -3,7 +3,6 @@ import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
-import { useEffect, useState } from 'react';
 
 export type RootStackParamList = {
   // Auth: undefined;
@@ -18,18 +17,18 @@ export const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   const { isLoggedIn, hasDog } = useAuth();
-  const [isAppFirstLaunch, setIsAppFirstLaunch] = useState(true);
+  // const [isAppFirstLaunch, setIsAppFirstLaunch] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAppFirstLaunch(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsAppFirstLaunch(false);
+  //   }, 2000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  if (isAppFirstLaunch) {
-    return null;
-  }
+  // if (isAppFirstLaunch) {
+  //   return null;
+  // }
 
   if (!isLoggedIn) {
     return <AuthNavigator />;
