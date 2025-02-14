@@ -1,4 +1,3 @@
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { CreateInviteCode } from '~screens/FamilyDang/CreateInviteCode';
 import { Header } from '~components/Common/Header';
@@ -7,8 +6,11 @@ import { Text } from 'react-native';
 import { FamilySetting } from '~screens/FamilyDang/FamilySetting';
 import { FamilyCaptain } from '~screens/FamilyDang/FamilySetting/FamilyCaptain';
 import { FamilyOut } from '~screens/FamilyDang/FamilySetting/FamilyOut';
+import { FamilyDangScreen } from '~screens/FamilyDang';
+import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
 
 export type FamilyDdangParamList = {
+  FamilyDangScreen: undefined;
   CreateInviteCode: undefined;
   FamilySetting: undefined;
   FamilyCaptain: undefined;
@@ -35,6 +37,13 @@ const HeaderComponent4 = () => (
 export const FamilyDDangNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="FamilyDangScreen"
+        component={FamilyDangScreen}
+        options={{
+          header: () => <FamilyDDangHeaderComponent />,
+        }}
+      />
       <Stack.Screen
         name="CreateInviteCode"
         component={CreateInviteCode}

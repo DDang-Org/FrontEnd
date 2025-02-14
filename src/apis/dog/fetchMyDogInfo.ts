@@ -17,10 +17,10 @@ export type FetchMyDogInfoResponseType = {
   comment: string;
 };
 
-export const fetchMyDogInfo = async (): Promise<APIResponse<FetchMyDogInfoResponseType[]>> => {
+export const fetchMyDogInfo = async (): Promise<FetchMyDogInfoResponseType[]> => {
   try {
     const response = await api.get('dogs').json<APIResponse<FetchMyDogInfoResponseType[]>>();
-    return response;
+    return response.data;
   } catch (error) {
     console.error('Error:', error);
     throw error;

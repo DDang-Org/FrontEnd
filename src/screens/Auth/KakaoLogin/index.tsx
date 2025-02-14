@@ -1,41 +1,42 @@
+import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
-import Config from 'react-native-config';
-import ky from 'ky';
-
-const REDIRECT_URI = `https://ddang.pages.dev/register`;
+import WebView, { WebViewNavigation } from 'react-native-webview';
+import { AuthParamList } from '~navigation/AuthNavigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export const KakaoLogin = () => {
-  const handleOnMessage = (event: WebViewMessageEvent) => {
-    console.log('url', event.nativeEvent);
-    if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
-      const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
+  const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
+  // const handleOnMessage = (event: WebViewMessageEvent) => {
+  //   console.log('url', event.nativeEvent);
+  //   if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
+  //     const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
+  //     requestToken(code);
+  //   }
+  // };
 
-      requestToken(code);
+  const handleNavigationStateChange = (navState: WebViewNavigation) => {
+    const { url } = navState;
+    console.log(url);
+
+    if (url.includes('/register')) {
+      const params = new URLSearchParams(url.split('?')[1]);
+      const email = params.get('email') || '';
+      const provider = params.get('provider') || '';
+
+      console.log('Register Params:', { email, provider });
+      console.log('회원가입 스크린으로 이동');
+      navigation.replace('OwnerProfile', { email, provider });
     }
   };
 
-  const requestToken = async (code: string) => {
-    const response = await ky
-      .post('https://kauth.kakao.com/oauth/token', {
-        searchParams: {
-          grant_type: 'authorization_code',
-          client_id: Config.KAKAO_REST_API_KEY || '',
-          redirect_uri: REDIRECT_URI,
-          code,
-        },
-      })
-      .json();
-
-    console.log(response);
-  };
   return (
     <S.KakaoLogin>
       <WebView
         source={{
-          uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${Config.KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}`,
+          uri: `https://ddang.site/oauth2/authorization/kakao`,
         }}
-        onMessage={handleOnMessage}
+        // onMessage={handleOnMessage}
+        onNavigationStateChange={handleNavigationStateChange}
         injectedJavaScript="window.ReactNativeWebView.postMessage('')"
       />
     </S.KakaoLogin>

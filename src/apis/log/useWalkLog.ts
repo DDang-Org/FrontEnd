@@ -26,9 +26,12 @@ const useLogDetails = (dogId: number, selectDate: string) => {
 };
 
 export const useWalkLog = (selectedDogIndex: number, selectedDate: string) => {
-  const myDogInfo = useMyDogInfo();
-  const walkDates = useWalkDates(myDogInfo[selectedDogIndex].dogId);
-  const logDetails = useLogDetails(myDogInfo[selectedDogIndex].dogId, selectedDate);
+  const { data: myDogInfo } = useMyDogInfo();
+
+  const dogId = myDogInfo?.[selectedDogIndex]?.dogId;
+
+  const walkDates = useWalkDates(dogId || -1);
+  const logDetails = useLogDetails(dogId || -1, selectedDate);
 
   return { walkDates, logDetails };
 };
