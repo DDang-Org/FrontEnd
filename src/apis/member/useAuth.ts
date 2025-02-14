@@ -35,6 +35,7 @@ export const useAuth = () => {
   const logoutMutation = useLogout();
   const isLoggedIn = myDogInfo.isSuccess;
   const hasDog = Array.isArray(myDogInfo.data) && myDogInfo.data.length > 0;
+  console.log(myDogInfo.data);
 
   return { signupMutaion, myDogInfo, logoutMutation, isLoggedIn, hasDog };
 };

@@ -11,7 +11,7 @@ import { FetchMyDogInfoResponseType } from '~apis/dog/fetchMyDogInfo'; // 타입
 export const DogProfile = () => {
   const [expanded, setExpanded] = useState(false);
   const [selectedDog, setSelectedDog] = useState<FetchMyDogInfoResponseType | null>(null);
-  const allDogs = useMyDogInfo();
+  const { data: allDogs } = useMyDogInfo();
   const firstDog = useFirstMyDogInfo();
   const currentDog = selectedDog || firstDog;
 

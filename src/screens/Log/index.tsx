@@ -25,13 +25,18 @@ type NavigationProps = NativeStackNavigationProp<WalkLogParamList>;
 
 export const LogHome = () => {
   const [date, setDate] = useState(new Date());
-  const myDogs = useMyDogInfo();
+  const { data: myDogs, isPending, isError } = useMyDogInfo();
+
   const [selectedDogIndex, setSelectedDogIndex] = useState(0);
   const { logDetails, walkDates } = useWalkLog(selectedDogIndex, dateToString(date, '-'));
   const [dogListOpened, setDogListOpened] = useState(false);
   const navigation = useNavigation<NavigationProps>();
   const insets = useSafeAreaInsets();
   const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? insets.top : ExtraDimensions.get('STATUS_BAR_HEIGHT');
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   const handleSelectDog = (selectedDog: any) => {
     myDogs.forEach((dog, index) => {

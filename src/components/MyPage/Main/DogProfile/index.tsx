@@ -15,9 +15,13 @@ interface DogProfileProps {
 export const DogProfile = ({ navigateToDogProfileEdit }: DogProfileProps) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedDog, setSelectedDog] = useState<FetchMyDogInfoResponseType | null>(null);
-  const allDogs = useMyDogInfo();
+  const { data: allDogs, isPending, isError } = useMyDogInfo();
   const firstDog = useFirstMyDogInfo();
   const currentDog = selectedDog || firstDog;
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   console.log('allDogs : ', allDogs);
   console.log('firstDog : ', firstDog);
