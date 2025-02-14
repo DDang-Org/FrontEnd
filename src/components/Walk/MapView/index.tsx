@@ -21,6 +21,7 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import WalkSummaryModal from '../WalkSummary';
 import { startWalk } from '~apis/walk/startWalk';
 import { completeWalk } from '~apis/walk/completeWalk';
+import { useWebSocket } from '~hooks/useWebSocket';
 
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
@@ -44,6 +45,9 @@ const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2:
 
 const MapView = () => {
   const myDogInfo = useMyDogInfo();
+  const { sendMessage, responseData } = useWebSocket();
+
+  console.log(responseData);
 
   const mapRef = useRef<NaverMapViewRef>(null);
   const [isWalking, setIsWalking] = useState(false);
@@ -378,6 +382,13 @@ const MapView = () => {
 
       setRouteCoordinates(newRouteCoordinates);
       setDistance(routeDistance);
+
+      const lastCoordinate = newRouteCoordinates[newRouteCoordinates.length - 1];
+      const message = JSON.stringify({
+        latitude: lastCoordinate[1],
+        longitude: lastCoordinate[0],
+      });
+      sendMessage('/pub/api/v1/walk-alone', message);
     } catch (error) {
       console.error('경로 데이터 가져오기 실패:', error);
     }
