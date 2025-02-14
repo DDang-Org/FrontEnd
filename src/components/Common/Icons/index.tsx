@@ -33,6 +33,7 @@ import FamilyInvitationGuide from '~assets/family-invitation-guide.svg';
 import FamilyJoinGuide from '~assets/family-join-guide.svg';
 import FamilyJoinGuide2 from '~assets/family-join-guide2.svg';
 import FamilyJoinGuide3 from '~assets/family-join-guide3.svg';
+import WalkSummary from '~assets/walk-summary.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -69,4 +70,5 @@ export const Icon = {
   FamilyJoinGuide: (props: SvgProps) => <FamilyJoinGuide {...props} />,
   FamilyJoinGuide2: (props: SvgProps) => <FamilyJoinGuide2 {...props} />,
   FamilyJoinGuide3: (props: SvgProps) => <FamilyJoinGuide3 {...props} />,
+  WalkSummary: (props: SvgProps) => <WalkSummary {...props} />,
 };
