@@ -15,11 +15,11 @@ export type FetchMyDogInfoResponseType = {
   isNeutered: BooleanString;
   familyId: number;
   comment: string;
-}[];
+};
 
-export const fetchMyDogInfo = async (): Promise<APIResponse<FetchMyDogInfoResponseType>> => {
+export const fetchMyDogInfo = async (): Promise<APIResponse<FetchMyDogInfoResponseType[]>> => {
   try {
-    const response = await api.get('dogs').json<APIResponse<FetchMyDogInfoResponseType>>();
+    const response = await api.get('dogs').json<APIResponse<FetchMyDogInfoResponseType[]>>();
     return response;
   } catch (error) {
     console.error('Error:', error);
