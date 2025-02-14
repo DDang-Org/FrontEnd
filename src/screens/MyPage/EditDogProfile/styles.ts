@@ -4,6 +4,7 @@ import { TextBold } from '~components/Common/Text';
 
 export const EditDogProfile = styled.SafeAreaView`
   flex: 1;
+  background-color: ${props => props.theme.colors.gc_4};
 `;
 
 export const StyledScrollView = styled.ScrollView`

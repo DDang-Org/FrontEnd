@@ -64,7 +64,7 @@ export const ProfileEditScreen = () => {
 
   return (
     <GestureHandlerRootView>
-      <ScrollView contentContainerStyle={{ paddingBottom: 10, padding: 16 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 10, padding: 16, backgroundColor: 'white' }}>
         <S.EditComment>
           <S.EditCommentText fontSize={24}>내 정보 수정</S.EditCommentText>
         </S.EditComment>

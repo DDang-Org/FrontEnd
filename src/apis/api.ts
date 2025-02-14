@@ -39,9 +39,9 @@ export const api = ky.create({
             throw error;
           }
         }
-        if (!accessToken) {
-          console.warn('액세스 토큰 존재하지 않음');
-        }
+        // if (!accessToken) {
+        //   console.warn('액세스 토큰 존재하지 않음');
+        // }
         return response;
       },
     ],
