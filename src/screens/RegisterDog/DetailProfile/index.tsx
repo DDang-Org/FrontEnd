@@ -14,18 +14,16 @@ import { WeightInput } from '~components/Common/WeightInput';
 import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 import { useCreateDog } from '~apis/dog/useDogProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { CommonActions } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~navigation/RootNavigator';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '~navigation/RootNavigator';
 
-type RootStackNavigationProp = NativeStackScreenProps<RootStackParamList, 'RegisterDog'>;
-
-export const DetailProfile = ({ navigation }: RootStackNavigationProp) => {
+export const DetailProfile = () => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
   const registerDog = useCreateDog();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const deviceHeight = Dimensions.get('screen').height;
 
@@ -39,12 +37,9 @@ export const DetailProfile = ({ navigation }: RootStackNavigationProp) => {
     registerDog.mutate(dogProfile, {
       onSuccess: () => {
         console.log('강아지 등록 성공!');
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: 'BottomTab' }],
-          }),
-        );
+        setTimeout(() => {
+          navigation.navigate('BottomTab');
+        }, 1000);
       },
     });
   };

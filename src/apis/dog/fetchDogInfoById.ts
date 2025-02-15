@@ -21,10 +21,10 @@ export type FetchDogInfoByIdResponseType = {
 };
 
 export const fetchDogInfoById = async ({
-  // dogId,
+  dogId,
 }: FetchDogInfoByIdRequestType): Promise<APIResponse<FetchDogInfoByIdResponseType>> => {
   try {
-    const response = await api.get(`dogs/3`).json<APIResponse<FetchDogInfoByIdResponseType>>();
+    const response = await api.get(`dogs/${dogId}`).json<APIResponse<FetchDogInfoByIdResponseType>>();
     return response;
   } catch (error) {
     console.error('Error fetching dog info by ID:', (error as unknown as Error).message || error);

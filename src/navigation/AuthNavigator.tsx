@@ -4,7 +4,7 @@ import { KakaoLogin } from '~screens/Auth/KakaoLogin';
 import { Icon } from '~components/Common/Icons';
 import { Header } from '~components/Common/Header';
 import { Login } from '~screens/Auth/Login';
-import { GoogleLogin } from '~screens/Auth/GoogleLogin/styles';
+import { GoogleLogin } from '~screens/Auth/GoogleLogin';
 
 export type AuthParamList = {
   Login: undefined;

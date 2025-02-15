@@ -1,8 +1,10 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
+
+export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export type RootStackParamList = {
   RegisterDog: undefined;

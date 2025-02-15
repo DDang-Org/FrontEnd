@@ -6,7 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { storeAccessToken } from '~utils/controlAccessToken';
 import { queryClient } from '~providers/QueryClientProvider';
 
-export const KakaoLogin = () => {
+export const GoogleLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
 
   const handleNavigationStateChange = async (navState: WebViewNavigation) => {
