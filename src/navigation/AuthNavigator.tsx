@@ -4,10 +4,12 @@ import { KakaoLogin } from '~screens/Auth/KakaoLogin';
 import { Icon } from '~components/Common/Icons';
 import { Header } from '~components/Common/Header';
 import { Login } from '~screens/Auth/Login';
+import { GoogleLogin } from '~screens/Auth/GoogleLogin/styles';
 
 export type AuthParamList = {
   Login: undefined;
   KakaoLogin: undefined;
+  GoogleLogin: undefined;
   OwnerProfile: { email: string; provider: string };
 };
 
@@ -35,6 +37,15 @@ export const AuthNavigator = () => {
         options={{
           header: ({ navigation }) => (
             <Header left={<Icon.Prev />} center={'카카오 로그인'} onLeftPress={() => navigation.goBack()} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="GoogleLogin"
+        component={GoogleLogin}
+        options={{
+          header: ({ navigation }) => (
+            <Header left={<Icon.Prev />} center={'구글 로그인'} onLeftPress={() => navigation.goBack()} />
           ),
         }}
       />
