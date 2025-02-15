@@ -1,4 +1,4 @@
-import * as S from '../styles';
+import * as S from './styles';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollView, Modal, TouchableOpacity, View } from 'react-native';
 import { ActionButton } from '~components/Common/ActionButton';
@@ -58,7 +58,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
       email,
       provider,
       memberName: user.memberName,
-      memberGender: user.memberGender!,
+      memberGender: user.memberGender,
       memberBirthDate: user.memberBirthDate.split('. ').join('-'),
       address: user.address,
       familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE] as FamilyRole,

@@ -3,29 +3,27 @@ import * as S from './styles';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import { AuthParamList } from '~navigation/AuthNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { storeAccessToken } from '~utils/controlAccessToken';
+import { queryClient } from '~providers/QueryClientProvider';
 
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
-  // const handleOnMessage = (event: WebViewMessageEvent) => {
-  //   console.log('url', event.nativeEvent);
-  //   if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
-  //     const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
-  //     requestToken(code);
-  //   }
-  // };
 
-  const handleNavigationStateChange = (navState: WebViewNavigation) => {
+  const handleNavigationStateChange = async (navState: WebViewNavigation) => {
     const { url } = navState;
-    console.log(url);
+    console.log('현재 리다이렉트된 url', url);
 
+    const params = new URLSearchParams(url.split('?')[1]);
     if (url.includes('/register')) {
-      const params = new URLSearchParams(url.split('?')[1]);
       const email = params.get('email') || '';
       const provider = params.get('provider') || '';
-
       console.log('Register Params:', { email, provider });
-      console.log('회원가입 스크린으로 이동');
       navigation.replace('OwnerProfile', { email, provider });
+    } else if (url.includes('accessToken')) {
+      const accessToken = params.get('accessToken') || '';
+
+      await storeAccessToken(accessToken);
+      queryClient.invalidateQueries({ queryKey: ['myDogInfo'] });
     }
   };
 
@@ -35,7 +33,6 @@ export const KakaoLogin = () => {
         source={{
           uri: `https://ddang.site/oauth2/authorization/kakao`,
         }}
-        // onMessage={handleOnMessage}
         onNavigationStateChange={handleNavigationStateChange}
         injectedJavaScript="window.ReactNativeWebView.postMessage('')"
       />

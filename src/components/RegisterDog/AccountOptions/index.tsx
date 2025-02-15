@@ -1,3 +1,4 @@
+import { useAuth } from '~apis/member/useAuth';
 import { CompoundOption } from '~components/Common/CompoundOptions';
 
 interface AccountOptionsProps {
@@ -6,11 +7,12 @@ interface AccountOptionsProps {
 }
 
 export const AccountOptions = ({ isVisible, hideOption }: AccountOptionsProps) => {
+  const { logoutMutation } = useAuth();
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
         <CompoundOption.Container>
-          <CompoundOption.Button>로그아웃</CompoundOption.Button>
+          <CompoundOption.Button onPress={() => logoutMutation.mutate(null)}>로그아웃</CompoundOption.Button>
           <CompoundOption.Divider />
           <CompoundOption.Button>회원 탈퇴</CompoundOption.Button>
         </CompoundOption.Container>

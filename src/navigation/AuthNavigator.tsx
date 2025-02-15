@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Login } from '~screens/Login';
-import { RegisterOwnerProfile } from '~screens/RegisterOwner/OwnerProfile';
+import { RegisterOwnerProfile } from '~screens/Auth/OwnerProfile';
 import { KakaoLogin } from '~screens/Auth/KakaoLogin';
 import { Icon } from '~components/Common/Icons';
 import { Header } from '~components/Common/Header';
+import { Login } from '~screens/Auth/Login';
 
 export type AuthParamList = {
   Login: undefined;

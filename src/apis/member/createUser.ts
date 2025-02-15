@@ -55,6 +55,7 @@ export const createUser = async (userInfo: RequestUserProfile): Promise<APIRespo
       const errorData = await error.response.json();
       console.error(errorData);
     }
+    console.error(error);
     throw error;
   }
 };
