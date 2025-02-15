@@ -1,20 +1,19 @@
-import React from 'react';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import * as S from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~navigation/RootNavigator';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 
 export const FamilySetting = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const handleFamilyOut = () => {
-    navigation.navigate('FamilyDDang', { screen: 'FamilyCaptain' });
+    navigation.navigate('FamilyCaptain');
   };
   const handleFamilyCaptain = () => {
-    navigation.navigate('FamilyDDang', { screen: 'FamilyOut' });
+    navigation.navigate('FamilyOut');
   };
 
   return (

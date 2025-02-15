@@ -5,7 +5,7 @@ export const useFirstMyDogInfo = () => {
   const { data: myFirstDogInfo } = useSuspenseQuery({
     queryKey: ['fetchMyDogInfo'],
     queryFn: fetchMyDogInfo,
-    select: ({ data }) => data[0],
+    select: data => data[0],
   });
   return myFirstDogInfo;
 };

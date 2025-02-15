@@ -8,6 +8,12 @@ import { useCreateInviteCode } from '~apis/family/useInviteCode';
 export const CreateInviteCode = () => {
   const { data, refetch } = useCreateInviteCode();
 
+  const refetchInviteCode = () => {
+    setTimeout(() => {
+      refetch();
+    }, 1000);
+  };
+
   return (
     <SafeAreaView>
       <S.StyledScrollView contentContainerStyle={{ paddingBottom: 130 }}>
@@ -19,7 +25,7 @@ export const CreateInviteCode = () => {
           <TextRegular fontSize={17}>관리할 수 있어요.</TextRegular>
           <S.DogImage />
         </S.TextArea>
-        <S.CopyInviteCode onPress={async () => await Share.share({ message: '공유할 메세지' })}>
+        <S.CopyInviteCode onPress={async () => await Share.share({ message: data.inviteCode })}>
           <TextBold fontSize={15} color="sub">
             초대 코드 공유
           </TextBold>
@@ -27,7 +33,7 @@ export const CreateInviteCode = () => {
         </S.CopyInviteCode>
         <S.TimerWrapper>
           <TextBold fontSize={15}>유효 시간</TextBold>
-          <Timer time={data.expiresInSeconds} onTimeEnd={() => refetch()} />
+          <Timer time={data.expiresInSeconds} onTimeEnd={refetchInviteCode} />
         </S.TimerWrapper>
         <S.Separator />
         <S.InviteGuideArea>

@@ -8,7 +8,7 @@ import { Header } from '~components/Common/Header';
 export type AuthParamList = {
   Login: undefined;
   KakaoLogin: undefined;
-  OwnerProfile: undefined;
+  OwnerProfile: { email: string; provider: string };
 };
 
 export const AuthNavigator = () => {

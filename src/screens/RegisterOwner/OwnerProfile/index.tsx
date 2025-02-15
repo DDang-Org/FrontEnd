@@ -14,8 +14,19 @@ import { Icon } from '~components/Common/Icons/index.tsx';
 import { useToast } from '~hooks/useToast';
 import { UserProfileType } from '~types/user-profile';
 import { validateUserProfile } from '~utils/validateUserProfile';
+import { AuthParamList } from '~navigation/AuthNavigator';
+import { RouteProp } from '@react-navigation/native';
+import { RequestUserProfile } from '~apis/member/createUser';
+import { REVERSE_FAMILY_ROLE } from '~constants/family-role';
+import { FamilyRole } from '~types/family-role';
 
-export const RegisterOwnerProfile = () => {
+type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
+
+type Props = {
+  route: RegisterOwnerProfileRouteProp;
+};
+
+export const RegisterOwnerProfile = ({ route }: Props) => {
   const { showFormErrorToast } = useToast();
   const [user, setUser] = useState<UserProfileType>({
     memberName: '',
@@ -23,13 +34,14 @@ export const RegisterOwnerProfile = () => {
     memberGender: null,
     memberBirthDate: '',
     familyRole: '',
-    memberProfileImg: 0,
+    memberProfileImg: null,
   });
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
   const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
   const confirmButtonRef = useRef<View | null>(null);
+  const { email, provider } = route.params;
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
@@ -40,14 +52,28 @@ export const RegisterOwnerProfile = () => {
       showFormErrorToast(error, confirmButtonRef);
       return;
     }
-    console.log('다음으로');
+    const registerData: RequestUserProfile = {
+      email,
+      provider,
+      memberName: user.memberName,
+      memberGender: user.memberGender!,
+      memberBirthDate: user.memberBirthDate.split('. ').join('-'),
+      address: user.address,
+      familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE] as FamilyRole,
+      memberProfileImg: user.memberProfileImg!,
+    };
+    console.log('보낼 데이터', registerData);
   };
 
   useEffect(() => {
-    if (selectedAvatarIndex) {
-      setUser({ ...user, memberProfileImg: selectedAvatarIndex + 1 });
+    console.log(email, provider);
+  }, [email, provider]);
+
+  useEffect(() => {
+    if (selectedAvatarIndex !== null) {
+      setUser(prevUser => ({ ...prevUser, memberProfileImg: selectedAvatarIndex + 1 }));
     }
-  }, [user, selectedAvatarIndex]);
+  }, [selectedAvatarIndex]);
 
   return (
     <>
@@ -136,7 +162,7 @@ export const RegisterOwnerProfile = () => {
 
         {/* 다음 버튼 */}
         <S.NextButtonWrapper ref={confirmButtonRef}>
-          <ActionButton onPress={handleNextPress} text="다음" />
+          <ActionButton onPress={handleNextPress} text="완료" />
         </S.NextButtonWrapper>
       </ScrollView>
 

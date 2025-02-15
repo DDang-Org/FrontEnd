@@ -1,5 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Header } from '~components/Common/Header';
+import { Icon } from '~components/Common/Icons';
 import { MyPageScreen } from '~screens/MyPage';
 import { BlockScreen } from '~screens/MyPage/Block';
 import { EditDogProfile } from '~screens/MyPage/EditDogProfile';
@@ -35,8 +37,24 @@ export const MyPageNavigator = () => {
       <Stack.Screen name="Main" component={MyPageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Setting" component={SettingScreen} options={{ title: '설정' }} />
       <Stack.Screen name="Block" component={BlockScreen} options={{ title: '차단 목록' }} />
-      <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} options={{ title: '내 정보 수정' }} />
-      <Stack.Screen name="DogProfileEdit" component={EditDogProfile} options={{ title: '반려견 정보 수정' }} />
+      <Stack.Screen
+        name="ProfileEdit"
+        component={ProfileEditScreen}
+        options={{
+          title: '내 정보 수정',
+          header: () => <Header left={<Icon.Prev />} />,
+          contentStyle: { backgroundColor: theme.colors.gc_4 },
+        }}
+      />
+      <Stack.Screen
+        name="DogProfileEdit"
+        component={EditDogProfile}
+        options={{
+          title: '반려견 정보 수정',
+          header: () => <Header left={<Icon.Prev />} />,
+          contentStyle: { backgroundColor: theme.colors.gc_4 },
+        }}
+      />
     </Stack.Navigator>
   );
 };
