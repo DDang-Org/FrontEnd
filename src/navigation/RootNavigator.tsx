@@ -15,6 +15,7 @@ export const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   const { isLoggedIn, hasDog } = useAuth();
+
   // const [isAppFirstLaunch, setIsAppFirstLaunch] = useState(true);
 
   // useEffect(() => {

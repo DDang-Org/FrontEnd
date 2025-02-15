@@ -41,6 +41,9 @@ export const DetailProfile = () => {
           navigation.navigate('BottomTab');
         }, 1000);
       },
+      // onError: async error => {
+      //   showFormErrorToast(error.message, confirmButtonRef);
+      // },
     });
   };
 

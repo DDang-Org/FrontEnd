@@ -5,10 +5,12 @@ import { TextBold, TextRegular } from '~components/Common/Text';
 import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
+import { useAuth } from '~apis/member/useAuth';
 
 type Props = NativeStackScreenProps<MyPageStackProps, 'Setting'>;
 
 export const SettingScreen = ({ navigation }: Props) => {
+  const { logoutMutation } = useAuth();
   const {
     chatNotificationAllowed,
     familyNotificationAllowed,
@@ -56,7 +58,12 @@ export const SettingScreen = ({ navigation }: Props) => {
       </S.NavigationToBlockScreen>
 
       <S.ButtonContainer>
-        <ActionButton text="로그아웃" bgColor="font_1" type="semiRoundedRect" />
+        <ActionButton
+          onPress={() => logoutMutation.mutate(null)}
+          text="로그아웃"
+          bgColor="font_1"
+          type="semiRoundedRect"
+        />
         <S.DeleteAccountButton>
           <S.DeleteAccountTypo fontSize={15}>탈퇴하기</S.DeleteAccountTypo>
         </S.DeleteAccountButton>
