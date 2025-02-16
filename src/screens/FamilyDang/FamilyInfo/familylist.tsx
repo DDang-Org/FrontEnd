@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from '../styles';
 import { Separator } from '~components/Common/Seperator';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
@@ -35,8 +34,14 @@ export const FamilyList = () => {
             </S.LineWrapper>
             <S.LineWrapper>
               <S.MemberDetails fontSize={13}>
-                {item.memberGender === 'MALE' ? '남자' : '여자'} <Separator $height={8} />{' '}
-                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })} <Separator $height={8} />{' '}
+                {item.memberGender === 'MALE' ? '남자' : '여자'}
+                {'  '}
+                <Separator $height={8} />
+                {'  '}
+                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })}
+                {'  '}
+                <Separator $height={8} />
+                {'  '}
                 {getAge(item.memberBirthDate)}세
               </S.MemberDetails>
             </S.LineWrapper>
