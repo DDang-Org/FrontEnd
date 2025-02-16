@@ -13,18 +13,36 @@ export const FamilyList = () => {
     <S.GapBox paddingVertical={5} paddingHorizontal={15}>
       {familyMembers.map((item, index) => (
         <S.ProfileWrapper key={item.memberId} isLast={index === familyMembers.length - 1}>
-          <Profile size={74} avatarNumber={item.memberProfileImg} />
+          import CrownIcon from '~assets/crown.svg';
+          <S.ProfileContainer>
+            {item.isRepresent && (
+              <S.CrownIcon
+                width={28}
+                height={28}
+                style={{
+                  position: 'absolute',
+                  top: -20,
+                  left: '50%',
+                  transform: [{ translateX: -35 }, { rotate: '335deg' }],
+                }}
+              />
+            )}
+            <Profile size={74} avatarNumber={item.memberProfileImg} />
+          </S.ProfileContainer>
           <S.FamilyInfoArea>
             <S.LineWrapper>
               <S.MemberName fontSize={20}>{item.memberName}</S.MemberName>
             </S.LineWrapper>
             <S.LineWrapper>
               <S.MemberDetails fontSize={13}>
-                {item.memberGender === 'MALE' ? '남자' : '여자'}{'  '}
-                <Separator $height={8} />{'  '}
-                {/* {item.familyRole} */}
-                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })}{'  '}
-                <Separator $height={8} />{'  '}
+                {item.memberGender === 'MALE' ? '남자' : '여자'}
+                {'  '}
+                <Separator $height={8} />
+                {'  '}
+                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })}
+                {'  '}
+                <Separator $height={8} />
+                {'  '}
                 {getAge(item.memberBirthDate)}세
               </S.MemberDetails>
             </S.LineWrapper>
@@ -39,4 +57,3 @@ export const FamilyList = () => {
     </S.GapBox>
   );
 };
-

@@ -23,7 +23,7 @@ export type FetchfamilyInfoResponseType = {
 export const fetchFamilyInfo = async (): Promise<APIResponse<FetchfamilyInfoResponseType[]>> => {
   try {
     const response = await api.get('family').json<APIResponse<FetchfamilyInfoResponseType[]>>();
-    console.log('Reaponse Data : ', response);
+    console.log('Family Info : ', response);
     return response;
   } catch (error) {
     console.error('Error:', error);
