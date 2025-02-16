@@ -22,8 +22,9 @@ export const api = ky.create({
         }
       },
     ],
+
     afterResponse: [
-      async (request, options, response) => {
+      async (request, _, response) => {
         if (request.url.endsWith('member/reissue')) {
           return response;
         }
@@ -34,19 +35,17 @@ export const api = ky.create({
           console.warn('401 Unauthorized: Access Token 만료, 재발급 시도 중...');
 
           try {
-            await reissueToken();
+            const newAccessToken = await reissueToken();
+            request.headers.set('Authorization', `Bearer ${newAccessToken}`);
 
-            // 원래 요청 다시 시도
-            return api(request.url, options);
+            const retryResponse = await ky(request);
+            return retryResponse;
           } catch (error) {
             console.error('토큰 재발급 실패:', error);
             console.error('로그아웃합니다.');
             await logout();
             throw error;
           }
-        }
-        if (!accessToken) {
-          console.warn('액세스 토큰 존재하지 않음');
         }
         return response;
       },

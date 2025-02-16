@@ -3,6 +3,7 @@ import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
+import { storeAccessToken } from '~utils/controlAccessToken';
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -28,6 +29,10 @@ export const RootNavigator = () => {
   // if (isAppFirstLaunch) {
   //   return null;
   // }
+
+  setInterval(async () => {
+    await storeAccessToken('asdfasdfasdfadsf');
+  }, 2000);
 
   if (!isLoggedIn) {
     return <AuthNavigator />;
