@@ -35,6 +35,7 @@ import FamilyJoinGuide2 from '~assets/family-join-guide2.svg';
 import FamilyJoinGuide3 from '~assets/family-join-guide3.svg';
 import DogTurnedBack from '~assets/dogs/dog-turned-back.svg';
 import FriendOption from '~assets/icons/extra-option.svg';
+import Crown from '~assets/crown.svg';
 
 export const Icon = {
   Bell: (props: SvgProps) => <Bell {...props} />,
@@ -73,4 +74,5 @@ export const Icon = {
   FamilyJoinGuide3: (props: SvgProps) => <FamilyJoinGuide3 {...props} />,
   DogTurnedBack: (props: SvgProps) => <DogTurnedBack {...props} />,
   FriendOption: (props: SvgProps) => <FriendOption {...props} />,
+  Crown: (props: SvgProps) => <Crown {...props} />,
 };

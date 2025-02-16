@@ -3,11 +3,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import { BgBox } from '~components/Common/BgBox';
 import { ResizeButton } from '~components/Common/ResizeButton';
+import { Icon } from '~components/Common/Icons';
+
+export const CrownIcon = styled(Icon.Crown)`
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+`;
 
 export const SafeContainer = styled(SafeAreaView)`
   padding: -35px 20px;
   gap: 20px;
   background-color: ${({ theme }) => theme.colors.lighten_3};
+`;
+
+export const ProfileContainer = styled.View`
+  position: relative;
 `;
 
 export const HeaderArea = styled.View`
