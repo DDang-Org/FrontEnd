@@ -5,8 +5,7 @@ import { BgBox } from '~components/Common/BgBox';
 import { ResizeButton } from '~components/Common/ResizeButton';
 
 export const SafeContainer = styled(SafeAreaView)`
-  flex: 1;
-  padding: -55px 20px;
+  padding: -35px 20px;
   gap: 20px;
   background-color: ${({ theme }) => theme.colors.lighten_3};
 `;
@@ -137,16 +136,18 @@ export const RadioButtonInner = styled.View`
   border-radius: 6px;
   background-color: black;
 `;
+
 export const FamilyComment = styled.View`
-  /* margin-top: 15px; */
   background-color: white;
 `;
+
 export const FamilyCommentTextAtrea = styled.View`
   display: flex;
   flex-direction: column;
   align-items: start;
   padding: 26px 30px;
 `;
+
 export const FamilyCommentTextCommentAtrea = styled.View`
   display: flex;
   flex-direction: row;

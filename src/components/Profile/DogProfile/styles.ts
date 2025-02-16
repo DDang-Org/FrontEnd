@@ -15,6 +15,7 @@ export const DogProfile = styled(BgBox)<{ expanded?: boolean }>`
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding-bottom: 110px;
 `;
 
 export const FirstDogProfile = styled.View`
