@@ -24,7 +24,7 @@ export const api = ky.create({
     ],
     afterResponse: [
       async (request, options, response) => {
-        if (request.url.endsWith('/member/reissue')) {
+        if (request.url.endsWith('member/reissue')) {
           return response;
         }
 

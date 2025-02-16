@@ -7,6 +7,7 @@ export const reissueToken = async (): Promise<APIResponse<string> | undefined> =
     const response = await api.post('member/reissue');
 
     const authorizationHeader = response.headers.get('authorization');
+    console.log('authorizationHeader', authorizationHeader);
     if (authorizationHeader) {
       const accessToken = authorizationHeader.replace('Bearer ', '');
       console.log('New Access Token:', accessToken);
