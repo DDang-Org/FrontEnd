@@ -35,10 +35,7 @@ export const SettingScreen = ({ navigation }: Props) => {
     Alert.alert('정말로 탈퇴하시겠습니까?', '삭제된 계정은 복구하실 수 없습니다.', [
       {
         text: '탈퇴하기',
-        onPress: () =>
-          deleteAccountMutation.mutate({
-            onSuccess: () => successToast('회원탈퇴가 완료되었습니다'),
-          }),
+        onPress: () => deleteAccountMutation.mutate(null),
       },
       {
         text: '취소',

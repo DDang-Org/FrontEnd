@@ -68,9 +68,17 @@ const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
 };
 
 const useDeleteAccount = (mutationOptions?: UseMutationCustomOptions) => {
+  const { successToast } = useToast();
+
   return useMutation({
     mutationFn: deleteUser,
-    onSuccess: async () => await logout(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myDogInfo'] });
+      successToast('회원탈퇴가 완료되었습니다');
+    },
+    onSettled: async () => {
+      await logout();
+    },
     ...mutationOptions,
   });
 };
