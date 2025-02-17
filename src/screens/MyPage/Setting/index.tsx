@@ -44,6 +44,7 @@ export const SettingScreen = ({ navigation }: Props) => {
       },
     ]);
   };
+
   return (
     <S.SettingScreen>
       <ToggleBox>

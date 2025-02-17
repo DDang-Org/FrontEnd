@@ -20,6 +20,7 @@ import { RequestUserProfile } from '~apis/member/createUser';
 import { REVERSE_FAMILY_ROLE } from '~constants/family-role';
 import { FamilyRole } from '~types/family-role';
 import { useAuth } from '~apis/member/useAuth';
+import { useGeolocations } from '~hooks/useGeolocation';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -44,6 +45,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const confirmButtonRef = useRef<View | null>(null);
   const { signupMutaion } = useAuth();
   const { email, provider } = route.params;
+  const address = useGeolocations();
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
@@ -70,6 +72,10 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   useEffect(() => {
     console.log(email, provider);
   }, [email, provider]);
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
 
   useEffect(() => {
     if (selectedAvatarIndex !== null) {
