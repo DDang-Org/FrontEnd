@@ -25,17 +25,17 @@ export const RootNavigator = () => {
   //   return () => clearTimeout(timer);
   // }, []);
 
-  // if (isAppFirstLaunch) {
-  //   return null;
-  // }
-
   if (!isLoggedIn) {
     return <AuthNavigator />;
   }
 
+  if (!hasDog) {
+    return <RegisterDogNavigator />;
+  }
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {hasDog && <Stack.Screen name="BottomTab" component={BottomTabNavigator} />}
+      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
     </Stack.Navigator>
   );

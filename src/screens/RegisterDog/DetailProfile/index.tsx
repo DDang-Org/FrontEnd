@@ -16,6 +16,7 @@ import { useCreateDog } from '~apis/dog/useDogProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '~navigation/RootNavigator';
+import { useAuth } from '~apis/member/useAuth';
 
 export const DetailProfile = () => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
@@ -26,6 +27,7 @@ export const DetailProfile = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const deviceHeight = Dimensions.get('screen').height;
+  const { hasDog } = useAuth();
 
   const handleClickConfirm = () => {
     const error = validateDetailProfile(dogProfile);
@@ -37,13 +39,16 @@ export const DetailProfile = () => {
     registerDog.mutate(dogProfile, {
       onSuccess: () => {
         console.log('강아지 등록 성공!');
-        setTimeout(() => {
-          navigation.navigate('BottomTab');
-        }, 1000);
+        if (hasDog) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'BottomTab' }],
+          });
+        }
       },
-      // onError: async error => {
-      //   showFormErrorToast(error.message, confirmButtonRef);
-      // },
+      onError: async error => {
+        showFormErrorToast(error.message, confirmButtonRef);
+      },
     });
   };
 
