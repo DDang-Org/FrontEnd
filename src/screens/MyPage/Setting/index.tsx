@@ -7,18 +7,15 @@ import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 import { useAuth } from '~apis/member/useAuth';
 import { useUser } from '~apis/member/useUser';
-import { fetchFamilyInfo } from '~apis/family/fetchFamilyInfo';
-import { useEffect } from 'react';
 import { Alert } from 'react-native';
-import { useToast } from '~hooks/useToast';
+import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 
 type Props = NativeStackScreenProps<MyPageStackProps, 'Setting'>;
 
 export const SettingScreen = ({ navigation }: Props) => {
   const { logoutMutation, deleteAccountMutation } = useAuth();
   const myInfo = useUser();
-  const familyInfo = fetchFamilyInfo();
-  const { successToast } = useToast();
+  const familyInfo = useFamilyInfo();
   const {
     chatNotificationAllowed,
     familyNotificationAllowed,
@@ -27,15 +24,19 @@ export const SettingScreen = ({ navigation }: Props) => {
     gangbunttaNotificationAllowed,
   } = useNotificationPermission();
 
-  useEffect(() => {
-    console.log(familyInfo);
-  }, []);
+  const isRepresetative = myInfo.isRepresentative && familyInfo.length > 1;
 
   const handleDeleteAccount = () => {
     Alert.alert('정말로 탈퇴하시겠습니까?', '삭제된 계정은 복구하실 수 없습니다.', [
       {
         text: '탈퇴하기',
-        onPress: () => deleteAccountMutation.mutate(null),
+        onPress: () => {
+          if (isRepresetative) {
+            Alert.alert('패밀리장은 탈퇴할 수 없습니다.', '패밀리장 위임 후 탈퇴를 진행해주세요.');
+            return;
+          }
+          deleteAccountMutation.mutate(null);
+        },
       },
       {
         text: '취소',
