@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { createUser, RequestUserProfile } from '~apis/member/createUser';
+import { deleteUser } from '~apis/member/deleteUser';
 import { fetchUser, FetchUserResponseType } from '~apis/member/fetchUser';
 import { logout } from '~apis/member/logout';
 import { reissueToken } from '~apis/member/reissueToken';
@@ -66,6 +67,14 @@ const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
   });
 };
 
+const useDeleteAccount = (mutationOptions?: UseMutationCustomOptions) => {
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: async () => await logout(),
+    ...mutationOptions,
+  });
+};
+
 export const useAuth = () => {
   const signupMutaion = useSignup();
   const myDogInfo = useMyDogInfo();
@@ -75,6 +84,7 @@ export const useAuth = () => {
   });
   const logoutMutation = useLogout();
   const hasDog = Array.isArray(myDogInfo.data) && myDogInfo.data.length > 0;
+  const deleteAccountMutation = useDeleteAccount();
 
-  return { signupMutaion, myDogInfo, myInfo, logoutMutation, isLoggedIn, hasDog };
+  return { signupMutaion, myDogInfo, myInfo, logoutMutation, isLoggedIn, hasDog, deleteAccountMutation };
 };
