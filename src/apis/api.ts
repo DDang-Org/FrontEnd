@@ -1,11 +1,11 @@
 import ky from 'ky';
 import { logout } from '~apis/member/logout';
 import { reissueToken } from '~apis/member/reissueToken';
-import { BASE_URL } from '~constants/base-url';
 import { getAccessToken } from '~utils/controlAccessToken';
+import { Config } from 'react-native-config';
 
 export const api = ky.create({
-  prefixUrl: BASE_URL,
+  prefixUrl: Config.BASE_URL,
   timeout: 5000,
   hooks: {
     beforeRequest: [
