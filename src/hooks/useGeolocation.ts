@@ -1,10 +1,32 @@
 import ky from 'ky';
 import Config from 'react-native-config';
+import Geolocation from '@react-native-community/geolocation';
+
+interface LatLngType {
+  latitude: number;
+  longitude: number;
+}
 
 export const useGeolocations = () => {
-  const getAddressFromCoordinates = async (latitude: number, longitude: number) => {
+  const getCurrentLatLng = async (): Promise<LatLngType> => {
+    return new Promise((resolve, reject) => {
+      Geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          resolve({ latitude, longitude });
+        },
+        error => {
+          console.error('위치 가져오기 실패:', error);
+          reject(new Error('현재 위치를 가져올 수 없습니다.'));
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+      );
+    });
+  };
+
+  const getAddressFromCoordinates = async (latitude: number, longitude: number): Promise<string> => {
     try {
-      const response: any = await ky
+      const response = await ky
         .get('https://dapi.kakao.com/v2/local/geo/coord2address.json', {
           searchParams: {
             x: longitude,
@@ -14,38 +36,39 @@ export const useGeolocations = () => {
             Authorization: `KakaoAK ${Config.KAKAO_REST_API_KEY}`,
           },
         })
-        .json();
-      console.log('response', response);
-      if (response.documents.length > 0) {
-        const region_2depth_name = response.documents[0].address?.region_2depth_name || '';
-        const region_3depth_name = response.documents[0].address?.region_3depth_name || '';
-        const result = region_2depth_name + ' ' + region_3depth_name;
+        .json<{
+          documents: Array<{
+            address?: {
+              region_2depth_name?: string;
+              region_3depth_name?: string;
+            };
+          }>;
+        }>();
 
-        if (result.split(' ').join('')) {
-          return result.split(' ').slice(-2).join(' ');
+      if (response.documents.length > 0) {
+        const { region_2depth_name = '', region_3depth_name = '' } = response.documents[0].address || {};
+
+        if (region_2depth_name || region_3depth_name) {
+          return `${region_2depth_name} ${region_3depth_name}`.split(' ').slice(-2).join(' ').trim();
         }
-        return '주소 정보 없음';
-      } else {
-        return '주소 정보 없음';
       }
+
+      return '주소 정보 없음';
     } catch (error) {
       console.error('Reverse Geocoding 에러:', error);
-      throw error;
+      throw new Error('주소 변환에 실패했습니다.');
     }
   };
 
-  const fetchAddress = async () => {
-    const latitude = 37.499668;
-    const longitude = 127.040612;
+  const fetchAddress = async (): Promise<string> => {
     try {
-      const address = await getAddressFromCoordinates(latitude, longitude);
-      console.log('가져온 주소:', address);
-      return address;
+      const { latitude, longitude } = await getCurrentLatLng();
+      return await getAddressFromCoordinates(latitude, longitude);
     } catch (error) {
       console.error('주소 가져오기 실패:', error);
       return '주소 정보 없음';
     }
   };
 
-  return fetchAddress();
+  return { fetchAddress };
 };
