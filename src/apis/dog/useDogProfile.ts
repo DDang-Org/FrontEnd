@@ -17,7 +17,7 @@ export const useCreateDog = (mutationOptions?: UseMutationCustomOptions) => {
   const { successToast } = useToast();
   return useMutation({
     mutationFn: createDog,
-    onSuccess: () => successToast(successMessage['CREATE_DOG']),
+    onSuccess: () => successToast(successMessage.CREATE_DOG),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
     ...mutationOptions,
   });
@@ -29,7 +29,7 @@ export const useDogProfile = (dogId: number, mutationOptions?: UseMutationCustom
   const useUpdateDog = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
     return useMutation({
       mutationFn: (dogProfile: DogProfileType) => updateDog(dogId, dogProfile),
-      onSuccess: () => successToast(successMessage['UPDATE_DOG']),
+      onSuccess: () => successToast(successMessage.UPDATE_DOG),
       onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
       ...mutationOptions,
     });
@@ -38,7 +38,7 @@ export const useDogProfile = (dogId: number, mutationOptions?: UseMutationCustom
   const useDeleteDog = (dogId: number, mutationOptions?: UseMutationCustomOptions) => {
     return useMutation({
       mutationFn: () => deleteDog(dogId),
-      onSuccess: () => successToast(successMessage['DELETE_DOG']),
+      onSuccess: () => successToast(successMessage.DELETE_DOG),
       onSettled: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
       ...mutationOptions,
     });

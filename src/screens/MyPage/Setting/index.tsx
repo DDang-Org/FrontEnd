@@ -5,10 +5,17 @@ import { TextBold, TextRegular } from '~components/Common/Text';
 import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
+import { useAuth } from '~apis/member/useAuth';
+import { useUser } from '~apis/member/useUser';
+import { Alert } from 'react-native';
+import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 
 type Props = NativeStackScreenProps<MyPageStackProps, 'Setting'>;
 
 export const SettingScreen = ({ navigation }: Props) => {
+  const { logoutMutation, deleteAccountMutation } = useAuth();
+  const myInfo = useUser();
+  const familyInfo = useFamilyInfo();
   const {
     chatNotificationAllowed,
     familyNotificationAllowed,
@@ -16,6 +23,28 @@ export const SettingScreen = ({ navigation }: Props) => {
     walkNotificationAllowed,
     gangbunttaNotificationAllowed,
   } = useNotificationPermission();
+
+  const isRepresetative = myInfo.isRepresentative && familyInfo.length > 1;
+
+  const handleDeleteAccount = () => {
+    Alert.alert('정말로 탈퇴하시겠습니까?', '삭제된 계정은 복구하실 수 없습니다.', [
+      {
+        text: '탈퇴하기',
+        onPress: () => {
+          if (isRepresetative) {
+            Alert.alert('패밀리장은 탈퇴할 수 없습니다.', '패밀리장 위임 후 탈퇴를 진행해주세요.');
+            return;
+          }
+          deleteAccountMutation.mutate(null);
+        },
+      },
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+    ]);
+  };
+
   return (
     <S.SettingScreen>
       <ToggleBox>
@@ -56,8 +85,13 @@ export const SettingScreen = ({ navigation }: Props) => {
       </S.NavigationToBlockScreen>
 
       <S.ButtonContainer>
-        <ActionButton text="로그아웃" bgColor="font_1" type="semiRoundedRect" />
-        <S.DeleteAccountButton>
+        <ActionButton
+          onPress={() => logoutMutation.mutate(null)}
+          text="로그아웃"
+          bgColor="font_1"
+          type="semiRoundedRect"
+        />
+        <S.DeleteAccountButton onPress={handleDeleteAccount}>
           <S.DeleteAccountTypo fontSize={15}>탈퇴하기</S.DeleteAccountTypo>
         </S.DeleteAccountButton>
       </S.ButtonContainer>

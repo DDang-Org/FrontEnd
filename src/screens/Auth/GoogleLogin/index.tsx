@@ -6,7 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { storeAccessToken } from '~utils/controlAccessToken';
 import { queryClient } from '~providers/QueryClientProvider';
 
-export const KakaoLogin = () => {
+export const GoogleLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
 
   const handleNavigationStateChange = async (navState: WebViewNavigation) => {
@@ -18,7 +18,6 @@ export const KakaoLogin = () => {
       const email = params.get('email') || '';
       const provider = params.get('provider') || '';
       console.log('Register Params:', { email, provider });
-
       navigation.replace('OwnerProfile', { email, provider });
     } else if (url.includes('accessToken')) {
       const accessToken = params.get('accessToken') || '';
@@ -29,14 +28,15 @@ export const KakaoLogin = () => {
   };
 
   return (
-    <S.KakaoLogin>
+    <S.GoogleLogin>
       <WebView
         source={{
-          uri: `https://ddang.site/oauth2/authorization/kakao`,
+          uri: `https://ddang.site/oauth2/authorization/google`,
         }}
+        userAgent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
         onNavigationStateChange={handleNavigationStateChange}
         injectedJavaScript="window.ReactNativeWebView.postMessage('')"
       />
-    </S.KakaoLogin>
+    </S.GoogleLogin>
   );
 };

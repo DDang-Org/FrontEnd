@@ -34,7 +34,10 @@ export const updateDog = async (
 
     return response;
   } catch (error) {
-    console.error(error as HTTPError);
+    if (error instanceof HTTPError) {
+      const errorData = await error.response.json();
+      console.error(errorData);
+    }
     throw new Error('An unexpected error occurred');
   }
 };

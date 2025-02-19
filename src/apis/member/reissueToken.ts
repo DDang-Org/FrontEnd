@@ -1,30 +1,29 @@
-import { HTTPError } from 'ky';
 import { api } from '~apis/api';
 import { APIResponse } from '~types/api';
-import { storeAccessToken } from '~utils/controlAccessToken';
+import { removeAccessToken, storeAccessToken } from '~utils/controlAccessToken';
+import { getEmail } from '~utils/controlEmail';
 
-export const reissueToken = async (): Promise<APIResponse<string>> => {
+export const reissueToken = async (): Promise<string> => {
   try {
-    const response = await api.post('member/reissue');
+    const email = await getEmail();
+    const response = await api.post('member/reissue', {
+      json: { email },
+    });
 
     const authorizationHeader = response.headers.get('authorization');
+    console.log('authorizationHeader', authorizationHeader);
     if (authorizationHeader) {
       const accessToken = authorizationHeader.replace('Bearer ', '');
-      console.log('New Access Token:', accessToken);
       await storeAccessToken(accessToken);
     } else {
-      console.warn('Authrizaion 헤더가 존재하지 않습니다.');
+      console.warn('Authorization 헤더가 존재하지 않습니다.');
     }
 
-    const responseData = await response.json<APIResponse<string>>();
-
-    console.log('response로 들어온 data', responseData);
-    return responseData;
+    const accessToken = (await response.json<APIResponse<string>>()).data;
+    return accessToken;
   } catch (error) {
-    if (error instanceof HTTPError) {
-      const errorData = await error.response.json();
-      console.error('Reissue Token Error:', errorData);
-    }
+    console.error('Reissue Token Error: 재시도 초과');
+    await removeAccessToken();
     throw error;
   }
 };
