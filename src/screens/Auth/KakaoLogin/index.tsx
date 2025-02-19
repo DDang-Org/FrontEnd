@@ -5,13 +5,21 @@ import { AuthParamList } from '~navigation/AuthNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { storeAccessToken } from '~utils/controlAccessToken';
 import { queryClient } from '~providers/QueryClientProvider';
+import { useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
 
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const deviceHeight = Dimensions.get('window').height;
 
   const handleNavigationStateChange = async (navState: WebViewNavigation) => {
     const { url } = navState;
-    console.log('현재 리다이렉트된 url', url);
+    const isMatched = !url.includes('accounts');
+
+    setIsLoading(isMatched);
+    console.log('redirect url', url);
 
     const params = new URLSearchParams(url.split('?')[1]);
     if (url.includes('/register')) {
@@ -30,6 +38,11 @@ export const KakaoLogin = () => {
 
   return (
     <S.KakaoLogin>
+      {isLoading && (
+        <S.KaKaoLoadingContainer style={{ height: deviceHeight, elevation: 10 }}>
+          <ActivityIndicator size={'small'} color={'black'} />
+        </S.KaKaoLoadingContainer>
+      )}
       <WebView
         source={{
           uri: `https://ddang.site/oauth2/authorization/kakao`,
