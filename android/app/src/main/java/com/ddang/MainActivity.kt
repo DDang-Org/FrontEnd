@@ -1,9 +1,11 @@
 package com.ddang
 
 import com.facebook.react.ReactActivity
+import android.os.Bundle;
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
+import org.devio.rn.splashscreen.SplashScreen;
 
 class MainActivity : ReactActivity() {
 
@@ -20,4 +22,13 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+  /**
+   * Override onCreate to show the splash screen.
+   */
+  override fun onCreate(savedInstanceState: Bundle?) {
+    // Show the splash screen before calling super.onCreate
+    SplashScreen.show(this)
+    super.onCreate(savedInstanceState)
+  }
 }
