@@ -11,6 +11,7 @@ export const api = ky.create({
     beforeRequest: [
       async request => {
         const accessToken = await getAccessToken();
+
         if (accessToken) {
           request.headers.set(
             'Authorization',

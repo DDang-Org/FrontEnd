@@ -18,6 +18,7 @@ export const KakaoLogin = () => {
       const email = params.get('email') || '';
       const provider = params.get('provider') || '';
       console.log('Register Params:', { email, provider });
+
       navigation.replace('OwnerProfile', { email, provider });
     } else if (url.includes('accessToken')) {
       const accessToken = params.get('accessToken') || '';
