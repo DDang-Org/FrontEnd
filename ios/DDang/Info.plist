@@ -80,7 +80,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<string>네이버 맵에서 내 위치를 표시하기 위해 권한을 요청합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
