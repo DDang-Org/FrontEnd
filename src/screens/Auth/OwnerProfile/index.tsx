@@ -21,6 +21,7 @@ import { REVERSE_FAMILY_ROLE } from '~constants/family-role';
 import { FamilyRole } from '~types/family-role';
 import { useAuth } from '~apis/member/useAuth';
 import { usePermission } from '~hooks/usePermission';
+import { useGeolocations } from '~hooks/useGeolocation';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -45,7 +46,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const confirmButtonRef = useRef<View | null>(null);
   const { signupMutaion } = useAuth();
   const { email, provider } = route.params;
-  // const { fetchAddress } = useGeolocations();
+  const { fetchAddress } = useGeolocations();
   const { requestAndCheckPermission } = usePermission();
 
   const avatarList = Object.values(Avatars);
@@ -86,7 +87,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
       return;
     }
 
-    const address = '양천구 신월동';
+    const address = await fetchAddress();
     setUser({ ...user, address });
   };
 
