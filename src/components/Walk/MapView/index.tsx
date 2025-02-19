@@ -14,7 +14,8 @@ import { formatDuration, formatDistance } from '~screens/Home/WalkScreen';
 import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { DogListModal } from '~components/Common/ListModal';
-import ky from 'ky';
+// import ky from 'ky';
+import axios from 'axios';
 
 import ViewShot, { captureRef } from 'react-native-view-shot';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
@@ -26,7 +27,7 @@ import { useWebSocket } from '~hooks/useWebSocket';
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
-const MIN_MARKER_DISTANCE = 20;
+const MIN_MARKER_DISTANCE = 5;
 
 const USER_EMAIL = 'mkh6793@naver.com';
 
@@ -47,7 +48,7 @@ const MapView = () => {
   const myDogInfo = useMyDogInfo();
   const { sendMessage, responseData } = useWebSocket();
 
-  console.log(responseData);
+  console.log('받은 데이터 : ' + responseData);
 
   const mapRef = useRef<NaverMapViewRef>(null);
   const [isWalking, setIsWalking] = useState(false);
@@ -353,30 +354,38 @@ const MapView = () => {
       [locationMarkers[locationMarkers.length - 1].longitude, locationMarkers[locationMarkers.length - 1].latitude],
     ];
 
+    console.log('lastTwoCoordinates : ' + lastTwoCoordinates);
+    console.log('lastTwoCoordinates : ' + typeof lastTwoCoordinates);
+
     try {
-      const response = await ky
-        .post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
-          json: {
-            coordinates: lastTwoCoordinates,
-          },
-        })
-        .json();
-      const routeData = response as {
-        features: [
-          {
-            geometry: {
-              coordinates: number[][];
-            };
-            properties: {
-              segments: [
-                {
-                  distance: number;
-                },
-              ];
-            };
-          },
-        ];
-      };
+      // const response = await ky
+      //   .post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
+      //     json: {
+      //       coordinates: lastTwoCoordinates,
+      //     },
+      //   })
+      //   .json();
+      // const routeData = response as {
+      //   features: [
+      //     {
+      //       geometry: {
+      //         coordinates: number[][];
+      //       };
+      //       properties: {
+      //         segments: [
+      //           {
+      //             distance: number;
+      //           },
+      //         ];
+      //       };
+      //     },
+      //   ];
+      // };
+
+      const response = await axios.post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
+        coordinates: lastTwoCoordinates,
+      });
+      const routeData = response.data;
       const newRouteCoordinates = routeData.features[0].geometry.coordinates;
       const routeDistance = routeData.features[0].properties.segments[0].distance;
 
@@ -388,7 +397,8 @@ const MapView = () => {
         latitude: lastCoordinate[1],
         longitude: lastCoordinate[0],
       });
-      sendMessage('/pub/api/v1/walk-alone', message);
+      // sendMessage('/pub/api/v1/walk-alone', message);
+      console.log('메시지 보내기 완료');
     } catch (error) {
       console.error('경로 데이터 가져오기 실패:', error);
     }
