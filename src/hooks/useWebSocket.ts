@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
 import { Client, IMessage } from '@stomp/stompjs';
 
@@ -9,6 +9,7 @@ const SERVER_URL = 'https://ddang.site/ws';
 
 export const useWebSocket = () => {
   const stompClientRef = useRef<Client | null>(null);
+  const [responseData, setResponseData] = useState<any>(null);
 
   useEffect(() => {
     const stompClient = new Client({
@@ -24,7 +25,9 @@ export const useWebSocket = () => {
       console.log('STOMP 연결 성공:', frame);
 
       stompClient.subscribe('/sub/walk/mkh6793@naver.com', message => {
-        console.log('받은 메시지:', message.body);
+        const response = JSON.parse(message.body);
+        console.log('받은 메시지:', response);
+        setResponseData(response);
       });
     };
 
@@ -48,5 +51,5 @@ export const useWebSocket = () => {
     }
   };
 
-  return { client: stompClientRef.current, sendMessage, subscribe };
+  return { client: stompClientRef.current, sendMessage, subscribe, responseData };
 };
