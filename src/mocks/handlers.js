@@ -198,20 +198,49 @@ export const handlers = [
       },
     });
   }),
-  http.get(`${BASE_URL}/dogs`, () => {
+  http.get(`${BASE_URL}/family`, () => {
     return HttpResponse.json({
-      data: {
-        dogId: 0,
-        dogName: '밤톨이',
-        breed: '포메라니안',
-        dogBirthDate: '2024-12-24',
-        weight: 6,
-        dogGender: 'MALE',
-        dogProfileImg: 'https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg',
-        isNeutered: 'TRUE',
-        familyId: 0,
-        comment: '우리아이 안 물어요 착해요. 강아지껌을 너무 좋아해요 같이 놀아요.',
-      },
+      data: [
+        {
+          memberId: 1,
+          memberName: '홍길동',
+          email: 'test@naver.com',
+          provider: 'KAKAO',
+          memberGender: 'MALE',
+          memberBirthDate: '2000-01-01',
+          address: '서울시 강남구',
+          familyRole: 'FATHER',
+          memberProfileImg: 1,
+          memberWalkCount: 4,
+          isRepresent: false,
+        },
+        {
+          memberId: 2,
+          memberName: '김영희',
+          email: 'younghee@gmail.com',
+          provider: 'GOOGLE',
+          memberGender: 'FEMALE',
+          memberBirthDate: '1995-05-15',
+          address: '서울시 서초구',
+          familyRole: 'SISTER',
+          memberProfileImg: 2,
+          memberWalkCount: 8,
+          isRepresent: true,
+        },
+        {
+          memberId: 3,
+          memberName: '이철수',
+          email: 'chulsoo@daum.net',
+          provider: 'KAKAO',
+          memberGender: 'MALE',
+          memberBirthDate: '2010-07-20',
+          address: '서울시 송파구',
+          familyRole: 'GRANDFATHER',
+          memberProfileImg: 3,
+          memberWalkCount: 32,
+          isRepresent: false,
+        },
+      ],
     });
   }),
 ];

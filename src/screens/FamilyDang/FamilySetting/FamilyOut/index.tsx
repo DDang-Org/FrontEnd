@@ -23,7 +23,7 @@ export const FamilyOut = () => {
         ))}
         <S.ActionButtonWrapper>
           <ActionButton onPress={() => console.log('Action 버튼 클릭')} text="위임하기" disabled={!isAnySelected} />
-        </S.ActionButtonWrapper>{' '}
+        </S.ActionButtonWrapper>
       </S.StyledView>
     </S.FamilySetting>
   );

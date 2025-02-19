@@ -18,8 +18,8 @@ const WalkInfoItem = ({ WalkInfoIcon, label, value }: { WalkInfoIcon: ReactNode;
 };
 
 export const WalkInfo = () => {
-  const [dogInfo] = useMyDogInfo();
-  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({ dogId: dogInfo.dogId });
+  const { data: dogInfo } = useMyDogInfo();
+  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({ dogId: dogInfo![0].dogId });
 
   return (
     <S.WalkInfo paddingHorizontal={24} paddingVertical={20}>

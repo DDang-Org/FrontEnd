@@ -5,19 +5,18 @@ import { useCalendar } from '~hooks/useCalendar';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { CalendarHeader } from '~components/Log/CalendarHeader';
-import { useWalkLog } from '~apis/log/useWalkLog';
-import { dateToString } from '~utils/dateFormat';
 import { DateItem } from '~components/Log/DateItem';
 
 interface CalendarProps {
   setDate: (date: Date) => void;
+  walkDates: string[] | undefined;
 }
 
 const deviceWidth = Dimensions.get('window').width;
 const ITEM_SPACING = 8;
 const SIDE_PADDING = 24;
 
-export const Calendar = React.memo(({ setDate }: CalendarProps) => {
+export const Calendar = React.memo(({ setDate, walkDates }: CalendarProps) => {
   const { activeIndex, weekDays, weekCalendarList, currentDate, setCurrentDate } = useCalendar(new Date());
   const dateItemSize = (deviceWidth - (ITEM_SPACING * (weekDays.length - 1) + SIDE_PADDING * 2)) / weekDays.length;
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +29,7 @@ export const Calendar = React.memo(({ setDate }: CalendarProps) => {
   const calendarHeight = useSharedValue(MIN_CALENDAR_SIZE);
   const isOpenShared = useSharedValue(isOpen);
 
-  const { walkDates } = useWalkLog(dateToString(currentDate, '-'));
+  // const { walkDates } = useWalkLog(dateToString(currentDate, '-'));
 
   useEffect(() => {
     setDate(currentDate);

@@ -2,6 +2,7 @@ import { TextBold, TextExtraBold, TextMedium } from '~components/Common/Text';
 import * as S from './styles';
 import { View } from 'react-native';
 import { WalkData } from '~apis/log/fetchTotalRecords';
+import { formatTime } from '~utils/dateFormat';
 
 interface WalkLogStatContainerProps {
   title: string;
@@ -17,9 +18,7 @@ export const WalkLogStatContainer = ({ title, walkData }: WalkLogStatContainerPr
       <S.StatContainerInner>
         <View>
           <TextMedium fontSize={13}>산책 시간</TextMedium>
-          <TextExtraBold fontSize={20}>
-            {hours}:{minutes}:{seconds}
-          </TextExtraBold>
+          <TextExtraBold fontSize={20}>{formatTime(hours, minutes, seconds)}</TextExtraBold>
         </View>
         <View>
           <TextMedium fontSize={13}>산책 기록</TextMedium>

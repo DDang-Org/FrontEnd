@@ -1,12 +1,11 @@
-import React from 'react';
 import { Text } from 'react-native';
 import { Header } from '~components/Common/Header';
 import { Icon } from '~components/Common/Icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~navigation/RootNavigator';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 
 const FamilyDDangHeaderComponent = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -18,7 +17,7 @@ const FamilyDDangHeaderComponent = () => {
       backgroundColorType="default"
       onRightPress={() => {
         console.log('Gear icon clicked');
-        navigation.navigate('FamilyDDang', { screen: 'FamilySetting' });
+        navigation.navigate('FamilySetting');
       }}
     />
   );

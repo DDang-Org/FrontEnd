@@ -13,6 +13,6 @@ export const SOCIAL_LOGIN_BUTTONS = [
     textColor: '#000000',
     IconComponent: Icon.Google,
     text: '구글계정 로그인',
-    onPress: (navigation: any) => navigation.navigate('RegisterOwner', { screen: 'OwnerProfile' }),
+    onPress: (navigation: any) => navigation.navigate('Auth', { screen: 'OwnerProfile' }),
   },
 ];

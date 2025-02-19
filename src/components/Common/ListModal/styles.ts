@@ -11,7 +11,7 @@ export const ModalBackground = styled.TouchableOpacity`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const ModalContainer = styled(Animated.View)<{ type: 'walk' | 'default' | 'multi-select' }>`
+export const ModalContainer = styled(Animated.View)<{ type: 'walk' | 'default' | 'multi-select' | 'select' }>`
   position: absolute;
   bottom: 0;
   left: 0;

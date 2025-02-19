@@ -4,14 +4,15 @@ import { TextBold } from '~components/Common/Text';
 
 export const EditDogProfile = styled.SafeAreaView`
   flex: 1;
+  background-color: ${props => props.theme.colors.gc_4};
 `;
 
 export const StyledScrollView = styled.ScrollView`
-  padding: 0px 20px 36px 20px;
+  padding: 0px 20px 40px 20px;
 `;
 
 export const TextWrapper = styled.View<{ deviceHeight: number }>`
-  margin-top: ${props => (props.deviceHeight > 900 ? '70px' : '50px')};
+  margin-top: ${props => (props.deviceHeight > 900 ? '36px' : '24px')};
   margin-bottom: 20px;
   align-items: center;
 `;

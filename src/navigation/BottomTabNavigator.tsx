@@ -9,12 +9,10 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import Prev from '~assets/icons/prev.svg';
 import { HomeNavigator } from '~navigation/HomeNavigator';
 import { MyPageNavigator } from '~navigation/MyPageNavigator';
-import { FamilyDangScreen } from '~screens/FamilyDang';
 import { ProfileScreen } from '~screens/Profile';
 import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
-import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
-import FamilyDDangHeaderComponent from '~screens/FamilyDang/Header/FamilyDDangHeaderComponent';
+import { FamilyDDangNavigator, FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { TalkScreen } from '~screens/Talk';
 
 export type TabBarParamList = {
@@ -78,13 +76,12 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="FamilyDang"
-        component={FamilyDangScreen}
+        component={FamilyDDangNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="heart" size={size} color={color} focused={focused} />
           ),
-          header: () => <FamilyDDangHeaderComponent />,
-          headerShown: true,
+          headerShown: false,
         }}
       />
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as S from '../styles';
-import { ClickFamily } from '../../FamilyInfo/clickfamily';
+import { ClickFamily } from '~screens/FamilyDang/FamilyInfo/clickfamily';
 import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
 import { ActionButton } from '~components/Common/ActionButton';
 

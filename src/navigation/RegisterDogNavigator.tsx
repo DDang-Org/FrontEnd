@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FetchMyDogInfoResponseType } from '~apis/dog/fetchMyDogInfo';
+import { Header } from '~components/Common/Header';
+import { Icon } from '~components/Common/Icons';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { DogProfileProvider } from '~providers/DogProfileProvider';
 import { RegisterDog } from '~screens/RegisterDog';
@@ -26,6 +28,7 @@ export const RegisterDogNavigator = () => {
           contentStyle: {
             backgroundColor: 'white',
           },
+          header: ({ navigation }) => <Header left={<Icon.Prev />} onLeftPress={() => navigation.goBack()} />,
           headerShadowVisible: false,
           headerTitle: '',
         }}

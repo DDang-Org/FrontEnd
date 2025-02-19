@@ -19,7 +19,7 @@ interface DogListModalProps {
   dogs: Dog[];
   onSelectDog: (dog: Dog) => void;
   onSelectMultipleDogs?: (dogs: Dog[]) => void;
-  type?: 'walk' | 'default' | 'multi-select';
+  type?: 'walk' | 'default' | 'multi-select' | 'select';
 }
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -103,7 +103,6 @@ export const DogListModal = ({
               </S.ConfirmButton>
             )}
           </S.HeaderContainer>
-
           <ScrollView>
             {dogs.map(dog => (
               <S.DogItem
@@ -141,7 +140,7 @@ export const DogListModal = ({
                     }}
                     type="roundedRect"
                     bgColor="lighten_3"
-                    text={type === 'walk' ? '강번따' : '추가'}
+                    text={type === 'walk' ? '강번따' : type === 'select' ? '선택' : '추가'}
                   />
                 </S.ButtonContainer>
               </S.DogItem>

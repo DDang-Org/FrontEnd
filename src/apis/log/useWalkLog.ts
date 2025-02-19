@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 import { fetchLogDetails } from '~apis/log/fetchLogDetails';
 import { fetchWalkDates } from '~apis/log/fetchWalkDates';
@@ -7,6 +7,7 @@ const useWalkDates = (dogId: number) => {
   const { data } = useQuery({
     queryKey: ['walkDates', dogId],
     queryFn: () => fetchWalkDates({ dogId }),
+    placeholderData: keepPreviousData,
     select: ({ data }) => data,
   });
 
@@ -14,19 +15,23 @@ const useWalkDates = (dogId: number) => {
 };
 
 const useLogDetails = (dogId: number, selectDate: string) => {
-  const { data } = useSuspenseQuery({
+  const { data } = useQuery({
     queryKey: ['walkDetails', dogId, selectDate],
     queryFn: () => fetchLogDetails({ selectDate, dogId }),
+    placeholderData: keepPreviousData,
     select: ({ data }) => data,
   });
 
   return data;
 };
 
-export const useWalkLog = (selectDate: string) => {
-  const myDogInfo = useMyDogInfo();
-  const walkDates = useWalkDates(myDogInfo[0].dogId);
-  const logDetails = useLogDetails(myDogInfo[0].dogId, selectDate);
+export const useWalkLog = (selectedDogIndex: number, selectedDate: string) => {
+  const { data: myDogInfo } = useMyDogInfo();
+
+  const dogId = myDogInfo?.[selectedDogIndex]?.dogId;
+
+  const walkDates = useWalkDates(dogId || -1);
+  const logDetails = useLogDetails(dogId || -1, selectedDate);
 
   return { walkDates, logDetails };
 };

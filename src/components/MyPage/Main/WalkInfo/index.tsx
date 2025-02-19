@@ -1,8 +1,9 @@
-import { useAccumulatedWalkInfo } from '~apis/dog/useAccumulatedWalkInfo';
 import { StatContainer } from '~components/Common/StatContainer';
+import { useUserWalkInfoById } from '~apis/member/useUserWalkInfoById';
 
-export const WalkInfo = ({ dogId }: { dogId: number }) => {
-  const { walkCount, countWalksWithMember, totalDistance } = useAccumulatedWalkInfo({ dogId });
+export const WalkInfo = () => {
+  const { walkCount, countWalksWithMember, totalDistance } = useUserWalkInfoById();
+
   return (
     <StatContainer>
       <StatContainer.Item>
