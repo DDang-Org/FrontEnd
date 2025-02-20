@@ -1,5 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Header } from '~components/Common/Header';
+import { Icon } from '~components/Common/Icons';
 import { HomeScreen } from '~screens/Home';
 import { NotificationScreen } from '~screens/Home/Notification';
 import { WalkScreen } from '~screens/Home/WalkScreen';
@@ -34,7 +36,9 @@ export const HomeNavigator = () => {
         name="Notification"
         component={NotificationScreen}
         options={{
-          title: '알림',
+          header: ({ navigation }) => (
+            <Header left={<Icon.Prev />} center={'알림'} onLeftPress={() => navigation.goBack()} />
+          ),
         }}
       />
     </Stack.Navigator>
