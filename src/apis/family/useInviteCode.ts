@@ -2,6 +2,7 @@ import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { createInviteCode } from '~apis/family/createInviteCode';
 import { joinFamily } from '~apis/family/joinFamily';
 import { verifyInviteCode } from '~apis/family/verifyInviteCode';
+import { useToast } from '~hooks/useToast';
 import { queryClient } from '~providers/QueryClientProvider';
 import { UseMutationCustomOptions } from '~types/api';
 
@@ -22,9 +23,13 @@ export const useVerifyInviteCode = (mutationOptions?: UseMutationCustomOptions) 
 };
 
 export const useJoinFamily = (mutationOptions?: UseMutationCustomOptions) => {
+  const { successToast } = useToast();
   return useMutation({
     mutationFn: (inviteCode: string) => joinFamily(inviteCode),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myDogInfo'] });
+      successToast('패밀리에 가입되었습니다.');
+    },
     ...mutationOptions,
   });
 };

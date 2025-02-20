@@ -42,7 +42,7 @@ export const FamilySetting = () => {
             <TextBold fontSize={17}>강아지 추가하기</TextBold>
             <TextRegular fontSize={15}>패밀리장은 강아지를 추가할 수 있어요</TextRegular>
           </S.TypoWrapper>
-          <S.NextButton onPress={handleRegisterDog} />
+          <S.NextButton onPress={handleJoinFamily} />
         </S.NavigationToSettingScreen>
         <S.NavigationToSettingScreen paddingHorizontal={20} paddingVertical={16.5}>
           <S.TypoWrapper>

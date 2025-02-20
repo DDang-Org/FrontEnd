@@ -40,10 +40,9 @@ export const DogConfirmation = ({ route }: { route: DogConfirmationRouteProps })
     joinFamilyMutation.mutate(inviteCode, {
       onSuccess: () => {
         if (hasDog) {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'BottomTab' }],
-          });
+          navigation.goBack();
+          setTimeout(() => navigation.goBack(), 0);
+          return;
         }
       },
       onError: async error => {
@@ -58,6 +57,7 @@ export const DogConfirmation = ({ route }: { route: DogConfirmationRouteProps })
   };
 
   const throttleHandleConfirm = throttle(handleConfirm);
+  const characterCount = targetDog.dogName.length + targetDog.breed.length;
 
   return (
     <S.DogConfirmation>
@@ -65,9 +65,9 @@ export const DogConfirmation = ({ route }: { route: DogConfirmationRouteProps })
         <TextBold fontSize={24}>이 반려견이</TextBold>
         <TextBold fontSize={24}>맞나요?</TextBold>
       </S.TextWrapper>
-      <S.DogProfileArea>
+      <S.DogProfileArea characterCount={characterCount}>
         <S.DogImage source={{ uri: targetDog.dogProfileImg }} />
-        <S.TagWrapper>
+        <S.TagWrapper characterCount={characterCount}>
           <Tag content={targetDog.dogName} />
           <Tag content={targetDog.breed} />
           <Tag content={`${getAge(targetDog.dogBirthDate).toString()}살`} />
