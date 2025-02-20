@@ -34,14 +34,8 @@ export const FamilyList = () => {
             </S.LineWrapper>
             <S.LineWrapper>
               <S.MemberDetails fontSize={13}>
-                {item.memberGender === 'MALE' ? '남자' : '여자'}
-                {'  '}
-                <Separator $height={8} />
-                {'  '}
-                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })}
-                {'  '}
-                <Separator $height={8} />
-                {'  '}
+                {item.memberGender === 'MALE' ? '남자' : '여자'} <Separator $height={8} />{' '}
+                {getKoreanRole({ dogGender: 'FEMALE', familyRole: item.familyRole })} <Separator $height={8} />{' '}
                 {getAge(item.memberBirthDate)}세
               </S.MemberDetails>
             </S.LineWrapper>
