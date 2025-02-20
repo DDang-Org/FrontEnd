@@ -1,5 +1,7 @@
 import styled from '@emotion/native';
 
+const CHARACTER_LIMIT = 19;
+
 export const DogConfirmation = styled.View`
   padding: 0px 20px 80px 20px;
   flex: 1;
@@ -20,12 +22,12 @@ export const DogImage = styled.Image`
 `;
 
 export const TagWrapper = styled.View<{ characterCount: number }>`
-  flex-direction: ${props => (props.characterCount < 19 ? 'row' : 'column')};
+  flex-direction: ${props => (props.characterCount < CHARACTER_LIMIT ? 'row' : 'column')};
   gap: 6px;
 `;
 
 export const DogProfileArea = styled.View<{ characterCount: number }>`
   gap: 24px;
   align-items: center;
-  margin-bottom: ${props => `${props.characterCount < 19 ? 180 : 80}px`};
+  margin-bottom: ${props => `${props.characterCount < CHARACTER_LIMIT ? 180 : 80}px`};
 `;
