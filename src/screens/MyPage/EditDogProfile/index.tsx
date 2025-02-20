@@ -20,6 +20,7 @@ import { useDogProfile } from '~apis/dog/useDogProfile';
 import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { HTTPError } from 'ky';
+import { useThrottle } from '~hooks/useThrottle';
 
 export const EditDogProfile = () => {
   const route = useRoute();
@@ -34,6 +35,7 @@ export const EditDogProfile = () => {
   const { showFormErrorToast } = useToast();
   const { updateDog, deleteDog } = useDogProfile(dogId);
   const navigation = useNavigation();
+  const throttle = useThrottle(1000);
 
   const deviceHeight = Dimensions.get('screen').height;
 
@@ -74,6 +76,8 @@ export const EditDogProfile = () => {
       },
     });
   };
+
+  const throttleHandleUpdateConfirm = throttle(handleUpdateConfirm);
 
   const handleClickDelete = () => {
     Alert.alert('정말로 삭제하시겠습니까?', '삭제된 반려견은 복구할 수 없습니다.', [
@@ -163,7 +167,7 @@ export const EditDogProfile = () => {
           />
           <S.ActionButtonWrapper ref={confirmButtonRef}>
             <ActionButton
-              onPress={handleUpdateConfirm}
+              onPress={throttleHandleUpdateConfirm}
               text="확인"
               disabled={isDatePickerOpen}
               bgColor={validateBasicProfile(dogProfile) && validateDetailProfile(dogProfile) ? 'gc_1' : 'default'}
