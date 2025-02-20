@@ -3,14 +3,17 @@ import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
+import { NavigatorScreenParams } from '@react-navigation/native';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
+import { TabBarParamList } from '~navigation/BottomTabNavigator';
 
 export type RootStackParamList = {
   // Auth: undefined;
   // Login: { screen?: keyof LoginParamList };
   // RegisterOwner: { screen?: keyof RegisterOwnerParamList };
   // FamilyDDang: { screen?: keyof FamilyDdangParamList };
-  RegisterDog: undefined;
-  BottomTab: undefined;
+  RegisterDog: NavigatorScreenParams<RegisterDogParamList>;
+  BottomTab: NavigatorScreenParams<TabBarParamList>;
 };
 
 export const RootNavigator = () => {
