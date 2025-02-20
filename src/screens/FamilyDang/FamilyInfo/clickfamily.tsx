@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import * as S from '../styles';
 import { TextBold } from '~components/Common/Text';
 import { RadioButton } from './radionbutton';
