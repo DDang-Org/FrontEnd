@@ -18,7 +18,7 @@ interface ResponseFreindRequestAction {
 
 export const respondToFriendRequest = async (
   memberId: number,
-  decision: string,
+  decision: 'ACCEPT' | 'DENY',
 ): Promise<APIResponse<ResponseFreindRequestAction>> => {
   try {
     const response = await api
