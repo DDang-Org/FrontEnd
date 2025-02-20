@@ -2,6 +2,7 @@ import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { createInviteCode } from '~apis/family/createInviteCode';
 import { joinFamily } from '~apis/family/joinFamily';
 import { verifyInviteCode } from '~apis/family/verifyInviteCode';
+import { queryClient } from '~providers/QueryClientProvider';
 import { UseMutationCustomOptions } from '~types/api';
 
 export const useCreateInviteCode = () => {
@@ -23,6 +24,7 @@ export const useVerifyInviteCode = (mutationOptions?: UseMutationCustomOptions) 
 export const useJoinFamily = (mutationOptions?: UseMutationCustomOptions) => {
   return useMutation({
     mutationFn: (inviteCode: string) => joinFamily(inviteCode),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['myDogInfo'] }),
     ...mutationOptions,
   });
 };

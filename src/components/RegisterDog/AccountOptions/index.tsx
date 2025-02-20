@@ -22,6 +22,7 @@ export const AccountOptions = ({ isVisible, hideOption }: AccountOptionsProps) =
       },
     ]);
   };
+
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
