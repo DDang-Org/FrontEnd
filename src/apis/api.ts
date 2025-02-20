@@ -3,7 +3,6 @@ import { logout } from '~apis/member/logout';
 import { reissueToken } from '~apis/member/reissueToken';
 import { getAccessToken } from '~utils/controlAccessToken';
 import { Config } from 'react-native-config';
-import { Platform } from 'react-native';
 
 export const api = ky.create({
   prefixUrl: Config.BASE_URL,
@@ -15,9 +14,8 @@ export const api = ky.create({
         if (accessToken) {
           request.headers.set(
             'Authorization',
-            Platform.OS === 'ios'
-              ? `Bearer ${accessToken}`
-              : `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiR09PR0xFIiwiZXhwIjoxNzQwMjQ4MjA3LCJlbWFpbCI6ImJibGJibGFuNjlAZ21haWwuY29tIn0.CpauBw9_yXlYQjr-BZP7xqm1u63pj1g1aM3kX9HwCm37BMhpOQGz1Mq8R42CihtC8henTRy0OHaxa7q9-1Svzw`,
+            `Bearer ${accessToken}`,
+            //`Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiR09PR0xFIiwiZXhwIjoxNzQwMjQ4MjA3LCJlbWFpbCI6ImJibGJibGFuNjlAZ21haWwuY29tIn0.CpauBw9_yXlYQjr-BZP7xqm1u63pj1g1aM3kX9HwCm37BMhpOQGz1Mq8R42CihtC8henTRy0OHaxa7q9-1Svzw`,
           );
         }
       },
