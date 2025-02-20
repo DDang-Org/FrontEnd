@@ -1,11 +1,12 @@
 import * as S from './styles';
-import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { TextBold, TextRegular } from '~components/Common/Text';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FamilyDdangParamList } from '~navigation/FamilyDdangNavigator';
 import { RootStackParamList } from '~navigation/RootNavigator';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
+import { CompositeNavigationProp } from '@react-navigation/native';
 import { useUser } from '~apis/member/useUser';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 import { deleteFamilyMySelf } from '~apis/family/deleteFamilyMySelf';
