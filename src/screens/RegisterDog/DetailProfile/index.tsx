@@ -15,7 +15,6 @@ import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 import { useCreateDog } from '~apis/dog/useDogProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '~navigation/RootNavigator';
 import { useAuth } from '~apis/member/useAuth';
 import { useThrottle } from '~hooks/useThrottle';
 import { HTTPError } from 'ky';
@@ -26,7 +25,7 @@ export const DetailProfile = () => {
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
   const registerDog = useCreateDog();
-  const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation();
   const throttle = useThrottle(2000);
 
   const deviceHeight = Dimensions.get('screen').height;
@@ -42,10 +41,8 @@ export const DetailProfile = () => {
     registerDog.mutate(dogProfile, {
       onSuccess: () => {
         if (hasDog) {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'BottomTab' }],
-          });
+          navigation.goBack();
+          setTimeout(() => navigation.goBack(), 0);
         }
       },
       onError: async error => {
