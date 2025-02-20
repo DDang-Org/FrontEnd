@@ -20,16 +20,12 @@ const navTheme = {
 };
 
 const MainApp = () => {
-  const { client, sendMessage } = useWebSocket();
-
   return (
-    <WebSocketProvider client={client} sendMessage={sendMessage}>
-      <AppProviders>
-        <NavigationContainer theme={navTheme}>
-          <RootNavigator />
-        </NavigationContainer>
-      </AppProviders>
-    </WebSocketProvider>
+    <AppProviders>
+      <NavigationContainer theme={navTheme}>
+        <RootNavigator />
+      </NavigationContainer>
+    </AppProviders>
   );
 };
 
