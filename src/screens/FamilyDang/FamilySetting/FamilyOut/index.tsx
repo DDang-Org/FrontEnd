@@ -4,13 +4,32 @@ import { ClickFamily } from '~screens/FamilyDang/FamilyInfo/clickfamily';
 import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
+import { deleteFamily } from '~apis/family/deleteFamily';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 
 export const FamilyOut = () => {
+  const navigation = useNavigation<NavigationProp>();
   const familyMembers = useFamilyInfo();
   const [selectedMemeberId, setSelectedMemberId] = useState<number | null>(null);
 
   const handleSelect = (memberId: number) => {
     setSelectedMemberId(memberId);
+  };
+
+  const handleDelete = async () => {
+    if (selectedMemeberId === null) return;
+
+    try {
+      const response = await deleteFamily({ queryKey: ['familyDelete', selectedMemeberId] });
+      console.log('멤버 패밀리 퇴출 성공:', response);
+      navigation.navigate('FamilyDangScreen');
+    } catch (error) {
+      console.error('패밀리 퇴출 실패', error);
+    }
   };
 
   return (
@@ -30,11 +49,7 @@ export const FamilyOut = () => {
           />
         ))}
         <S.ActionButtonWrapper>
-          <ActionButton
-            onPress={() => console.log('Action 버튼 클릭')}
-            text="퇴출하기"
-            disabled={selectedMemeberId === null}
-          />
+          <ActionButton onPress={handleDelete} text="퇴출하기" disabled={selectedMemeberId === null} />
         </S.ActionButtonWrapper>
       </S.StyledView>
     </S.FamilySetting>
