@@ -11,6 +11,7 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isChangeNavigate, setIsChangeNavigate] = useState(true);
 
   const deviceHeight = Dimensions.get('window').height;
 
@@ -19,6 +20,7 @@ export const KakaoLogin = () => {
     const isMatched = !url.includes('accounts');
 
     setIsLoading(isMatched);
+    setIsChangeNavigate(navState.loading);
     console.log('redirect url', url);
 
     const params = new URLSearchParams(url.split('?')[1]);
@@ -38,7 +40,7 @@ export const KakaoLogin = () => {
 
   return (
     <S.KakaoLogin>
-      {isLoading && (
+      {(isLoading || isChangeNavigate) && (
         <S.KaKaoLoadingContainer style={{ height: deviceHeight, elevation: 10 }}>
           <ActivityIndicator size={'small'} color={'black'} />
         </S.KaKaoLoadingContainer>

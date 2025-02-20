@@ -10,7 +10,7 @@ export const api = ky.create({
   hooks: {
     beforeRequest: [
       async request => {
-        const accessToken = await getAccessToken();
+        const accessToken = (await getAccessToken()) || 'a';
 
         if (accessToken) {
           request.headers.set(
