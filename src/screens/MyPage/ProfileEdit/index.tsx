@@ -20,6 +20,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FAMILY_ROLE } from '~constants/family-role';
 import { useGeolocations } from '~hooks/useGeolocation';
 import { usePermission } from '~hooks/usePermission';
+import { HTTPError } from 'ky';
 
 export const ProfileEditScreen = () => {
   const myProfile = useUser();
@@ -52,6 +53,14 @@ export const ProfileEditScreen = () => {
     }
     updateUser.mutate(user, {
       onSuccess: () => navigation.goBack(),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
+      },
     });
   };
 

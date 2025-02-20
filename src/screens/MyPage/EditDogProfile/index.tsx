@@ -19,6 +19,7 @@ import { useDogInfoById } from '~apis/dog/useDogInfoById';
 import { useDogProfile } from '~apis/dog/useDogProfile';
 import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { HTTPError } from 'ky';
 
 export const EditDogProfile = () => {
   const route = useRoute();
@@ -52,6 +53,12 @@ export const EditDogProfile = () => {
     setDogProfile(prevState => ({ ...prevState, [key]: value }));
   };
 
+  const showHTTPError = async (error: HTTPError) => {
+    const errorData = (await error.response.json()) as { message: string };
+    const errorMessage = errorData.message;
+    showFormErrorToast(errorMessage, confirmButtonRef);
+  };
+
   const handleUpdateConfirm = () => {
     const error = validateBasicProfile(dogProfile) || validateDetailProfile(dogProfile);
     if (error) {
@@ -60,6 +67,11 @@ export const EditDogProfile = () => {
     }
     updateDog.mutate(dogProfile, {
       onSuccess: () => navigation.goBack(),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          await showHTTPError(error);
+        }
+      },
     });
   };
 
@@ -70,6 +82,11 @@ export const EditDogProfile = () => {
         onPress: () =>
           deleteDog.mutate(dogId, {
             onSuccess: () => navigation.goBack(),
+            onError: async error => {
+              if (error instanceof HTTPError) {
+                await showHTTPError(error);
+              }
+            },
           }),
       },
       {

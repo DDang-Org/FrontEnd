@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '~navigation/RootNavigator';
 import { useAuth } from '~apis/member/useAuth';
 import { useThrottle } from '~hooks/useThrottle';
+import { HTTPError } from 'ky';
 
 export const DetailProfile = () => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
@@ -48,7 +49,12 @@ export const DetailProfile = () => {
         }
       },
       onError: async error => {
-        showFormErrorToast(error.message, confirmButtonRef);
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
       },
     });
   };
