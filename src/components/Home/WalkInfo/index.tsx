@@ -4,6 +4,7 @@ import { Icon } from '~components/Common/Icons';
 import { Separator } from '~components/Common/Seperator';
 import * as S from './styles';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
+import { attachSuffix } from '~utils/attachSuffix';
 
 const WalkInfoItem = ({ WalkInfoIcon, label, value }: { WalkInfoIcon: ReactNode; label: string; value: string }) => {
   return (
@@ -17,14 +18,22 @@ const WalkInfoItem = ({ WalkInfoIcon, label, value }: { WalkInfoIcon: ReactNode;
   );
 };
 
-export const WalkInfo = () => {
-  const { data: dogInfo } = useMyDogInfo();
-  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({ dogId: dogInfo![0].dogId });
+export const WalkInfo = ({ selectedDogIndex }: { selectedDogIndex: number }) => {
+  const { data: dogInfo, isPending, isError } = useMyDogInfo();
+  const { timeDuration, totalCalorie, totalDistanceMeter } = useTodayWalkInfo({
+    dogId: dogInfo![selectedDogIndex].dogId,
+  });
+
+  if (isPending || isError) {
+    return <></>;
+  }
+
+  const suffixAttachedDogName = attachSuffix(dogInfo[selectedDogIndex].dogName);
 
   return (
     <S.WalkInfo paddingHorizontal={24} paddingVertical={20}>
       <S.Heading fontSize={17}>
-        <S.Heading fontSize={17}>오늘은 밤톨이가 </S.Heading>
+        <S.Heading fontSize={17}>오늘은 {suffixAttachedDogName}가 </S.Heading>
         <S.Heading fontSize={17} color="default">
           {totalCalorie}
         </S.Heading>
