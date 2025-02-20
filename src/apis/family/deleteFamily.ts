@@ -15,7 +15,7 @@ export const deleteFamily = async ({
   const [, memberId] = queryKey;
   try {
     const response = await api.delete(`family/members/${memberId}`).json<APIResponse<DeleteFamilyResponseType>>();
-    console.log('패밀리 탈퇴 성공');
+    console.log('패밀리 퇴출 성공');
     return response;
   } catch (error) {
     console.error('Error:', error);

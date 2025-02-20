@@ -5,14 +5,18 @@ import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+// import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { useNavigation } from '@react-navigation/native';
-import { updateFamilyRepresentative } from '~apis/family/updateFamilyRepresentative';
+// import { updateFamilyRepresentative } from '~apis/family/updateFamilyRepresentative';
+import { deleteFamilyMySelf } from '~apis/family/deleteFamilyMySelf';
+import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 
-type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
+// type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
+type RegisterDogProps = NativeStackNavigationProp<RegisterDogParamList>;
 
 export const FamilyCaptain = () => {
-  const navigation = useNavigation<NavigationProp>();
+  // const navigation = useNavigation<NavigationProp>();
+  const navigationDog = useNavigation<RegisterDogProps>();
   const familyMembers = useFamilyInfo();
   const [selectedMemeberId, setSelectedMemberId] = useState<number | null>(null);
 
@@ -24,12 +28,19 @@ export const FamilyCaptain = () => {
     if (selectedMemeberId === null) {
       return;
     }
+    // try {
+    //   const response = await updateFamilyRepresentative({ queryKey: ['familyRepresentative', selectedMemeberId] });
+    //   console.log('패밀리장 위임 성공:', response);
+    //   navigation.navigate('FamilyDangScreen');
+    // } catch (error) {
+    //   console.error('패밀리장 위임 실패', error);
+    // }
     try {
-      const response = await updateFamilyRepresentative({ queryKey: ['familyRepresentative', selectedMemeberId] });
-      console.log('패밀리장 위임 성공:', response);
-      navigation.navigate('FamilyDangScreen');
+      const response = await deleteFamilyMySelf();
+      console.log('패밀리 나가기 성공:', response);
+      navigationDog.navigate('Home');
     } catch (error) {
-      console.error('패밀리장 위임 실패', error);
+      console.error('패밀리 나가기 실패', error);
     }
   };
 
