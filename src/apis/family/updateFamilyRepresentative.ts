@@ -8,12 +8,14 @@ export type UpdateFamilyRepresentativeRequestType = {
 export type UpdateFamilyRepresentativeResponseType = {};
 
 export const updateFamilyRepresentative = async ({
-  memberId,
-  ...data
-}: Partial<UpdateFamilyRepresentativeRequestType>): Promise<APIResponse<UpdateFamilyRepresentativeResponseType>> => {
+  queryKey,
+}: {
+  queryKey: [string, number];
+}): Promise<APIResponse<UpdateFamilyRepresentativeResponseType>> => {
+  const [, memberId] = queryKey;
   try {
     const response = await api
-      .patch(`family/representative/${memberId}`, { json: data })
+      .patch(`family/representative/${memberId}`)
       .json<APIResponse<UpdateFamilyRepresentativeResponseType>>();
     console.log('패밀리장 위임 성공', response);
     return response;

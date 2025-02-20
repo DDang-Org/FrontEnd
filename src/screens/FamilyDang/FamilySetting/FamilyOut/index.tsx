@@ -21,7 +21,9 @@ export const FamilyOut = () => {
   };
 
   const handleDelete = async () => {
-    if (selectedMemeberId === null) return;
+    if (selectedMemeberId === null) {
+      return;
+    }
 
     try {
       const response = await deleteFamily({ queryKey: ['familyDelete', selectedMemeberId] });
