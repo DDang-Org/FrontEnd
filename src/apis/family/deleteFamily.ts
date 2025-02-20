@@ -8,13 +8,13 @@ export type DeleteFamilyRequestType = {
 export type DeleteFamilyResponseType = {};
 
 export const deleteFamily = async ({
-  memberId,
-  ...params
-}: DeleteFamilyRequestType): Promise<APIResponse<DeleteFamilyResponseType>> => {
+  queryKey,
+}: {
+  queryKey: [string, number];
+}): Promise<APIResponse<DeleteFamilyResponseType>> => {
+  const [, memberId] = queryKey;
   try {
-    const response = await api
-      .delete(`family/members/${memberId}`, { searchParams: params })
-      .json<APIResponse<DeleteFamilyResponseType>>();
+    const response = await api.delete(`family/members/${memberId}`).json<APIResponse<DeleteFamilyResponseType>>();
     console.log('패밀리 탈퇴 성공');
     return response;
   } catch (error) {
