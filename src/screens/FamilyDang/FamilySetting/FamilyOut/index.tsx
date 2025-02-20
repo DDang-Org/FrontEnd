@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import * as S from '../styles';
 import { ClickFamily } from '~screens/FamilyDang/FamilyInfo/clickfamily';
 import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
