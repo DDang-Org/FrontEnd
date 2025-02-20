@@ -20,7 +20,7 @@ export const FamilyCaptain = () => {
           title="패밀리장을 위임할 사람을 선택하세요"
           description="패밀리장은 패밀리를 나갈 때 권한을 위임해야 해요"
         />
-        {familyMembers?.map(member => (
+        {familyMembers?.slice(1).map(member => (
           <ClickFamily
             key={member.memberId}
             memberId={member.memberId}
