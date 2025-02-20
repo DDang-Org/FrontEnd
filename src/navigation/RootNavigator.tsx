@@ -1,14 +1,12 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
 
+export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 export type RootStackParamList = {
-  // Auth: undefined;
-  // Login: { screen?: keyof LoginParamList };
-  // RegisterOwner: { screen?: keyof RegisterOwnerParamList };
-  // FamilyDDang: { screen?: keyof FamilyDdangParamList };
   RegisterDog: undefined;
   BottomTab: undefined;
 };
@@ -20,32 +18,29 @@ export const RootNavigator = () => {
   // const [isAppFirstLaunch, setIsAppFirstLaunch] = useState(true);
 
   // useEffect(() => {
-  //   const timer = setTimeout(() => {
+  //   setTimeout(() => {
   //     setIsAppFirstLaunch(false);
-  //   }, 2000);
-  //   return () => clearTimeout(timer);
+  //   }, 1000);
   // }, []);
 
-  // if (isAppFirstLaunch) {
-  //   return null;
-  // }
+  // useEffect(() => {
+  //   if (!isAppFirstLaunch) {
+  //     SplashScreen.hide();
+  //   }
+  // }, [isAppFirstLaunch]);
 
   if (!isLoggedIn) {
     return <AuthNavigator />;
   }
 
+  if (!hasDog) {
+    return <RegisterDogNavigator />;
+  }
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {hasDog && <Stack.Screen name="BottomTab" component={BottomTabNavigator} />}
-      {/* <Stack.Screen name="Auth" component={AuthNavigator} /> */}
-      {/* <Stack.Screen name="FamilyDDang" component={FamilyDDangNavigator} /> */}
+      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
       <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
-      {/* <Stack.Screen
-        name="RegisterOwner"
-        component={RegisterOwnerNavigator}
-        options={{ headerShown: true, headerTitle: '' }}
-      /> */}
-      {/* <Stack.Screen name="Login" component={LoginNavigator} options={{ headerTitle: '' }} /> */}
     </Stack.Navigator>
   );
 };

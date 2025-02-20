@@ -1,12 +1,9 @@
 import { useState, useRef } from 'react';
-import { Alert, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { ActionButton } from '~components/Common/ActionButton';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
-import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold } from '~components/Common/Text';
 import { SearchModal } from '~components/RegisterDog/SearchModal';
 import { validateDetailProfile } from '~utils/validateDogProfile';
@@ -17,17 +14,20 @@ import { WeightInput } from '~components/Common/WeightInput';
 import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 import { useCreateDog } from '~apis/dog/useDogProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '~navigation/RootNavigator';
+import { useAuth } from '~apis/member/useAuth';
 
-type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
-
-export const DetailProfile = ({}: DetailProps) => {
+export const DetailProfile = () => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
   const registerDog = useCreateDog();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const deviceHeight = Dimensions.get('screen').height;
+  const { hasDog } = useAuth();
 
   const handleClickConfirm = () => {
     const error = validateDetailProfile(dogProfile);
@@ -37,10 +37,18 @@ export const DetailProfile = ({}: DetailProps) => {
     }
 
     registerDog.mutate(dogProfile, {
-      onSuccess: data => {
-        console.log(data), Alert.alert('성공하셨습니다!!');
+      onSuccess: () => {
+        console.log('강아지 등록 성공!');
+        if (hasDog) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'BottomTab' }],
+          });
+        }
       },
-      onError: () => console.error('업로드 실패!!!!'),
+      onError: async error => {
+        showFormErrorToast(error.message, confirmButtonRef);
+      },
     });
   };
 
