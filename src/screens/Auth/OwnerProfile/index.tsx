@@ -49,13 +49,12 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const { email, provider } = route.params;
   const { fetchAddress } = useGeolocations();
   const { requestAndCheckPermission } = usePermission();
-  const throttle = useThrottle(1000);
+  const throttle = useThrottle(2000);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
 
   const handleNextPress = () => {
-    console.log('클릭!');
     const error = validateUserProfile(user);
     if (error) {
       showFormErrorToast(error, confirmButtonRef);
