@@ -6,7 +6,6 @@ import { ActionButton } from '~components/Common/ActionButton';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 
 export const FamilyOut = () => {
-  // const [isAnySelected, setIsAnySelected] = useState(false); // 하나라도 선택되었는지 확인
   const familyMembers = useFamilyInfo();
   const [selectedMemeberId, setSelectedMemberId] = useState<number | null>(null);
 
