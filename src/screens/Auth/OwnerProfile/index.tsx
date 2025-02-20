@@ -22,6 +22,7 @@ import { FamilyRole } from '~types/family-role';
 import { useAuth } from '~apis/member/useAuth';
 import { usePermission } from '~hooks/usePermission';
 import { useGeolocations } from '~hooks/useGeolocation';
+import { useThrottle } from '~hooks/useThrottle';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -48,11 +49,13 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const { email, provider } = route.params;
   const { fetchAddress } = useGeolocations();
   const { requestAndCheckPermission } = usePermission();
+  const throttle = useThrottle(1000);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
 
   const handleNextPress = () => {
+    console.log('클릭!');
     const error = validateUserProfile(user);
     if (error) {
       showFormErrorToast(error, confirmButtonRef);
@@ -71,9 +74,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
     signupMutaion.mutate(registerData);
   };
 
-  useEffect(() => {
-    console.log(email, provider);
-  }, [email, provider]);
+  const throttleHandleNextPress = throttle(handleNextPress);
 
   useEffect(() => {
     if (selectedAvatarIndex !== null) {
@@ -178,7 +179,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
 
         {/* 다음 버튼 */}
         <S.NextButtonWrapper ref={confirmButtonRef}>
-          <ActionButton onPress={handleNextPress} text="완료" />
+          <ActionButton onPress={throttleHandleNextPress} text="완료" />
         </S.NextButtonWrapper>
       </ScrollView>
 
