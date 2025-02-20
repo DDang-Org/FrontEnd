@@ -1,8 +1,8 @@
 import { Alert, Dimensions, View } from 'react-native';
 import * as S from './styles';
 import { TextBold } from '~components/Common/Text';
-import { useEffect, useRef, useState } from 'react';
-import { DogProfileType, INITIAL_DOG_PROFILE } from '~providers/DogProfileProvider';
+import { useRef, useState } from 'react';
+import { DogProfileType } from '~providers/DogProfileProvider';
 import FormInput from '~components/Common/FormInput';
 import { dateToString } from '~utils/dateFormat';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
@@ -26,7 +26,13 @@ export const EditDogProfile = () => {
   const route = useRoute();
   const { dogId } = route.params as { dogId: number };
   const targetDogProfile = useDogInfoById({ dogId });
-  const [dogProfile, setDogProfile] = useState<DogProfileType>(INITIAL_DOG_PROFILE);
+  const [dogProfile, setDogProfile] = useState<DogProfileType>({
+    name: targetDogProfile.dogName,
+    profileImg: targetDogProfile.dogProfileImg,
+    birthDate: targetDogProfile.dogBirthDate,
+    gender: targetDogProfile.dogGender,
+    ...targetDogProfile,
+  });
   const { requestAndCheckPermission } = usePermission();
   const { getImageFile, handleImagePicker } = useImagePicker();
   const confirmButtonRef = useRef<View | null>(null);
@@ -38,18 +44,6 @@ export const EditDogProfile = () => {
   const throttle = useThrottle(1000);
 
   const deviceHeight = Dimensions.get('screen').height;
-
-  useEffect(() => {
-    if (targetDogProfile) {
-      setDogProfile({
-        name: targetDogProfile.dogName,
-        profileImg: targetDogProfile.dogProfileImg,
-        birthDate: targetDogProfile.dogBirthDate,
-        gender: targetDogProfile.dogGender,
-        ...targetDogProfile,
-      });
-    }
-  }, [targetDogProfile]);
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile(prevState => ({ ...prevState, [key]: value }));
