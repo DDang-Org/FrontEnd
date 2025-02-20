@@ -4,13 +4,33 @@ import { ClickFamily } from '~screens/FamilyDang/FamilyInfo/clickfamily';
 import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
+import { useNavigation } from '@react-navigation/native';
+import { updateFamilyRepresentative } from '~apis/family/updateFamilyRepresentative';
+
+type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 
 export const FamilyCaptain = () => {
+  const navigation = useNavigation<NavigationProp>();
   const familyMembers = useFamilyInfo();
   const [selectedMemeberId, setSelectedMemberId] = useState<number | null>(null);
 
   const handleSelect = (memberId: number) => {
     setSelectedMemberId(memberId);
+  };
+
+  const handleCaptain = async () => {
+    if (selectedMemeberId === null) {
+      return;
+    }
+    try {
+      const response = await updateFamilyRepresentative({ queryKey: ['familyRepresentative', selectedMemeberId] });
+      console.log('패밀리장 위임 성공:', response);
+      navigation.navigate('FamilyDangScreen');
+    } catch (error) {
+      console.error('패밀리장 위임 실패', error);
+    }
   };
 
   return (
@@ -30,11 +50,7 @@ export const FamilyCaptain = () => {
           />
         ))}
         <S.ActionButtonWrapper>
-          <ActionButton
-            onPress={() => console.log('Action 버튼 클릭')}
-            text="패밀리장 위임하기"
-            disabled={selectedMemeberId === null}
-          />
+          <ActionButton onPress={handleCaptain} text="패밀리장 위임하기" disabled={selectedMemeberId === null} />
         </S.ActionButtonWrapper>
       </S.StyledView>
     </S.FamilySetting>
