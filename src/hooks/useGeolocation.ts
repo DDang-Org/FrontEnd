@@ -44,7 +44,6 @@ export const useGeolocations = () => {
             };
           }>;
         }>();
-
       if (response.documents.length > 0) {
         const { region_2depth_name = '', region_3depth_name = '' } = response.documents[0].address || {};
 
@@ -63,6 +62,7 @@ export const useGeolocations = () => {
   const fetchAddress = async (): Promise<string> => {
     try {
       const { latitude, longitude } = await getCurrentLatLng();
+
       return await getAddressFromCoordinates(latitude, longitude);
     } catch (error) {
       console.error('주소 가져오기 실패:', error);
