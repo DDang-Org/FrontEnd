@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "input-onlinepngtools.png",
+      "filename" : "play_store_512.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "input-onlinepngtools (1).png",
+      "filename" : "play_store_512 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "input-onlinepngtools (2).png",
+      "filename" : "play_store_512 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

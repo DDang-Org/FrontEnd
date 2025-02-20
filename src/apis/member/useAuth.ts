@@ -90,9 +90,10 @@ export const useAuth = () => {
   const myInfo = useMyInfo({
     enabled: isLoggedIn,
   });
+  const isLoading = myDogInfo.isPending;
   const logoutMutation = useLogout();
   const hasDog = Array.isArray(myDogInfo.data) && myDogInfo.data.length > 0;
   const deleteAccountMutation = useDeleteAccount();
 
-  return { signupMutaion, myDogInfo, myInfo, logoutMutation, isLoggedIn, hasDog, deleteAccountMutation };
+  return { signupMutaion, myDogInfo, myInfo, isLoading, logoutMutation, isLoggedIn, hasDog, deleteAccountMutation };
 };

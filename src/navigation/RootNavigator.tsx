@@ -3,6 +3,8 @@ import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
 import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
+import { useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -14,20 +16,15 @@ export type RootStackParamList = {
 export const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
-  const { isLoggedIn, hasDog } = useAuth();
-  // const [isAppFirstLaunch, setIsAppFirstLaunch] = useState(true);
+  const { isLoggedIn, hasDog, isLoading } = useAuth();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsAppFirstLaunch(false);
-  //   }, 1000);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!isAppFirstLaunch) {
-  //     SplashScreen.hide();
-  //   }
-  // }, [isAppFirstLaunch]);
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 200);
+    }
+  }, [isLoading]);
 
   if (!isLoggedIn) {
     return <AuthNavigator />;
