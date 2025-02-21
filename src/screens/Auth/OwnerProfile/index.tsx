@@ -23,6 +23,7 @@ import { useAuth } from '~apis/member/useAuth';
 import { usePermission } from '~hooks/usePermission';
 import { useGeolocations } from '~hooks/useGeolocation';
 import { useThrottle } from '~hooks/useThrottle';
+import { HTTPError } from 'ky';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -49,13 +50,12 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const { email, provider } = route.params;
   const { fetchAddress } = useGeolocations();
   const { requestAndCheckPermission } = usePermission();
-  const throttle = useThrottle(1000);
+  const throttle = useThrottle(2000);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
 
   const handleNextPress = () => {
-    console.log('클릭!');
     const error = validateUserProfile(user);
     if (error) {
       showFormErrorToast(error, confirmButtonRef);
@@ -71,7 +71,16 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
       familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE] as FamilyRole,
       memberProfileImg: user.memberProfileImg!,
     };
-    signupMutaion.mutate(registerData);
+    signupMutaion.mutate(registerData, {
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
+      },
+    });
   };
 
   const throttleHandleNextPress = throttle(handleNextPress);

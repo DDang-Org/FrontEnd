@@ -1,16 +1,17 @@
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RegisterDogNavigator } from '~navigation/RegisterDogNavigator';
-import { BottomTabNavigator } from '~navigation/BottomTabNavigator';
+import { RegisterDogNavigator, RegisterDogParamList } from '~navigation/RegisterDogNavigator';
+import { BottomTabNavigator, TabBarParamList } from '~navigation/BottomTabNavigator';
 import { AuthNavigator } from '~navigation/AuthNavigator';
 import { useAuth } from '~apis/member/useAuth';
 import { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export type RootStackParamList = {
-  RegisterDog: undefined;
-  BottomTab: undefined;
+  RegisterDog: NavigatorScreenParams<RegisterDogParamList>;
+  BottomTab: NavigatorScreenParams<TabBarParamList>;
 };
 
 export const RootNavigator = () => {

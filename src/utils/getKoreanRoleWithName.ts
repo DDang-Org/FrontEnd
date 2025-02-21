@@ -44,6 +44,6 @@ export const getKoreanRoleWithName = ({
     case 'GRANDFATHER':
       return koreanRole;
     default:
-      return dogGender === 'MALE' ? getParticle(name) + ' ' + koreanRole : name + ' ' + koreanRole;
+      return dogGender === 'MALE' ? getParticle(name) + ' ' + koreanRole : getParticle(name) + ' ' + koreanRole;
   }
 };
