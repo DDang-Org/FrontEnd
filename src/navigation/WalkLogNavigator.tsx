@@ -26,7 +26,7 @@ export const WalkLogNavigator = () => {
         options={() => ({
           headerShown: false,
         })}
-        name={WalkLogNavigations.LogHome}
+        name={WalkLogNavigations.LOG_HOME}
         component={LogHome}
       />
       <Stack.Screen
@@ -44,7 +44,7 @@ export const WalkLogNavigator = () => {
           ),
           headerTitle: '산책 분석',
         })}
-        name={WalkLogNavigations.Stats}
+        name={WalkLogNavigations.STATS}
         component={Stats}
       />
     </Stack.Navigator>

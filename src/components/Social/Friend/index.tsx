@@ -3,7 +3,8 @@ import { useDogInfoByMemberId } from '~apis/dog/useDogInfoByMemberId';
 import { FetchFriendsResponseType } from '~apis/friend/fetchFriends';
 import { useFriends } from '~apis/friend/useFriends';
 import { UserInfo } from '~components/Common/UserInfo';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
+import { SocialNavigations } from '~constants/navigations';
+import { SocialParamList } from '~navigation/SocialNavigator';
 
 export const FriendTab = () => {
   const friends = useFriends();
@@ -31,7 +32,7 @@ const Item = ({
   isLast: boolean;
 }) => {
   const dogInfos = useDogInfoByMemberId({ memberId });
-  const navigation = useNavigation<NavigationProp<TabBarParamList>>();
+  const navigation = useNavigation<NavigationProp<SocialParamList>>();
   console.log({ dogInfos }); //todo 3번 멤버 강아지 없어서 에러 발생. 데이터 추가 요청하기
   if (!dogInfos || !dogInfos.length) {
     return null;
@@ -44,7 +45,7 @@ const Item = ({
       familyRole={friend.familyRole}
       gender={friend.memberGender}
       name={friend.memberName}
-      onPressButton={() => navigation.navigate('Talk', { userId: friend.memberId })}
+      onPressButton={() => navigation.navigate(SocialNavigations.CHATROOM, { userId: friend.memberId })}
       userId={friend.memberId}
       isLast={isLast}
     />

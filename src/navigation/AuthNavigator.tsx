@@ -5,6 +5,8 @@ import { Icon } from '~components/Common/Icons';
 import { Header } from '~components/Common/Header';
 import { Login } from '~screens/Auth/Login';
 import { GoogleLogin } from '~screens/Auth/GoogleLogin';
+import { AuthNavigations } from '~constants/navigations';
+import { useTheme } from '@emotion/react';
 
 export type AuthParamList = {
   Login: undefined;
@@ -15,24 +17,25 @@ export type AuthParamList = {
 
 export const AuthNavigator = () => {
   const Stack = createNativeStackNavigator<AuthParamList>();
+  const theme = useTheme();
 
   return (
     <Stack.Navigator
       screenOptions={{
         contentStyle: {
-          backgroundColor: 'white',
+          backgroundColor: theme.colors.gc_4,
         },
       }}
     >
       <Stack.Screen
-        name="Login"
+        name={AuthNavigations.LOGIN}
         component={Login}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="KakaoLogin"
+        name={AuthNavigations.KAKAO_LOGIN}
         component={KakaoLogin}
         options={{
           header: ({ navigation }) => (
@@ -41,7 +44,7 @@ export const AuthNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="GoogleLogin"
+        name={AuthNavigations.GOOGLE_LOGIN}
         component={GoogleLogin}
         options={{
           header: ({ navigation }) => (
@@ -50,7 +53,7 @@ export const AuthNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="OwnerProfile"
+        name={AuthNavigations.OWNER_PROFILE}
         component={RegisterOwnerProfile}
         options={{
           header: ({ navigation }) => <Header left={<Icon.Prev />} onLeftPress={() => navigation.goBack()} />,

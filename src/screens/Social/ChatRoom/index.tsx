@@ -3,16 +3,16 @@ import { Profile } from '~components/Common/Profile';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUserById } from '~apis/member/fetchUserById';
 import { TalkArea } from '~components/Talk/TalkArea';
 import { Icon } from '~components/Common/Icons';
+import { SocialParamList } from '~navigation/SocialNavigator';
 
-interface TalkScreenProps extends BottomTabScreenProps<TabBarParamList> {}
+interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
-export const TalkScreen = ({ navigation, route }: TalkScreenProps) => {
+export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   const memberId = route.params!.userId; //! 항상 params로 userId를 넘겨줌
   const { data: userInfoById } = useQuery({
     queryKey: ['userInfoById', memberId],
@@ -35,7 +35,7 @@ export const TalkScreen = ({ navigation, route }: TalkScreenProps) => {
     <S.Talk>
       <S.Header>
         <S.LeftContentContainer>
-          <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.navigate('Social')} />
+          <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
           <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
           <S.TypoWrapper>
             <S.Name fontSize={15}>{name}</S.Name>

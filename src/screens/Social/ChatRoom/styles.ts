@@ -3,7 +3,7 @@ import { Theme } from '@emotion/react';
 import { TextInput } from 'react-native';
 import { TextBold, TextMedium } from '~components/Common/Text';
 
-export const Talk = styled.View`
+export const Talk = styled.SafeAreaView`
   flex: 1;
 `;
 export const Header = styled.View`

@@ -6,16 +6,17 @@ import { BlockedUsersLoader } from '~components/MyPage/Block/BlockedUsers/loader
 import { FriendTab } from '~components/Social/Friend';
 import { Tab } from '~components/Social/Tab';
 import { TalkTab } from '~components/Social/TalkTab';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
+import { SocialParamList } from '~navigation/SocialNavigator';
+import { SocialNavigations } from '~constants/navigations';
 
-type Props = BottomTabScreenProps<TabBarParamList, 'Social'>;
+type Props = BottomTabScreenProps<SocialParamList, typeof SocialNavigations.SOCIAL_HOME>;
 
-export const SocialScreen = ({}: Props) => {
+export const SocialHomeScreen = ({}: Props) => {
   const [selectedTab, setSelectedTab] = useState<'댕친' | '댕톡'>('댕친');
 
   return (
-    <S.SocialScreen>
+    <S.SocialHomeScreen>
       <S.Header>
         <S.HeaderText fontSize={17}>소셜</S.HeaderText>
       </S.Header>
@@ -29,6 +30,6 @@ export const SocialScreen = ({}: Props) => {
       ) : (
         <TalkTab />
       )}
-    </S.SocialScreen>
+    </S.SocialHomeScreen>
   );
 };

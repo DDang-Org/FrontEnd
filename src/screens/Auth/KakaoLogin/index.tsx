@@ -7,6 +7,7 @@ import { storeAccessToken } from '~utils/controlAccessToken';
 import { queryClient } from '~providers/QueryClientProvider';
 import { useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
+import { AuthNavigations } from '~constants/navigations';
 
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
@@ -29,7 +30,7 @@ export const KakaoLogin = () => {
       const provider = params.get('provider') || '';
       console.log('Register Params:', { email, provider });
 
-      navigation.replace('OwnerProfile', { email, provider });
+      navigation.replace(AuthNavigations.OWNER_PROFILE, { email, provider });
     } else if (url.includes('accessToken')) {
       const accessToken = params.get('accessToken') || '';
 
