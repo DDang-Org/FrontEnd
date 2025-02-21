@@ -14,6 +14,8 @@ import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
 import { SocialScreen } from '~screens/Social';
 import { FamilyDDangNavigator, FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { TalkScreen } from '~screens/Talk';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { WalkLogNavigations } from '~constants/navigations';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -43,11 +45,18 @@ export const BottomTabNavigator = () => {
   const theme = useTheme();
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: '#783D16',
         tabBarLabelPosition: 'below-icon',
         headerShown: false,
-      }}
+        tabBarStyle: (tabRoute => {
+          const routeName = getFocusedRouteNameFromRoute(tabRoute);
+
+          if (routeName === 'Notification' || routeName === WalkLogNavigations.Stats) {
+            return { display: 'none' };
+          }
+        })(route),
+      })}
     >
       <Tab.Screen
         name="Home"
