@@ -8,6 +8,8 @@ import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
 import { RegisterDogNavigations } from '~constants/navigations';
 import { useUser } from '~apis/member/useUser';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
+import { deleteFamilyMySelf } from '~apis/family/deleteFamilyMySelf';
+import { Alert } from 'react-native';
 
 type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 type CompositeNavigationType = CompositeNavigationProp<
@@ -45,9 +47,33 @@ export const FamilySetting = () => {
       navigation.navigate('FamilyCaptain');
     } else {
       // 패밀리 구성원일 경우 바로 나가고 강아지 등록 페이지로 이동
-      compositeNavigation.navigate('RegisterDog', {
-        screen: RegisterDogNavigations.HOME,
-      });
+      Alert.alert(
+        '패밀리 나가기',
+        '기존 산책과 강아지 데이터가 사라집니다. 패밀리를 나갈까요?',
+        [
+          {
+            text: '아니오',
+            onPress: () => console.log('Action canceled'),
+            style: 'cancel',
+          },
+          {
+            text: '예',
+            onPress: async () => {
+              try {
+                // 패밀리 나가기
+                const response = await deleteFamilyMySelf();
+                console.log('패밀리 나가기 성공:', response);
+                compositeNavigation.navigate('RegisterDog', {
+                  screen: RegisterDogNavigations.HOME,
+                });
+              } catch (error) {
+                console.error('패밀리 나가기 실패', error);
+              }
+            },
+          },
+        ],
+        { cancelable: false },
+      );
     }
   };
 
