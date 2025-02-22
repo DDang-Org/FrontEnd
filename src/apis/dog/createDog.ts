@@ -21,7 +21,6 @@ export const createDog = async (dogProfile: DogProfileType): Promise<APIResponse
     );
 
     formData.append('profileImgFile', dogProfile.profileImgFile);
-    console.log(dogProfile.profileImgFile);
     const response = await api
       .post('dogs/create', {
         body: formData,

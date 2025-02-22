@@ -3,7 +3,6 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
-import StoryBookUI from '../.storybook';
 import { RootNavigator } from '~navigation/RootNavigator';
 import { useWebSocket } from '~hooks/useWebSocket';
 import { WebSocketProvider } from '~providers/WebSocketProvider';
@@ -45,12 +44,13 @@ export const App = () => {
 
   return (
     <>
-      {__DEV__ && (
+      {/* {__DEV__ && (
         <StoryBookFloatingButton onPress={toggleStorybook} activeOpacity={0.8}>
           <StoryBookButtonText>S</StoryBookButtonText>
         </StoryBookFloatingButton>
       )}
-      {__DEV__ && storybookEnabled ? <StoryBookUI /> : <MainApp />}
+      {__DEV__ && storybookEnabled ? <StoryBookUI /> : <MainApp />} */}
+      <MainApp />
     </>
   );
 };
