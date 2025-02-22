@@ -9,6 +9,7 @@ import { fetchUserById } from '~apis/member/fetchUserById';
 import { TalkArea } from '~components/Talk/TalkArea';
 import { Icon } from '~components/Common/Icons';
 import { SocialParamList } from '~navigation/SocialNavigator';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
@@ -33,26 +34,33 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   }, [navigation, userInfoById?.memberName]);
   return (
     <S.Talk>
-      <S.Header>
-        <S.LeftContentContainer>
-          <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
-          <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
-          <S.TypoWrapper>
-            <S.Name fontSize={15}>{name}</S.Name>
-            <S.GenderFamilyRoleWrapper>
-              <S.Gender fontSize={11}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
-              <Separator $height={8} />
-              <S.FamilyRole fontSize={11}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
-            </S.GenderFamilyRoleWrapper>
-          </S.TypoWrapper>
-        </S.LeftContentContainer>
-        <Icon.Ellipsis style={{ position: 'absolute', right: 20, top: 24 }} />
-      </S.Header>
-      <TalkArea />
-      <S.TalkInputWrapper>
-        <S.TalkInput fontSize={15} placeholder="채팅 내용 입력" />
-      </S.TalkInputWrapper>
-      {/* 전송 버튼 만들기 */}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
+      >
+        <S.Header>
+          <S.LeftContentContainer>
+            <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
+            <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
+            <S.TypoWrapper>
+              <S.Name fontSize={15}>{name}</S.Name>
+              <S.GenderFamilyRoleWrapper>
+                <S.Gender fontSize={11}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
+                <Separator $height={8} />
+                <S.FamilyRole fontSize={11}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
+              </S.GenderFamilyRoleWrapper>
+            </S.TypoWrapper>
+          </S.LeftContentContainer>
+          <Icon.Ellipsis style={{ position: 'absolute', right: 20, top: 24 }} />
+        </S.Header>
+
+        <TalkArea />
+        <S.TalkInputWrapper>
+          <S.TalkInput fontSize={15} placeholder="채팅 내용 입력" textAlignVertical="center" />
+        </S.TalkInputWrapper>
+        {/* 전송 버튼 만들기 */}
+      </KeyboardAvoidingView>
     </S.Talk>
   );
 };

@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import { Theme } from '@emotion/react';
-import { TextInput } from 'react-native';
+import { Platform, TextInput } from 'react-native';
 import { TextBold, TextMedium } from '~components/Common/Text';
 
 export const Talk = styled.SafeAreaView`
@@ -27,11 +27,12 @@ export const Gender = styled(TextMedium)``;
 export const FamilyRole = styled(TextMedium)``;
 export const TalkInputWrapper = styled.View`
   width: 100%;
-  position: fixed;
-  bottom: 0;
   height: 64px;
   padding: 12px 20px;
+  padding-top: ${Platform.OS === 'ios' ? 3 + 'px' : 12 + 'px'};
   background-color: ${({ theme }) => theme.colors.gc_4};
+  align-items: center;
+  justify-content: center;
 `;
 
 interface TextProps {
@@ -45,5 +46,4 @@ export const TalkInput = styled(TextInput)<TextProps>`
   color: ${({ theme, color = 'font_1' }) => theme.colors[color]};
   line-height: ${({ fontSize }) => fontSize * 1.5 + 'px'};
   letter-spacing: ${({ fontSize }) => fontSize * -0.025 + 'px'};
-  // medium 15px
 `;

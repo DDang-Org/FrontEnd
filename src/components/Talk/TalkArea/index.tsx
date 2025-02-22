@@ -8,62 +8,62 @@ import { useState } from 'react';
 
 const messages = [
   {
-    id: 1,
+    id: 12,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 13,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 14,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 15,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 16,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 17,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 18,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 19,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 111,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 112,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 113,
     type: 'outgoing',
     text: 'hihi',
   },
   {
-    id: 1,
+    id: 114,
     type: 'outgoing',
     text: 'hihi',
   },
@@ -73,7 +73,7 @@ const messages = [
     text: '최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2',
   },
   {
-    id: 1233,
+    id: 123334,
     type: 'incoming',
     text: '최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2',
   },
