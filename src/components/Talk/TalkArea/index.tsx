@@ -4,16 +4,92 @@ import { TextBold } from '~components/Common/Text';
 import { Dimensions } from 'react-native';
 import { IncomingMessage, OutgoingMessage } from '~components/Talk/Message/styles';
 import DogHowling from '~assets/dogs/dog-howling.svg';
+import { useState } from 'react';
 
 const messages = [
   {
     id: 1,
-    type: 'incoming',
-    text: '안녕하세요 성훈님1',
+    type: 'outgoing',
+    text: 'hihi',
   },
-  { id: 2, type: 'outgoing', text: '안녕하세요!!2' },
-  { id: 3, type: 'incoming', text: '안녕하세요 성훈님3' },
-  { id: 4, type: 'outgoing', text: '안녕하세요!!4' },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 1233,
+    type: 'outgoing',
+    text: '최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2',
+  },
+  {
+    id: 1233,
+    type: 'incoming',
+    text: '최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2최신 메세지2',
+  },
+  // {
+  //   id: 154,
+  //   type: 'incoming',
+  //   text: '최신 메세지',
+  // },
+  // {
+  //   id: 1,
+  //   type: 'incoming',
+  //   text: '안녕하세요 성훈님1',
+  // },
+  // { id: 2, type: 'outgoing', text: '안녕하세요!!2' },
+  // { id: 3, type: 'incoming', text: '안녕하세요 성훈님3' },
+  // { id: 4, type: 'outgoing', text: '안녕하세요!!4' },
   // { id: 11, type: 'incoming', text: '안녕하세요 성훈님1' },
   // { id: 21, type: 'outgoing', text: '안녕하세요!!2' },
   // { id: 31, type: 'incoming', text: '안녕하세요 성훈님3' },
@@ -114,7 +190,8 @@ const messages = [
 
 export const TalkArea = () => {
   const deviceWidth = Dimensions.get('window').width;
-  // const reverseMessages = [...messages].reverse();
+  const [talkAreaHeight, setTalkAreaHeight] = useState(0);
+  const [flatListHeight, setFlatListHeight] = useState(0);
 
   const renderMessage = ({ item }: { item: (typeof messages)[0] }) => {
     if (item.type === 'incoming') {
@@ -132,7 +209,12 @@ export const TalkArea = () => {
   };
 
   return (
-    <S.TalkArea>
+    <S.TalkArea
+      onLayout={event => {
+        const { height } = event.nativeEvent.layout;
+        setTalkAreaHeight(height);
+      }}
+    >
       <DogHowling
         style={{
           position: 'absolute',
@@ -145,14 +227,16 @@ export const TalkArea = () => {
         contentContainerStyle={{
           paddingVertical: 10,
           paddingHorizontal: 20,
-          borderWidth: 1,
-          justifyContent: 'flex-end',
+          marginTop: Math.max(0, talkAreaHeight - flatListHeight),
         }}
         data={messages}
         renderItem={renderMessage}
         keyExtractor={item => item.id.toString()}
         removeClippedSubviews={false}
         inverted
+        onContentSizeChange={(_, height) => {
+          setFlatListHeight(height);
+        }}
       />
     </S.TalkArea>
   );
