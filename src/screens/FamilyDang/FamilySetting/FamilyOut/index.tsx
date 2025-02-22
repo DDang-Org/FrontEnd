@@ -8,6 +8,7 @@ import { deleteFamily } from '~apis/family/deleteFamily';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
 
@@ -24,14 +25,30 @@ export const FamilyOut = () => {
     if (selectedMemeberId === null) {
       return;
     }
-
-    try {
-      const response = await deleteFamily({ queryKey: ['familyDelete', selectedMemeberId] });
-      console.log('멤버 패밀리 퇴출 성공:', response);
-      navigation.navigate('FamilyDangScreen');
-    } catch (error) {
-      console.error('패밀리 퇴출 실패', error);
-    }
+    Alert.alert(
+      '패밀리 퇴출시키기',
+      '퇴출된 회원의 데이터가 사라집니다. 퇴출시킬까요?',
+      [
+        {
+          text: '아니오',
+          onPress: () => console.log('Action canceled'),
+          style: 'cancel',
+        },
+        {
+          text: '예',
+          onPress: async () => {
+            try {
+              const response = await deleteFamily({ queryKey: ['familyDelete', selectedMemeberId] });
+              console.log('패밀리 퇴출 성공:', response);
+              navigation.navigate('FamilyDangScreen');
+            } catch (error) {
+              console.error('패밀리 퇴출 실패', error);
+            }
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   return (
