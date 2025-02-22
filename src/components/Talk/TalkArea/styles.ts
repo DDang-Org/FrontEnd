@@ -1,8 +1,9 @@
 import styled from '@emotion/native';
+import { Dimensions } from 'react-native';
 
-export const TalkArea = styled.ScrollView`
+const deviceWidth = Dimensions.get('window').width;
+
+export const TalkArea = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.lighten_3};
-  padding: 20px;
-  gap: 0;
 `;

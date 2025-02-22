@@ -4,11 +4,12 @@ import * as S from './styles';
 import { UnreadChatCount } from '~components/Common/UnreadChatCount';
 import { Pressable } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import { useChatRooms } from '~apis/chat/useChatRooms';
 import { FetchChatRoomsResponseType } from '~apis/chat/fetchChatRooms';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import { useDogInfoByMemberId } from '~apis/dog/useDogInfoByMemberId';
+import { SocialNavigations } from '~constants/navigations';
+import { SocialParamList } from '~navigation/SocialNavigator';
 
 export const TalkTab = () => {
   const chatRooms = useChatRooms();
@@ -23,10 +24,10 @@ export const TalkTab = () => {
 };
 
 const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: FetchChatRoomsResponseType[number]) => {
-  const navigation = useNavigation<NavigationProp<TabBarParamList>>();
+  const navigation = useNavigation<NavigationProp<SocialParamList>>();
   const opponentDogInfos = useDogInfoByMemberId({ memberId: members[0].memberId });
   return (
-    <Pressable onPress={() => navigation.navigate('Talk', { userId: members[0].memberId })}>
+    <Pressable onPress={() => navigation.navigate(SocialNavigations.CHATROOM, { userId: members[0].memberId })}>
       <S.TalkItem>
         <Profile size={48} avatarNumber={members[0].memberProfileImg} />
         <S.MainContainer>
