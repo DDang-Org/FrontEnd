@@ -14,7 +14,6 @@ type Props = BottomTabScreenProps<SocialParamList, typeof SocialNavigations.SOCI
 
 export const SocialHomeScreen = ({}: Props) => {
   const [selectedTab, setSelectedTab] = useState<'댕친' | '댕톡'>('댕친');
-
   return (
     <S.SocialHomeScreen>
       <S.Header>

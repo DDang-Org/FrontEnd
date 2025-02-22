@@ -31,8 +31,9 @@ export const TalkInputWrapper = styled.View`
   padding: 12px 20px;
   padding-top: ${Platform.OS === 'ios' ? 3 + 'px' : 12 + 'px'};
   background-color: ${({ theme }) => theme.colors.gc_4};
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+  border: solid 1px red;
 `;
 
 interface TextProps {
@@ -40,10 +41,27 @@ interface TextProps {
   color?: keyof Theme['colors'];
 }
 export const TalkInput = styled(TextInput)<TextProps>`
+  flex: 1;
   font-family: 'SUIT-Medium';
-  width: 100%;
   font-size: ${({ fontSize }) => fontSize + 'px'};
   color: ${({ theme, color = 'font_1' }) => theme.colors[color]};
   line-height: ${({ fontSize }) => fontSize * 1.5 + 'px'};
   letter-spacing: ${({ fontSize }) => fontSize * -0.025 + 'px'};
+`;
+
+export const MessageSendButtonWrapper = styled.View`
+  width: 57px;
+  height: 64px;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px red;
+`;
+
+export const MessageSendButton = styled.Pressable`
+  width: 57px;
+  height: 40px;
+  background-color: ${props => props.theme.colors.lighten_2};
+  border-radius: 32px;
+  justify-content: center;
+  align-items: center;
 `;

@@ -10,6 +10,7 @@ import { TalkArea } from '~components/Talk/TalkArea';
 import { Icon } from '~components/Common/Icons';
 import { SocialParamList } from '~navigation/SocialNavigator';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+import { TextBold } from '~components/Common/Text';
 
 interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
@@ -58,6 +59,11 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <TalkArea />
         <S.TalkInputWrapper>
           <S.TalkInput fontSize={15} placeholder="채팅 내용 입력" textAlignVertical="center" />
+          <S.MessageSendButtonWrapper>
+            <S.MessageSendButton>
+              <TextBold fontSize={14}>전송</TextBold>
+            </S.MessageSendButton>
+          </S.MessageSendButtonWrapper>
         </S.TalkInputWrapper>
         {/* 전송 버튼 만들기 */}
       </KeyboardAvoidingView>
