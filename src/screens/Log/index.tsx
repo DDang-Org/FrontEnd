@@ -26,7 +26,6 @@ type NavigationProps = NativeStackNavigationProp<WalkLogParamList>;
 export const LogHome = () => {
   const [date, setDate] = useState(new Date());
   const { data: myDogs, isPending, isError } = useMyDogInfo();
-
   const [selectedDogIndex, setSelectedDogIndex] = useState(0);
   const { logDetails, walkDates } = useWalkLog(selectedDogIndex, dateToString(date, '-'));
   const [dogListOpened, setDogListOpened] = useState(false);
@@ -53,7 +52,7 @@ export const LogHome = () => {
       <Header
         left={
           <DogProfile
-            dogName={myDogs[selectedDogIndex].dogName}
+            dogName={`${myDogs[selectedDogIndex].dogName} 일기`}
             imageUri={myDogs[selectedDogIndex].dogProfileImg}
             onPress={() => setDogListOpened(true)}
           />

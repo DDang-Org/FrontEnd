@@ -3,39 +3,52 @@ import * as S from './styles';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import { AuthParamList } from '~navigation/AuthNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { storeAccessToken } from '~utils/controlAccessToken';
+import { queryClient } from '~providers/QueryClientProvider';
+import { useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
 
 export const KakaoLogin = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthParamList>>();
-  // const handleOnMessage = (event: WebViewMessageEvent) => {
-  //   console.log('url', event.nativeEvent);
-  //   if (event.nativeEvent.url.includes(`${REDIRECT_URI}?code=`)) {
-  //     const code = event.nativeEvent.url.replace(`${REDIRECT_URI}?code=`, '');
-  //     requestToken(code);
-  //   }
-  // };
+  const [isLoading, setIsLoading] = useState(true);
+  const [isChangeNavigate, setIsChangeNavigate] = useState(true);
 
-  const handleNavigationStateChange = (navState: WebViewNavigation) => {
+  const deviceHeight = Dimensions.get('window').height;
+
+  const handleNavigationStateChange = async (navState: WebViewNavigation) => {
     const { url } = navState;
-    console.log(url);
+    const isMatched = !url.includes('accounts') && !url.includes('kauth');
 
+    setIsLoading(isMatched);
+    setIsChangeNavigate(navState.loading);
+    console.log('redirect url', url);
+
+    const params = new URLSearchParams(url.split('?')[1]);
     if (url.includes('/register')) {
-      const params = new URLSearchParams(url.split('?')[1]);
       const email = params.get('email') || '';
       const provider = params.get('provider') || '';
-
       console.log('Register Params:', { email, provider });
-      console.log('회원가입 스크린으로 이동');
+
       navigation.replace('OwnerProfile', { email, provider });
+    } else if (url.includes('accessToken')) {
+      const accessToken = params.get('accessToken') || '';
+
+      await storeAccessToken(accessToken);
+      queryClient.invalidateQueries({ queryKey: ['myDogInfo'] });
     }
   };
 
   return (
     <S.KakaoLogin>
+      {(isLoading || isChangeNavigate) && (
+        <S.KaKaoLoadingContainer style={{ height: deviceHeight, elevation: 10 }}>
+          <ActivityIndicator size={'small'} color={'black'} />
+        </S.KaKaoLoadingContainer>
+      )}
       <WebView
         source={{
           uri: `https://ddang.site/oauth2/authorization/kakao`,
         }}
-        // onMessage={handleOnMessage}
         onNavigationStateChange={handleNavigationStateChange}
         injectedJavaScript="window.ReactNativeWebView.postMessage('')"
       />

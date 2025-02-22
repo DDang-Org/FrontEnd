@@ -11,6 +11,7 @@ import { validateFamilyCode } from '~utils/validateDogProfile';
 import { useToast } from '~hooks/useToast';
 import { useVerifyInviteCode } from '~apis/family/useInviteCode';
 import { HTTPError } from 'ky';
+import { useThrottle } from '~hooks/useThrottle';
 
 type InviteCodeProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.INVITE_CODE>;
 
@@ -19,6 +20,7 @@ export const InviteCode = ({ navigation }: InviteCodeProps) => {
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
   const inviteCodeMutation = useVerifyInviteCode();
+  const throttle = useThrottle(1000);
 
   const handleClickConfirm = () => {
     const error = validateFamilyCode(inviteCode);
@@ -34,19 +36,16 @@ export const InviteCode = ({ navigation }: InviteCodeProps) => {
         }),
       onError: async error => {
         if (error instanceof HTTPError) {
-          try {
-            const errorData = await error.response.json();
-            const message = errorData.message;
-            showFormErrorToast(message, confirmButtonRef);
-          } catch (parseError) {
-            console.error('Failed to parse error response:', parseError);
-          }
-        } else {
-          console.error('Unexpected Error:', error);
+          const errorData = await error.response.json();
+          const message = errorData.message;
+          showFormErrorToast(message, confirmButtonRef);
         }
+        console.error(error);
       },
     });
   };
+
+  const throttleHandleClickConfirm = throttle(handleClickConfirm);
 
   return (
     <S.InviteCode>
@@ -58,7 +57,7 @@ export const InviteCode = ({ navigation }: InviteCodeProps) => {
         <FormInput onChangeText={setInviteCode} value={inviteCode} placeholder="가족코드 입력" />
       </S.CodeInputArea>
       <View ref={confirmButtonRef}>
-        <ActionButton onPress={handleClickConfirm} text="확인" />
+        <ActionButton onPress={throttleHandleClickConfirm} text="확인" />
       </View>
     </S.InviteCode>
   );

@@ -1,4 +1,4 @@
-import * as S from '../styles';
+import * as S from './styles';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollView, Modal, TouchableOpacity, View } from 'react-native';
 import { ActionButton } from '~components/Common/ActionButton';
@@ -19,6 +19,11 @@ import { RouteProp } from '@react-navigation/native';
 import { RequestUserProfile } from '~apis/member/createUser';
 import { REVERSE_FAMILY_ROLE } from '~constants/family-role';
 import { FamilyRole } from '~types/family-role';
+import { useAuth } from '~apis/member/useAuth';
+import { usePermission } from '~hooks/usePermission';
+import { useGeolocations } from '~hooks/useGeolocation';
+import { useThrottle } from '~hooks/useThrottle';
+import { HTTPError } from 'ky';
 
 type RegisterOwnerProfileRouteProp = RouteProp<AuthParamList, 'OwnerProfile'>;
 
@@ -41,7 +46,11 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
   const [isFamilyModalVisible, setIsFamilyModalVisible] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState<number | null>(null);
   const confirmButtonRef = useRef<View | null>(null);
+  const { signupMutaion } = useAuth();
   const { email, provider } = route.params;
+  const { fetchAddress } = useGeolocations();
+  const { requestAndCheckPermission } = usePermission();
+  const throttle = useThrottle(2000);
 
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
@@ -56,24 +65,41 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
       email,
       provider,
       memberName: user.memberName,
-      memberGender: user.memberGender!,
+      memberGender: user.memberGender,
       memberBirthDate: user.memberBirthDate.split('. ').join('-'),
       address: user.address,
       familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE] as FamilyRole,
       memberProfileImg: user.memberProfileImg!,
     };
-    console.log('보낼 데이터', registerData);
+    signupMutaion.mutate(registerData, {
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
+      },
+    });
   };
 
-  useEffect(() => {
-    console.log(email, provider);
-  }, [email, provider]);
+  const throttleHandleNextPress = throttle(handleNextPress);
 
   useEffect(() => {
     if (selectedAvatarIndex !== null) {
       setUser(prevUser => ({ ...prevUser, memberProfileImg: selectedAvatarIndex + 1 }));
     }
   }, [selectedAvatarIndex]);
+
+  const getAddress = async () => {
+    const isGranted = await requestAndCheckPermission('LOCATION');
+    if (!isGranted) {
+      return;
+    }
+
+    const address = await fetchAddress();
+    setUser({ ...user, address });
+  };
 
   return (
     <>
@@ -112,7 +138,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
           {/* 주소 입력 */}
           <PressableInput
             onPress={
-              () => setUser({ ...user, address: '양천구 신월동' }) // 주소 선택 로직 추가 가능
+              getAddress // 주소 선택 로직 추가 가능
             }
             value={user.address}
             placeholder="내 동네 불러오기"
@@ -162,7 +188,7 @@ export const RegisterOwnerProfile = ({ route }: Props) => {
 
         {/* 다음 버튼 */}
         <S.NextButtonWrapper ref={confirmButtonRef}>
-          <ActionButton onPress={handleNextPress} text="완료" />
+          <ActionButton onPress={throttleHandleNextPress} text="완료" />
         </S.NextButtonWrapper>
       </ScrollView>
 

@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { api } from '~apis/api';
 import { DogProfileType } from '~providers/DogProfileProvider';
 import { APIResponse } from '~types/api';
@@ -34,7 +33,7 @@ export const updateDog = async (
 
     return response;
   } catch (error) {
-    console.error(error as HTTPError);
-    throw new Error('An unexpected error occurred');
+    console.error(error);
+    throw error;
   }
 };

@@ -18,6 +18,10 @@ type CompositeNavigationType = CompositeNavigationProp<
   NativeStackNavigationProp<RootStackParamList>,
   NativeStackNavigationProp<RegisterDogParamList>
 >;
+type CompositeNavigationType = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList>,
+  NativeStackNavigationProp<RegisterDogParamList>
+>;
 
 export const FamilySetting = () => {
   const userInfo = useUser();

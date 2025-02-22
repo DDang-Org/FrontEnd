@@ -15,7 +15,7 @@ export type RegisterDogParamList = {
   BasicProfile: undefined;
   DetailProfile: undefined;
   InviteCode: undefined;
-  DogConfirmation: { inviteCode: string; dogInfos: FetchMyDogInfoResponseType };
+  DogConfirmation: { inviteCode: string; dogInfos: FetchMyDogInfoResponseType[] };
 };
 
 export const RegisterDogNavigator = () => {

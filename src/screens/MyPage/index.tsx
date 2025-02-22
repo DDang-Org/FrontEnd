@@ -14,9 +14,16 @@ import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 import { DogProfileLoader } from '~components/MyPage/Main/DogProfile/loader';
 import { ScrollView } from 'react-native';
+import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 type Props = NativeStackScreenProps<MyPageStackProps, 'Main'>;
 
 export const MyPageScreen = ({ navigation }: Props) => {
+  const { data: myDogs, isPending, isError } = useMyDogInfo();
+
+  if (isPending || isError) {
+    return <></>;
+  }
+
   return (
     <S.MyPage>
       <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10, gap: 20 }}>
@@ -38,7 +45,9 @@ export const MyPageScreen = ({ navigation }: Props) => {
         </ErrorBoundary>
         <ErrorBoundary FallbackComponent={DogProfileFallback}>
           <Suspense fallback={<DogProfileLoader />}>
-            <DogProfile navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit', { dogId: 0 })} />
+            <DogProfile
+              navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit', { dogId: myDogs[0].dogId })}
+            />
           </Suspense>
         </ErrorBoundary>
       </ScrollView>

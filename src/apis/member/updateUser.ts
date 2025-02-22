@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { api } from '~apis/api';
 import { APIResponse } from '~types/api';
 import { FamilyRole } from '~types/family-role';
@@ -10,6 +9,7 @@ export interface RequestUpdateUser {
   memberName: string;
   memberGender: Gender;
   address: string;
+  memberBirthDate: string;
   familyRole: FamilyRole;
   memberProfileImg: number;
 }
@@ -18,6 +18,7 @@ export interface ResponseUpdateUser {
   memberId: number;
   memberName: string;
   memberGender: Gender;
+  memberBirthDate: string;
   address: string;
   familyRole: FamilyRole;
   memberProfileImg: number;
@@ -28,6 +29,7 @@ export const updateUser = async (user: UserProfileType): Promise<APIResponse<Res
     memberName: user.memberName,
     memberGender: user.memberGender as Gender,
     address: user.address,
+    memberBirthDate: user.memberBirthDate.split('. ').join('-'),
     familyRole: REVERSE_FAMILY_ROLE[user.familyRole as keyof typeof REVERSE_FAMILY_ROLE],
     memberProfileImg: user.memberProfileImg as number,
   };
@@ -40,9 +42,7 @@ export const updateUser = async (user: UserProfileType): Promise<APIResponse<Res
       .json<APIResponse<ResponseUpdateUser>>();
     return response;
   } catch (error) {
-    if (error instanceof HTTPError) {
-      console.error(error.response);
-    }
+    console.error(error);
     throw error;
   }
 };

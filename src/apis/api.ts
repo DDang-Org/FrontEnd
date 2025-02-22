@@ -1,16 +1,16 @@
 import ky from 'ky';
 import { logout } from '~apis/member/logout';
 import { reissueToken } from '~apis/member/reissueToken';
-import { BASE_URL } from '~constants/base-url';
 import { getAccessToken } from '~utils/controlAccessToken';
+import { Config } from 'react-native-config';
 
 export const api = ky.create({
-  prefixUrl: BASE_URL,
+  prefixUrl: Config.BASE_URL,
   timeout: 5000,
   hooks: {
     beforeRequest: [
       async request => {
-        const accessToken = (await getAccessToken()) || 'a';
+        const accessToken = await getAccessToken();
         if (accessToken) {
           request.headers.set(
             'Authorization',
@@ -24,17 +24,24 @@ export const api = ky.create({
         }
       },
     ],
+
     afterResponse: [
-      async (request, options, response) => {
+      async (request, _, response) => {
+        if (request.url.endsWith('member/reissue')) {
+          return response;
+        }
+
         const accessToken = await getAccessToken();
 
         if (response.status === 401 && accessToken) {
           console.warn('401 Unauthorized: Access Token 만료, 재발급 시도 중...');
-          try {
-            await reissueToken();
 
-            // 원래 요청 다시 시도
-            return api(request.url, options);
+          try {
+            const newAccessToken = await reissueToken();
+            request.headers.set('Authorization', `Bearer ${newAccessToken}`);
+
+            const retryResponse = await ky(request);
+            return retryResponse;
           } catch (error) {
             console.error('토큰 재발급 실패:', error);
             console.error('로그아웃합니다.');
@@ -42,9 +49,6 @@ export const api = ky.create({
             throw error;
           }
         }
-        // if (!accessToken) {
-        //   console.warn('액세스 토큰 존재하지 않음');
-        // }
         return response;
       },
     ],

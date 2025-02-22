@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { APIResponse } from '~types/api';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
@@ -51,10 +50,7 @@ export const createUser = async (userInfo: RequestUserProfile): Promise<APIRespo
     const responseData = await response.json<APIResponse<ResponseUserProfile>>();
     return responseData;
   } catch (error) {
-    if (error instanceof HTTPError) {
-      const errorData = await error.response.json();
-      console.error(errorData);
-    }
+    console.error(error);
     throw error;
   }
 };

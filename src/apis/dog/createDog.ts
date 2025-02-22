@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { api } from '~apis/api.ts';
 import { DogProfileType } from '~providers/DogProfileProvider';
 import { APIResponse } from '~types/api';
@@ -31,7 +30,7 @@ export const createDog = async (dogProfile: DogProfileType): Promise<APIResponse
 
     return response;
   } catch (error) {
-    console.error(error as HTTPError);
+    console.error(error);
     throw error;
   }
 };

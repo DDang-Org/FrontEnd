@@ -1,12 +1,9 @@
 import { useState, useRef } from 'react';
-import { Alert, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import * as S from './styles';
 import FormInput from '~components/Common/FormInput';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
 import { ActionButton } from '~components/Common/ActionButton';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
-import { RegisterDogNavigations } from '~constants/navigations';
 import { TextBold } from '~components/Common/Text';
 import { SearchModal } from '~components/RegisterDog/SearchModal';
 import { validateDetailProfile } from '~utils/validateDogProfile';
@@ -17,17 +14,22 @@ import { WeightInput } from '~components/Common/WeightInput';
 import { NeuteredCheckButton } from '~components/Common/NeuteredCheckButton';
 import { useCreateDog } from '~apis/dog/useDogProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '~apis/member/useAuth';
+import { useThrottle } from '~hooks/useThrottle';
+import { HTTPError } from 'ky';
 
-type DetailProps = NativeStackScreenProps<RegisterDogParamList, typeof RegisterDogNavigations.DETAIL_PROFILE>;
-
-export const DetailProfile = ({}: DetailProps) => {
+export const DetailProfile = () => {
   const [dogProfile, setDogProfile] = useAtom(dogProfileAtom);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { showFormErrorToast } = useToast();
   const confirmButtonRef = useRef<View | null>(null);
   const registerDog = useCreateDog();
+  const navigation = useNavigation();
+  const throttle = useThrottle(2000);
 
   const deviceHeight = Dimensions.get('screen').height;
+  const { hasDog } = useAuth();
 
   const handleClickConfirm = () => {
     const error = validateDetailProfile(dogProfile);
@@ -37,23 +39,31 @@ export const DetailProfile = ({}: DetailProps) => {
     }
 
     registerDog.mutate(dogProfile, {
-      onSuccess: data => {
-        console.log(data), Alert.alert('성공하셨습니다!!');
+      onSuccess: () => {
+        if (hasDog) {
+          navigation.goBack();
+          setTimeout(() => navigation.goBack(), 0);
+        }
       },
-      onError: () => console.error('업로드 실패!!!!'),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
+      },
     });
   };
+
+  const throttleHandleClickConfirm = throttle(handleClickConfirm);
 
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile(prevState => ({ ...prevState, [key]: value }));
   };
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      enableOnAndroid={true}
-      extraScrollHeight={80} // 키보드 위 여백
-    >
+    <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }} enableOnAndroid={true} extraScrollHeight={80}>
       <S.DetailProfile>
         <S.TextWrapper deviceHeight={deviceHeight}>
           <TextBold fontSize={24}>반려견의 상세 정보를</TextBold>
@@ -85,7 +95,7 @@ export const DetailProfile = ({}: DetailProps) => {
         <S.ActionButtonWrapper ref={confirmButtonRef}>
           <ActionButton
             text="확인"
-            onPress={handleClickConfirm}
+            onPress={throttleHandleClickConfirm}
             bgColor={validateDetailProfile(dogProfile) ? 'gc_1' : 'default'}
           />
         </S.ActionButtonWrapper>
