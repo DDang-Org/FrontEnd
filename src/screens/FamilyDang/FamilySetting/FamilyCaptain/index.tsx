@@ -5,17 +5,14 @@ import { FamilyComment } from '~screens/FamilyDang/FamilyInfo/familycomment';
 import { ActionButton } from '~components/Common/ActionButton';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-// import { FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
 import { useNavigation } from '@react-navigation/native';
-// import { updateFamilyRepresentative } from '~apis/family/updateFamilyRepresentative';
+import { updateFamilyRepresentative } from '~apis/family/updateFamilyRepresentative';
 import { deleteFamilyMySelf } from '~apis/family/deleteFamilyMySelf';
 import { RegisterDogParamList } from '~navigation/RegisterDogNavigator';
-
-// type NavigationProp = NativeStackNavigationProp<FamilyDdangParamList>;
+import { Alert } from 'react-native';
 type RegisterDogProps = NativeStackNavigationProp<RegisterDogParamList>;
 
 export const FamilyCaptain = () => {
-  // const navigation = useNavigation<NavigationProp>();
   const navigationDog = useNavigation<RegisterDogProps>();
   const familyMembers = useFamilyInfo();
   const [selectedMemeberId, setSelectedMemberId] = useState<number | null>(null);
@@ -28,20 +25,36 @@ export const FamilyCaptain = () => {
     if (selectedMemeberId === null) {
       return;
     }
-    // try {
-    //   const response = await updateFamilyRepresentative({ queryKey: ['familyRepresentative', selectedMemeberId] });
-    //   console.log('패밀리장 위임 성공:', response);
-    //   navigation.navigate('FamilyDangScreen');
-    // } catch (error) {
-    //   console.error('패밀리장 위임 실패', error);
-    // }
-    try {
-      const response = await deleteFamilyMySelf();
-      console.log('패밀리 나가기 성공:', response);
-      navigationDog.navigate('Home');
-    } catch (error) {
-      console.error('패밀리 나가기 실패', error);
-    }
+    Alert.alert(
+      '패밀리 나가기',
+      '기존 산책과 강아지 데이터가 사라집니다. 패밀리를 나갈까요?',
+      [
+        {
+          text: '아니오',
+          onPress: () => console.log('Action canceled'),
+          style: 'cancel',
+        },
+        {
+          text: '예',
+          onPress: async () => {
+            try {
+              // 패밀리장 위임
+              const updateResponse = await updateFamilyRepresentative({
+                queryKey: ['familyRepresentative', selectedMemeberId],
+              });
+              console.log('패밀리장 위임 성공:', updateResponse);
+              // 패밀리 나가기
+              const response = await deleteFamilyMySelf();
+              console.log('패밀리 나가기 성공:', response);
+              navigationDog.navigate('Home');
+            } catch (error) {
+              console.error('패밀리 나가기 실패', error);
+            }
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   return (
