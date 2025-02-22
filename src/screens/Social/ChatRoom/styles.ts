@@ -29,11 +29,11 @@ export const TalkInputWrapper = styled.View`
   width: 100%;
   height: 64px;
   padding: 12px 20px;
-  padding-top: ${Platform.OS === 'ios' ? 3 + 'px' : 12 + 'px'};
+  padding-top: ${Platform.OS === 'ios' ? 4 + 'px' : 12 + 'px'};
   background-color: ${({ theme }) => theme.colors.gc_4};
   flex-direction: row;
+  align-items: center;
   gap: 20px;
-  border: solid 1px red;
 `;
 
 interface TextProps {
@@ -54,7 +54,7 @@ export const MessageSendButtonWrapper = styled.View`
   height: 64px;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  transform: translateY(${Platform.OS === 'ios' ? 4 + 'px' : 0 + 'px'});
 `;
 
 export const MessageSendButton = styled.Pressable`
