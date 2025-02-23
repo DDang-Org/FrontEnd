@@ -39,15 +39,18 @@ export const Profile = ({ size, src, userId, testID, avatarNumber, onPress }: Pr
         </Suspense>
       );
     }
-    if (!src) {
+    if (!src && !avatarNumber) {
+      console.log(src, avatarNumber);
       throw new Error('Profile 컴포넌트의 props가 적절하지 않습니다. src, avatarNumber 중 하나는 작성해 주세요.');
     }
     if (typeof src === 'string') {
       return <S.ProfileWithSrc source={{ uri: src }} style={{ width: size, height: size }} />;
     }
 
-    const SvgComponent = src;
-    return <SvgComponent width={size} height={size} />;
+    if (src) {
+      const SvgComponent = src;
+      return <SvgComponent width={size} height={size} />;
+    }
   };
 
   return (

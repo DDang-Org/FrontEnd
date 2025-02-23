@@ -1,38 +1,21 @@
 import { Separator } from '~components/Common/Seperator';
-import { Profile } from '~components/Common/Profile';
-import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUserById } from '~apis/member/fetchUserById';
 import { TalkArea } from '~components/Talk/TalkArea';
 import { Icon } from '~components/Common/Icons';
 import { SocialParamList } from '~navigation/SocialNavigator';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { TextBold } from '~components/Common/Text';
+import { useUserById } from '~apis/member/useUserById';
+import { Profile } from '~components/Common/Profile';
+import { FAMILY_ROLE } from '~constants/family-role';
 
 interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
 export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   const memberId = route.params!.userId; //! 항상 params로 userId를 넘겨줌
-  const { data: userInfoById } = useQuery({
-    queryKey: ['userInfoById', memberId],
-    queryFn: () => fetchUserById({ memberId }),
-    select: ({ data }) => data,
-  });
-  const avatarNumber = 1;
-  const userId = 1;
-  const name = '감자탕수육';
-  const gender = 'MALE';
-  const dogGender = 'FEMALE';
-  const familyRole = 'FATHER';
+  const chatPartner = useUserById({ memberId });
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: userInfoById?.memberName,
-    });
-  }, [navigation, userInfoById?.memberName]);
   return (
     <S.Talk>
       <KeyboardAvoidingView
@@ -43,13 +26,13 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <S.Header>
           <S.LeftContentContainer>
             <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
-            <Profile size={40} avatarNumber={avatarNumber} userId={userId} />
+            <Profile size={40} avatarNumber={chatPartner.memberProfileImg!} userId={chatPartner.memberId} />
             <S.TypoWrapper>
-              <S.Name fontSize={15}>{name}</S.Name>
+              <S.Name fontSize={15}>{chatPartner.memberName}</S.Name>
               <S.GenderFamilyRoleWrapper>
-                <S.Gender fontSize={11}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
+                <S.Gender fontSize={11}>{chatPartner.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
                 <Separator $height={8} />
-                <S.FamilyRole fontSize={11}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
+                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner.familyRole]}</S.FamilyRole>
               </S.GenderFamilyRoleWrapper>
             </S.TypoWrapper>
           </S.LeftContentContainer>

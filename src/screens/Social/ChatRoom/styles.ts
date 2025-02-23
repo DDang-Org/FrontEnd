@@ -54,7 +54,7 @@ export const MessageSendButtonWrapper = styled.View`
   height: 64px;
   justify-content: center;
   align-items: center;
-  transform: translateY(${Platform.OS === 'ios' ? 4 + 'px' : 0 + 'px'});
+  transform: translateY(${Platform.OS === 'ios' ? 3 + 'px' : 0 + 'px'});
 `;
 
 export const MessageSendButton = styled.Pressable`

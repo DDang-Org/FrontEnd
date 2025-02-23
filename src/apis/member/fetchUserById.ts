@@ -14,9 +14,9 @@ export type FetchUserByIdResponseType = {
   email: string;
   address: string;
   memberGender: Gender;
+  memberBirthDate: string;
   familyRole: FamilyRole;
-  memberProfileImg: string;
-  avatarNumber: AvatarNumber;
+  memberProfileImg: AvatarNumber;
 };
 
 export const fetchUserById = async ({
