@@ -4,7 +4,7 @@ import { APIResponse } from '~types/api';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
 
-interface BlockedUser {
+export interface BlockedUser {
   blockId: number;
   blockedMemberName: string;
   memberGender: Gender;
@@ -40,11 +40,7 @@ export interface ResponseBlockList {
 
 export const fetchBlockedUsers = async (page = 0): Promise<APIResponse<ResponseBlockList>> => {
   try {
-    const response = await api
-      .get('block/list', {
-        json: { page },
-      })
-      .json<APIResponse<ResponseBlockList>>();
+    const response = await api.get(`block/list?page=${page}`).json<APIResponse<ResponseBlockList>>();
     return response;
   } catch (error) {
     if (error instanceof HTTPError) {

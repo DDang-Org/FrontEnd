@@ -2,13 +2,25 @@ import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { blockUser } from '~apis/block/blockUser';
 import { UseMutationCustomOptions } from '~types/api';
 import { unblockUser } from './unblockUser';
-import { fetchBlockedUsers } from '~apis/member/fetchBlockedUsers';
+import { BlockedUser, fetchBlockedUsers } from '~apis/block/fetchBlockedUsers';
 
-const useBlockedUsers = () => {
+const useBlockedUserList = () => {
   return useSuspenseQuery({
-    queryFn: fetchBlockedUsers,
-    queryKey: ['blockedUsers'],
-    select: ({ data }) => data,
+    queryKey: ['allBlockedUsers'],
+    queryFn: async () => {
+      let allData: BlockedUser[] = [];
+      let currentPage = 0;
+      let isLastPage = false;
+
+      while (!isLastPage) {
+        const response = await fetchBlockedUsers(currentPage);
+        allData = [...allData, ...response.data.content];
+        isLastPage = response.data.last;
+        currentPage += 1;
+      }
+
+      return allData;
+    },
   });
 };
 
@@ -27,7 +39,7 @@ const useUnblockUser = (mutationOptions?: UseMutationCustomOptions) => {
 };
 
 export const useBlock = () => {
-  const blockedUsers = useBlockedUsers();
+  const blockedUsers = useBlockedUserList().data;
   const blockUserMutation = useBlockUser();
   const unblockUserMutation = useUnblockUser();
 
