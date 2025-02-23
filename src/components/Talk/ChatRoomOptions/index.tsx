@@ -32,6 +32,7 @@ export const ChatRoomOptions = ({ isVisible, hideOption, chatPartnerId }: ChatRo
               onSuccess: () => {
                 successToast('차단되었습니다');
                 queryClient.invalidateQueries({ queryKey: ['allBlockedUsers'] });
+                queryClient.invalidateQueries({ queryKey: ['friends'] });
               },
               onSettled: () => hideOption(),
             }),

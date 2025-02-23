@@ -3,14 +3,13 @@ import { Profile } from '~components/Common/Profile';
 import { Separator } from '~components/Common/Seperator';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
-import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import * as S from './styles';
 import { AvatarNumber } from '~types/avatar-number';
+import { FAMILY_ROLE } from '~constants/family-role';
 
 export interface UserItemProps {
   name: string;
   gender: Gender;
-  dogGender: Gender;
   familyRole: FamilyRole;
   buttonText: string;
   isLast?: boolean;
@@ -30,7 +29,6 @@ const Item = ({
   name,
   isLast = false,
   onPressButton,
-  dogGender,
   avatarNumber,
   userId,
 }: UserItemProps) => {
@@ -45,7 +43,7 @@ const Item = ({
             <S.GenderFamilyRoleWrapper>
               <S.Gender fontSize={14}>{gender === 'MALE' ? '남자' : '여자'}</S.Gender>
               <Separator $height={8} />
-              <S.FamilyRole fontSize={14}>{getKoreanRole({ dogGender, familyRole })}</S.FamilyRole>
+              <S.FamilyRole fontSize={14}>{FAMILY_ROLE[familyRole]}</S.FamilyRole>
             </S.GenderFamilyRoleWrapper>
           </S.TypoWrapper>
         </S.LeftContentContainer>
