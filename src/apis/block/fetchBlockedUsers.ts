@@ -11,17 +11,19 @@ interface BlockedUser {
   familyRole: FamilyRole;
 }
 
+interface Sort {
+  unsorted: boolean;
+  sorted: boolean;
+  empty: boolean;
+}
+
 interface Pageable {
   pageNumber: number;
   pageSize: number;
   paged: boolean;
   unpaged: boolean;
   offset: number;
-  sort: {
-    unsorted: boolean;
-    sorted: boolean;
-    empty: boolean;
-  };
+  sort: Sort;
 }
 
 export interface ResponseBlockList {
@@ -30,11 +32,7 @@ export interface ResponseBlockList {
   size: number;
   content: BlockedUser[];
   number: number;
-  sort: {
-    unsorted: boolean;
-    sorted: boolean;
-    empty: boolean;
-  };
+  sort: Sort;
   first: boolean;
   last: boolean;
   empty: boolean;
