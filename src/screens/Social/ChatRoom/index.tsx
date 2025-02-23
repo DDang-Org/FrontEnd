@@ -48,7 +48,6 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
             </S.MessageSendButton>
           </S.MessageSendButtonWrapper>
         </S.TalkInputWrapper>
-        {/* 전송 버튼 만들기 */}
       </KeyboardAvoidingView>
     </S.Talk>
   );
