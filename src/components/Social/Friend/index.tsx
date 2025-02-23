@@ -8,16 +8,13 @@ import { SocialParamList } from '~navigation/SocialNavigator';
 
 export const FriendTab = () => {
   const friends = useFriends();
-  console.log({ friends });
   return (
     <UserInfo>
-      (
       <UserInfo.Container>
         {friends?.map((friend, idx) => (
           <Item key={friend.memberId} friend={friend} memberId={friend.memberId} isLast={idx === friends.length - 1} />
         ))}
       </UserInfo.Container>
-      ),
     </UserInfo>
   );
 };
@@ -33,7 +30,6 @@ const Item = ({
 }) => {
   const dogInfos = useDogInfoByMemberId({ memberId });
   const navigation = useNavigation<NavigationProp<SocialParamList>>();
-  console.log({ dogInfos }); //todo 3번 멤버 강아지 없어서 에러 발생. 데이터 추가 요청하기
   if (!dogInfos || !dogInfos.length) {
     return null;
   }
@@ -41,7 +37,6 @@ const Item = ({
     <UserInfo.Item
       avatarNumber={friend.memberProfileImg}
       buttonText="메시지"
-      dogGender={dogInfos[0].dogGender}
       familyRole={friend.familyRole}
       gender={friend.memberGender}
       name={friend.memberName}

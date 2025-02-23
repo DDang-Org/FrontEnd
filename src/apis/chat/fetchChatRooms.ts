@@ -4,7 +4,7 @@ import { AvatarNumber } from '~types/avatar-number';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
 
-interface MemberInfo {
+interface Member {
   memberId: number;
   memberName: string;
   email: string;
@@ -17,10 +17,9 @@ export interface ResponseFetchChatRooms {
   name: string;
   lastMessage: string;
   unreadMessageCount: number;
-  members: MemberInfo[];
+  members: Member[];
 }
 [];
-
 export const fetchChatRooms = async (): Promise<APIResponse<ResponseFetchChatRooms>> => {
   try {
     const response = await api.get('chat/rooms').json<APIResponse<ResponseFetchChatRooms>>();

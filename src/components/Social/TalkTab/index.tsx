@@ -5,7 +5,7 @@ import { UnreadChatCount } from '~components/Common/UnreadChatCount';
 import { Pressable } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useChatRooms } from '~apis/chat/useChatRooms';
-import { FetchChatRoomsResponseType } from '~apis/chat/fetchChatRooms';
+import { ResponseFetchChatRooms } from '~apis/chat/fetchChatRooms';
 import { getKoreanRole } from '~utils/getKoreanRoleWithName';
 import { useDogInfoByMemberId } from '~apis/dog/useDogInfoByMemberId';
 import { SocialNavigations } from '~constants/navigations';
@@ -23,7 +23,7 @@ export const TalkTab = () => {
   );
 };
 
-const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: FetchChatRoomsResponseType[number]) => {
+const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: ResponseFetchChatRooms[number]) => {
   const navigation = useNavigation<NavigationProp<SocialParamList>>();
   const opponentDogInfos = useDogInfoByMemberId({ memberId: members[0].memberId });
   return (
