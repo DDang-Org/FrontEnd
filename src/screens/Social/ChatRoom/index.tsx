@@ -9,12 +9,15 @@ import { TextBold } from '~components/Common/Text';
 import { useUserById } from '~apis/member/useUserById';
 import { Profile } from '~components/Common/Profile';
 import { FAMILY_ROLE } from '~constants/family-role';
+import { ChatRoomOptions } from '~components/Talk/ChatRoomOptions';
+import { useState } from 'react';
 
 interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
 export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   const memberId = route.params!.userId; //! 항상 params로 userId를 넘겨줌
   const chatPartner = useUserById({ memberId });
+  const [isOptionVisible, setIsOptionVisible] = useState(false);
 
   return (
     <S.Talk>
@@ -36,7 +39,10 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
               </S.GenderFamilyRoleWrapper>
             </S.TypoWrapper>
           </S.LeftContentContainer>
-          <Icon.Ellipsis style={{ position: 'absolute', right: 20, top: 24 }} />
+          <Icon.Ellipsis
+            style={{ position: 'absolute', right: 20, top: 24 }}
+            onPress={() => setIsOptionVisible(true)}
+          />
         </S.Header>
 
         <TalkArea />
@@ -48,6 +54,7 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
             </S.MessageSendButton>
           </S.MessageSendButtonWrapper>
         </S.TalkInputWrapper>
+        <ChatRoomOptions isVisible={isOptionVisible} hideOption={() => setIsOptionVisible(false)} isBlocked={false} />
       </KeyboardAvoidingView>
     </S.Talk>
   );
