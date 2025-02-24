@@ -12,17 +12,17 @@ interface Member {
   familyRole: FamilyRole;
   memberProfileImg: AvatarNumber;
 }
-export interface ResponseFetchChatRooms {
+export interface ResponseFetchChatRoom {
   chatRoomId: number;
   name: string;
   lastMessage: string;
   unreadMessageCount: number;
   members: Member[];
 }
-[];
-export const fetchChatRooms = async (): Promise<APIResponse<ResponseFetchChatRooms>> => {
+
+export const fetchChatRooms = async (): Promise<APIResponse<ResponseFetchChatRoom[]>> => {
   try {
-    const response = await api.get('chat/rooms').json<APIResponse<ResponseFetchChatRooms>>();
+    const response = await api.get('chat/rooms').json<APIResponse<ResponseFetchChatRoom[]>>();
     return response;
   } catch (error) {
     console.error('Error:', error);

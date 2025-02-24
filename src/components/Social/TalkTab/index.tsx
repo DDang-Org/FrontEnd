@@ -5,11 +5,11 @@ import { UnreadChatCount } from '~components/Common/UnreadChatCount';
 import { Pressable } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useChatRooms } from '~apis/chat/useChatRooms';
-import { ResponseFetchChatRooms } from '~apis/chat/fetchChatRooms';
-import { getKoreanRole } from '~utils/getKoreanRoleWithName';
-import { useDogInfoByMemberId } from '~apis/dog/useDogInfoByMemberId';
 import { SocialNavigations } from '~constants/navigations';
 import { SocialParamList } from '~navigation/SocialNavigator';
+import { ResponseFetchChatRoom } from '~apis/chat/fetchChatRooms';
+import { FAMILY_ROLE } from '~constants/family-role';
+import { useEffect } from 'react';
 
 export const TalkTab = () => {
   const chatRooms = useChatRooms();
@@ -23,9 +23,13 @@ export const TalkTab = () => {
   );
 };
 
-const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: ResponseFetchChatRooms[number]) => {
+const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: ResponseFetchChatRoom) => {
   const navigation = useNavigation<NavigationProp<SocialParamList>>();
-  const opponentDogInfos = useDogInfoByMemberId({ memberId: members[0].memberId });
+
+  useEffect(() => {
+    console.log('members[0]', members[0]);
+    console.log('members[1]', members[1]);
+  }, []);
   return (
     <Pressable onPress={() => navigation.navigate(SocialNavigations.CHATROOM, { userId: members[0].memberId })}>
       <S.TalkItem>
@@ -35,10 +39,7 @@ const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: ResponseFe
             <S.Name fontSize={17}>{name}</S.Name>
             <S.FamilyRoleGenderWrapper>
               <S.FamilyRole fontSize={13} color="font_2">
-                {getKoreanRole({
-                  dogGender: opponentDogInfos ? opponentDogInfos[0]?.dogGender : 'MALE',
-                  familyRole: members[0].familyRole,
-                })}
+                {FAMILY_ROLE[members[0].familyRole]}
               </S.FamilyRole>
               <Separator $height={8} />
               <S.Gender fontSize={13} color="font_2">

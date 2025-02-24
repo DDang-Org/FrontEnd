@@ -32,7 +32,6 @@ const Item = ({
   avatarNumber,
   userId,
 }: UserItemProps) => {
-  //! 유저 강아지 성별
   return (
     <S.Item>
       <S.ItemWrapper isLast={isLast}>
