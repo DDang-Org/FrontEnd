@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
-import { respondToFriendRequest } from '~apis/friend/respondToFriendRequest';
 import { createUser, RequestUserProfile } from '~apis/member/createUser';
 import { deleteUser } from '~apis/member/deleteUser';
 import { fetchUser, FetchUserResponseType } from '~apis/member/fetchUser';
@@ -38,12 +37,6 @@ const useMyInfo = (
       (async () => {
         const email = data.data.email;
         await storeEmail(email);
-        if (data.data.memberId === 1) {
-          await respondToFriendRequest(46, 'ACCEPT');
-        }
-        if (data.data.memberId === 46) {
-          await respondToFriendRequest(1, 'ACCEPT');
-        }
       })();
     }
   }, [isSuccess, data]);
