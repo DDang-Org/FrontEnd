@@ -1,3 +1,9 @@
 import styled from '@emotion/native';
 
-export const FriendOptions = styled.View``;
+export const FriendProfile = styled.View`
+  width: 100%;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;

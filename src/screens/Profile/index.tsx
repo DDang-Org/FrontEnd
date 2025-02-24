@@ -17,7 +17,7 @@ import { useUserById } from '~apis/member/useUserById';
 interface ProfileScreenProps extends BottomTabScreenProps<TabBarParamList> {}
 
 export const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
-  const memberId = route.params!.userId; //! 항상 params로 userId를 넘겨줌
+  const memberId = route.params!.userId;
   const { data: user, isPending, isError } = useUserById({ memberId });
 
   if (isPending || isError) {

@@ -1,8 +1,8 @@
-import { View } from 'react-native';
 import { useUserById } from '~apis/member/useUserById';
 import { CompoundOption } from '~components/Common/CompoundOptions';
 import { Profile } from '~components/Common/Profile';
 import { TextBold } from '~components/Common/Text';
+import * as S from './styles';
 
 interface FriendOptionsProps {
   isVisible: boolean;
@@ -22,10 +22,10 @@ export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptions
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
         <CompoundOption.Container>
-          <View style={{ width: '100%', height: 150 }}>
-            <Profile size={30} avatarNumber={friendInfo.memberProfileImg} />
+          <S.FriendProfile>
+            <Profile size={80} avatarNumber={friendInfo.memberProfileImg} />
             <TextBold fontSize={15}>{friendInfo.memberName}</TextBold>
-          </View>
+          </S.FriendProfile>
           <CompoundOption.Divider />
           <CompoundOption.Button onPress={() => null}>상세 프로필 보기(미구현)</CompoundOption.Button>
           <CompoundOption.Divider />
