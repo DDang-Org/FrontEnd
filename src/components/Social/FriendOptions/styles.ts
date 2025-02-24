@@ -5,5 +5,6 @@ export const FriendProfile = styled.View`
   height: 150px;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 10px;
 `;

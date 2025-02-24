@@ -3,6 +3,8 @@ import { CompoundOption } from '~components/Common/CompoundOptions';
 import { Profile } from '~components/Common/Profile';
 import { TextBold } from '~components/Common/Text';
 import * as S from './styles';
+import { useDeleteFriend } from '~apis/friend/useDeleteFriend';
+import { Alert } from 'react-native';
 
 interface FriendOptionsProps {
   isVisible: boolean;
@@ -12,7 +14,25 @@ interface FriendOptionsProps {
 
 export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptionsProps) => {
   const { data: friendInfo, isPending, isError } = useUserById({ memberId: friendId });
-  const handleDeleteFriend = () => {};
+  const deleteFrinedMutation = useDeleteFriend();
+  const handleDeleteFriend = () => {
+    Alert.alert(`'${friendInfo?.memberName}'님을 친구 목록에서 삭제하시겠습니까?`, '', [
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+      {
+        text: '삭제하기',
+        onPress: () => {
+          deleteFrinedMutation.mutate(friendId, {
+            onSuccess: hideOption,
+            onError: error => console.error(error),
+            onSettled: () => console.log(friendId),
+          });
+        },
+      },
+    ]);
+  };
 
   if (isPending || isError) {
     return <></>;

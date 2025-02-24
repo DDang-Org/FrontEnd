@@ -4,11 +4,7 @@ import { APIResponse } from '~types/api';
 
 export const deleteFriend = async (memberId: number): Promise<APIResponse<{}>> => {
   try {
-    const response = await api
-      .delete('friend', {
-        json: { memberId },
-      })
-      .json<APIResponse<{}>>();
+    const response = await api.delete(`friend/${memberId}`).json<APIResponse<{}>>();
     return response;
   } catch (error) {
     if (error instanceof HTTPError) {
