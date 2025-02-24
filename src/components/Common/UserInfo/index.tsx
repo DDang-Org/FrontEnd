@@ -37,15 +37,13 @@ const Item = ({
   optionButton,
 }: UserItemProps) => {
   const friendOptionContext = useContext(FriendOptionContext);
-  if (!friendOptionContext) {
-    throw new Error('No friendOptionContext!!!');
-  }
-
-  const { setIsFriendOptionsVisible, setFriendId } = friendOptionContext;
 
   const handlePressFriendOption = () => {
-    setIsFriendOptionsVisible(true);
-    setFriendId(userId);
+    if (friendOptionContext) {
+      const { setIsFriendOptionsVisible, setFriendId } = friendOptionContext;
+      setIsFriendOptionsVisible(true);
+      setFriendId(userId);
+    }
   };
 
   return (
