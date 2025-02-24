@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import { useDogInfoByMemberId } from '~apis/dog/useDogInfoByMemberId';
 import { FetchFriendsResponseType } from '~apis/friend/fetchFriends';
 import { useFriends } from '~apis/friend/useFriends';
@@ -10,6 +10,7 @@ import { SocialParamList } from '~navigation/SocialNavigator';
 
 interface FriendOptionProps {
   setIsFriendOptionsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setFriendId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const FriendOptionContext = createContext<FriendOptionProps | undefined>(undefined);
@@ -17,8 +18,10 @@ export const FriendOptionContext = createContext<FriendOptionProps | undefined>(
 export const FriendTab = () => {
   const friends = useFriends();
   const [isFriendOptionsVisible, setIsFriendOptionsVisible] = useState(false);
-  return (
-    <FriendOptionContext.Provider value={{ setIsFriendOptionsVisible }}>
+  const [friendId, setFriendId] = useState(1);
+
+  const friendItems = useMemo(() => {
+    return (
       <UserInfo>
         <UserInfo.Container>
           {friends?.map((friend, idx) => (
@@ -29,16 +32,24 @@ export const FriendTab = () => {
                 memberId={friend.memberId}
                 isLast={idx === friends.length - 1}
               />
-              <FriendOptions
-                isVisble={isFriendOptionsVisible}
-                hideOption={() => setIsFriendOptionsVisible(false)}
-                friendId={friend.memberId}
-              />
             </>
           ))}
         </UserInfo.Container>
       </UserInfo>
-    </FriendOptionContext.Provider>
+    );
+  }, [friends]);
+
+  return (
+    <>
+      <FriendOptionContext.Provider value={{ setIsFriendOptionsVisible, setFriendId }}>
+        {friendItems}
+      </FriendOptionContext.Provider>
+      <FriendOptions
+        isVisible={isFriendOptionsVisible}
+        hideOption={() => setIsFriendOptionsVisible(false)}
+        friendId={friendId}
+      />
+    </>
   );
 };
 

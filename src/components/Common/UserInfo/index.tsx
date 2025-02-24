@@ -41,7 +41,12 @@ const Item = ({
     throw new Error('No friendOptionContext!!!');
   }
 
-  const { setIsFriendOptionsVisible } = friendOptionContext;
+  const { setIsFriendOptionsVisible, setFriendId } = friendOptionContext;
+
+  const handlePressFriendOption = () => {
+    setIsFriendOptionsVisible(true);
+    setFriendId(userId);
+  };
 
   return (
     <S.Item>
@@ -62,7 +67,7 @@ const Item = ({
             <S.ButtonText fontSize={14}>{buttonText}</S.ButtonText>
           </S.Button>
           {optionButton && (
-            <S.FriendOptionButton onPress={() => setIsFriendOptionsVisible(true)}>
+            <S.FriendOptionButton onPress={handlePressFriendOption}>
               <Icon.FriendOption />
             </S.FriendOptionButton>
           )}

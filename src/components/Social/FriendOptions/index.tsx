@@ -2,24 +2,27 @@ import { View } from 'react-native';
 import { useUserById } from '~apis/member/useUserById';
 import { CompoundOption } from '~components/Common/CompoundOptions';
 import { Profile } from '~components/Common/Profile';
+import { TextBold } from '~components/Common/Text';
 
 interface FriendOptionsProps {
-  isVisble: boolean;
+  isVisible: boolean;
   hideOption: () => void;
   friendId: number;
 }
 
-export const FriendOptions = ({ isVisble, hideOption, friendId }: FriendOptionsProps) => {
+export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptionsProps) => {
   const friendInfo = useUserById({ memberId: friendId });
   const handleDeleteFriend = () => {};
 
   return (
-    <CompoundOption isVisible={isVisble} hideOption={hideOption}>
+    <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
         <CompoundOption.Container>
           <View style={{ width: '100%', height: 150 }}>
-            <Profile size={30} avatarNumber={friendInfo.memberProfileImg} />
+            <Profile size={30} avatarNumber={friendInfo?.memberProfileImg} />
+            <TextBold fontSize={15}>{friendInfo?.memberName}</TextBold>
           </View>
+          <CompoundOption.Divider />
           <CompoundOption.Button onPress={() => null}>상세 프로필 보기(미구현)</CompoundOption.Button>
           <CompoundOption.Divider />
           <CompoundOption.Button onPress={handleDeleteFriend} isDanger>
