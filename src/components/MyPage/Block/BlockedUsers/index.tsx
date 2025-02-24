@@ -1,9 +1,9 @@
-import { Alert, View } from 'react-native';
+import { Alert } from 'react-native';
 import { useBlock } from '~apis/block/useBlock';
-import { TextBold } from '~components/Common/Text';
 import { UserInfo } from '~components/Common/UserInfo';
 import { useToast } from '~hooks/useToast';
 import { queryClient } from '~providers/QueryClientProvider';
+import { NoBlockedUsers } from '~components/MyPage/NoBlockedUsers';
 
 export const BlockedUsers = () => {
   const { blockedUsers, unblockUserMutation } = useBlock();
@@ -29,11 +29,9 @@ export const BlockedUsers = () => {
   };
 
   return (
-    <UserInfo.Container>
+    <UserInfo.Container contentContainerStyle={{ flex: 1 }}>
       {blockedUsers.length === 0 ? (
-        <View>
-          <TextBold fontSize={15}>차단 목록이 없습니다.</TextBold>
-        </View>
+        <NoBlockedUsers />
       ) : (
         blockedUsers.map((user, idx) => (
           <UserInfo.Item
