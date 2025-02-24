@@ -1,9 +1,11 @@
-import { PropsWithChildren, ReactNode, createContext, useContext, useEffect, useRef } from 'react';
+import { PropsWithChildren, ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Animated, GestureResponderEvent, Modal, ModalProps, PressableProps, StyleSheet } from 'react-native';
 import * as S from './styles';
 
 interface OptionContextValue {
   onClickOutSide?: (event: GestureResponderEvent) => void;
+  isVisible: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OptionContext = createContext<OptionContextValue | undefined>(undefined);
@@ -15,15 +17,21 @@ interface OptionMainProps extends ModalProps {
 }
 
 const OptionMain = ({ children, isVisible, hideOption, ...props }: OptionMainProps) => {
+  const [showModal, setShowModal] = useState(isVisible);
   const onClickOutSide = (event: GestureResponderEvent) => {
     if (event.target === event.currentTarget) {
       hideOption();
     }
   };
+  useEffect(() => {
+    if (isVisible) {
+      setShowModal(true);
+    }
+  }, [isVisible]);
 
   return (
-    <Modal visible={isVisible} transparent={true} onRequestClose={hideOption} {...props}>
-      <OptionContext.Provider value={{ onClickOutSide }}>{children}</OptionContext.Provider>
+    <Modal visible={showModal} transparent={true} onRequestClose={hideOption} {...props}>
+      <OptionContext.Provider value={{ onClickOutSide, isVisible, setShowModal }}>{children}</OptionContext.Provider>
     </Modal>
   );
 };
@@ -37,13 +45,27 @@ const Background = ({ children }: PropsWithChildren) => {
 const Container = ({ children }: PropsWithChildren) => {
   const slideAnim = useRef(new Animated.Value(300)).current;
 
+  const optionContext = useContext(OptionContext);
+  if (!optionContext) throw new Error('Container must be used within an OptionMain');
+
+  const { isVisible, setShowModal } = optionContext;
+
   useEffect(() => {
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  }, [slideAnim]);
+    if (isVisible) {
+      setShowModal(true);
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(slideAnim, {
+        toValue: 600,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => setShowModal(false));
+    }
+  }, [isVisible]);
 
   return (
     <Animated.View
