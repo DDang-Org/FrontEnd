@@ -2,7 +2,7 @@ import { api } from '~apis/api.ts';
 import { APIResponse } from '~types/api';
 
 export type FetchAccumulatedWalkInfoRequestType = {
-  dogId: number;
+  memberId: number;
 };
 
 export type FetchAccumulatedWalkInfoResponseType = {
@@ -12,10 +12,12 @@ export type FetchAccumulatedWalkInfoResponseType = {
 };
 
 export const fetchAccumulatedWalkInfo = async ({
-  dogId,
+  memberId,
 }: FetchAccumulatedWalkInfoRequestType): Promise<APIResponse<FetchAccumulatedWalkInfoResponseType>> => {
   try {
-    const response = await api.get(`dogs/${dogId}/walks`).json<APIResponse<FetchAccumulatedWalkInfoResponseType>>();
+    const response = await api
+      .get(`member/walk-info/${memberId}`)
+      .json<APIResponse<FetchAccumulatedWalkInfoResponseType>>();
     return response;
   } catch (error) {
     console.error('Error:', error);
