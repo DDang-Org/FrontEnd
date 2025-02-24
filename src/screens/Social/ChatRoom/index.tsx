@@ -16,8 +16,12 @@ interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
 export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   const memberId = route.params!.userId;
-  const chatPartner = useUserById({ memberId });
+  const { data: chatPartner, isPending, isError } = useUserById({ memberId });
   const [isOptionVisible, setIsOptionVisible] = useState(false);
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   return (
     <S.Talk>
@@ -29,13 +33,13 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <S.Header>
           <S.LeftContentContainer>
             <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
-            <Profile size={40} avatarNumber={chatPartner?.memberProfileImg!} userId={chatPartner?.memberId} />
+            <Profile size={40} avatarNumber={chatPartner.memberProfileImg} userId={chatPartner?.memberId} />
             <S.TypoWrapper>
-              <S.Name fontSize={15}>{chatPartner?.memberName}</S.Name>
+              <S.Name fontSize={15}>{chatPartner.memberName}</S.Name>
               <S.GenderFamilyRoleWrapper>
-                <S.Gender fontSize={11}>{chatPartner?.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
+                <S.Gender fontSize={11}>{chatPartner.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
                 <Separator $height={8} />
-                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner!.familyRole]}</S.FamilyRole>
+                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner?.familyRole || 'FATHER']}</S.FamilyRole>
               </S.GenderFamilyRoleWrapper>
             </S.TypoWrapper>
           </S.LeftContentContainer>

@@ -19,12 +19,10 @@ export type FetchUserByIdResponseType = {
   memberProfileImg: AvatarNumber;
 };
 
-export const fetchUserById = async ({
-  memberId,
-}: FetchUserByIdRequestType): Promise<APIResponse<FetchUserByIdResponseType>> => {
+export const fetchUserById = async ({ memberId }: FetchUserByIdRequestType): Promise<FetchUserByIdResponseType> => {
   try {
     const response = await api.get(`member/${memberId}`).json<APIResponse<FetchUserByIdResponseType>>();
-    return response;
+    return response.data;
   } catch (error) {
     console.error('Error:', error);
     throw error;

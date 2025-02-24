@@ -11,16 +11,20 @@ interface FriendOptionsProps {
 }
 
 export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptionsProps) => {
-  const friendInfo = useUserById({ memberId: friendId });
+  const { data: friendInfo, isPending, isError } = useUserById({ memberId: friendId });
   const handleDeleteFriend = () => {};
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
         <CompoundOption.Container>
           <View style={{ width: '100%', height: 150 }}>
-            <Profile size={30} avatarNumber={friendInfo?.memberProfileImg} />
-            <TextBold fontSize={15}>{friendInfo?.memberName}</TextBold>
+            <Profile size={30} avatarNumber={friendInfo.memberProfileImg} />
+            <TextBold fontSize={15}>{friendInfo.memberName}</TextBold>
           </View>
           <CompoundOption.Divider />
           <CompoundOption.Button onPress={() => null}>상세 프로필 보기(미구현)</CompoundOption.Button>

@@ -9,7 +9,11 @@ interface UserProfileProps {
 }
 
 export const UserProfile = ({ userId }: UserProfileProps) => {
-  const user = useUserById({ memberId: userId });
+  const { data: user, isPending, isError } = useUserById({ memberId: userId });
+
+  if (isError || isError) {
+    return <></>;
+  }
 
   return (
     <S.UserProfile paddingVertical={24} paddingHorizontal={20}>

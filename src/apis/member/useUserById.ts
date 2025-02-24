@@ -1,12 +1,10 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchUserById, FetchUserByIdRequestType } from '~apis/member/fetchUserById';
+import { fetchUserById, FetchUserByIdRequestType, FetchUserByIdResponseType } from '~apis/member/fetchUserById';
 
 export const useUserById = ({ memberId }: FetchUserByIdRequestType) => {
-  const { data } = useQuery({
+  return useQuery<FetchUserByIdResponseType>({
     queryKey: ['userInfoById', memberId],
     queryFn: () => fetchUserById({ memberId }),
     placeholderData: keepPreviousData,
   });
-
-  return data?.data;
 };
