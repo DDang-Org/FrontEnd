@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useContext } from 'react';
 import { Profile } from '~components/Common/Profile';
 import { Separator } from '~components/Common/Seperator';
 import { FamilyRole } from '~types/family-role';
@@ -6,6 +6,8 @@ import { Gender } from '~types/gender';
 import * as S from './styles';
 import { AvatarNumber } from '~types/avatar-number';
 import { FAMILY_ROLE } from '~constants/family-role';
+import { Icon } from '~components/Common/Icons';
+import { FriendOptionContext } from '~components/Social/Friend';
 
 export interface UserItemProps {
   name: string;
@@ -16,6 +18,7 @@ export interface UserItemProps {
   avatarNumber: AvatarNumber;
   onPressButton: () => void;
   userId: number;
+  optionButton?: boolean;
 }
 
 export const UserInfo = ({ children }: PropsWithChildren) => {
@@ -31,7 +34,15 @@ const Item = ({
   onPressButton,
   avatarNumber,
   userId,
+  optionButton,
 }: UserItemProps) => {
+  const friendOptionContext = useContext(FriendOptionContext);
+  if (!friendOptionContext) {
+    throw new Error('No friendOptionContext!!!');
+  }
+
+  const { setIsFriendOptionsVisible } = friendOptionContext;
+
   return (
     <S.Item>
       <S.ItemWrapper isLast={isLast}>
@@ -46,9 +57,16 @@ const Item = ({
             </S.GenderFamilyRoleWrapper>
           </S.TypoWrapper>
         </S.LeftContentContainer>
-        <S.Button onPress={onPressButton}>
-          <S.ButtonText fontSize={14}>{buttonText}</S.ButtonText>
-        </S.Button>
+        <S.RightContainer>
+          <S.Button onPress={onPressButton}>
+            <S.ButtonText fontSize={14}>{buttonText}</S.ButtonText>
+          </S.Button>
+          {optionButton && (
+            <S.FriendOptionButton onPress={() => setIsFriendOptionsVisible(true)}>
+              <Icon.FriendOption />
+            </S.FriendOptionButton>
+          )}
+        </S.RightContainer>
       </S.ItemWrapper>
     </S.Item>
   );

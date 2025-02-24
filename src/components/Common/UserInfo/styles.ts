@@ -41,3 +41,14 @@ export const Button = styled.Pressable`
 export const ButtonText = styled(TextBold)`
   text-align: center;
 `;
+
+export const RightContainer = styled.View`
+  flex-direction: row;
+  gap: 12px;
+`;
+
+export const FriendOptionButton = styled.Pressable`
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+`;

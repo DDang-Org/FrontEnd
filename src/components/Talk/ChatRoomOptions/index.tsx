@@ -65,7 +65,7 @@ export const ChatRoomOptions = ({ isVisible, hideOption, chatPartnerId }: ChatRo
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
         <CompoundOption.Container>
-          <CompoundOption.Button onPress={() => null}>채팅방 나가기</CompoundOption.Button>
+          <CompoundOption.Button onPress={() => null}>채팅방 나가기(미구현)</CompoundOption.Button>
           <CompoundOption.Divider />
           {isBlocked ? (
             <CompoundOption.Button onPress={handleUnblock}>차단 해제</CompoundOption.Button>
