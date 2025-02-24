@@ -39,7 +39,6 @@ export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptions
     ]);
   };
 
-
   if (isPending || isError) {
     return <></>;
   }
