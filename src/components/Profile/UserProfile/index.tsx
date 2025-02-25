@@ -23,7 +23,6 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
       <S.GenderRoleWrapper>
         <S.Gender fontSize={13}>{user.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
         <Separator $height={8} />
-        {/* 임시 dogGender */}
         <S.Role fontSize={13}>{getKoreanRole({ dogGender: 'FEMALE', familyRole: user.familyRole })}</S.Role>
       </S.GenderRoleWrapper>
     </S.UserProfile>

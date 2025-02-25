@@ -20,15 +20,15 @@ export const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
   const memberId = route.params!.userId;
   const { data: user, isPending, isError } = useUserById({ memberId });
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: user?.memberName,
+    });
+  }, [navigation, user?.memberName]);
+
   if (isPending || isError) {
     return <></>;
   }
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: user.memberName,
-    });
-  }, [navigation, user.memberName]);
 
   return (
     <S.Profile>

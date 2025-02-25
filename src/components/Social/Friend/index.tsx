@@ -25,14 +25,12 @@ export const FriendTab = () => {
       <UserInfo>
         <UserInfo.Container>
           {friends?.map((friend, idx) => (
-            <>
-              <Item
-                key={friend.memberId}
-                friend={friend}
-                memberId={friend.memberId}
-                isLast={idx === friends.length - 1}
-              />
-            </>
+            <Item
+              key={friend.memberId}
+              friend={friend}
+              memberId={friend.memberId}
+              isLast={idx === friends.length - 1}
+            />
           ))}
         </UserInfo.Container>
       </UserInfo>

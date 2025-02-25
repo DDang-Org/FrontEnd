@@ -33,13 +33,13 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <S.Header>
           <S.LeftContentContainer>
             <Icon.Prev style={{ marginRight: 8 }} onPress={() => navigation.goBack()} />
-            <Profile size={40} avatarNumber={chatPartner.memberProfileImg} userId={chatPartner?.memberId} />
+            <Profile size={40} avatarNumber={chatPartner.memberProfileImg} userId={chatPartner.memberId} />
             <S.TypoWrapper>
               <S.Name fontSize={15}>{chatPartner.memberName}</S.Name>
               <S.GenderFamilyRoleWrapper>
                 <S.Gender fontSize={11}>{chatPartner.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
                 <Separator $height={8} />
-                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner?.familyRole || 'FATHER']}</S.FamilyRole>
+                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner.familyRole]}</S.FamilyRole>
               </S.GenderFamilyRoleWrapper>
             </S.TypoWrapper>
           </S.LeftContentContainer>
@@ -61,7 +61,7 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <ChatRoomOptions
           isVisible={isOptionVisible}
           hideOption={() => setIsOptionVisible(false)}
-          chatPartnerId={chatPartner!.memberId}
+          chatPartnerId={chatPartner.memberId}
         />
       </KeyboardAvoidingView>
     </S.Talk>
