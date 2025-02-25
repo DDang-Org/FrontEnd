@@ -55,7 +55,7 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
               <S.GenderFamilyRoleWrapper>
                 <S.Gender fontSize={11}>{chatPartner.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
                 <Separator $height={8} />
-                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner?.familyRole || 'FATHER']}</S.FamilyRole>
+                <S.FamilyRole fontSize={11}>{FAMILY_ROLE[chatPartner.familyRole]}</S.FamilyRole>
               </S.GenderFamilyRoleWrapper>
             </S.TypoWrapper>
           </S.LeftContentContainer>
@@ -83,7 +83,7 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
         <ChatRoomOptions
           isVisible={isOptionVisible}
           hideOption={() => setIsOptionVisible(false)}
-          chatPartnerId={chatPartner!.memberId}
+          chatPartnerId={chatPartner.memberId}
         />
       </KeyboardAvoidingView>
     </S.Talk>
