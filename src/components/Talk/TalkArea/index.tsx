@@ -17,6 +17,1066 @@ const messages = [
     type: 'incoming',
     text: 'hihi',
   },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
+  {
+    id: 12,
+    type: 'outgoing',
+    text: 'hihi',
+  },
+  {
+    id: 13,
+    type: 'incoming',
+    text: 'hihi',
+  },
 ];
 
 interface TalkAreaProps {
