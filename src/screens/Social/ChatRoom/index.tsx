@@ -35,10 +35,6 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
     }
   };
 
-  if (isPending || isError) {
-    return <></>;
-  }
-
   return (
     <S.Talk>
       <KeyboardAvoidingView
