@@ -23,8 +23,10 @@ export const useChat = (email: string) => {
 
       stompClient.onConnect = () => {
         console.log('STOMP 연결 성공');
+        console.log('WebSocket 연결 상태:', stompClientRef.current?.connected);
 
-        stompClient.subscribe(`/sub/chat/${email}`, message => {
+        stompClient.subscribe(`/sub/${email}`, message => {
+          console.log(message.body);
           const receivedMessage = JSON.parse(message.body);
           console.log('받은 메시지', receivedMessage);
           setMessages(prevMessages => [receivedMessage, ...prevMessages]);
@@ -42,9 +44,10 @@ export const useChat = (email: string) => {
     initializeWebSocket();
   }, [email]);
 
-  const sendMessages = (receiverEmail: string, text: string) => {
+  const sendMessage = (receiverEmail: string, text: string) => {
     if (stompClientRef.current && stompClientRef.current.connected) {
       const payload = JSON.stringify({ receiverEmail, message: text });
+      console.log('payload', payload);
       stompClientRef.current.publish({
         destination: '/pub/api/v1/chat/message',
         body: payload,
@@ -52,5 +55,5 @@ export const useChat = (email: string) => {
     }
   };
 
-  return { messages, sendMessages };
+  return { messages, sendMessage };
 };

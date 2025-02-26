@@ -11,17 +11,29 @@ import { Profile } from '~components/Common/Profile';
 import { FAMILY_ROLE } from '~constants/family-role';
 import { useState } from 'react';
 import { ChatRoomOptions } from '~components/Talk/ChatRoomOptions';
+import { useUser } from '~apis/member/useUser';
+import { useChat } from '~hooks/useChat';
 
 interface TalkScreenProps extends BottomTabScreenProps<SocialParamList> {}
 
 export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
   const memberId = route.params!.userId;
   const { data: chatPartner, isPending, isError } = useUserById({ memberId });
+  const myInfo = useUser();
   const [isOptionVisible, setIsOptionVisible] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const { messages, sendMessage } = useChat(myInfo.email);
 
   if (isPending || isError) {
     return <></>;
   }
+
+  const handleSendMessage = () => {
+    if (inputText.trim()) {
+      sendMessage(chatPartner.email, inputText);
+      setInputText('');
+    }
+  };
 
   return (
     <S.Talk>
@@ -49,11 +61,17 @@ export const ChatRoomScreen = ({ navigation, route }: TalkScreenProps) => {
           />
         </S.Header>
 
-        <TalkArea />
+        <TalkArea messages={messages} />
         <S.TalkInputWrapper>
-          <S.TalkInput fontSize={15} placeholder="채팅 내용 입력" textAlignVertical="center" />
+          <S.TalkInput
+            fontSize={15}
+            placeholder="채팅 내용 입력"
+            textAlignVertical="center"
+            value={inputText}
+            onChangeText={setInputText}
+          />
           <S.MessageSendButtonWrapper>
-            <S.MessageSendButton>
+            <S.MessageSendButton onPress={handleSendMessage}>
               <TextBold fontSize={14}>전송</TextBold>
             </S.MessageSendButton>
           </S.MessageSendButtonWrapper>
