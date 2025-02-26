@@ -27,9 +27,7 @@ import { useWebSocket } from '~hooks/useWebSocket';
 const WALKING_INTERVAL = 5000;
 // const NORMAL_INTERVAL = 10000;
 const MIN_ACCURACY = 30;
-const MIN_MARKER_DISTANCE = 5;
-
-const USER_EMAIL = 'mkh6793@naver.com';
+const MIN_MARKER_DISTANCE = 1;
 
 const calculateDirectDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371e3;
@@ -307,7 +305,7 @@ const MapView = () => {
 
     try {
       const dogIds = dog.map((d: any) => d.dogId);
-      const response = await startWalk({ dogIds });
+      // const response = await startWalk({ dogIds });
       console.log(response);
     } catch (error) {
       console.error('산책 시작 실패:', error);
@@ -382,12 +380,14 @@ const MapView = () => {
       //   ];
       // };
 
-      const response = await axios.post('https://ruehan-home.com:8003/ors/v2/directions/foot-walking/geojson', {
+      const response = await axios.post('https://ruehan-home.com:8004/ors/v2/directions/foot-walking/geojson', {
         coordinates: lastTwoCoordinates,
       });
       const routeData = response.data;
       const newRouteCoordinates = routeData.features[0].geometry.coordinates;
       const routeDistance = routeData.features[0].properties.segments[0].distance;
+
+      console.log('routeData : ' + routeData);
 
       setRouteCoordinates(newRouteCoordinates);
       setDistance(routeDistance);
@@ -470,7 +470,7 @@ const MapView = () => {
         <DogListModal
           isVisible={isModalVisible}
           onClose={() => setIsModalVisible(false)}
-          dogs={myDogInfo}
+          dogs={myDogInfo.data}
           onSelectMultipleDogs={handleSelectDog}
           type="multi-select"
         />
