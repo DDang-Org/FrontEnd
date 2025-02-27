@@ -46,26 +46,30 @@ const Container = ({ children }: PropsWithChildren) => {
   const slideAnim = useRef(new Animated.Value(300)).current;
 
   const optionContext = useContext(OptionContext);
-  if (!optionContext) throw new Error('Container must be used within an OptionMain');
+  if (!optionContext) {
+    throw new Error('Container must be used within an OptionMain');
+  }
 
   const { isVisible, setShowModal } = optionContext;
 
-  useEffect(() => {
-    if (isVisible) {
-      setShowModal(true);
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(slideAnim, {
-        toValue: 600,
-        duration: 200,
-        useNativeDriver: true,
-      }).start(() => setShowModal(false));
-    }
-  }, [isVisible]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  if (isVisible) {
+    setShowModal(true);
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  } else {
+    Animated.timing(slideAnim, {
+      toValue: 600,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => setShowModal(false));
+  }
+}, [isVisible]);
+
 
   return (
     <Animated.View

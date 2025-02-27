@@ -29,7 +29,7 @@ const TalkItem = ({ lastMessage, members, name, unreadMessageCount }: ResponseFe
   useEffect(() => {
     console.log('members[0]', members[0]);
     console.log('members[1]', members[1]);
-  }, []);
+  }, [members]);
   return (
     <Pressable onPress={() => navigation.navigate(SocialNavigations.CHATROOM, { userId: members[0].memberId })}>
       <S.TalkItem>
