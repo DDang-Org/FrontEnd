@@ -1,3 +1,4 @@
+import React from 'react';
 import * as S from './styles';
 import { TextBold, TextRegular } from '~components/Common/Text';
 import { useNavigation } from '@react-navigation/native';
