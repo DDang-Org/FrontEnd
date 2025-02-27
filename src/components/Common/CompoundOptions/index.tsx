@@ -52,7 +52,7 @@ const Container = ({ children }: PropsWithChildren) => {
 
   const { isVisible, setShowModal } = optionContext;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  
 useEffect(() => {
   if (isVisible) {
     setShowModal(true);
@@ -68,7 +68,7 @@ useEffect(() => {
       useNativeDriver: true,
     }).start(() => setShowModal(false));
   }
-}, [isVisible]);
+}, [isVisible, setShowModal, slideAnim]);
 
 
   return (
