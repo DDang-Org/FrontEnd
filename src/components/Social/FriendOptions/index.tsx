@@ -39,9 +39,6 @@ export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptions
     ]);
   };
 
-  if (isPending || isError) {
-    return <></>;
-  }
 
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
