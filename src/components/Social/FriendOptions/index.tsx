@@ -15,8 +15,13 @@ interface FriendOptionsProps {
 export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptionsProps) => {
   const { data: friendInfo, isPending, isError } = useUserById({ memberId: friendId });
   const deleteFrinedMutation = useDeleteFriend();
+
+  if (isPending || isError) {
+    return <></>;
+  }
+  
   const handleDeleteFriend = () => {
-    Alert.alert(`'${friendInfo?.memberName}'님을 친구 목록에서 삭제하시겠습니까?`, '', [
+    Alert.alert(`'${friendInfo.memberName}'님을 친구 목록에서 삭제하시겠습니까?`, '', [
       {
         text: '취소',
         style: 'cancel',
@@ -34,9 +39,6 @@ export const FriendOptions = ({ isVisible, hideOption, friendId }: FriendOptions
     ]);
   };
 
-  if (isPending || isError) {
-    return <></>;
-  }
 
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
