@@ -49,6 +49,8 @@ export const DogListModal = ({
   const slideAnim = useRef(new Animated.Value(type === 'walk' ? WALK_MODAL_HEIGHT : 500)).current;
   const [selectedDogs, setSelectedDogs] = useState<Dog[]>([]);
 
+  console.log(dogs);
+
   useEffect(() => {
     if (isVisible) {
       Animated.spring(slideAnim, {
@@ -125,7 +127,7 @@ export const DogListModal = ({
                     <Separator $height={14} />
                     <S.InfoText fontSize={14}>{calculateAge(dog.dogBirthDate)}살</S.InfoText>
                     <Separator $height={14} />
-                    <S.InfoText fontSize={14}>{dog.dogGender}</S.InfoText>
+                    <S.InfoText fontSize={14}>{dog.dogGender === 'MALE' ? '남' : '여'}</S.InfoText>
                   </S.InfoContainer>
                   <S.WalkText fontSize={14}>산책 횟수 {dog.walkCount}회</S.WalkText>
                 </S.DogInfo>
