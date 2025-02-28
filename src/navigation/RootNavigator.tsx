@@ -6,6 +6,7 @@ import { useAuth } from '~apis/member/useAuth';
 import { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigatorScreenParams } from '@react-navigation/native';
+import { RootNavigations } from '~constants/navigations';
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -37,8 +38,8 @@ export const RootNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
-      <Stack.Screen name="RegisterDog" component={RegisterDogNavigator} />
+      <Stack.Screen name={RootNavigations.BOTTOM_TAB} component={BottomTabNavigator} />
+      <Stack.Screen name={RootNavigations.REGISTER_DOG} component={RegisterDogNavigator} />
     </Stack.Navigator>
   );
 };

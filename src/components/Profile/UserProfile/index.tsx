@@ -9,18 +9,21 @@ interface UserProfileProps {
 }
 
 export const UserProfile = ({ userId }: UserProfileProps) => {
-  const { address, familyRole, avatarNumber, memberGender, memberName } = useUserById({ memberId: userId });
+  const { data: user, isPending, isError } = useUserById({ memberId: userId });
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   return (
     <S.UserProfile paddingVertical={24} paddingHorizontal={20}>
-      <Profile size={140} avatarNumber={avatarNumber} />
-      <S.Name fontSize={24}>{memberName}</S.Name>
-      <S.Address fontSize={15}>{address}</S.Address>
+      <Profile size={140} avatarNumber={user.memberProfileImg} />
+      <S.Name fontSize={24}>{user.memberName}</S.Name>
+      <S.Address fontSize={15}>{user.address}</S.Address>
       <S.GenderRoleWrapper>
-        <S.Gender fontSize={13}>{memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
+        <S.Gender fontSize={13}>{user.memberGender === 'MALE' ? '남자' : '여자'}</S.Gender>
         <Separator $height={8} />
-        {/* 임시 dogGender */}
-        <S.Role fontSize={13}>{getKoreanRole({ dogGender: 'FEMALE', familyRole })}</S.Role>
+        <S.Role fontSize={13}>{getKoreanRole({ dogGender: 'FEMALE', familyRole: user.familyRole })}</S.Role>
       </S.GenderRoleWrapper>
     </S.UserProfile>
   );

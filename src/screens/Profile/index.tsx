@@ -1,8 +1,6 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useQuery } from '@tanstack/react-query';
 import { Suspense, useEffect } from 'react';
 import ErrorBoundary from 'react-native-error-boundary';
-import { fetchUserById } from '~apis/member/fetchUserById';
 import { DogProfile } from '~components/Profile/DogProfile';
 import { DogProfileFallback } from '~components/Profile/DogProfile/fallback';
 import { DogProfileLoader } from '~components/Profile/DogProfile/loader';
@@ -14,22 +12,23 @@ import { WalkInfoFallback } from '~components/Profile/WalkInfo/fallback';
 import { WalkInfoLoader } from '~components/Profile/WalkInfo/loader';
 import { TabBarParamList } from '~navigation/BottomTabNavigator';
 import * as S from './styles';
+import { useUserById } from '~apis/member/useUserById';
 
 interface ProfileScreenProps extends BottomTabScreenProps<TabBarParamList> {}
 
 export const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
-  const memberId = route.params!.userId; //! 항상 params로 userId를 넘겨줌
-  const { data: userInfoById } = useQuery({
-    queryKey: ['userInfoById', memberId],
-    queryFn: () => fetchUserById({ memberId }),
-    select: ({ data }) => data,
-  });
+  const memberId = route.params!.userId;
+  const { data: user, isPending, isError } = useUserById({ memberId });
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: userInfoById?.memberName,
+      headerTitle: user?.memberName,
     });
-  }, [navigation, userInfoById?.memberName]);
+  }, [navigation, user?.memberName]);
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   return (
     <S.Profile>
@@ -40,12 +39,12 @@ export const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={WalkInfoFallback}>
         <Suspense fallback={<WalkInfoLoader />}>
-          <WalkInfo dogId={1} />
+          <WalkInfo memberId={memberId} />
         </Suspense>
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={DogProfileFallback}>
         <Suspense fallback={<DogProfileLoader />}>
-          <DogProfile dogId={1} />
+          <DogProfile />
         </Suspense>
       </ErrorBoundary>
     </S.Profile>

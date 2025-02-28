@@ -8,6 +8,7 @@ const Message = styled(View)`
   white-space: pre-line;
   margin: 8px 0;
   z-index: 1;
+  max-width: 230px;
 `;
 export const IncomingMessage = styled(Message)`
   width: fit-content;

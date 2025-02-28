@@ -11,9 +11,10 @@ import { HomeNavigator } from '~navigation/HomeNavigator';
 import { MyPageNavigator } from '~navigation/MyPageNavigator';
 import { ProfileScreen } from '~screens/Profile';
 import { WalkLogNavigator } from '~navigation/WalkLogNavigator';
-import { SocialScreen } from '~screens/Social';
-import { FamilyDDangNavigator, FamilyDdangParamList } from '~navigation/FamilyDDangNavigator';
-import { TalkScreen } from '~screens/Talk';
+import { FamilyDDangNavigator } from '~navigation/FamilyDDangNavigator';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { HomeNavigations, SocialNavigations, TabNavigations, WalkLogNavigations } from '~constants/navigations';
+import { SocialNavigator } from '~navigation/SocialNavigator';
 
 export type TabBarParamList = {
   Home: undefined;
@@ -22,11 +23,15 @@ export type TabBarParamList = {
   FamilyDang: undefined;
   MyPage: undefined;
   Profile: { userId: number };
-  FamilyDDang: { screen?: keyof FamilyDdangParamList };
-  Talk: { userId: number };
 };
 
 const Tab = createBottomTabNavigator<TabBarParamList>();
+const hiddenTabRoutes: ReadonlyArray<string> = [
+  HomeNavigations.NOTIFICATION,
+  WalkLogNavigations.STATS,
+  SocialNavigations.CHATROOM,
+  'CreateInviteCode',
+];
 
 const TabIcon = ({ focused, name, size, color }: { focused: boolean; name: string } & IconButtonProps) => (
   <View
@@ -43,21 +48,27 @@ export const BottomTabNavigator = () => {
   const theme = useTheme();
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: '#783D16',
         tabBarLabelPosition: 'below-icon',
         headerShown: false,
-      }}
+        tabBarStyle: (tabRoute => {
+          const routeName = getFocusedRouteNameFromRoute(tabRoute);
+          if (routeName && hiddenTabRoutes.includes(routeName)) {
+            return { display: 'none' };
+          }
+        })(route),
+      })}
     >
       <Tab.Screen
-        name="Home"
+        name={TabNavigations.HOME}
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color, focused, size }) => <TabIcon name="home" size={size} color={color} focused={focused} />,
         }}
       />
       <Tab.Screen
-        name="Log"
+        name={TabNavigations.LOG}
         component={WalkLogNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
@@ -66,8 +77,8 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Social"
-        component={SocialScreen}
+        name={TabNavigations.SOCIAL}
+        component={SocialNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <TabIcon name="people" size={size} color={color} focused={focused} />
@@ -75,7 +86,7 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="FamilyDang"
+        name={TabNavigations.FAMILYDANG}
         component={FamilyDDangNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
@@ -86,7 +97,7 @@ export const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="MyPage"
+        name={TabNavigations.MYPAGE}
         component={MyPageNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
@@ -95,7 +106,7 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={TabNavigations.PROFILE}
         component={ProfileScreen}
         options={({ navigation }) => ({
           tabBarButton: () => null,
@@ -120,16 +131,6 @@ export const BottomTabNavigator = () => {
           ),
           animation: 'shift',
         })}
-      />
-      <Tab.Screen
-        name="Talk"
-        component={TalkScreen}
-        options={{
-          tabBarButton: () => null,
-          tabBarItemStyle: {
-            display: 'none',
-          },
-        }}
       />
     </Tab.Navigator>
   );

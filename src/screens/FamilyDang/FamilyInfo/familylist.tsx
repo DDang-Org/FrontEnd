@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from '../styles';
 import { Separator } from '~components/Common/Seperator';
 import { useFamilyInfo } from '~apis/family/useFamilyInfo';
