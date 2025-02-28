@@ -37,7 +37,7 @@ export const WalkScreen = () => {
       <WalkHeader />
       <View style={{ flex: 1 }}>
         <MapView />
-        <WalkMessage />
+        {/* <WalkMessage /> */}
       </View>
     </SafeAreaView>
   );
