@@ -67,6 +67,7 @@ export const DogListModal = ({
         friction: 10,
       }).start();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, type]);
 
   const toggleDogSelection = (dog: Dog) => {

@@ -325,6 +325,7 @@ const MapView = () => {
       console.log('[Walk] 위치 추적 중지');
       Geolocation.clearWatch(watchId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locationPermissionGranted, isWalking, isLocationCentered, shouldAddMarker]);
 
   const handleLocationButtonPress = useCallback(() => {
@@ -603,13 +604,6 @@ const MapView = () => {
         }
 
         if (connectionStatus === 'connected' && newRouteCoordinates.length > 0) {
-          const currentTotalDistance =
-            lastProcessedMarkerIndexRef.current === 2
-              ? segmentDistance
-              : segmentDistance < 1000
-              ? distance + segmentDistance
-              : distance;
-
           const lastCoordinate = newRouteCoordinates[newRouteCoordinates.length - 1];
 
           const message = JSON.stringify({
@@ -643,6 +637,7 @@ const MapView = () => {
         }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [connectionStatus, sendMessage, distance, walkTime],
   );
 

@@ -5,8 +5,6 @@ import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import StoryBookUI from '../.storybook';
 import { RootNavigator } from '~navigation/RootNavigator';
-import { useWebSocket } from '~hooks/useWebSocket';
-import { WebSocketProvider } from '~providers/WebSocketProvider';
 
 import 'react-native-url-polyfill/auto';
 import 'fast-text-encoding';

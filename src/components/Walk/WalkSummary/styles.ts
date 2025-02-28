@@ -1,5 +1,4 @@
 import styled from '@emotion/native';
-import { Button } from 'react-native';
 import { BgBox } from '~components/Common/BgBox';
 import { TextBold, TextExtraBold, TextMedium } from '~components/Common/Text';
 
