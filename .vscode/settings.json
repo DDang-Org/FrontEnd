@@ -1,5 +1,5 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "minimal"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.configPath": "/Users/kimjuyoung/Desktop/DDang_RN2/.prettierrc"
 }

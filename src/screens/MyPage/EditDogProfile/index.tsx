@@ -1,8 +1,8 @@
 import { Alert, Dimensions, View } from 'react-native';
 import * as S from './styles';
 import { TextBold } from '~components/Common/Text';
-import { useEffect, useRef, useState } from 'react';
-import { DogProfileType, INITIAL_DOG_PROFILE } from '~providers/DogProfileProvider';
+import { useRef, useState } from 'react';
+import { DogProfileType } from '~providers/DogProfileProvider';
 import FormInput from '~components/Common/FormInput';
 import { dateToString } from '~utils/dateFormat';
 import { GenderSelectButton } from '~components/Common/GenderSelectButton';
@@ -19,12 +19,20 @@ import { useDogInfoById } from '~apis/dog/useDogInfoById';
 import { useDogProfile } from '~apis/dog/useDogProfile';
 import { CustomDatePicker } from '~components/Common/CustomDatePicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { HTTPError } from 'ky';
+import { useThrottle } from '~hooks/useThrottle';
 
 export const EditDogProfile = () => {
   const route = useRoute();
   const { dogId } = route.params as { dogId: number };
   const targetDogProfile = useDogInfoById({ dogId });
-  const [dogProfile, setDogProfile] = useState<DogProfileType>(INITIAL_DOG_PROFILE);
+  const [dogProfile, setDogProfile] = useState<DogProfileType>({
+    name: targetDogProfile.dogName,
+    profileImg: targetDogProfile.dogProfileImg,
+    birthDate: targetDogProfile.dogBirthDate,
+    gender: targetDogProfile.dogGender,
+    ...targetDogProfile,
+  });
   const { requestAndCheckPermission } = usePermission();
   const { getImageFile, handleImagePicker } = useImagePicker();
   const confirmButtonRef = useRef<View | null>(null);
@@ -33,23 +41,18 @@ export const EditDogProfile = () => {
   const { showFormErrorToast } = useToast();
   const { updateDog, deleteDog } = useDogProfile(dogId);
   const navigation = useNavigation();
+  const throttle = useThrottle(1000);
 
   const deviceHeight = Dimensions.get('screen').height;
 
-  useEffect(() => {
-    if (targetDogProfile) {
-      setDogProfile({
-        name: targetDogProfile.dogName,
-        profileImg: targetDogProfile.dogProfileImg,
-        birthDate: targetDogProfile.dogBirthDate,
-        gender: targetDogProfile.dogGender,
-        ...targetDogProfile,
-      });
-    }
-  }, [targetDogProfile]);
-
   const updateField = <K extends keyof DogProfileType>(key: K, value: DogProfileType[K]) => {
     setDogProfile(prevState => ({ ...prevState, [key]: value }));
+  };
+
+  const showHTTPError = async (error: HTTPError) => {
+    const errorData = (await error.response.json()) as { message: string };
+    const errorMessage = errorData.message;
+    showFormErrorToast(errorMessage, confirmButtonRef);
   };
 
   const handleUpdateConfirm = () => {
@@ -60,8 +63,15 @@ export const EditDogProfile = () => {
     }
     updateDog.mutate(dogProfile, {
       onSuccess: () => navigation.goBack(),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          await showHTTPError(error);
+        }
+      },
     });
   };
+
+  const throttleHandleUpdateConfirm = throttle(handleUpdateConfirm);
 
   const handleClickDelete = () => {
     Alert.alert('정말로 삭제하시겠습니까?', '삭제된 반려견은 복구할 수 없습니다.', [
@@ -70,6 +80,11 @@ export const EditDogProfile = () => {
         onPress: () =>
           deleteDog.mutate(dogId, {
             onSuccess: () => navigation.goBack(),
+            onError: async error => {
+              if (error instanceof HTTPError) {
+                await showHTTPError(error);
+              }
+            },
           }),
       },
       {
@@ -146,7 +161,7 @@ export const EditDogProfile = () => {
           />
           <S.ActionButtonWrapper ref={confirmButtonRef}>
             <ActionButton
-              onPress={handleUpdateConfirm}
+              onPress={throttleHandleUpdateConfirm}
               text="확인"
               disabled={isDatePickerOpen}
               bgColor={validateBasicProfile(dogProfile) && validateDetailProfile(dogProfile) ? 'gc_1' : 'default'}

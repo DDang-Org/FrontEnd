@@ -20,6 +20,8 @@ import { useNavigation } from '@react-navigation/native';
 import { FAMILY_ROLE } from '~constants/family-role';
 import { useGeolocations } from '~hooks/useGeolocation';
 import { usePermission } from '~hooks/usePermission';
+import { HTTPError } from 'ky';
+import { useThrottle } from '~hooks/useThrottle';
 
 export const ProfileEditScreen = () => {
   const myProfile = useUser();
@@ -41,6 +43,8 @@ export const ProfileEditScreen = () => {
   const navigation = useNavigation();
   const { fetchAddress } = useGeolocations();
   const { requestAndCheckPermission } = usePermission();
+  const throttle = useThrottle(1000);
+
   const avatarList = Object.values(Avatars);
   const familyOptions = ['엄마', '아빠', '언니(누나)', '오빠(형)', '할아버지', '할머니'];
 
@@ -52,8 +56,18 @@ export const ProfileEditScreen = () => {
     }
     updateUser.mutate(user, {
       onSuccess: () => navigation.goBack(),
+      onError: async error => {
+        if (error instanceof HTTPError) {
+          const errorData = await error.response.json();
+          const errorMessage = errorData.message;
+          showFormErrorToast(errorMessage, confirmButtonRef);
+        }
+        console.error(error);
+      },
     });
   };
+
+  const throttleHandleConfirmPress = throttle(handleConfirmPress);
 
   useEffect(() => {
     setSelectedAvatarIndex(user.memberProfileImg! - 1);
@@ -161,7 +175,7 @@ export const ProfileEditScreen = () => {
 
         {/* 다음 버튼 */}
         <S.NextButtonWrapper ref={confirmButtonRef}>
-          <ActionButton onPress={handleConfirmPress} text="수정 완료" />
+          <ActionButton onPress={throttleHandleConfirmPress} text="수정 완료" />
         </S.NextButtonWrapper>
       </ScrollView>
 
