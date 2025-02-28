@@ -10,7 +10,7 @@ interface WalkSummaryModalProps {
   onClose: () => void;
 }
 
-const WalkSummaryModal = ({ visible, walkTime, distance, screenshotUri, onClose }: WalkSummaryModalProps) => {
+const WalkSummaryModal = ({ visible, walkTime, distance, screenshotUri }: WalkSummaryModalProps) => {
   if (!visible) {
     return null;
   }
