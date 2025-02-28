@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
 import * as S from '../styles';
 import { TextBold } from '~components/Common/Text';
 import { RadioButton } from './radionbutton';
 
 type ClickFamilyProps = {
-  onSelect: (isSelected: boolean) => void;
+  memberId: number;
+  memberName: string;
+  isSelected: boolean;
+  onSelect: (isSelected: number) => void;
 };
 
-export const ClickFamily = ({ onSelect }: ClickFamilyProps) => {
-  const [isSelected, setIsSelected] = useState(false);
-
+export const ClickFamily = ({ onSelect, memberId, memberName, isSelected }: ClickFamilyProps) => {
   const handlePress = () => {
-    const newState = !isSelected;
-    setIsSelected(newState);
-    onSelect(newState);
+    onSelect(memberId);
   };
 
   return (
     <S.ClickFamily>
       <S.TextAtrea>
-        <TextBold fontSize={17}>닉네임 1</TextBold>
+        <TextBold fontSize={17}>{memberName}</TextBold>
         <RadioButton isSelected={isSelected} onPress={handlePress} />
       </S.TextAtrea>
     </S.ClickFamily>

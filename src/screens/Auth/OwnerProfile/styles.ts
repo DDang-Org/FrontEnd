@@ -12,7 +12,7 @@ export const AddAvatarBtn = styled.Pressable`
 `;
 
 export const RegisterComment = styled.View`
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 30px;
   align-items: center;
 `;

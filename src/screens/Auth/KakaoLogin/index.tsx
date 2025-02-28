@@ -17,7 +17,7 @@ export const KakaoLogin = () => {
 
   const handleNavigationStateChange = async (navState: WebViewNavigation) => {
     const { url } = navState;
-    const isMatched = !url.includes('accounts');
+    const isMatched = !url.includes('accounts') && !url.includes('kauth');
 
     setIsLoading(isMatched);
     setIsChangeNavigate(navState.loading);

@@ -14,7 +14,7 @@ export type FetchUserResponseType = {
   familyRole: FamilyRole;
   memberProfileImg: AvatarNumber;
   memberBirthDate: string;
-  isRepresentative: boolean;
+  isRepresentative: Boolean;
 };
 
 export const fetchUser = async (): Promise<APIResponse<FetchUserResponseType>> => {
