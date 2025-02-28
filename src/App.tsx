@@ -2,8 +2,6 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { AppProviders } from '~providers/AppProviders';
 import { lightTheme } from '~styles/theme';
 import { RootNavigator } from '~navigation/RootNavigator';
-import { useWebSocket } from '~hooks/useWebSocket';
-import { WebSocketProvider } from '~providers/WebSocketProvider';
 
 import 'react-native-url-polyfill/auto';
 import 'fast-text-encoding';
@@ -17,16 +15,12 @@ const navTheme = {
 };
 
 const MainApp = () => {
-  const { client, sendMessage } = useWebSocket();
-
   return (
-    <WebSocketProvider client={client} sendMessage={sendMessage}>
-      <AppProviders>
-        <NavigationContainer theme={navTheme}>
-          <RootNavigator />
-        </NavigationContainer>
-      </AppProviders>
-    </WebSocketProvider>
+    <AppProviders>
+      <NavigationContainer theme={navTheme}>
+        <RootNavigator />
+      </NavigationContainer>
+    </AppProviders>
   );
 };
 

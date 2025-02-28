@@ -1,10 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React from 'react';
+import { getAvatar } from '~utils/getAvatar';
+import { useUser } from '~apis/member/useUser';
 
 const WalkHeader = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const avatars = getAvatar();
+  const user = useUser();
+  const AvatarComponent = avatars[user.memberProfileImg];
 
   return (
     <S.Header style={{ top: insets.top }}>
@@ -17,10 +23,8 @@ const WalkHeader = () => {
         <S.BackButton onPress={() => navigation.goBack()}>
           <S.BackIcon>←</S.BackIcon>
         </S.BackButton>
-        <S.Title fontSize={20}>강남구 논현동</S.Title>
-        <S.ProfileContainer>
-          <S.ProfileImage source={{ uri: 'https://avatars.githubusercontent.com/u/65541546?v=4' }} />
-        </S.ProfileContainer>
+        <S.Title fontSize={20}>{user.address}</S.Title>
+        <S.ProfileContainer>{AvatarComponent && <AvatarComponent width={40} height={40} />}</S.ProfileContainer>
       </S.HeaderContent>
     </S.Header>
   );

@@ -1,28 +1,23 @@
 import { Client } from '@stomp/stompjs';
 import { createContext, useContext, PropsWithChildren } from 'react';
+import { useWebSocket } from '~hooks/useWebSocket';
 
 type WebSocketContextType = {
   client: Client | null;
   sendMessage: (destination: string, body: any) => void;
 };
 
-const WebSocketContext = createContext<WebSocketContextType>({
-  client: null,
-  sendMessage: () => {}, // 기본 빈 함수
-});
+const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
 
-type WebSocketProviderProps = {
-  client: Client | null;
-  sendMessage: (destination: string, body: any) => void;
-};
+export const WebSocketProvider = ({ children }: PropsWithChildren) => {
+  const { client, sendMessage } = useWebSocket();
 
-export const WebSocketProvider = ({ children, client, sendMessage }: PropsWithChildren<WebSocketProviderProps>) => {
   return <WebSocketContext.Provider value={{ client, sendMessage }}>{children}</WebSocketContext.Provider>;
 };
 
 export const useWebSocketContext = () => {
   const context = useContext(WebSocketContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useWebSocketContext must be used within a WebSocketProvider');
   }
   return context;
