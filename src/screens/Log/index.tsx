@@ -58,7 +58,7 @@ export const LogHome = () => {
           />
         }
         right={
-          <Pressable onPress={() => navigation.navigate(WalkLogNavigations.Stats)}>
+          <Pressable onPress={() => navigation.navigate(WalkLogNavigations.STATS)}>
             <Icon.Graph />
           </Pressable>
         }

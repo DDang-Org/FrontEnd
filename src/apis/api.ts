@@ -12,15 +12,7 @@ export const api = ky.create({
       async request => {
         const accessToken = (await getAccessToken()) || 'a';
         if (accessToken) {
-          request.headers.set(
-            'Authorization',
-            // accessToken,
-            // `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiS0FLQU8iLCJleHAiOjE3Mzk3NjQwMDIsImVtYWlsIjoibWtoNjc5M0BuYXZlci5jb20ifQ.EF03NpevMSZ2DcM5Q-trEEmRa0KEb5HpJ1HlD-Vj8xy3N2JoFvdQFoWDJRM3IGVwx58L9T2oV7GBTr6wJOevnA`,
-            // 패밀리장, 가족많음
-            `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiR09PR0xFIiwiZXhwIjoxNzQwMjQ4MjA3LCJlbWFpbCI6ImJibGJibGFuNjlAZ21haWwuY29tIn0.CpauBw9_yXlYQjr-BZP7xqm1u63pj1g1aM3kX9HwCm37BMhpOQGz1Mq8R42CihtC8henTRy0OHaxa7q9-1Svzw`,
-            //나 혼자 패밀리장
-            // `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInByb3ZpZGVyIjoiS0FLQU8iLCJleHAiOjE3NDEyNzUwNjcsImVtYWlsIjoibndpNjk1OUBnbWFpbC5jb20ifQ.pOk3HSBSFGPKGIL4KS7tbwCrzPfCloQZrA4xWzZVpngYTnodSZuenuoUYRC1DkWY-EdmvK-cv_am2EnPryhsxg`,
-          );
+          request.headers.set('Authorization', `Bearer ${accessToken}`);
         }
       },
     ],

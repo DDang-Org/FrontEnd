@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { ImageFileType } from '~types/image-file';
 
@@ -9,7 +8,7 @@ export const useImagePicker = () => {
     }
 
     const file: ImageFileType = {
-      uri: Platform.OS === 'android' ? image.path.replace('file://', '') : `file://${image.path}`,
+      uri: `file://${image.path}`,
       type: image.mime,
       name: image.path.split('/').pop() || 'unknown.jpg',
     };

@@ -4,25 +4,25 @@ import { AvatarNumber } from '~types/avatar-number';
 import { FamilyRole } from '~types/family-role';
 import { Gender } from '~types/gender';
 
-export type FetchChatRoomsResponseType = {
+interface Member {
+  memberId: number;
+  memberName: string;
+  email: string;
+  memberGender: Gender;
+  familyRole: FamilyRole;
+  memberProfileImg: AvatarNumber;
+}
+export interface ResponseFetchChatRoom {
   chatRoomId: number;
   name: string;
   lastMessage: string;
   unreadMessageCount: number;
-  members: [
-    {
-      memberId: number;
-      memberName: string;
-      email: string;
-      memberGender: Gender;
-      familyRole: FamilyRole;
-      memberProfileImg: AvatarNumber;
-    },
-  ];
-}[];
-export const fetchChatRooms = async (): Promise<APIResponse<FetchChatRoomsResponseType>> => {
+  members: Member[];
+}
+
+export const fetchChatRooms = async (): Promise<APIResponse<ResponseFetchChatRoom[]>> => {
   try {
-    const response = await api.get('chat/rooms').json<APIResponse<FetchChatRoomsResponseType>>();
+    const response = await api.get('chat/rooms').json<APIResponse<ResponseFetchChatRoom[]>>();
     return response;
   } catch (error) {
     console.error('Error:', error);

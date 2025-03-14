@@ -1,71 +1,65 @@
-import { IncomingMessage, OutgoingMessage } from '~components/Talk/Message/styles';
+import { FlatList } from 'react-native';
 import * as S from './styles';
 import { TextBold } from '~components/Common/Text';
-import DogHowling from '~assets/dogs/dog-howling.svg';
 import { Dimensions } from 'react-native';
+import { IncomingMessage, OutgoingMessage } from '~components/Talk/Message/styles';
+import DogHowling from '~assets/dogs/dog-howling.svg';
+import { useState } from 'react';
 
-interface TalkAreaProps {}
+interface TalkAreaProps {
+  messages: any[];
+}
 
-export const TalkArea = ({}: TalkAreaProps) => {
-  const width = Dimensions.get('window').width;
+export const TalkArea = ({ messages }: TalkAreaProps) => {
+  const deviceWidth = Dimensions.get('window').width;
+  const [talkAreaHeight, setTalkAreaHeight] = useState(0);
+  const [flatListHeight, setFlatListHeight] = useState(0);
+
+  const renderMessage = ({ item }: { item: (typeof messages)[0] }) => {
+    if (item.type === 'incoming') {
+      return (
+        <IncomingMessage>
+          <TextBold fontSize={14}>{item.text}</TextBold>
+        </IncomingMessage>
+      );
+    }
+    return (
+      <OutgoingMessage>
+        <TextBold fontSize={14}>{item.text}</TextBold>
+      </OutgoingMessage>
+    );
+  };
+
   return (
-    <S.TalkArea>
+    <S.TalkArea
+      onLayout={event => {
+        const { height } = event.nativeEvent.layout;
+        setTalkAreaHeight(height);
+      }}
+    >
       <DogHowling
         style={{
           position: 'absolute',
-          left: width / 2,
+          left: deviceWidth / 2,
           bottom: 30,
-          transform: [{ translateX: -188 / 2 }],
+          transform: [{ translateX: -94 }],
         }}
       />
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>{' '}
-      <IncomingMessage>
-        <TextBold fontSize={14}>안녕하세요 성훈님</TextBold>
-      </IncomingMessage>
-      <OutgoingMessage>
-        <TextBold fontSize={14}>안녕하세요!!</TextBold>
-      </OutgoingMessage>
+      <FlatList
+        contentContainerStyle={{
+          paddingVertical: 10,
+          paddingHorizontal: 20,
+          marginTop: Math.max(0, talkAreaHeight - flatListHeight),
+        }}
+        data={messages}
+        renderItem={renderMessage}
+        keyExtractor={item => item.id.toString()}
+        removeClippedSubviews={false}
+        inverted
+        onContentSizeChange={(_, height) => {
+          setFlatListHeight(height);
+        }}
+      />
     </S.TalkArea>
   );
 };

@@ -2,6 +2,7 @@ import { useTheme } from '@emotion/react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from '~components/Common/Header';
 import { Icon } from '~components/Common/Icons';
+import { HomeNavigations } from '~constants/navigations';
 import { HomeScreen } from '~screens/Home';
 import { NotificationScreen } from '~screens/Home/Notification';
 import { WalkScreen } from '~screens/Home/WalkScreen';
@@ -30,10 +31,14 @@ export const HomeNavigator = () => {
         },
       }}
     >
-      <Stack.Screen name="Main" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Walk" component={WalkScreen} options={{ headerBackButtonDisplayMode: 'minimal' }} />
+      <Stack.Screen name={HomeNavigations.MAIN} component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen
-        name="Notification"
+        name={HomeNavigations.WALK}
+        component={WalkScreen}
+        options={{ headerBackButtonDisplayMode: 'minimal' }}
+      />
+      <Stack.Screen
+        name={HomeNavigations.NOTIFICATION}
         component={NotificationScreen}
         options={{
           header: ({ navigation }) => (

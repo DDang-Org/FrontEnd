@@ -2,12 +2,12 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchAccumulatedWalkInfo } from '~apis/dog/fetchAccumulatedWalkInfo';
 
 interface useAccumulatedWalkInfoProps {
-  dogId: number;
+  memberId: number;
 }
-export const useAccumulatedWalkInfo = ({ dogId }: useAccumulatedWalkInfoProps) => {
+export const useAccumulatedWalkInfo = ({ memberId }: useAccumulatedWalkInfoProps) => {
   const { data: accumulatedWalkInfo } = useSuspenseQuery({
-    queryKey: ['accumulatedWalkInfo', dogId],
-    queryFn: () => fetchAccumulatedWalkInfo({ dogId }),
+    queryKey: ['accumulatedWalkInfo', memberId],
+    queryFn: () => fetchAccumulatedWalkInfo({ memberId }),
     select: ({ data }) => data,
   });
   return accumulatedWalkInfo;
