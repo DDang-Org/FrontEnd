@@ -42,7 +42,7 @@
 |:-:|:-:|:-:|:-:|:-:|
 | [김주영](https://github.com/kimjuyoung99) | [남원일](https://github.com/wonill) | [한규](https://github.com/ruehan) | [문재경](https://github.com/MoonJaeGyeong) | [노관태](https://github.com/Repaion24) |
 | <img src="https://avatars.githubusercontent.com/u/102804323?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/119827402?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/65541546?v=4" width="200" height="150"/> | <img src="https://avatars.githubusercontent.com/u/108010440?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/65394501?v=4" width="150" height="150"/> |
-| **패밀리댕, 로그인, 견주등록 관리, 설정** | **댕로그, 가족코드 공유, 강아지등록 관리** | **산책, 강번따, 친구 신청** | **채팅, 패밀리댕, 차단, 알림, 회원정보** | **산책, 댕댕로그, 강아지, 시큐리티, 친구**  |
+| **패밀리댕, 마이페이지** | **로그인, 견주 등록/관리, 강아지 등록/관리, 홈, 소셜, 실시간 채팅, 댕댕로그, 가족 코드 공유** | **산책, 강번따, 친구 신청** | **채팅, 패밀리댕, 차단, 알림, 회원정보** | **산책, 댕댕로그, 강아지, 시큐리티, 친구**  |
 
 
 </div>
