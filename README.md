@@ -5,7 +5,7 @@
 <div align=center>
    
 > ## 👩🏻‍💻 DDang, 어떻게 마이그레이션 되었나요?
-> ### 1. React ➡️ React Native 전환하여 iOS/Android 크로스플랫폼 지원❗️ 앱스토어 출기 대기중 <br>
+> ### 1. React ➡️ React Native 전환하여 iOS/Android 크로스플랫폼 지원❗️ 앱스토어 출시 대기중 <br>
 > ### 2. 기존 단일 강아지 프로필 ➡️ 복수(2마리 이상) 강아지 등록 및 관리 기능 구현 <br>
 > ### 3. 차단, 신고 로직 및 UX/UI 추가 <br>
 > ### 4. 데이터베이스 쿼리 최적화 및 API 엔드포인트 확장<br>
