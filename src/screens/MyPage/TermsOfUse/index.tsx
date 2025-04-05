@@ -1,7 +1,7 @@
 import React from 'react';
 // import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // import { MyPageStackProps } from '~navigation/MyPageNavigator';
-import { ImageSourcePropType } from 'react-native'; // Import ImageSourcePropType
+import { ImageSourcePropType } from 'react-native';
 import Term1 from '~assets/termsofuse/term1.png';
 import Term2 from '~assets/termsofuse/term2.png';
 import Term3 from '~assets/termsofuse/term3.png';
