@@ -94,6 +94,9 @@ export const SettingScreen = ({ navigation }: Props) => {
         <S.DeleteAccountButton onPress={handleDeleteAccount}>
           <S.DeleteAccountTypo fontSize={15}>탈퇴하기</S.DeleteAccountTypo>
         </S.DeleteAccountButton>
+        <S.TermsOfUseButton onPress={() => navigation.navigate('TermsOfUse')}>
+          <S.TermsOfUseTypo fontSize={15}>이용약관</S.TermsOfUseTypo>
+        </S.TermsOfUseButton>
       </S.ButtonContainer>
     </S.SettingScreen>
   );

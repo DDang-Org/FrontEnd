@@ -7,6 +7,7 @@ import { BlockScreen } from '~screens/MyPage/Block';
 import { EditDogProfile } from '~screens/MyPage/EditDogProfile';
 import { ProfileEditScreen } from '~screens/MyPage/ProfileEdit';
 import { SettingScreen } from '~screens/MyPage/Setting';
+import { TermsOfUseScreen } from '~screens/MyPage/TermsOfUse';
 
 export type MyPageStackProps = {
   Main: undefined;
@@ -14,6 +15,7 @@ export type MyPageStackProps = {
   Block: undefined;
   ProfileEdit: undefined;
   DogProfileEdit: { dogId: number };
+  TermsOfUse: undefined;
 };
 
 const Stack = createNativeStackNavigator<MyPageStackProps>();
@@ -51,6 +53,15 @@ export const MyPageNavigator = () => {
         component={EditDogProfile}
         options={{
           title: '반려견 정보 수정',
+          header: () => <Header left={<Icon.Prev />} />,
+          contentStyle: { backgroundColor: theme.colors.gc_4 },
+        }}
+      />
+      <Stack.Screen
+        name="TermsOfUse"
+        component={TermsOfUseScreen}
+        options={{
+          title: '이용약관',
           header: () => <Header left={<Icon.Prev />} />,
           contentStyle: { backgroundColor: theme.colors.gc_4 },
         }}
