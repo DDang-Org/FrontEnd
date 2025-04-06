@@ -21,12 +21,12 @@ export const TermsOfUseScreen = () => {
     <S.Container>
       <S.ScrollContainer>
         {/* 각 이미지 렌더링 */}
-        <S.Image source={Term1 as ImageSourcePropType} resizeMode="contain" />
-        <S.Image source={Term2 as ImageSourcePropType} resizeMode="contain" />
-        <S.Image source={Term3 as ImageSourcePropType} resizeMode="contain" />
-        <S.Image source={Term4 as ImageSourcePropType} resizeMode="contain" />
-        <S.Image source={Term5 as ImageSourcePropType} resizeMode="contain" />
-        <S.Image source={Term6 as ImageSourcePropType} resizeMode="contain" />
+        <S.Image source={Term1 as ImageSourcePropType} resizeMode="stretch" />
+        <S.Image source={Term2 as ImageSourcePropType} resizeMode="stretch" />
+        <S.Image source={Term3 as ImageSourcePropType} resizeMode="stretch" />
+        <S.Image source={Term4 as ImageSourcePropType} resizeMode="stretch" />
+        <S.Image source={Term5 as ImageSourcePropType} resizeMode="stretch" />
+        <S.Image source={Term6 as ImageSourcePropType} resizeMode="stretch" />
       </S.ScrollContainer>
     </S.Container>
   );
