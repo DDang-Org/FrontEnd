@@ -5,6 +5,7 @@ import { RootNavigator } from '~navigation/RootNavigator';
 
 import 'react-native-url-polyfill/auto';
 import 'fast-text-encoding';
+import '~utils/abortSignalPolyfill';
 
 const navTheme = {
   ...DefaultTheme,
