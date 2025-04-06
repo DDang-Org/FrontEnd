@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNotificationPermission } from '~apis/notification/useNotificationPermission';
 import { ActionButton } from '~components/Common/ActionButton';
 import { TextBold, TextRegular } from '~components/Common/Text';
-import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
+// import { ToggleBox } from '~components/MyPage/Setting/ToggleBox';
 import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 import { useAuth } from '~apis/member/useAuth';
@@ -17,11 +17,11 @@ export const SettingScreen = ({ navigation }: Props) => {
   const myInfo = useUser();
   const familyInfo = useFamilyInfo();
   const {
-    chatNotificationAllowed,
-    familyNotificationAllowed,
-    friendNotificationAllowed,
-    walkNotificationAllowed,
-    gangbunttaNotificationAllowed,
+    // chatNotificationAllowed,
+    // familyNotificationAllowed,
+    // friendNotificationAllowed,
+    // walkNotificationAllowed,
+    // gangbunttaNotificationAllowed,
   } = useNotificationPermission();
 
   const isRepresetative = myInfo.isRepresentative && familyInfo.length > 1;
