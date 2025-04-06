@@ -47,11 +47,11 @@ export const SettingScreen = ({ navigation }: Props) => {
 
   return (
     <S.SettingScreen>
-      {/* <ToggleBox>
+      <ToggleBox>
         <ToggleBox.Item title="강번따 허용 여부" enabled={gangbunttaNotificationAllowed === 'TRUE' ? true : false} />
-      </ToggleBox> */}
+      </ToggleBox>
 
-      {/* <ToggleBox>
+      <ToggleBox>
         <ToggleBox.Container>
           <ToggleBox.Item
             title="내 산책 알림"
@@ -74,7 +74,7 @@ export const SettingScreen = ({ navigation }: Props) => {
             enabled={familyNotificationAllowed === 'TRUE' ? true : false}
           />
         </ToggleBox.Container>
-      </ToggleBox> */}
+      </ToggleBox>
 
       <S.NavigationToBlockScreen paddingHorizontal={20} paddingVertical={16.5}>
         <S.TypoWrapper>
@@ -94,9 +94,6 @@ export const SettingScreen = ({ navigation }: Props) => {
         <S.DeleteAccountButton onPress={handleDeleteAccount}>
           <S.DeleteAccountTypo fontSize={15}>탈퇴하기</S.DeleteAccountTypo>
         </S.DeleteAccountButton>
-        <S.TermsOfUseButton onPress={() => navigation.navigate('TermsOfUse')}>
-          <S.TermsOfUseTypo fontSize={15}>이용약관</S.TermsOfUseTypo>
-        </S.TermsOfUseButton>
       </S.ButtonContainer>
     </S.SettingScreen>
   );

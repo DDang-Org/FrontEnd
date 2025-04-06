@@ -13,14 +13,7 @@ export const SettingScreen = styled.View`
 
 export const DeleteAccountButton = styled(Pressable)``;
 
-export const TermsOfUseButton = styled(Pressable)``;
-
 export const DeleteAccountTypo = styled(TextBold)`
-  text-align: center;
-  color: #dcccc2;
-`;
-
-export const TermsOfUseTypo = styled(TextBold)`
   text-align: center;
   color: #dcccc2;
 `;
