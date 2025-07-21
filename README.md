@@ -142,7 +142,7 @@
 
 ### **⏰ 개발 기간**
 
-- 2024.11.15 ~ 2024.12.09
+- 2025.01.15 ~ 2025.03.04
 
 ### **👥 UserFlow**
 <img src="https://github.com/user-attachments/assets/4fbe61a1-5851-4306-999c-22ff5032377e" align="center" width="70%">
@@ -152,7 +152,7 @@
 
 - 프로젝트 기간이 짧았던 만큼, 매주 월요일마다 스프린트 하였습니다.
 - 데일리 스크럼을 통해 팀원 간 작업 상황을 공유하였습니다.
-- [Github Project](https://github.com/orgs/prgrms-web-devcourse-final-project/projects/4)에서 Stroy Point를 이용해 작업을 관리하였습니다.
+- Stroy Point를 이용해 작업을 관리하였습니다.
 
 ## 브랜치 전략
 
@@ -163,7 +163,7 @@
 <img width="931" alt="image" src="https://github.com/user-attachments/assets/a834c7ef-eafe-4422-8ef2-8e215eaa7768" />
 <img width="933" alt="image" src="https://github.com/user-attachments/assets/46f36c10-7bcb-4c05-b7a1-15135c25cbac" />
 
-- Front : Vite React Typescript
+- Front : React Native TypeScript
 - Back : Java Spring
 - Version & Issue Management :  Github Project
 - Tools : Discord, Slack, Notion
