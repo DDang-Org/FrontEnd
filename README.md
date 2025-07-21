@@ -142,7 +142,7 @@
 
 ### **⏰ 개발 기간**
 
-- 2024.11.15 ~ 2024.12.09
+- 2025.01.15 ~ 2025.03.04
 
 ### **👥 UserFlow**
 <img src="https://github.com/user-attachments/assets/4fbe61a1-5851-4306-999c-22ff5032377e" align="center" width="70%">
