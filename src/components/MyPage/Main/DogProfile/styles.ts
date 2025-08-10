@@ -7,27 +7,20 @@ interface IconProps {
   expanded: boolean;
 }
 
-export const DogProfile = styled(BgBox)<{ expanded: boolean }>`
+export const DogProfile = styled(BgBox)`
   min-height: 80px;
-  height: ${({ expanded }) => (expanded ? 'auto' : '108px')};
+  height: auto;
   overflow: hidden;
   flex-direction: column;
-  gap: 20px;
+  gap: 19px;
   align-items: center;
   padding-bottom: 10px;
   padding-top: -10px;
 `;
 
-export const FirstDogProfile = styled.View`
-  flex-direction: row;
-  min-height: 108px;
-  overflow: hidden;
-  flex: 1;
-  gap: 20px;
-  align-items: center;
-`;
 export const Info = styled.View`
-  flex: 1;
+  /* flex: 1; */
+  
 `;
 export const StyledIcon = styled(Icon.Prev)<IconProps>`
   width: 16px;
@@ -40,14 +33,7 @@ export const Heading = styled.View`
   gap: 3px;
 `;
 
-export const EditOtherButton = styled.Pressable`
-  width: 40px;
-  height: 40px;
-  background-color: ${({ theme }) => theme.colors.lighten_2};
-  border-radius: 30px;
-  flex-direction: row;
-  align-items: center;
-`;
+
 export const Name = styled(TextBold)``;
 export const Breed = styled(TextMedium)``;
 export const Age = styled(TextMedium)``;
@@ -57,28 +43,45 @@ export const Weight = styled(TextMedium)``;
 export const Comment = styled(TextMedium)`
   margin-top: 4px;
 `;
+
 export const EditButton = styled(Pressable)`
   padding: 8px;
   background-color: ${({ theme }) => theme.colors.lighten_2};
   border-radius: 10px;
 `;
+
 export const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 4px;
 `;
+
 export const OtherDogWrapper = styled.View`
   flex-direction: column;
-  min-height: 108px;
-  min-width: 300px;
-  gap: 10px;
+  width: 100%;
+  gap: 19px;
 `;
 
 export const OtherDogProfile = styled.View`
   flex-direction: row;
-  margin: 7px 0;
-  gap: 15px;
+  align-items: center;
+  gap: 11px;
+  
+  padding: 14px 20px;
+  background-color: white;
+  border-radius: 16px;
 `;
+
+export const ArrowBtnWrapper = styled.View`
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const Line = styled.View`
   align-items: center;
   padding-bottom: 14px;

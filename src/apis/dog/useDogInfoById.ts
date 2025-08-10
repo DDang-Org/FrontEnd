@@ -3,7 +3,7 @@ import { fetchDogInfoById } from '~apis/dog/fetchDogInfoById';
 
 export const useDogInfoById = ({ dogId }: { dogId: number }) => {
   const { data: dogInfo } = useSuspenseQuery({
-    queryKey: ['dogInfoById', dogId],
+    queryKey: ['myDogInfo', 'dogInfoById', dogId],
     queryFn: () => fetchDogInfoById({ dogId }),
     select: ({ data }) => data,
   });
