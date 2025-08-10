@@ -6,7 +6,6 @@ import { TextBold } from '~components/Common/Text';
 export const MyPage = styled(SafeAreaView)`
   flex: 1;
   padding: 0 20px;
-  gap: 20px;
 `;
 
 export const Header = styled.View`

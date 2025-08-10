@@ -70,6 +70,7 @@ export const OtherDogProfile = styled.View`
   padding: 14px 20px;
   background-color: white;
   border-radius: 16px;
+
 `;
 
 export const ArrowBtnWrapper = styled.View`

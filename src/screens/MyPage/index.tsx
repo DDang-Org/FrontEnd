@@ -14,43 +14,35 @@ import { MyPageStackProps } from '~navigation/MyPageNavigator';
 import * as S from './styles';
 import { DogProfileLoader } from '~components/MyPage/Main/DogProfile/loader';
 import { ScrollView } from 'react-native';
-import { useMyDogInfo } from '~apis/dog/useMyDogInfo';
 type Props = NativeStackScreenProps<MyPageStackProps, 'Main'>;
 
-export const MyPageScreen = ({ navigation }: Props) => {
-  const { data: myDogs, isPending, isError } = useMyDogInfo();
-
-  if (isPending || isError) {
-    return <></>;
-  }
+export const MyPageScreen = ({ navigation, route }: Props) => {
 
   return (
-    <S.MyPage>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10, gap: 20 }}>
-        <S.Header>
-          <S.Title fontSize={17}>마이페이지</S.Title>
-          <S.GearWrapper>
-            <Icon.Gear onPress={() => navigation.navigate('Setting')} />
-          </S.GearWrapper>
-        </S.Header>
-        <ErrorBoundary FallbackComponent={UserProfileFallback}>
-          <Suspense fallback={<UserProfileLoader />}>
-            <UserProfile navigateToProfileEdit={() => navigation.navigate('ProfileEdit')} />
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary FallbackComponent={WalkInfoFallback}>
-          <Suspense fallback={<WalkInfoLoader />}>
-            <WalkInfo />
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary FallbackComponent={DogProfileFallback}>
-          <Suspense fallback={<DogProfileLoader />}>
-            <DogProfile
-              navigateToDogProfileEdit={() => navigation.navigate('DogProfileEdit', { dogId: myDogs[0].dogId })}
-            />
-          </Suspense>
-        </ErrorBoundary>
-      </ScrollView>
-    </S.MyPage>
+      <S.MyPage edges={['top']}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, paddingBottom: 35, gap: 20 }}>
+          <S.Header>
+            <S.Title fontSize={17}>마이페이지</S.Title>
+            <S.GearWrapper>
+              <Icon.Gear onPress={() => navigation.navigate('Setting')} />
+            </S.GearWrapper>
+          </S.Header>
+          <ErrorBoundary FallbackComponent={UserProfileFallback}>
+            <Suspense fallback={<UserProfileLoader />}>
+              <UserProfile navigateToProfileEdit={() => navigation.navigate('ProfileEdit')} />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={WalkInfoFallback}>
+            <Suspense fallback={<WalkInfoLoader />}>
+              <WalkInfo />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={DogProfileFallback}>
+            <Suspense fallback={<DogProfileLoader />}>
+              <DogProfile navigation={navigation} route={route}/>
+            </Suspense>
+          </ErrorBoundary>
+        </ScrollView>
+      </S.MyPage>
   );
 };
