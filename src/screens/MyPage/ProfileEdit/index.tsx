@@ -22,6 +22,7 @@ import { useGeolocations } from '~hooks/useGeolocation';
 import { usePermission } from '~hooks/usePermission';
 import { HTTPError } from 'ky';
 import { useThrottle } from '~hooks/useThrottle';
+import { TextBold } from '~components/Common/Text';
 
 export const ProfileEditScreen = () => {
   const myProfile = useUser();
@@ -99,12 +100,15 @@ export const ProfileEditScreen = () => {
         {/* 아바타 선택 */}
         <S.AvatarSelectWrapper>
           {selectedAvatarIndex === null ? (
-            <S.StyledAvatarSelect onPress={() => setIsAvatarModalVisible(true)} />
+            <S.StyledAvatarSelect/>
           ) : (
-            <TouchableOpacity onPress={() => setIsAvatarModalVisible(true)}>
+            <TouchableOpacity>
               <Profile size={180} src={avatarList[selectedAvatarIndex]} />
             </TouchableOpacity>
           )}
+          <S.SelectPictureButton onPress={()=>setIsAvatarModalVisible(true)}>
+            <TextBold color={'gc_4'} fontSize={14}>아바타 선택</TextBold>
+          </S.SelectPictureButton>
         </S.AvatarSelectWrapper>
 
         {/* 프로필 데이터 입력 */}
@@ -159,15 +163,15 @@ export const ProfileEditScreen = () => {
           {/* 성별 선택 */}
           <S.GenderButtonWrapper>
             <GenderSelectButton
+
               gender="MALE"
               isActive={user.memberGender === 'MALE'}
-              direction="row"
               onPress={() => setUser({ ...user, memberGender: user.memberGender === 'MALE' ? null : 'MALE' })}
             />
             <GenderSelectButton
               gender="FEMALE"
               isActive={user.memberGender === 'FEMALE'}
-              direction="row"
+              
               onPress={() => setUser({ ...user, memberGender: user.memberGender === 'FEMALE' ? null : 'FEMALE' })}
             />
           </S.GenderButtonWrapper>

@@ -22,8 +22,19 @@ export const StyledAvatarSelect = styled(Icon.AvatarSelect)`
   margin-bottom: 20px;
 `;
 
+export const SelectPictureButton = styled.Pressable`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  border-radius: 22px;
+  background-color: ${(props) => props.theme.colors.font_1};
+  padding: 5.5px 12px;
+  margin-top: 12px;
+`
+
 export const ProfileDataContainer = styled.View`
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   padding-right: 25px;
   gap: 4px;
   align-items: center;
@@ -35,6 +46,7 @@ export const GenderButtonWrapper = styled.View`
   justify-content: space-between;
   margin-bottom: 40px;
   margin-top: 10px;
+  gap: 8px;
 `;
 
 export const NextButtonWrapper = styled.View`

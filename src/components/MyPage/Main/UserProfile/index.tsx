@@ -15,8 +15,8 @@ export const UserProfile = ({ navigateToProfileEdit }: UserProfileProps) => {
   return (
     <S.UserProfile paddingVertical={24} paddingHorizontal={20}>
       <Profile.Mine size={140} />
-      <S.EditWrapper>
-        <Icon.Edit onPress={navigateToProfileEdit} />
+      <S.EditWrapper onPress={navigateToProfileEdit}>
+        <Icon.Edit/>
       </S.EditWrapper>
       <S.Name fontSize={24}>{name}</S.Name>
       <S.Address fontSize={15}>{address}</S.Address>

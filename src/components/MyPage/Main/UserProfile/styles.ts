@@ -1,5 +1,4 @@
 import styled from '@emotion/native';
-import { View } from 'react-native';
 import { BgBox } from '~components/Common/BgBox';
 import { TextBold, TextExtraBold, TextMedium } from '~components/Common/Text';
 
@@ -26,13 +25,19 @@ export const GenderRoleWrapper = styled.View`
 export const Gender = styled(TextBold)``;
 export const Role = styled(TextBold)``;
 
-export const EditWrapper = styled(View)`
-  border-radius: 10px;
+export const EditWrapper = styled.Pressable`
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   padding: 8px;
-  background-color: ${({ theme }) => theme.colors.lighten_2};
+  background-color: ${({ theme }) => theme.colors.gc_4};
   position: absolute;
-  right: 32px;
-  top: 32px;
+  right: 0;
+  top: 0;
 `;
 
 //! Fallback

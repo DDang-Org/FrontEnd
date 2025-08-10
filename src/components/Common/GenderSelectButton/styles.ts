@@ -9,8 +9,8 @@ interface GenderBtnProps {
 export const GenderBtn = styled.Pressable<GenderBtnProps>`
   border-width: 2px;
   border-style: solid;
-  border-color: ${({ isActive, direction, theme }) =>
-    isActive ? theme.colors.darken : direction === 'column' ? theme.colors.gc_1 : theme.colors.gc_4};
+  border-color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.darken : theme.colors.gc_1 };
   border-radius: 8px;
   width: 164px;
   height: ${({ direction }) => (direction === 'column' ? '102px' : '63px')};
